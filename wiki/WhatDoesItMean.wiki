@@ -9,7 +9,7 @@ http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/a
     * Hexagons are taskdefs:
 http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/taskdef_legend.png
     * Ovals are macrodefs:
-http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/taskdef_legend.png
+http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/macrodef_legend.png
     * Solid black lines are depends calls on other targets: 
 http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/depends_legend.png
     * Dotted red lines are ant calls on targets:
