@@ -51,305 +51,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jhall.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/ant_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/taskdefFromJarProperties.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM5/build.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/conf/log4j.prop" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/target_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_clean.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/log4j.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/HelloWorld.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/Simple.build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/fourbuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jnlp.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Taskdef.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_common_dist.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Property.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_taskdefs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/legend.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/ExampleFileFilter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/runDynamo.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/contact_me.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/EventCollector.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_tools.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/OutputHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/taskdef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_taskdefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Dependency Test" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/onebuild.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/fourbuild.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Macrodef.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/threebuild_nogrouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/testng-5.8-jdk15.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/C_Roy/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/script-sample.build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/cdmKeystore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/MainForm.vb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/using_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/om-windev-deploy.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/junit.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/threebuild.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bcel.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Target.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/antscriptVisualizer.jnlp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_dir.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/NoDotDialog.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/default.build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/what_exactly_is_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/legend.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/NoDotDialog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/examples.build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_cc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_targets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/depends_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/NodeType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/bugs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/HelloWindowsForms.vbproj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/ant_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/Event.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/taskdef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Dependency Test/build-batch.dot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_dist.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/threebuild.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/UniqueList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/target_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/bugs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AntScript Visualizer.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/twobuild_with_taskdef_and_macrodef.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_all.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/PathSet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/jalopyPreferences.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/help.jhm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/helpTOC.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/threebuild_nogrouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/help.hs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/threebuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Version.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/site.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Fileset.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/twobuild_with_taskdefs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/global-build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/MockAntParserUi.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/MainForm.resx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_paths.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/NodeWithDependancies.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/runme.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Node.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM5" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/fourbuilda.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-server.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_noconcentrate.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/what_exactly_is_ant_script_vis.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Dependency Test/build-batch.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild_importA.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/C_Roy/build.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/conf/log4j.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-main.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/C_Roy/build.dot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/wing1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/what_exactly_is_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/what_exactly_is_ant_script_vis.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/om-windev-deploy.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsnewDialogForm.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/whats_left_todo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/fourbuild1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/AntCall.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/antcall_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/what_exactly_is_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/PatternsetTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/om-windev-deploy.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/nurflugelKeystore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_macrodefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_cc.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_beanmanaged.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-legacy.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/whats_left_todo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/global-build.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/twobuild_with_taskdefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/build-delegate.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/twobuild_with_taskdef_and_macrodef.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_taskdefs.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/wing.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/site.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Classpath.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/contact_me.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testng-config/testng.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/threebuild_grouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_real.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/fourbuild.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild_importB.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/updates.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Antfile.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Include.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/nant-0.84.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Constants.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/PathElement.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/threebuild.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/net/nike" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/twobuild_with_taskdefs.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_noconcentrate.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/net/nike/util" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/updates.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/macrodef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_taskdefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/om-windev-deploy.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUi.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/net" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_beanmanaged.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build_cc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/fourbuild.dot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/threebuild_importB.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-legacy.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-batch.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM5/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/Simple.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/global-build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntFileParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_properties.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/HelloWorld.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/site.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/threebuild.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/javac2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/wing1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_tools.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsNewDialog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM5/build.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/fourbuild1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/depends_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.pdf_testPreparsedExec.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-batch.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/threebuild_importB.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/OutputFormat.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build_dist.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build/build.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Utility.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-visualize.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/fourbuild.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testng-config" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/runme.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/threebuild_grouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_real.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/site.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/UserTask.cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/macrodef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-legacy.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/forms_rt.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/build-server.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/idea_rt.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/C_Roy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_macrodefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/default.build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/wing.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/HelloWindowsForms.build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/helpTOC.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/threebuild_importA.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/help.jhm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/om-build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/properties.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/onebuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build_all.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/GenericException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/wing.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUiImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Path.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/ExecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/LogFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/html/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/html/using_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/version_tool.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Dependency.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUi.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Ant.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/HelloWorld.vb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/build_targets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/Dependency Test/build_dir.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/threebuild_importA.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images/antcall_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jdom.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AntScript Visualizer.ipr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild/threebuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/app/web/help/help.hs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/build-delegate.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/help/html/assets/images/build.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/om-windev-deploy.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild/om-build.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/master-build" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/build.xml" afterPath="$PROJECT_DIR$/build/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
@@ -533,7 +237,7 @@
       <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="180" column="42" selection-start="7743" selection-end="7743" vertical-scroll-proportion="0.3846154">
               <folding />
             </state>
           </provider>
@@ -691,7 +395,7 @@
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkin" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <OptionsSetting value="true" id="Undo Check Out" />
@@ -770,15 +474,15 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure ProjectPane="false" Scope="false" PackagesPane="false" Favorites="false" />
+      <showStructure Favorites="false" Scope="false" PackagesPane="false" ProjectPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
     </navigator>
   </component>
   <component name="PropertiesComponent">
-    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web" value="/private/tmp/webExplodedDir25335tmp" />
@@ -801,8 +505,8 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="RunManagerConfig.compileBeforeRunning" value="true" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web8" value="/private/tmp/webExplodedDir25338tmp" />
-    <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web12" value="/private/tmp/webExplodedDir25341tmp" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web19" value="/private/tmp/webExplodedDir25344tmp" />
+    <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web12" value="/private/tmp/webExplodedDir25341tmp" />
     <property name="last_opened_file_path" value="/Users/douglasbullard/Documents/JavaStuff/Nike_Stabilization_Projects/OrderUpload/build" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="false" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
@@ -1254,14 +958,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" />
+      <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1961207" sideWeight="0.66311586" order="0" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1961207" sideWeight="0.66311586" order="0" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30290872" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Jalopy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32799444" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
@@ -1271,7 +975,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12643678" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2030825" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34886816" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35681292" sideWeight="0.5" order="4" side_tool="false" x="937" y="189" width="990" height="1292" />
@@ -1300,8 +1004,8 @@
       <window_info id="IDE talk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Maven" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25278664" sideWeight="0.5" order="2" side_tool="false" />
-      <window_info id="PE Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="JarSpy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="PE Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="RemoteSynchronizer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Character Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Workspaces" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" />
@@ -1311,8 +1015,8 @@
       <window_info id="IntelliTail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32471263" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Compare Directories" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" />
@@ -1462,7 +1166,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="180" column="42" selection-start="7743" selection-end="7743" vertical-scroll-proportion="0.3846154">
           <folding />
         </state>
       </provider>
