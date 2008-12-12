@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Ant ScriptDependency Visualizer client application -->
+<jnlp
+    spec="1.0+"
+    codebase="http://@hostname@/webstart/AntScriptVisualizer"
+    href="antscriptVisualizer.jnlp">
+    <information>
+        <title>Ant Script Visualizer</title>
+        <vendor>From Nurflugel.com...</vendor>
+        <homepage href="index.html"/>
+        <description>Ant ScriptDependency Visualizer</description>
+        <icon href="wing.jpg"/>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.5+"  initial-heap-size="64m" max-heap-size="512m"/>
+        <jar href="antscriptVisualizer.jar"/>
+        <jar href="commons-lang.jar"/>
+        <jar href="help.jar"/>
+        <jar href="forms_rt.jar"/>
+        <jar href="log4j.jar"/>
+        <jar href="jdom.jar"/>
+        <jar href="jhall.jar"/>
+    </resources>
+    <application-desc main-class="com.nurflugel.util.antscriptvisualizer.AntParserUiImpl"/>
+</jnlp>
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./ant2html.xsl"?>
+<!-- ================================================================          -->
+<!-- nike.net build file                                                       -->
+<!-- The three build files for the server are as follows:                      -->
+<!-- build.xml - used to build/distribute/run the CDM app on Windev.  Not      -->
+<!--             for server distribution.                                      -->
+<!--     build-main.xml - used to create/configure/install the "external"      -->
+<!--                      (outside cdm-main) data directory (cdm-main-data)    -->
+<!--     build-server.xml - used for configuring the Weblogic domain and       -->
+<!--                        "installing" CDM into that domain                  -->
+<!--     build-batch.xml - used to create the "external" (outside cdm-batch)   -->
+<!--                       data directory (cdm-batch-data)                     -->
+<!--                                                                           -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                          -->
+<!-- ================================================================          -->
+<project name="cdm-solaris-main app-deploy" default="info">
+
+    <!-- import the common pieces of the build file:-->
+    <import file="build_dir.xml"/>
+    <import file="build_properties.xml"/>
+    <import file="build_paths.xml"/>
+    <import file="build_taskdefs.xml"/>
+    <import file="build_common_dist.xml"/>
+
+
+    <target name="info">
+        <echo>
+Usage: build [targets], where [targets] are as follows:
+  install-configure-weblogic    Creates the WL server and deploys the app.
+        </echo>
+    </target>
+
+    <!--This is called by all targets prior to execution-->
+    <target name="init" depends="pre-init,properties,paths" unless="init.done">
+
+        <echo message="  propertyfilename   = ${property.file.name}"/>
+        <echo message="  basedir            = ${base.dir}"/>
+        <echo message="  output             = ${output}"/>
+        <echo message="  build              = ${build}"/>
+        <echo message="  deploy             = ${deploy}"/>
+        <echo message="  compiler           = ${compiler}"/>
+        <echo message="  weblogic           = ${weblogic}"/>
+        <echo message="  TODAY              = ${TODAY}"/>
+        <echo message="  TIME               = ${TIME}"/>
+        <echo message="  build.day.time     = ${build.day.time}"/>
+        <property name="init.done" value="true"/>
+        <echo> OS is: ${os.name}</echo>
+    </target>
+    
+    <target name="pre-init">
+        <property name="base.dir" value="${basedir}/.."/>
+        <!--        if genconf exists (windev), use that for configuration.  Else, (dev, qa, etc), use the conf dir-->
+        <available file="genconf" property="generated.conf" value="${basedir}\..\genconf"/>
+        <property name="generated.conf" value="${base.dir}/conf"/>
+        <echo>generated.conf is now ${generated.conf}</echo>
+    </target>
+
+    <target name="copy-htdocs" depends="init">
+        <copy-htdocs source="${base.dir}/../docs" target="${docroot}"/>
+    </target>
+</project>

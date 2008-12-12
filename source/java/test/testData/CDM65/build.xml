@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./ant2html.xsl"?>
+<!-- ================================================================ -->
+<!-- nike.net build file                                              -->
+<!-- The three build files for the server are as follows:                      -->
+<!--     build.xml - used to build/distribute/run the CDM app or legacy app    -->
+<!--                 on Windev.  Not for server distribution.                  -->
+<!--     build-main.xml - used to create/configure/install the "external"      -->
+<!--                      (outside cdm-main) data directory (cdm-main-data)    -->
+<!--     build-server.xml - used for configuring the Weblogic domain and       -->
+<!--                        "installing" CDM into that domain                  -->
+<!--     build-batch.xml - used to create the "external" (outside cdm-batch)   -->
+<!--                       data directory (cdm-batch-data)                     -->
+<!--                                                                           -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                 -->
+<!-- ================================================================ -->
+<project name="cdm-main" default="info">
+
+    <target name="info">
+        <echo>
+Usage: build [targets], where [targets] are as follows:
+  clean         Cleans up the build environment.  Cleans out the classes and all deploy directories,
+                and does some ClearCase housekeeping (gets rid of .keep files and the like).
+  clean-all     Clean out the entire build, and removes the WebLogic domain.  You will need to do a
+                'install-configure-weblogic' to get it all back
+  clean-docs    Cleans the docs directory.
+  clean-coverage Cleans the coverage data directory (not the generated html report, however).
+  clean-tests   Cleans the test directory.
+  clean-build   Cleans the build directory.
+  clean-deploy  Cleans the deploy directory.
+  clean-domain  Cleans the domain directory.
+  clean-jsps    Clean out the generated JSP .java and .class files in the WebLogic domain.
+                Revisiting the web pages will regenerate it all back.
+  copy-jsps     Copies the project JSP files to the deploy directory, where Weblogic will find it and regenerate
+                the compiled pages on the next visit.
+  compile       Compile all of the code
+  dist          Tars the entire project up for copying to the dev (default) server
+  dist-qa       Tars the entire project up for copying to the qa server
+  configure     Performs environment configuration on files which need it.
+  generate      Regenerate the Hibernate definitions
+  start         Compiles, deploys the project, and starts the weblogic server.
+  junitreport   Generates a test report for previously run JUnit tests.
+  stop          Stop weblogic server
+  test          Run ALL the unit tests.  This will fork.  One tine will start WebLogic, the other waits a predetermined
+                amount of time (as specified in build.properties) and then starts the unit tests.  When the tests are finished, it will
+                stop WebLogic.  This will also run the JunitReport subtask to format the unit test results for viewing.
+  test-wl       Same as test, but assumes Weblogic is already running.
+  test-single   Excercise a single test, assumes Weblogic is already running.
+                You should call the "runTest.cmd" script wrapper for this - "runTest Testname"
+  install-configure-weblogic    Creates the WL server and deploys the app.
+                All you need to do after this is 'start' to use the server
+  doc           Generate doccheck and javadoc
+  strutsdoc     Generates Struts documentation
+  middlegen     Use Middlegen to generate Hibernate descriptors for your data object classes
+  index         Build a build index page
+  viewprivate   List the files that are of view private status.
+  update        Update the snapshot view with the latest repository versions.  Check all checkedout files against the latest versions in the repository, and merge them if necessary.  Calls viewprivate.
+  updateForCheckin Same as update except it doesn't call viewprivate.
+  checkin       Attempts to check in files to clear case.  Calls viewprivate, updateForCheckin, compile and test.
+        </echo>
+    </target>
+
+    <!-- read in the common configuration files for all CDM build scripts       -->
+    <import file="build_dir.xml"/>
+    <import file="build_properties.xml"/>
+    <import file="build_taskdefs.xml"/>
+    <import file="build_paths.xml"/>
+    <import file="build_tools.xml"/>
+    <import file="build_cc.xml"/>
+    <import file="build_dist.xml"/>
+    <import file="build_clean.xml"/>
+
+    <!--This is called by all targets prior to execution-->
+    <target name="init" depends="properties,paths,taskdefs" unless="init.done">
+
+        <echo message="  propertyfilename   = ${property.file.name}"/>
+        <echo message="  basedir            = ${base.dir}"/>
+        <echo message="  output             = ${output}"/>
+        <echo message="  build              = ${build}"/>
+        <echo message="  deploy             = ${deploy}"/>
+        <echo message="  compiler           = ${compiler}"/>
+        <echo message="  weblogic           = ${weblogic}"/>
+        <echo message="  TODAY              = ${TODAY}"/>
+        <echo message="  TIME               = ${TIME}"/>
+        <echo message="  build.day.time     = ${build.day.time}"/>
+        <echo> OS is: ${os.name}</echo>
+        <property name="init.done" value="true"/>
+    </target>
+
+
+    <target name="emma" depends="init" description="turns on EMMA instrumentation/reporting">
+        <property name="emma.enabled" value="true"/>
+    </target>
+
+
+    <!--Use this target to create a WL installation and deploy CDM all in one shot.    -->
+    <target name="server">
+        <!--        <ant target="deploy" inheritall="false" inheritrefs="false"/>-->
+        <ant antfile="build-server.xml" target="install-configure-weblogic" inheritall="false" inheritrefs="false"/>
+    </target>
+
+
+    <target name="emmacompile" depends="emma, compile"/>
+    <target name="emmatest" depends="emma, test"/>
+    <target name="emmatest-integration" depends="emma, integration-test"/>
+
+    <!-- ======================================================= -->
+    <!-- Compiles the java classes.  Test and Integration Test go to different class dirs.                          -->
+    <!--     Uses build.properties to determine compiler - Jikes or 'Modern'-->
+    <!-- ======================================================= -->
+    <target name="compile" depends="init,dir,compile-jaxb,compile-main,compile-test,compile-integration" unless="compile.done,configure.done"
+        description="Compiles the java classes. ">
+        <emma enabled="${emma.enabled}">
+            <instr instrpath="${classes}"
+                destdir="${classes}"
+                metadatafile="${coverage.dir}/metadata.emma"
+                merge="true"
+                mode="overwrite"
+                />
+        </emma>
+        <property name="compile.done" value="true"/>
+    </target>
+
+    <target name="compile-jaxb" depends="init,dir,generate-jaxb" unless="compile-jaxb.done">
+        <javac srcdir="${generated.src.jaxb}"
+            destdir="${classes}"
+            includeAntRuntime="false"
+            debug="${compile.debug}"
+            debugLevel="${compile.debug.level}"
+            optimize="${compile.optimize}"
+            deprecation="${compile.deprecation}"
+            classpathref="class.lib.weblogic.path"/>
+        <property name="compile-jaxb.done" value="true"/>
+    </target>
+
+    <target name="compile-main" depends="init,dir,compile-jaxb">
+        <javac srcdir="${src}"
+            destdir="${classes}"
+            includeAntRuntime="false"
+            debug="${compile.debug}"
+            debugLevel="${compile.debug.level}"
+            optimize="${compile.optimize}"
+            deprecation="${compile.deprecation}"
+            classpathref="class.lib.weblogic.path"/>
+        <property name="compile-main.done" value="true"/>
+    </target>
+
+    <target name="compile-test" depends="init,dir,compile-main" unless="compile-test.done">
+        <javac srcdir="${test}"
+            destdir="${test.classes}"
+            includeAntRuntime="false"
+            debug="${compile.debug}"
+            debugLevel="${compile.debug.level}"
+            optimize="${compile.optimize}"
+            deprecation="${compile.deprecation}"
+            classpathref="class.test.path"/>
+        <property name="compile-test.done" value="true"/>
+    </target>
+
+    <target name="compile-integration" depends="init,dir,compile-test" unless="compile-integration.done">
+        <javac srcdir="${integrationTest}"
+            destdir="${integration.classes}"
+            includeAntRuntime="false"
+            debug="${compile.debug}"
+            debugLevel="${compile.debug.level}"
+            optimize="${compile.optimize}"
+            deprecation="${compile.deprecation}"
+            classpathref="class.integration.test.path"/>
+        <property name="compile-integration.done" value="true"/>
+    </target>
+
+
+    <!-- ======================================================= -->
+    <!-- Deploys the application to WL                           -->
+    <!-- ======================================================= -->
+    <target name="deploy" depends="compile,jar-applet,make-links" unless="deploy.done,configure.done">
+        <property name="deploy.location" value="${cdm.main.approot}"/>
+        <property name="deploy.conf.location" value="${cdm.main.approot}"/>
+        <deploy-exploded-ear/>
+        <deploy-exploded-war/>
+        <deploy-exploded-ejb-app/>
+        <copy-conf/>
+        <antcall target="create-export-client" inheritrefs="true" inheritall="true"/>
+        <property name="deploy.done" value="true"/>
+    </target>
+
+
+    <!-- ======================================================= -->
+    <!-- Deploys the exploded EAR                                -->
+    <!-- ======================================================= -->
+    <macrodef name="deploy-exploded-ear">
+        <sequential>
+            <copy todir="${deploy.location}/cdm/META-INF">
+                <fileset dir="${conf}/metadata/application/META-INF/"/>
+            </copy>
+
+            <copy todir="${deploy.location}/cdm/APP-INF/lib">
+                <fileset file="${lib.commons}/commons-beanutils.jar"/>
+                <fileset file="${lib.commons}/commons-collections.jar"/>
+                <fileset file="${lib.commons}/commons-fileupload.jar"/>
+                <fileset file="${lib.commons}/commons-digester.jar"/>
+                <fileset file="${lib.commons}/commons-httpclient.jar"/>
+                <fileset file="${lib.commons}/commons-lang.jar"/>
+                <fileset file="${lib.commons}/commons-logging.jar"/>
+                <fileset file="${lib.commons}/commons-logging.jar"/>
+                <fileset file="${lib.commons}/commons-validator.jar"/>
+                <fileset file="${lib.hibernate}/cglib*.jar"/>
+                <fileset file="${lib.hibernate}/dom4j.jar"/>
+                <fileset file="${lib.hibernate}/ehcache*.jar"/>
+                <fileset file="${lib.hibernate}/hibernate*.jar"/>
+                <fileset file="${lib.hibernate}/jdbc*-stdext.jar"/>
+                <fileset file="${lib.hibernate}/odmg.jar"/>
+                <fileset file="${lib.struts}/nike-displaytag-1.0-rc1.jar"/>
+                <fileset file="${lib.struts}/standard.jar"/>
+                <fileset file="${lib.struts}/struts-el.jar"/>
+                <fileset file="${lib.struts}/providers.jar"/>
+                <fileset file="${lib}/poi-2.5.1-final-20040804.jar"/>
+                <fileset file="${lib.struts}/struts.jar"/>
+                <fileset file="${lib.struts}/strutstest-*.jar"/>
+                <fileset file="${lib.struts}/taglibs-log.jar"/>
+                <fileset file="${lib.struts}/taglibs-string.jar"/>
+                <fileset file="${lib.struts}/tiles.jar"/>
+                <fileset file="${lib.testing}/*.properties"/>
+                <fileset file="${lib.testing}/cactus-*.jar"/>
+                <fileset file="${lib.testing}/junit.jar"/>
+                <fileset file="${lib}/aspectjrt-*.jar"/>
+                <fileset file="${lib}/jstl.jar"/>
+                <fileset file="${lib}/log4j.jar"/>
+                <fileset file="${lib}/shared.jar"/>
+                <fileset file="${lib}/xercesImpl.jar"/>
+                <fileset file="${lib}/nikenet-global.jar"/>
+                <fileset file="${lib}/nikenet-global-classpath.jar"/>
+                <fileset file="${lib}/xineo-xml-1.1.0.jar"/>
+                <fileset file="${lib.jaxb}/jax-qname.jar"/>
+                <fileset file="${lib.jaxb}/jaxb-api.jar"/>
+                <fileset file="${lib.jaxb}/jaxb-impl.jar"/>
+                <fileset file="${lib.jaxb}/jaxb-libs.jar"/>
+                <fileset file="${lib.jaxb}/jaxb-xjc.jar"/>
+                <fileset file="${lib.jaxb}/jaxp-api.jar"/>
+                <fileset file="${lib.jaxb}/relaxngDatatype.jar"/>
+                <fileset file="${lib}/xsdlib.jar"/>
+                <fileset file="${lib}/namespace.jar"/>
+            </copy>
+            <copy todir="${deploy.location}/cdm/APP-INF/classes">
+                <fileset dir="${classes}"/>
+            </copy>
+            <property name="deploy.ear.app.done" value="true"/>
+        </sequential>
+    </macrodef>
+
+    <!--Copies CONFIGURED files into the deploy directories-->
+    <macrodef name="copy-conf">
+        <sequential>
+
+            <!--copy any changed resource info into genconf first-->
+            <copy todir="${generated.conf}">
+                <fileset dir="${conf}/resource" excludes="**/*.ttf" casesensitive="false"/>
+            </copy>
+
+            <!--        copy application config stuff-->
+            <copy todir="${deploy.conf.location}/cdm/APP-INF/lib">
+                <fileset dir="${generated.conf}"/>
+                <fileset dir="${conf}/resource" includes="**/*.ttf" casesensitive="false"/>
+            </copy>
+
+            <!--        copy EJB stuff -->
+            <copy todir="${deploy.conf.location}/cdm/cdmEjbApp">
+                <fileset dir="${generated.conf}" >
+                    <include name="**/*.xml"/>
+                    <include name="**/*.dtd"/>
+                    <include name="**/*.properties"/>
+                </fileset>
+                <fileset dir="${conf}/resource" includes="**/*.ttf" casesensitive="false"/>
+            </copy>
+
+            <!--                copy web stuff-->
+            <copy todir="${deploy.conf.location}/cdm/cdmWebApp/WEB-INF/classes">
+                <fileset dir="${generated.conf}"/>
+                <fileset dir="${conf}/resource" includes="**/*.ttf" casesensitive="false"/>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <!--Copies UNCONFIGURED files into the deploy directories-->
+    <macrodef name="copy-unconf">
+        <sequential>
+            <!--        copy application config stuff-->
+            <copy todir="${deploy.location}/cdm/APP-INF/lib" filtering="true" overwrite="true">
+                <filterset refid="cdmServerFilterSet"/>
+                <fileset dir="${generated.conf}"/>
+            </copy>
+            <copy todir="${deploy.location}/cdm/APP-INF/lib" filtering="true" overwrite="true">
+                <filterset refid="cdmServerFilterSet"/>
+                <fileset dir="${conf}/resource"/>
+                <fileset dir="${conf}/multiconfig"/>
+            </copy>
+            <copy tofile="${deploy.location}/cdm/APP-INF/lib/build-info.properties" file="${cdm.main.approot}/${buildinfo}" overwrite="true"/>
+
+            <!--        copy EJB stuff -->
+            <copy todir="${deploy.location}/cdm/cdmEjbApp" filtering="true" overwrite="true">
+                <filterset refid="cdmServerFilterSet"/>
+                <fileset dir="${generated.conf}"/>
+            </copy>
+            <copy todir="${deploy.location}/cdm/cdmEjbApp" filtering="true" overwrite="true">
+                <filterset refid="cdmServerFilterSet"/>
+                <fileset dir="${conf}/resource"/>
+                <fileset dir="${conf}/multiconfig"/>
+            </copy>
+            <copy tofile="${deploy.location}/cdm/cdmEjbApp/build-info.properties" file="${cdm.main.approot}/${buildinfo}" overwrite="true"/>
+
+            <!--                copy web stuff-->
+            <copy todir="${deploy.location}/cdm/cdmWebApp/WEB-INF/classes" filtering="true" overwrite="true">
+                <filterset refid="cdmServerFilterSet"/>
+                <fileset dir="${generated.conf}"/>
+            </copy>
+            <copy todir="${deploy.location}/cdm/cdmWebApp/WEB-INF/classes" filtering="true" overwrite="true">
+                <filterset refid="cdmServerFilterSet"/>
+                <fileset dir="${conf}/resource"/>
+                <fileset dir="${conf}/multiconfig"/>
+            </copy>
+            <copy tofile="${deploy.location}/cdm/cdmWebApp/WEB-INF/classes/build-info.properties" file="${cdm.main.approot}/${buildinfo}" overwrite="true"/>
+
+            <!--                copy export client stuff - DGB is this needed for the APP server, or just the batch stuff???? -->
+<!--            <copy todir="${deploy.location}/exportclient" filtering="true" overwrite="true">-->
+<!--                <filterset refid="cdmServerFilterSet"/>-->
+<!--                <fileset dir="${export.client.dir}"/>-->
+<!--            </copy>-->
+<!--            <copy todir="${deploy.location}/exportclient" filtering="true" overwrite="true">-->
+<!--                <filterset refid="cdmServerFilterSet"/>-->
+<!--                <fileset dir="${conf}/resource" excludes="**/pdf/**, **/scripts/**"/>-->
+<!--                <fileset dir="${conf}/multiconfig" excludes="**/scripts/**"/>-->
+<!--            </copy>-->
+<!--            <copy todir="${deploy.location}/exportclient" filtering="true" overwrite="true">-->
+<!--                <filterset refid="cdmServerFilterSet"/>-->
+<!--                <fileset dir="${generated.conf}" includes="**/defaultXslFoStyleSheet.xsl"/>-->
+<!--            </copy>-->
+<!--            <copy tofile="${deploy.location}/exportclient/build-info.properties" file="${cdm.main.approot}/${buildinfo}" overwrite="true"/>-->
+
+        </sequential>
+    </macrodef>
+
+
+    <!-- ======================================================= -->
+    <!-- Deploys the exploded EJB app                            -->
+    <!-- ======================================================= -->
+    <macrodef name="deploy-exploded-ejb-app">
+        <sequential>
+            <copy todir="${deploy.location}/cdm/cdmEjbApp/META-INF">
+                <fileset dir="${conf}/metadata/ejb/META-INF"/>
+            </copy>
+
+        </sequential>
+    </macrodef>
+
+    <!-- ======================================================= -->
+    <!-- Deploys the exploded Web app -->
+    <!-- ======================================================= -->
+    <macrodef name="deploy-exploded-war">
+        <sequential>
+            <!--            skip unless it's a "dist" operation, as win/mac deploy has a junction-->
+            <echo> Use junctions? ${dont.use.junctions}</echo>
+            <if>
+                <equals arg1="${dont.use.junctions}" arg2="true"/>
+                <then>
+                    <echo>Branch 1</echo>
+                    <antcall target="break-links" inheritrefs="true" inheritall="true"/>
+                    <copy todir="${deploy.location}/cdm/cdmWebApp">
+                        <fileset dir="${base.dir}/web"/>
+                    </copy>
+                </then>
+                <else>
+                    <echo>Branch 2</echo>
+                    <copy todir="${deploy.location}/cdm/cdmWebApp">
+                        <fileset dir="${base.dir}/web" excludes="**/jsp/**/*"/>
+                    </copy>
+
+                    <!--                cactus seems to require these next two.  Don't know why exactly-->
+                    <copy todir="${deploy.location}/cdm/cdmWebApp/WEB-INF/lib">
+                        <fileset dir="${lib.testing}" includes="cactus*"/>
+                        <fileset dir="${generated.conf}" includes="cactus.properties"/>
+                    </copy>
+                    <copy todir="${deploy.location}/cdm/cdmWebApp/WEB-INF/classes">
+                        <fileset dir="${test.classes}"/>
+                        <fileset dir="${integration.classes}"/>
+                    </copy>
+                </else>
+            </if>
+
+            <copy todir="${deploy.location}/cdm/META-INF">
+                <fileset dir="${conf}/metadata/application/META-INF/"/>
+            </copy>
+
+        </sequential>
+    </macrodef>
+
+    <!-- ======================================================= -->
+    <!--    Jars the applet for distribution                     -->
+    <!-- ======================================================= -->
+    <target name="jar-applet" depends="init" unless="jar-applet.done,configure.done">
+        <!--        this will be overridden if used during a "dist"-->
+        <property name="deploy.location" value="${cdm.main.approot}"/>
+        <!--        unjar the common jar so we can get just the goodies we want without all 360K of the jar-->
+        <unjar src="${lib}/nikenet-global.jar" dest="${build}/expandedNikeNetJar"/>
+        <unjar src="${lib}/commons/commons-lang.jar" dest="${build}/expandedJakartaCommonsJar"/>
+        <unjar src="${lib}/commons/commons-beanutils.jar" dest="${build}/expandedJakartaCommonsJar"/>
+        <delete file="${deploy.location}/cdm/cdmWebApp/cdmapplet.jar"/>
+        <jar update="true"
+            index="true"
+            destfile="${deploy.location}/cdm/cdmWebApp/cdmapplet.jar"
+            >
+            <fileset dir="${classes}">
+                <include name="net/nike/cdm/ui/applet/**/*.class"/>
+                <include name="net/nike/cdm/domain/reference/BusinessGroup*.class"/>
+                <include name="net/nike/cdm/domain/reference/Country*.class"/>
+                <include name="net/nike/cdm/domain/reference/Currency*.class"/>
+                <include name="net/nike/cdm/domain/reference/SegmentationOrganization*.class"/>
+                <include name="net/nike/cdm/domain/reference/SegmentationCatalogType*.class"/>
+                <include name="net/nike/cdm/domain/reference/PdfFormat*.class"/>
+                <include name="net/nike/cdm/domain/reference/SeasonYear*.class"/>
+                <include name="net/nike/cdm/domain/reference/LibraryRegion*.class"/>
+                <include name="net/nike/cdm/domain/reference/SystemRole*.class"/>
+                <include name="net/nike/cdm/domain/reference/User.class"/>
+                <include name="net/nike/cdm/domain/reference/Language*.class"/>
+                <include name="net/nike/cdm/domain/reference/Region*.class"/>
+                <include name="net/nike/cdm/domain/reference/ReferenceFacade.class"/>
+                <include name="net/nike/cdm/domain/reference/SizeType*.class"/>
+                <include name="net/nike/cdm/domain/catalog/responses/*.class"/>
+                <include name="net/nike/cdm/domain/catalog/requests/*.class"/>
+                <include name="net/nike/cdm/domain/catalog/events/*.class"/>
+                <include name="net/nike/cdm/domain/catalog/common/**/*.class"/>
+                <include name="net/nike/cdm/domain/user/User.class"/>
+                <include name="net/nike/cdm/domain/user/UserImpl.class"/>
+                <include name="net/nike/cdm/domain/user/OracleUser.class"/>
+                <include name="net/nike/cdm/domain/user/LdapUser.class"/>
+                <include name="net/nike/cdm/domain/universe/Image*.class"/>
+                <include name="net/nike/cdm/domain/reference/Image*.class"/>
+                <include name="net/nike/cdm/domain/reference/RemovalType*.class"/>
+                <include name="net/nike/cdm/domain/reference/ProductDivision*.class"/>
+                <include name="net/nike/cdm/domain/reference/DefaultGraphic*.class"/>
+                <include name="net/nike/cdm/domain/ui/applet/**/*.class"/>
+                <include name="**/MediatorFactory.class"/>
+                <include name="**/ServletCatalogMediator.class"/>
+                <include name="**/GenericDomainException.class"/>
+                <include name="**/ConfigurationException.class"/>
+                <include name="**/TransactionalCatalog*.class"/>
+                <include name="**/MasterProfile*.class"/>
+                <include name="**/CatalogStatus*.class"/>
+                <include name="**/TransactionalProfile*.class"/>
+                <include name="**/Exception.class"/>
+                <include name="**/CatalogProductHierarchyConstants.class"/>
+                <include name="**/LightweightFacadeLocator.class"/>
+                <include name="**/MasterCatalogAccessDeniedEvent.class"/>
+                <include name="**/MasterCatalogHierarchyTranslationsSavedEvent.class"/>
+                <include name="**/*Applet*.class"/>
+                <include name="**/FacadeLocator*.class"/>
+                <include name="**/ObjectCopier.class"/>
+                <include name="**/Implicitly*.class"/>
+                <include name="net/nike/cdm/ui/common/CountryComparator.class"/>
+                <include name="net/nike/cdm/ui/common/SegmentationOrganizationComparator.class"/>
+                <include name="net/nike/cdm/ui/common/SegmentationCatalogTypeComparator.class"/>
+                <include name="net/nike/cdm/ui/common/CurrencyComparator.class"/>
+                <include name="net/nike/cdm/ui/common/PdfFormatComparator.class"/>
+                <exclude name="**/*HbmImpl*.class"/>
+                <exclude name="**/*Utils.class"/>
+                <exclude name="**/*Test.class"/>
+                <exclude name="**/Test*.class"/>
+            </fileset>
+            <fileset dir="${generated.conf}">
+                <include name="CDM.properties"/>
+                <exclude name="**/LogFactory.xml"/>
+            </fileset>
+            <fileset dir="${conf}/appletconfig">
+                <include name="**/*.properties"/>
+                <include name="**/*.xml"/>
+            </fileset>
+            <fileset dir="${build}/expandedNikeNetJar">
+                <include name="**/PropertyFileReader.class"/>
+                <include name="**/FactoryBase.class"/>
+                <include name="net/nike/common/logging/**/*.class"/>
+                <include name="**/ConfigurationException.class"/>
+                <include name="**/ContextualException.class"/>
+                <include name="**/Visitor.class"/>
+                <include name="**/DomainEvent*.class"/>
+                <include name="**/DomainBase.class"/>
+                <include name="**/Domain.class"/>
+                <include name="**/Visitable.class"/>
+                <include name="**/VisitorException.class"/>
+                <include name="**/RefreshException.class"/>
+                <include name="**/EventCollector.class"/>
+                <include name="**/PropertiesHandler.class"/>
+                <exclude name="**/*Test.class"/>
+            </fileset>
+            <fileset dir="${build}/expandedJakartaCommonsJar">
+                <include name="**/NestableException.class"/>
+                <include name="**/NestableRuntimeException.class"/>
+                <include name="**/NestableDelegate.class"/>
+                <include name="**/Nestable.class"/>
+                <include name="**/PropertyUtils.class"/>
+                <include name="**/PropertyDescriptor.class"/>
+                <include name="**/FeatureDescriptor.class"/>
+            </fileset>
+            <fileset dir="${base.dir}/web/images"
+                includes="*arrow.gif,*Icon.gif"/>
+        </jar>
+        <copy file="${base.dir}/lib/xineo-xml-1.1.0.jar" todir="${deploy.location}/cdm/cdmWebApp"/>
+        <!--        <antcall target="sign" inheritall="true"/>-->
+        <property name="jar-applet.done" value="true"/>
+    </target>
+
+    <!-- ======================================================= -->
+    <!-- Configures the  configurable resources.                 -->
+    <!-- ======================================================= -->
+    <target name="configure" depends="init" unless="configure.done" description=" Configures the  configurable resources.">
+        <delete dir="${generated.conf}" quiet="true"/>
+
+        <!-- generate buildinfo.txt in ${cdm.main.approot} -->
+        <antcall target="build-info"/>
+
+        <!-- copy buildinfo.txt into generated.conf for windev -->
+        <copy tofile="${generated.conf}/build-info.properties" file="${cdm.main.approot}/${buildinfo}" />
+        <copy todir="${generated.conf}" overwrite="true" filtering="true"><!--won't overwrite generated files unless set to "true"-->
+            <filterset refid="cdmFilterSet"/>
+            <fileset dir="${conf}/multiconfig" includes="**/*.xml,**/*.dtd,**/*.properties"/>
+        </copy>
+
+        <!-- replace cache settings -->
+        <copy file="${conf}/multiconfig/ehcache.xml" todir="${generated.conf}" overwrite="true">
+            <filterset>
+                <filter token="reference.cache.timetolive" value="${reference.cache.timetolive}"/>
+                <filter token="universe.cache.timetolive" value="${universe.cache.timetolive}"/>
+                <filter token="library.cache.timetolive" value="${library.cache.timetolive}"/>
+            </filterset>
+        </copy>
+
+        <run-environment-tool base.dir="${base.dir}" working.dir="${generated.conf}" envtool.location="${envtool.location}" envstore.location="${envstore.location}" envtool.key="${envtool.key}" envtool.log="${envtool.log}"/>
+
+        <!--   copy non-templated config files to genconf - this way genconf is the only location for all configuration files  -->
+        <copy todir="${generated.conf}" overwrite="true">
+            <filterset refid="cdmFilterSet"/>
+            <fileset dir="${conf}/resource" includes="**/*.xml,**/*.dtd,**/*.properties,**/*.gif"/>
+        </copy>
+
+        <ant target="generate" inheritall="false" inheritrefs="false"/>
+        <property name="configure.done" value="true"/>
+    </target>
+
+    <!--        Run ALL the integration tests.  This will fork.  One tine will start WebLogic, the other waits a predetermined-->
+    <!--        amount of time (as specified in build.properties) and then starts the unit tests.  When the tests are finished, it will-->
+    <!--        stop WebLogic.  This will also run the JunitReport subtask to format the unit test results for viewing.-->
+    <target name="integration-test" depends="clean-tests,dir,deploy,copy-integration-classes,copy-test-data,generate"
+        unless="integration.test.done,configure.done">
+
+        <parallel>
+            <echo message="************* ANTCALL to STARTWL ************"/>
+            <antcall target="start" inheritAll="false"/>
+            <sequential>
+                <sleep seconds="${delay}"/>
+                <do-tests test.path="class.integration.test.path" test.dir="${integration.classes}" test.docs.dir="${docs}/integrationTest"/>
+                <antcall target="stop" inheritall="true" inheritrefs="true"/>
+                <!--                <antcall target="junitreport" inheritall="true" inheritrefs="true"/>-->
+            </sequential>
+        </parallel>
+        <do-junitreport test.docs.dir="${docs}/integrationTest"/>
+        <property name="integration.test.done" value="true"/>
+    </target>
+
+    <!--         Run the unit tests.  This will fork.  One tine will start WebLogic, the other waits a predetermined-->
+    <!--         amount of time (as specified in build.properties) and then starts the unit tests.  When the tests are finished, it will-->
+    <!--         stop WebLogic.  This will also run the JunitReport subtask to format the unit test results for viewing.-->
+    <target name="test" depends="compile-test,copy-test-data,configure" unless="test.done,configure.done">
+        <do-tests test.path="class.test.path" test.dir="${test.classes}" test.docs.dir="${docs}/test"/>
+
+        <do-junitreport test.docs.dir="${docs}/test"/>
+        <property name="test.done" value="true"/>
+    </target>
+
+    <macrodef name="do-tests">
+        <attribute name="test.path"/>
+        <attribute name="test.dir"/>
+        <attribute name="test.docs.dir"/>
+        <sequential>
+            <junit failureproperty="test.failed"
+                errorproperty="test.failed"
+                dir="${cdm.main.approot}"
+                fork="true"
+                forkmode="perBatch"
+                printsummary="true">
+                <classpath>
+                    <path refid="@{test.path}"/>
+                </classpath>
+                <formatter type="xml"/>
+                <batchtest todir="@{test.docs.dir}">
+                    <fileset dir="@{test.dir}" includes="**/*Test.class"/>
+                </batchtest>
+                <jvmarg value="-Djava.ext.dirs=${deprecated.lib.ant}/emma"/>
+                <jvmarg value="-Demma.coverage.out.file=${coverage.out.file}"/>
+                <jvmarg value="-Demma.coverage.out.merge=true"/>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <!-- ======================================================================= -->
+    <!-- Run a single unit test.  You should call the "runTest.cmd" script wrapper for this - "runTest Testname"  -->
+    <!-- ======================================================================= -->
+    <target name="test-single" depends="clean-docs,compile,copy-test-data,copy-integration-classes" unless="configure.done"
+        description="Run a single unit test.">
+        <echo message="************* STARTING JUNIT TEST for ${testClass} ************"/>
+
+        <junit failureproperty="test.failed"
+            errorproperty="test.failed"
+            dir="${cdm.main.approot}"
+            fork="true"
+            printsummary="true">
+            <classpath>
+                <path refid="class.integration.test.path"/>
+            </classpath>
+            <formatter type="xml"/>
+            <batchtest todir="${docs}/test">
+                <fileset dir="${integration.classes}" includes="**/${testClass}.class"/>
+                <fileset dir="${test.classes}" includes="**/${testClass}.class"/>
+            </batchtest>
+            <jvmarg value="-Djava.ext.dirs=${ant}/emma"/>
+            <jvmarg value="-Demma.coverage.out.file=${coverage.out.file}"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+        </junit>
+        <do-junitreport test.docs.dir="${docs}/test"/>
+        <property name="test.done" value="true"/>
+    </target>
+
+    <!--    Copy the integration classes to the deployed app for testing-->
+    <target name="copy-integration-classes" depends="init">
+        <property name="deploy.location" value="${cdm.main.approot}"/>
+        <copy todir="${deploy.location}/cdm/cdmWebApp/WEB-INF/classes">
+            <fileset dir="${integration-test-classes}"/>
+            <fileset dir="${test-classes}"/>
+        </copy>
+        <!-- The MockCatalogMediator class needs to be copied to the APP-INF classes directory in order for -->
+        <!-- the application class loader to find it. It is used for the EPM catalog import submit action-->
+        <!-- integration test in order not to actually go ahead and send the JMS request. The test is only-->
+        <!-- meant to test some file upload scenarios.-->
+        <copy todir="${deploy.location}/cdm/APP-INF/classes">
+            <fileset dir="${test-classes}" includes="**/MockCatalogMediator.class"/>
+        </copy>
+    </target>
+
+    <target name="junitreport" depends="init, compile-main" unless="junitreport.done,configure.done"
+        description="Builds the JUnit test report">
+        <do-junitreport test.docs.dir="${docs}/integrationTest"/>
+
+        <property name="junitreport.done" value="true"/>
+    </target>
+
+    <macrodef name="do-junitreport">
+        <attribute name="test.docs.dir"/>
+        <sequential>
+            <if>
+                <equals arg1="${junitreport.done}" arg2="true"/>
+                <then>
+                    <echo>junitreport already run...</echo>
+                </then>
+                <else>
+                    <echo>junitreport Test failed status is: ${test.failed}</echo>
+
+                    <!--        This is the original version.  Doesn't work with Ant 1.6, having WL.jar in the ant's lib dir-->
+                    <!--        It's either disable the WL server construction task, or do a workaround here.-->
+                    <!--        <junitreport todir="${docs}/test">-->
+                    <!---->
+                    <!--            <fileset dir="${docs}/test">-->
+                    <!--                <include name="TEST-*Test.xml"/>-->
+                    <!--            </fileset>-->
+                    <!--            <report format="frames" todir="${docs}/test"/>-->
+                    <!--        </junitreport>-->
+
+
+                    <!--        Doesn't work!!-->
+                    <!--        <java classname="net.nike.build.ant.task.JunitReportWrapper" >-->
+                    <!--            <arg value="${docs}/test"/>-->
+                    <!--            <arg value="TEST-*Test.xml"/>-->
+                    <!--            <arg value="frames"/>-->
+                    <!--            <arg value="${docs}/test"/>-->
+                    <!--            <classpath path="${output}/classes"/>-->
+                    <!--            <classpath path="${ant}/lib/ant.jar"/>-->
+                    <!--            <classpath path="${ant}/lib/ant-junit.jar"/>-->
+                    <!--            <classpath path="${java.class.path}"/>-->
+                    <!--        </java>-->
+                    <!--Works as a batch command-->
+                    <!--java -classpath c:\cdm_out\classes;apache-ant-1.6.2\lib\ant.jar;apache-ant-1.6.2\lib\ant-junit.jar net.nike.build.ant.task.JunitReportWrapper-->
+
+
+                    <!--This is the final version of WHAT WORKS.-->
+
+                    <exec executable="java">
+                        <arg line="-Djava.ext.dirs=${deprecated.lib.ant}/emma"/>
+                        <arg line="-classpath ${output}/classes;${ant}/lib/ant.jar;${ant}/lib/ant-junit.jar"/>
+                        <arg line="net.nike.build.ant.task.JunitReportWrapper"/>
+                        <!--         String junitToDirArg = args[0];-->
+                        <arg line="@{test.docs.dir}"/>
+                        <!--        String baseDirArg=args[1];-->
+                        <arg line="${base.dir}"/>
+                        <!--        String filesetDirArg = args[2];-->
+                        <arg line="@{test.docs.dir}"/>
+                        <!--        String includeNameArg = args[3];-->
+                        <arg line="TEST-*.xml"/>
+                        <!--        String reportFormatArg = args[4];-->
+                        <arg line="frames"/>
+                        <!--        String reportToDirArg = args[5];-->
+                        <arg line="@{test.docs.dir}"/>
+                    </exec>
+
+                    <fail message="At least one unit test failed." if="test.failed"/>
+                    <property name="junitreport.done" value="true"/>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!-- ======================================================= -->
+    <!-- Copies the test data where the app can find it          -->
+    <!-- put this data elsewhere later?  No test items in conf/test-->
+    <!-- ======================================================= -->
+    <target name="copy-test-data" depends="init" unless="copy.test.data.done,configure.done">
+        <!--        <copy todir="${deploy}/conf/test">-->
+        <!--            <fileset dir="${conf}/test"/>-->
+        <!--        </copy>-->
+        <copy todir="${test.data.output}">
+            <fileset dir="${test.data}"/>
+        </copy>
+        <property name="copy.test.data.done" value="true"/>
+    </target>
+
+
+    <!-- ======================================================= -->
+    <!-- Starts up WebLogic.  The instance as started will be attachable  -->
+    <!-- to a debugger on port 5005 (set in build.properties).    -->
+    <!-- ======================================================= -->
+    <target name="start" depends="deploy, emma" unless="configure.done"
+        description="">
+        <echo message="coverage out file: ${coverage.out.file}"/>
+        <java classname="weblogic.Server"
+            dir="${cdmdomain}"
+            fork="true"
+            failonerror="true">
+            <classpath>
+                <path refid="weblogic.path"/>
+            </classpath>
+            <jvmarg value="-Dbea.home=${beahome}"/>
+            <jvmarg value="-Dweblogic.RootDirectory=${cdmdomain}"/>
+            <jvmarg value="-Dweblogic.ConfigFile=config.xml"/>
+            <jvmarg value="-Dweblogic.Domain=${cdm.main.domain}"/>
+            <jvmarg value="-Dweblogic.Name=${cdm.main.weblogic.server.name}"/>
+            <jvmarg value="-Dweblogic.management.discover=false"/>
+            <jvmarg value="-Dweblogic.management.username=${cdm.main.weblogic.admin.user}"/>
+            <jvmarg value="-Dweblogic.management.password=${cdm.main.weblogic.admin.password}"/>
+            <jvmarg value="-Dweblogic.ProductionModeEnabled=false"/>
+            <!--            <jvmarg value="-Dweblogic.jsp.windows.caseSensitive=true"/>-->
+            <!--            needed for Idea debugging-->
+            <jvmarg value="-Xdebug"/>
+            <jvmarg value="-Xmx512M"/>
+            <jvmarg value="-Xnoagent"/>
+            <jvmarg value="-Djava.compiler=NONE"/>
+            <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=${cdm-stylelib.weblogic.debug.port}"/>
+            <jvmarg value="-Demma.coverage.out.file=${coverage.out.file}"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+            <jvmarg value="-Djava.ext.dirs=${deprecated.lib.ant}/emma"/>
+        </java>
+    </target>
+
+    <!-- stops Weblogic.  -->
+    <target name="stop" depends="init" unless="configure.done" description="Stops weblogic">
+        <ant antfile="build-server.xml" target="stopAppServer" inheritrefs="false" inheritall="false"/>
+    </target>
+
+    <target name="doc" depends="compile,dir" unless="doc.done,configure.done"
+        description="Generate the project docs">
+        <javadoc maxmemory="128M" packagenames="net.nike.*" destdir="${docs}/api" protected="yes" classpathref="class.lib.weblogic.path" breakiterator="true">
+            <sourcepath>
+                <pathelement path="${src}"/>
+                <pathelement path="${generated.src.jaxb}"/>
+                <pathelement path="${base.dir}/test"/>
+            </sourcepath>
+            <doctitle><![CDATA[<h1>CDM R6.5</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Copyright &#169; 2004 Nike. All Rights Reserved.</i>]]></bottom>
+            <group title="Domain" packages="net.nike.cdm.domain*"/>
+            <group title="Library" packages="net.nike.cdm.domain.library*"/>
+            <group title="Reference" packages="net.nike.cdm.domain.reference*"/>
+            <group title="Exceptions" packages="net.nike.cdm.exception*"/>
+            <group title="Extract" packages="net.nike.cdm.export*"/>
+            <group title="Load" packages="net.nike.cdm.load*"/>
+            <group title="Persistence" packages="net.nike.cdm.persistence*"/>
+            <group title="Service" packages="net.nike.cdm.service*"/>
+            <group title="Test" packages="net.nike.cdm.test*"/>
+            <group title="Utility" packages="net.nike.cdm.util*"/>
+            <group title="UI" packages="net.nike.cdm.ui*"/>
+            <group title="Common" packages="net.nike.common*"/>
+            <group title="CDM Common" packages="net.nike.cdm.common*"/>
+            <tag name="hibernate.class" scope="all" description="Hibernate class XDoclet tag"/>
+            <tag name="hibernate.component" scope="all" description="Hibernate omponent XDoclet tag"/>
+            <tag name="hibernate.property" scope="all" description="Hibernate property XDoclet tag"/>
+            <tag name="hibernate.jcs-cache" scope="all" description="JCS Cache XDoclet tag"/>
+            <tag name="hibernate.cache" scope="all" description="Hibernate Cache XDoclet tag"/>
+            <tag name="hibernate.generator-param" scope="all" description="Hibernate sequence generator XDoclet tag"/>
+            <tag name="hibernate.id" scope="all" description="Hibernate ID XDoclet tag"/>
+            <tag name="hibernate.version" scope="all" description="Hibernate version XDoclet tag"/>
+            <tag name="hibernate.column" scope="all" description="Hibernate column XDoclet tag"/>
+            <tag name="hibernate.many-to-one" scope="all" description="Hibernate many-to-one XDoclet tag"/>
+            <tag name="hibernate.set" scope="all" description="Hibernate one-to-one XDoclet tag"/>
+            <tag name="hibernate.collection-key" scope="all" description="Hibernate one-to-one XDoclet tag"/>
+            <tag name="hibernate.collection-one-to-many" scope="all" description="Hibernate one-to-one XDoclet tag"/>
+            <tag name="hibernate.many-to-one" scope="all" description="Hibernate many-to-one XDoclet tag"/>
+            <tag name="hibernate.generator-param" scope="all" description="Hibernate XDoclet tag"/>
+            <tag name="stereotype" scope="all" description="TogetherJ tag"/>
+        </javadoc>
+
+        <!-- Generate TLD documentation -->
+        <echo>Creating TLD documentation...</echo>
+        <java fork="true" jar="${lib}/tlddoc.jar"
+            failonerror="false">
+            <arg line="-d ${docs}/tlddoc"/>
+            <arg value="${base.dir}/web/WEB-INF/taglib/cdm-custom.tld"/>
+        </java>
+
+        <property name="doc.done" value="true"/>
+    </target>
+
+
+    <target name="strutsdoc" depends="init,dir" unless="configure.done"
+        description="Generate the struts docs">
+        <strutsdoc destdir="${relative.base.dir}/strutsdoc" webxml="${base.dir}/web/WEB-INF/web.xml">
+            <plugin name="stxx"/>
+            <plugin name="tiles"/>
+            <plugin name="validator"/>
+        </strutsdoc>
+        <copy todir="${docs}/strutsdoc">
+            <fileset dir="${relative.base.dir}/strutsdoc"/>
+        </copy>
+    </target>
+
+
+    <!-- ======================================================= -->
+    <!-- Create an html index page for the docs                  -->
+    <!-- ======================================================= -->
+    <target name="index" depends="init" unless="index.done,configure.done">
+        <copy file="${conf}/build.html" tofile="${docs}/index.html" filtering="yes" overwrite="yes">
+            <filterset>
+                <filter token="TODAY" value="${TODAY}"/>
+                <filter token="TIME" value="${TIME}"/>
+            </filterset>
+        </copy>
+        <property name="index.done" value="true"/>
+    </target>
+
+    <!--Creates the WL server and deploys the app.-->
+    <!--        All you need to do after this is 'start' to use the server-->
+    <target name="install-configure-weblogic" depends="deploy">
+<!--    <target name="install-configure-weblogic" depends="init">-->
+        <mkdir dir="${cdmdomain}"/>
+        <ant antfile="build-server.xml" target="install-configure-weblogic" inheritrefs="false" inheritall="false"/>
+    </target>
+
+
+    <target name="generate-hibernate"
+        description="Generates Hibernate descriptor files.">
+        <!-- Execute the hibernatedoclet task -->
+        <hibernatedoclet
+            destdir="${generated.conf}"
+            excludedtags="@version,@author,@todo"
+            force="${generated.forced}"
+            mergedir="${generated.conf}"
+            verbose="true">
+
+            <fileset dir="${src}">
+                <include name="**/*Hbm*.java"/>
+            </fileset>
+            <fileset dir="${test}">
+                <include name="**/*Hbm*.java"/>
+            </fileset>
+
+            <hibernate version="2.0"/>
+
+        </hibernatedoclet>
+        <!--Fix with Ant a problem with the XDoclet generated inner files.  Do we still need this?  YES! DB 4/23/2004-->
+        <replace casesensitive="true" dir="${generated.conf}" includes="**/*.hbm.xml" token=".Key" value="$Key"> </replace>
+    </target>
+
+    <target name="generate-jaxb" depends="init,dir" unless="generate-jaxb.done"
+        description="Generates all JAXB classes for export.">
+        <available property="jaxb.exists" value="Yup, it's there, allright.  Skipping JAXB generation..." file="${base.dir}/gensrc/jaxb/net/nike/cdm/export/jaxb/ObjectFactory.java"/>
+        <!--        only generate the jaxb stuff if it doesn't already exist.  If you need to force it, run clean-jaxb BEFORE generate/compile, and it'll get done-->
+        <echo>Does the generated jaxp stuff exist? ${jaxb.exists}</echo>
+        <if>
+            <not>
+                <isset property="jaxb.exists"/>
+            </not>
+            <then>
+                <mkdir dir="${jaxb.output}"/>
+                <echo message="Creating the XML Jaxb Classes"/>
+                <java fork="false" classname="com.sun.tools.xjc.Driver" dir="${base.dir}" classpathref="lib.path" failonerror="true">
+                    <arg value="-d"/>
+                    <arg value="${jaxb.output}"/>
+                    <arg value="-p"/>
+                    <arg value="${jaxb.xml.package}"/>
+                    <arg value="-readOnly"/>
+                    <arg value="${configure.xml}/cdm_export.xsd"/>
+                </java>
+            </then>
+            <else>
+                <echo>Skipping jaxb generation, java files already found</echo>
+            </else>
+
+        </if>
+        <property name="generate-jaxb.done" value="true"/>
+    </target>
+
+    <!-- this generates the Javadocs for the JAXB classes -->
+    <target name="jaxb-javadoc" depends="generate-jaxb">
+        <javadoc maxmemory="512M" destdir="${docs}/api" protected="yes" classpathref="class.lib.weblogic.path" breakiterator="true" doctitle="CDM PDF Export JAXB API" windowtitle="CDM PDF Export JAXB API" failonerror="true">
+            <sourcepath>
+                <pathelement path="${jaxb.output}"/>
+            </sourcepath>
+            <package name="${jaxb.xml.package}"/>
+        </javadoc>
+    </target>
+
+    <!--    Generates Hibernate class descriptor files and JAXB source files for catalog export-->
+    <target name="generate" depends="init,dir,generate-hibernate,generate-jaxb" unless="configure.done"
+        description="Creates generated classes.">
+    </target>
+
+    <!-- Task to make symoblic links. -->
+    <target name="make-links" unless="make.links.done,configure,dont.use.junctions" depends="init,break-links,dir">
+        <!--        Remove old dir if it exists-->
+        <delete dir="${cdm.main.approot}/cdm/cdmWebApp/WEB-INF/jsp" verbose="true"/>
+
+        <if>
+            <or>
+                <contains string="${os}" substring="Win"/>
+            </or>
+            <then>
+                <echo>Excecuting ${base.dir}/bin/junction.exe ${deploy}\app\cdm\cdmWebApp\WEB-INF\jsp ${base.dir}\web\WEB-INF\jsp</echo>
+                <exec executable="${base.dir}/bin/junction.exe">
+                    <arg line="${cdm.main.approot}\cdm\cdmWebApp\WEB-INF\jsp"/>
+                    <arg line="${base.dir}\web\WEB-INF\jsp"/>
+                </exec>
+            </then>
+            <else>
+                <exec executable="ln">
+                    <arg line="-s"/>
+                    <arg line="${base.dir}/web/WEB-INF/jsp"/>
+                    <arg line="${cdm.main.approot}/cdm/cdmWebApp/WEB-INF/jsp"/>
+                </exec>
+            </else>
+        </if>
+        <property name="make.links.done" value="done"/>
+    </target>
+
+    <!--    Task to break links-->
+    <target name="break-links" unless="break.links.done,configure.done" depends="init">
+        <if>
+            <or>
+                <contains string="${os}" substring="Win"/>
+            </or>
+            <then>
+                <exec executable="${base.dir}/bin/junction.exe">
+                    <arg line="-d"/>
+                    <arg line="${cdm.main.approot}/cdm/cdmWebApp/WEB-INF/jsp"/>
+                </exec>
+            </then>
+            <else>
+                <exec executable="rm">
+                    <arg line="${cdm.main.approot}/cdm/cdmWebApp/WEB-INF/jsp"/>
+                </exec>
+            </else>
+        </if>
+        <property name="break.links.done" value="done"/>
+    </target>
+
+
+    <target name="coveragereport" depends="init, emma">
+        <emma enabled="${emma.enabled}">
+            <report sourcepath="${src}"
+                sort="+block,+name,+method,+class"
+                metrics="method:70,block:80,line:80,class:100"
+                >
+                <infileset dir="${coverage.dir}" includes="*.ec, *.emma"/>
+                <html outfile="${docs}/coverage/coverage.html"
+                    depth="method"
+                    columns="name,class,method,block,line"
+                    />
+            </report>
+        </emma>
+    </target>
+
+
+    <!-- ======================================================= -->
+    <!-- Creates the export client in a separate directory.      -->
+    <!-- ======================================================= -->
+    <target name="create-export-client" depends="compile,compile-jaxb" unless="create.export.client.done,configure.done">
+
+        <copy-configure-fop-files filterset="cdmFilterSet"/>
+
+        <!--  Convert non-Latin 1 and non-Unicode to ASCII with escaped Unicode-->
+        <mkdir dir="${export.client.dir}"/>
+        <native2ascii encoding="UTF8"
+            src="${conf}/resource/pdf/bundles_base"
+            dest="${generated.conf}"
+            includes="**/*.*"
+            ext=".properties">
+        </native2ascii>
+        <!--        <delete dir="${export.client.dir}" quiet="true"/>-->
+
+        <copy todir="${export.client.dir}" includeEmptyDirs="false">
+            <fileset dir="${conf}/resource/pdf" excludes="**/bundles_base/**, **/defaultXslFoStyleSheet_base.xsl"/>
+        </copy>
+        <copy todir="${export.client.dir}" includeEmptyDirs="false">
+            <fileset dir="${generated.conf}" excludes="**/pdf/**, **/scripts/**"/>
+        </copy>
+        <copy todir="${export.client.dir}" includeEmptyDirs="false">
+            <fileset dir="${output}/classes" excludes="**/*EJB*, .dependency-info/**"/>
+        </copy>
+        <copy todir="${export.client.dir}" includeEmptyDirs="false">
+            <fileset dir="${jaxb.output}" excludes="**/*.java"/>
+        </copy>
+        <copy todir="${export.client.dir}/lib">
+            <fileset dir="${base.dir}/lib/jaxb" includes="*.jar"/>
+        </copy>
+        <copy todir="${export.client.dir}/lib">
+            <fileset file="${base.dir}/lib/sax.jar"/>
+            <fileset file="${base.dir}/lib/dom.jar"/>
+            <fileset file="${base.dir}/lib/jdom.jar"/>
+            <fileset file="${base.dir}/lib/xercesImpl.jar"/>
+            <fileset file="${base.dir}/lib/namespace.jar"/>
+            <fileset file="${base.dir}/lib/xsdlib.jar"/>
+            <fileset file="${base.dir}/lib/commons/commons-lang.jar"/>
+            <fileset file="${base.dir}/lib/commons/commons-collections.jar"/>
+            <fileset file="${base.dir}/lib/commons/commons-beanutils.jar"/>
+            <fileset file="${base.dir}/lib/commons/commons-logging.jar"/>
+            <fileset file="${base.dir}/lib/log4j.jar"/>
+            <fileset file="${base.dir}/lib/fop.jar"/>
+            <fileset file="${base.dir}/lib/avalon-framework-cvs-20020806.jar"/>
+            <fileset file="${base.dir}/lib/batik.jar"/>
+            <fileset file="${base.dir}/lib/shared.jar"/>
+            <fileset file="${base.dir}/lib/nikenet-global.jar"/>
+            <fileset file="${base.dir}/lib/xineo-xml-1.1.0.jar"/>
+        </copy>
+        <property name="create.export.client.done" value="true"/>
+    </target>
+
+
+</project>

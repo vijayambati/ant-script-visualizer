@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./ant2html.xsl"?>
+<!-- ================================================================ -->
+<!-- nike.net build file                                              -->
+<!-- The three build files for the server are as follows:                      -->
+<!-- build.xml - used to build/distribute/run the CDM app on Windev.  Not      -->
+<!--             for server distribution.                                      -->
+<!--     build-main.xml - used to create/configure/install the "external"      -->
+<!--                      (outside cdm-main) data directory (cdm-main-data)    -->
+<!--     build-server.xml - used for configuring the Weblogic domain and       -->
+<!--                        "installing" CDM into that domain                  -->
+<!--     build-batch.xml - used to create the "external" (outside cdm-batch)   -->
+<!--                       data directory (cdm-batch-data)                     -->
+<!--                                                                           -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                 -->
+<!-- ================================================================ -->
+<project name="cdm-server-deploy" default="info">
+
+    <!-- import the common pieces of the build file:-->
+    <import file="build_dir.xml"/>
+    <import file="build_properties.xml"/>
+    <import file="build_paths.xml"/>
+    <import file="build_taskdefs.xml"/>
+
+
+    <target name="info">
+        <echo>
+Usage: build [targets], where [targets] are as follows:
+  install-configure-weblogic    Creates the WL server and deploys the app.
+        </echo>
+    </target>
+
+
+    <!--This is called by all targets prior to execution-->
+    <target name="init" depends="pre-init,properties,paths" unless="init.done">
+
+
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${ant}/lib/ant-contrib-1.0b1.jar"/>
+        <tstamp>
+            <format property="TIME" pattern="hh:mm a"/>
+        </tstamp>
+        <!-- read in the common configuration files for all CDM build scripts       -->
+
+        <taskdef name="wlserver" classname="weblogic.ant.taskdefs.management.WLServer" classpathref="weblogic.path"/>
+        <taskdef name="wlconfig" classname="weblogic.ant.taskdefs.management.WLConfig" classpathref="weblogic.path"/>
+        <taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpathref="weblogic.path"/>
+
+        <echo message="  propertyfilename   = ${property.file.name}"/>
+        <echo message="  basedir            = ${base.dir}"/>
+        <echo message="  output             = ${output}"/>
+        <echo message="  build              = ${build}"/>
+        <echo message="  deploy             = ${deploy}"/>
+        <echo message="  compiler           = ${compiler}"/>
+        <echo message="  weblogic           = ${weblogic}"/>
+        <echo message="  TODAY              = ${TODAY}"/>
+        <echo message="  TIME               = ${TIME}"/>
+        <echo message="  build.day.time     = ${build.day.time}"/>
+        <echo> OS is: ${os.name}</echo>
+        <available file="${cdmdomain}/config.xml" property="cdm.domain.exists"/>
+        <property name="init.done" value="true"/>
+    </target>
+
+    <target name="pre-init">
+        <property name="base.dir" value="${basedir}/.."/>
+        <!--        if genconf exists (windev), use that for configuration.  Else, (dev, qa, etc), use the conf dir-->
+        <available file="${base.dir}/genconf" property="generated.conf" value="${basedir}\..\genconf"/>
+        <property name="generated.conf" value="${base.dir}/conf"/>
+        <echo>generated.conf is now ${generated.conf}</echo>
+    </target>
+
+    <!--    Clears out the cdm domain directory and recreates a fresh, emtpy one.-->
+    <target name="clean-domain" depends="init" if="cdm.domain.exists" unless="configure.done"
+        description="Clears out the cdm domain directory..">
+
+        <delete dir="${cdmdomain}" quiet="true"/>
+        <mkdir dir="${cdmdomain}"/>
+    </target>
+
+    <target name="install-configure-weblogic" depends="stopAllServers,create-new-server"
+        description="Creates the WL server and deploys the app.">
+    </target>
+
+    <!--stops Weblogic for administrative purposes.  Not to be used for RUNNING CDM!!!-->
+    <macrodef name="start-server">
+        <attribute name="port"/>
+        <attribute name="host"/>
+        <attribute name="serverName"/>
+        <sequential>
+            <wlserver
+                dir="${cdmdomain}"
+                host="@{host}"
+                port="@{port}"
+                servername="@{serverName}"
+                username="${cdm.main.weblogic.admin.user}"
+                password="${cdm.main.weblogic.admin.password}"
+                action="start"
+                beahome="${beahome}"
+                classpath="${weblogic}\lib\weblogic.jar"
+                />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="stop-server">
+        <attribute name="port"/>
+        <attribute name="host"/>
+        <attribute name="serverName"/>
+        <sequential>
+            <echo>Attempting to stop server @{serverName} on domain ${cdm.main.domain}, running on port @{port}</echo>
+<!--            <trycatch>-->
+<!--                <try>-->
+<!--                    <java classname="weblogic.Admin" dir="${basedir}" fork="true" failonerror="true">-->
+<!--                        <classpath refid="weblogic.path"/>-->
+<!--                        <arg line="-url t3://@{host}:@{port}"/>-->
+<!--                        <arg line="-username ${cdm.main.weblogic.admin.user}"/>-->
+<!--                        <arg line="-password ${cdm.main.weblogic.admin.password}"/>-->
+<!--                        <arg value="SHUTDOWN"/>-->
+<!--                    </java>-->
+<!--                </try>-->
+<!--                <catch>-->
+<!--                    <echo>Got an exception trying to shut down the weblogic VM, continuing anyway</echo>-->
+<!--                </catch>-->
+<!--            </trycatch>-->
+
+<!--                        <wlserver-->
+<!--                            dir="${cdmdomain}"-->
+<!--                            host="@{host}"-->
+<!--                            port="@{port}"-->
+<!--                            servername="@{serverName}"-->
+<!--                            username="${cdm.main.weblogic.admin.user}"-->
+<!--                            password="${cdm.main.weblogic.admin.password}"-->
+<!--                            action="forceshutdown"-->
+<!--                            beahome="${beahome}"-->
+<!--                            classpath="${weblogic}\lib\weblogic.jar"-->
+<!--                            />-->
+             <exec dir="${base.dir}" executable="java">
+            <arg line="-cp ${weblogic}/lib/weblogic.jar weblogic.Admin -url t3://@{host}:@{port} -username ${cdm.main.weblogic.admin.user} -password ${cdm.main.weblogic.admin.password} FORCESHUTDOWN @{serverName}"/>
+        </exec>
+            <echo>Server should have been stopped</echo>
+        </sequential>
+    </macrodef>
+
+    <!--Stop both the admin and app server-->
+    <target name="stopAllServers" depends="init" unless="configure.done" description="Stops weblogic">
+        <!--  Need to do this twice??  Once for admin, once for managed server  YES!!!!!!!-->
+        <if>
+            <contains string="${os.name}" substring="SunOS"/>
+            <then>
+                <antcall target="stopAdminServer" inheritall="true" inheritrefs="true"/>
+            </then>
+        </if>
+        <antcall target="stopAppServer" inheritall="true" inheritrefs="true"/>
+    </target>
+
+    <!--    Stop just the app server-->
+    <target name="stopAppServer" depends="init" unless="configure.done" description="Stops weblogic">
+        <stop-server serverName="${cdm.main.weblogic.server.name}" port="${cdm.main.weblogic.port}" host="${cdm.host}"/>
+    </target>
+
+    <!--    Stop just the app server-->
+    <target name="stopAdminServer" depends="init" unless="configure.done" description="Stops weblogic">
+        <stop-server serverName="${cdm.main.weblogic.server.name}.admin" port="${cdm.main.weblogic.admin.port}" host="${cdm.admin.host}"/>
+    </target>
+
+
+    <!--Creates a new Weblogic server and domain, configures it for use with appropriate -->
+    <!--JDBC and JMS pools.  Note that this does NOT deploy the app!-->
+    <!--Note, you MUST have run "configure" in a SEPERATE Ant invocation to get current configuration stuff!-->
+    <target name="create-new-server" depends="init,clean-domain,main-data-dir" unless="configure.done">
+
+        <mkdir dir="${cdmdomain}"/>
+        <property name="cdmUniversePool" value="cdmUniversePool"/>
+
+        <!--        Create the admin server-->
+        <wlserver
+            dir="${cdmdomain}"
+            host="${cdm.admin.host}"
+            port="${cdm.main.weblogic.admin.port}"
+            generateConfig="true"
+            username="${cdm.main.weblogic.admin.user}"
+            password="${cdm.main.weblogic.admin.password}"
+            domainname="${cdm.main.domain}"
+            servername="${cdm.main.weblogic.server.name}.admin"
+            action="start"
+            beahome="${beahome}"
+            classpath="${weblogic}\lib\weblogic.jar"
+
+            />
+
+
+        <echo> OS is: ${os.name}</echo>
+        <!--            sorry about the "if" statement, but we HAVE to use file storage for development on local boxes, -->
+        <!--            and we MUST use the database for the servers.  -->
+        <wlconfig
+            url="t3://${cdm.admin.host}:${cdm.main.weblogic.admin.port}"
+            username="${cdm.main.weblogic.admin.user}"
+            password="${cdm.main.weblogic.admin.password}"
+            >
+            <!--            Create the managed server-->
+            <create
+                type="Server"
+                domain="${cdm.main.domain}"
+                name="${cdm.main.weblogic.server.name}"
+                property="cdmserver">
+
+                <set attribute="ListenPort" value="${cdm.main.weblogic.port}"/>
+                <create type="ExecuteQueue" name="Batch Execute Queue" property="ms.eqmbean">
+                    <set attribute="ThreadPriority" value="2"/>
+                </create>
+                <create type="ExecuteQueue" name="Workflow Execute Queue" property="ms.eqmbean">
+                    <set attribute="ThreadPriority" value="2"/>
+                </create>
+
+                <create type="JDBCConnectionPool" name="CDMUniverse"
+                    property="cdmUniversePool">
+                    <set attribute="CapacityIncrement" value="${cdm.main.weblogic.main.capacityincrement}"/>
+                    <set attribute="DriverName" value="oracle.jdbc.driver.OracleDriver"/>
+                    <set attribute="URL" value="${cdm.universe.jdbc.url}"/>
+                    <set attribute="InitialCapacity" value="${cdm.main.weblogic.main.initialcapacity}"/>
+                    <set attribute="MaxCapacity" value="${cdm.main.weblogic.main.maxcapacity}"/>
+                    <set attribute="Properties" value="user=${cdm.universe.jdbc.username}"/>
+                    <set attribute="Password" value="${cdm.universe.jdbc.password}"/>
+                    <set attribute="RefreshMinutes" value="0"/>
+                    <set attribute="ShrinkPeriodMinutes" value="10"/>
+                    <set attribute="ShrinkingEnabled" value="yes"/>
+                    <set attribute="TestConnectionsOnRelease" value="false"/>
+                    <set attribute="TestConnectionsOnReserve" value="false"/>
+                    <set attribute="TestTableName" value="DUAL"/>
+                    <set attribute="Targets" value="${cdmserver}"/>
+                </create>
+                <create type="JDBCTxDataSource" name="CDMUniverseDataSource">
+                    <set attribute="JNDIName" value="CDMUniverse"/>
+                    <set attribute="EnableTwoPhaseCommit" value="true"/>
+                    <set attribute="PoolName" value="CDMUniverse"/>
+                    <set attribute="Targets" value="${cdmserver}"/>
+                </create>
+
+                <create type="JMSConnectionFactory" name="cdm_JMSConnectionFactory">
+                    <set attribute="JNDIName" value="net.nike.cdm.util.JMSConnectionFactory"/>
+                    <set attribute="XAServerEnabled" value="true"/>
+                    <set attribute="Targets" value="${cdmserver}"/>
+                </create>
+            </create>
+        </wlconfig>
+
+
+        <if>
+            <or>
+                <contains string="${os.name}" substring="Windows"/>
+                <contains string="${os.name}" substring="Mac OS X"/>
+            </or>
+            <then>
+                <!--                use a file store if it's Windoze or OS X-->
+                <wlconfig
+                    url="t3://${cdm.admin.host}:${cdm.main.weblogic.admin.port}"
+                    username="${cdm.main.weblogic.admin.user}"
+                    password="${cdm.main.weblogic.admin.password}"
+                    >
+
+                    <query
+                        domain="${cdm.main.domain}"
+                        type="Server"
+                        name="${cdm.main.weblogic.server.name}"
+                        property="cdmserver"/>
+                    <create type="JMSFileStore" name="FileStore" property="jmsstore">
+                        <set attribute="Directory" value="${deploy}"/>
+                    </create>
+                    <create type="JMSServer" name="CDM_JMSServer" property="jmsserver">
+                        <set attribute="Store" value="${jmsstore}"/>
+                        <set attribute="Targets" value="${cdmserver}"/>
+                    </create>
+                </wlconfig>
+
+            </then>
+            <else>
+                <!--                use a JDBC store for servers-->
+                <wlconfig
+                    url="t3://${cdm.admin.host}:${cdm.main.weblogic.admin.port}"
+                    username="${cdm.main.weblogic.admin.user}"
+                    password="${cdm.main.weblogic.admin.password}"
+                    >
+
+                    <query
+                        domain="${cdm.main.domain}"
+                        type="Server"
+                        name="${cdm.main.weblogic.server.name}"
+                        property="cdmserver"/>
+                    <create type="JMSJDBCStore" name="JDBCStore" property="jmsstore">
+                        <set attribute="ConnectionPool" value="${cdmUniversePool}"/>
+                    </create>
+                    <create type="JMSServer" name="CDM_JMSServer" property="jmsserver">
+                        <set attribute="Store" value="${jmsstore}"/>
+                        <set attribute="Targets" value="${cdmserver}"/>
+                    </create>
+
+                </wlconfig>
+
+            </else>
+        </if>
+
+        <wlconfig
+            url="t3://${cdm.admin.host}:${cdm.main.weblogic.admin.port}"
+            username="${cdm.main.weblogic.admin.user}"
+            password="${cdm.main.weblogic.admin.password}"
+            >
+
+            <query
+                domain="${cdm.main.domain}"
+                type="JMSServer"
+                name="CDM_JMSServer"
+                property="jmsserver"/>
+
+            <create type="JMSQueue" name="batchErrorQueue" property="batchErrorQueue">
+                <set attribute="JNDIName" value="net.nike.cdm.batchErrorQueue"/>
+                <set attribute="parent" value="${jmsserver}"/>
+            </create>
+            <query
+                domain="${cdm.main.domain}"
+                type="JMSQueue"
+                name="batchErrorQueue"
+                property="batchErrorQueue"/>
+
+            <create type="JMSQueue" name="batchQueue" property="batchQueue">
+                <set attribute="JNDIName" value="net.nike.cdm.batchQueue"/>
+                <set attribute="parent" value="${jmsserver}"/>
+            </create>
+            <query
+                domain="${cdm.main.domain}"
+                type="JMSQueue"
+                name="batchQueue">
+                <set attribute="ErrorDestination" value="${batchErrorQueue}"/>
+                <set attribute="ExpirationPolicy" value="Redirect"/>
+            </query>
+
+            <create type="JMSQueue" name="workflowErrorQueue" property="workflowErrorQueue">
+                <set attribute="JNDIName" value="net.nike.cdm.workflowErrorQueue"/>
+                <set attribute="parent" value="${jmsserver}"/>
+            </create>
+
+            <query
+                domain="${cdm.main.domain}"
+                type="JMSQueue"
+                name="workflowErrorQueue"
+                property="workflowErrorQueue"/>
+
+            <create type="JMSQueue" name="WorkFlowMessageBean" property="workflowQueue">
+                <set attribute="JNDIName" value="net.nike.cdm.WorkFlowMessageBean"/>
+                <set attribute="parent" value="${jmsserver}"/>
+            </create>
+
+            <query
+                domain="${cdm.main.domain}"
+                type="JMSQueue"
+                name="WorkFlowMessageBean">
+                <set attribute="ErrorDestination" value="${workflowErrorQueue}"/>
+                <set attribute="ExpirationPolicy" value="Redirect"/>
+            </query>
+
+        </wlconfig>
+
+    </target>
+
+
+    <!--Deploys the application into Weblogic.  This is NOT the same as the deploy target.  That puts the generated code where THIS task can find it.-->
+    <target name="deploy-app" depends="init" unless="configure.done">
+        <start-server port="${cdm.main.weblogic.admin.port}" serverName="${cdm.main.weblogic.server.name}" host="${cdm.admin.host}"/>
+        <wldeploy
+            action="deploy"
+            source="${cdm.main.approot}/cdm"
+            name="cdm"
+            user="${cdm.main.weblogic.admin.user}"
+            password="${cdm.main.weblogic.admin.password}"
+            verbose="true"
+            adminurl="t3://${cdm.admin.host}:${cdm.main.weblogic.admin.port}"
+            debug="true"
+            targets="${cdm.main.weblogic.server.name}"
+            />
+        <stop-server port="${cdm.main.weblogic.admin.port}" serverName="${cdm.main.weblogic.server.name}" host="${cdm.admin.host}"/>
+        <!--         <stop-server port="${cdm.main.weblogic.port}"/>-->
+    </target>
+
+
+</project>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cdm-properties">
+    <!--    This is the "properties" target of CDM.  It contains all the project                                -->
+    <!--     properties for reuse across buildfiles.                                                            -->
+    <!--    You use this by pasting the following block into your build file (uncommented, of course):          -->
+    <!--        <import file="build_dir.xml"/>                                                            -->
+    <!--        <import file="build_properties.xml"/>                                                     -->
+    <!--        <import file="build_paths.xml"/>                                                          -->
+    <!--        <import file="build_taskdefs.xml"/>                                                       -->
+    <!--    and the targets of these files are magically imported into your buildfile.  Make your "init" target -->
+    <!--    have these as a dependency as follows, and you'll have all you need magically imported:             -->
+    <!--        <target name="init" depends="properties,paths,taskdefs" unless="init.done">                     -->
+
+    <target name="properties" unless="properties.done">
+        <macrodef name="run-environment-tool">
+            <attribute name="base.dir"/><!-- the "root" of the VOB containing, among others, the "build," "src" and "conf" directories -->
+            <attribute name="working.dir"/><!-- the directory containing the files to operate on. -->
+            <attribute name="envtool.location"/>
+            <attribute name="envstore.location"/>
+            <attribute name="envtool.key"/>
+            <attribute name="envtool.log"/>
+            <sequential>
+                <!--                        Call env-config -->
+                <echo message="working.dir=@{working.dir}"/>
+                <exec executable="@{base.dir}/bin/envtool.bat" failonerror="true">
+                    <arg value="@{working.dir}"/>
+                    <arg path="@{base.dir}/@{envtool.location}"/>
+                    <arg value="@{envstore.location}"/>
+                    <arg value="@{envtool.key}"/>
+                    <arg value="@{envtool.log}"/>
+                </exec>
+            </sequential>
+        </macrodef>
+        <property name="build.dir" value="${basedir}"/>
+        <property name="relative.base.dir" value=".."/>
+        <property name="base.dir" value="${basedir}\${relative.base.dir}"/>
+        <!--        if the user has his own properties set then these will override-->
+        <!--        anything else. The USERPROFILE on Windows is set to C:\Documents and Settings\USERNAME-->
+        <property file="${build.dir}/mybuild.properties"/>
+        <property name="property.file.name" value="${build.dir}/build.properties"/>
+        <property file="${property.file.name}"/>
+
+        <property name="lib" value="${base.dir}/lib"/>
+        <property name="deprecated.lib.ant" value="${base.dir}/ant"/>
+        <property name="ant" value="${base.dir}/apache-ant-1.6.2"/>
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${ant}/lib/ant-contrib-1.0b1.jar"/>
+        <property name="src" value="${base.dir}/src"/>
+        <property name="src" value="${base.dir}/src"/>
+        <property name="test" value="${base.dir}/test"/>
+        <property name="integrationTest" value="${base.dir}/integrationTest"/>
+        <property name="build.compiler" value="${compiler}"/>
+        <property name="lib.commons" value="${lib}/commons"/>
+        <property name="lib.struts" value="${lib}/struts"/>
+        <property name="lib.hibernate" value="${lib}/hibernate"/>
+        <property name="lib.testing" value="${lib}/testing"/>
+        <property name="lib.jaxb" value="${lib}/jaxb"/>
+        <property name="conf" value="${base.dir}/conf"/>
+        <property name="docs" value="${output}/docs"/>
+        <tstamp>
+            <format property="TIME" pattern="hh:mm a"/>
+        </tstamp>
+        <property name="build.day.time" value="${DSTAMP}_${TSTAMP}"/>
+        <!--    note that this slash MUST be a back slash for the envtool to work on windows-->
+        <!--    We need this to be a generated configuration file so as to get the correct properties from envstore-->
+        <property name="generated.conf" value="${base.dir}\genconf"/>
+        <if>
+            <or>
+                <contains string="${os.name}" substring="Windows"/>
+                <contains string="${os.name}" substring="Mac OS X"/>
+            </or>
+            <then>
+                <!--        won't overwrite generated files unless set to "true"-->
+                <copy todir="${generated.conf}" overwrite="true" filtering="true">
+                    <fileset dir="${conf}/multiconfig" includes="**/env.properties"/>
+                </copy>
+                <run-environment-tool base.dir="${base.dir}" working.dir="${generated.conf}" envtool.location="${envtool.location}" envstore.location="${envstore.location}" envtool.key="${envtool.key}" envtool.log="${envtool.log}"/>
+            </then>
+        </if>
+        <property name="env.property.file.name" value="${generated.conf}/env.properties"/>
+        <property file="${env.property.file.name}"/>
+
+        <property name="weblogic" value="${weblogic.home}/server"/>
+        <property name="main.logdir" value="${cdm.main.datadir}/logs"/>
+        <property name="batch.logdir" value="${cdm.batch.datadir}/logs"/>
+        <property name="batch.export" value="${cdm.batch.datadir}/export"/>
+        <property name="batch.images" value="${cdm.batch.datadir}/export/images"/>
+        <property name="batch.pdfs" value="${cdm.batch.datadir}/export/pdfs"/>
+        <property name="bml" value="${cdm.batch.datadir}/bml"/>
+        <property name="batch.import" value="${cdm.batch.datadir}/import"/>
+        <property name="cdmdomain" value="${cdm.server.root}/${cdm.main.domain}"/>
+        <property name="docroot" value="${cdm.main.datadir}/docroot"/>
+        <property name="images" value="${docroot}/images"/>
+        <property name="export.output.path" value="${cdm.main.datadir}/export"/>
+        <property name="import.path" value="${cdm.main.datadir}/import"/>
+        <property name="dtds" value="${cdm.main.datadir}/dtds"/>
+        <!--        <property name="export.pdf.output.path" value="${export.output.path}/pdf"/> don't think we need this any more-->
+        <!--        <property name="export.testdata.dir" value="${cdm.main.datadir}/test"/> don't think we need this any more-->
+
+        <property name="generated.forced" value="true"/>
+        <property name="coverage.dir" value="${output}/coverage"/>
+        <property name="classes" value="${output}/classes"/>
+        <property name="out.instr.dir" value="${classes}"/>
+        <property name="coverage.out.file" value="${coverage.dir}/emma.ec"/>
+        <property name="generated.src" value="${base.dir}/gensrc"/>
+        <property name="generated.src.jaxb" value="${generated.src}/jaxb"/>
+        <property name="jaxb.output" value="${generated.src.jaxb}"/>
+        <property name="jaxb.xml.package" value="net.nike.cdm.export.jaxb"/>
+        <property name="configure.xml" value="${conf}/resource/xml"/>
+        <property name="integration-test-classes" value="${output}/integration_classes"/>
+        <property name="test-classes" value="${output}/test_classes"/>
+        <property name="test.data" value="${base.dir}/testdata"/>
+        <property name="test.data.output" value="${output}/test_data"/>
+        <property name="export.client.dir" value="${deploy}/../exportclient"/>
+        <property environment="env"/>
+        <property name="os" value="${env.OS}"/>
+
+        <filterset id="cdmFilterSet" begintoken="@@" endtoken="@@">
+            <filter token="cdm-main.logdir" value="${main.logdir}"/>
+            <filter token="cdm-batch.logdir" value="${batch.logdir}"/>
+            <filter token="catalog.export.dir" value="${batch.export}/catalogs"/>
+            <filter token="epm.import.dir" value="${test.data.output}"/>
+            <filter token="pdf.export.dir" value="${batch.export}/pdfs"/>
+            <filter token="images.dir" value="${images}"/>
+            <filter token="images.export.dir" value="${batch.images}"/>
+            <filter token="catalog.export.client.dir" value="${deploy}/../exportclient"/>
+            <filter token="cdm.batch.datadir" value="${cdm.batch.datadir}"/>
+            <filter token="font.base.dir" value=""/>
+        </filterset>
+
+        <!--        todo this is REALLY lame.... is there a better way than to have the envstore keys scattered throughout the app?-->
+        <!--        This way, they're only in the build_properites.xml and env.properties-->
+        <filterset id="cdmServerFilterSet" begintoken="@@" endtoken="@@">
+            <filter token="cdm-main.logdir" value="%%cdm-main-data.approot%%/logs"/>
+            <filter token="cdm-batch.logdir" value="%%cdm-batch-data.approot%%/logs"/>
+            <filter token="catalog.export.dir" value="%%cdm-batch-data.approot%%/export/catalogs"/>
+            <filter token="epm.import.dir" value="%%cdm-main-data.approot%%/"/>
+            <filter token="pdf.export.dir" value="%%cdm-batch-data.approot%%/export/pdfs"/>
+            <filter token="images.dir" value="%%cdm-main-data.approot%%/docroot/images"/>
+            <filter token="images.export.dir" value="%%cdm-batch-data.approot%%/export/images"/>
+            <filter token="catalog.export.client.dir" value="%%cdm-batch.approot%%/classes"/>
+            <filter token="cdm.batch.datadir" value="%%cdm-batch-data.approot%%"/>
+            <filter token="font.base.dir" value="%%cdm-batch.approot%%/classes/"/>
+        </filterset>
+        <property name="properties.done" value="true"/>
+    </target>
+</project>
