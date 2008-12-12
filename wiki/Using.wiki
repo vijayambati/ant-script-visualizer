@@ -32,6 +32,7 @@ The options available are:
 http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/fourbuild.png
 
   * Include imported Ant files - If your Ant files have an <include file="filename.xml"/> in them, they will be sucked in and analyzed as well (and, any imports those files have will also be imported.
+
   * Group nodes by buildfiles - If this is unchecked, all nodes are displayed as cleanly as possible, like so:
 
 http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/threebuild_nogrouping.png
@@ -41,6 +42,7 @@ http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/a
 http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/threebuild_grouping.png
 
             This will look considerably messier, but it's convenienent to know what targets are in what files.
+
   * Concentrate lines - Where possible, two lines close together going to the same target will be merged (think of an on-ramp for a freeway). This can clean up a graph considerably. For example no concentrating:
 
 http://ant-script-visualizer.googlecode.com/svn/trunk/source/app/web/help/html/assets/images/build_noconcentrate.png
