@@ -169,13 +169,13 @@
 		<echo>signing jars with keystore ${keystore}, alias ${alias}, keypassword ${keypassword}, storepassword
 			${storepassword}</echo>
 
-		<signjar jar="${webstart}/antscriptVisualizer.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
-		<signjar jar="${webstart}/help.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
-		<signjar jar="${webstart}/commons-lang.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
-		<signjar jar="${webstart}/forms_rt.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
-		<signjar jar="${webstart}/log4j.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
-		<signjar jar="${webstart}/jdom.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
-		<signjar jar="${webstart}/jhall.jar" keypass="hamuru" keystore="nurflugelKeystore" alias="dbulla" storepass="hamuru"/>
+		<signjar jar="${webstart}/antscriptVisualizer.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
+		<signjar jar="${webstart}/help.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
+		<signjar jar="${webstart}/commons-lang.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
+		<signjar jar="${webstart}/forms_rt.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
+		<signjar jar="${webstart}/log4j.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
+		<signjar jar="${webstart}/jdom.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
+		<signjar jar="${webstart}/jhall.jar" keypass="nurflugel" keystore="nurflugelKeystore" alias="dbulla" storepass="nurflugel"/>
 	</target>
 
 	<!--	Jar up the app for WebStart-->
