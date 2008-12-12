@@ -1,3 +1,4 @@
+#sidebar TableOfContents
 *Using Ant Script Visualizer*
 
 If you fired up the program, and accepted all the defaults (show targets, imports, taskdefs, and macrodefs) and then pointed it at the build script used to build this application, you'd get something like the following:
