@@ -1,0 +1,5 @@
+#summary How to build the Ant Script Visualizer
+
+= How to build the Ant Script Visualizer =
+
+A build script is included (in the build directory).  For convenience, a {{{build.cmd}}} and {{{build.sh}}}
