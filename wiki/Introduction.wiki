@@ -26,11 +26,3 @@ OK, here's an example of the output for the build file used for this program:
  * Groups results by build file subgraphs (default), or optionally, all items together in one graph
  * Ability to filter/show included obects by target, imported files, ant calls, taskdefs, and macrodefs
  * Output formats: PNG (default for PC), PDF (default for OS X, not available otherwise), SVG.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
