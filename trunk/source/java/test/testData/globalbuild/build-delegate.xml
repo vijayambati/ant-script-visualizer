@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="build-delegate" default="build" basedir=".">
+
+    <!-- Access any environment variables -->
+    <!--<property environment="env"/>-->
+
+    <!-- if the user has his own properties set then these will override
+    anything else. The USERPROFILE on Windows is set
+    to C:\Documents and Settings\USERNAME -->
+    <!--<property file="${env.USERPROFILE}/nikenetshared.properties"/>-->
+
+    <!-- Default standard system build properties -->
+    <!--<property file="global-build.properties"/>-->
+
+    <target name="build">
+        <ant antfile="global-build.xml" target="clearcase-update" inheritAll="false"/>
+        <ant antfile="global-build.xml" target="emma-global-unit-tests-instrument" inheritAll="false"/>
+
+        <!--the clearcase-update for global also does an update of om-->
+
+        <ant antfile="om-build.xml" target="emma-om-unit-tests-instrument" inheritAll="false"/>
+        <!--<taskdef name="readFailureFile" classname="net.nike.common.build.ReadFailureFile" classpath="${global.compile.out.dir}" />
+
+        <readFailureFile filename="${failure.file}" />-->
+    </target>
+
+</project>
+

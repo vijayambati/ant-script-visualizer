@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="cdm-main" default="info">
+
+	<target name="info">
+	</target>
+
+	<import file="build_cc.xml"/>
+
+	<target name="init"  unless="init.done">
+		<property name="init.done" value="true"/>
+	</target>
+
+	<target name="clean-checkin" depends="init"/>
+
+	<target name="test" depends="init"/>
+
+</project>

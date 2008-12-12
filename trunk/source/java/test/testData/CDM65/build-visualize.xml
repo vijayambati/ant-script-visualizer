@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./ant2html.xsl"?>
+<!-- ================================================================ -->
+<!-- nike.net build file                                              -->
+<!-- The three build files for the server are as follows:                      -->
+<!--     build.xml - used to build/distribute/run the CDM app or legacy app    -->
+<!--                 on Windev.  Not for server distribution.                  -->
+<!--     build-main.xml - used to create/configure/install the "external"      -->
+<!--                      (outside cdm-main) data directory (cdm-main-data)    -->
+<!--     build-server.xml - used for configuring the Weblogic domain and       -->
+<!--                        "installing" CDM into that domain                  -->
+<!--     build-batch.xml - used to create the "external" (outside cdm-batch)   -->
+<!--                       data directory (cdm-batch-data)                     -->
+<!--                                                                           -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                 -->
+<!-- ================================================================ -->
+<project name="cdm-main" default="info">
+
+
+
+    <!-- read in the common configuration files for all CDM build scripts       -->
+    <import file="build_dir.xml"/>
+    <import file="build_properties.xml"/>
+    <import file="build_paths.xml"/>
+
+    <!--This is called by all targets prior to execution-->
+    <target name="init" depends="properties,paths" unless="init.done">
+        <!--        <taskdef name="vizant" classname="net.sourceforge.vizant.Vizant" classpath="${base.dir}/ant/vizant.jar"/>-->
+
+        <tstamp>
+            <format property="TIME" pattern="hh:mm a"/>
+        </tstamp>
+        <property name="build.day.time" value="${DSTAMP}_${TSTAMP}"/>
+        <echo message="  propertyfilename   = ${property.file.name}"/>
+        <echo message="  basedir            = ${base.dir}"/>
+        <echo message="  output             = ${output}"/>
+        <echo message="  build              = ${build}"/>
+        <echo message="  deploy             = ${deploy}"/>
+        <echo message="  compiler           = ${compiler}"/>
+        <echo message="  weblogic           = ${weblogic}"/>
+        <echo message="  TODAY              = ${TODAY}"/>
+        <echo message="  TIME               = ${TIME}"/>
+        <echo message="  build.day.time     = ${build.day.time}"/>
+        <property name="init.done" value="true"/>
+        <echo> OS is: ${os.name}</echo>
+    </target>
+
+    <!--    visualize the Ant build - this looks tempting, investigating-->
+    <target name="visualize" depends="init">
+        <!--        java org.apache.xalan.xslt.Process -XSL ant2dot.xsl -IN build.xml               -OUT build\build.dot-->
+        <!--        <java classname="org.apache.xalan.xslt.Process" >-->
+        <!--           <arg value="-XSL ant2dot.xsl"/>-->
+        <!--           <arg value="-IN build.xml"/>-->
+        <!--           <arg value="-OUT build\build.dot" />-->
+        <!--           </java>-->
+        <generate-picture file="..\build"/>
+        <generate-picture file="..\build-server"/>
+        <generate-picture file="build-dist"/>
+    </target>
+
+
+    <macrodef name="generate-picture">
+        <attribute name="file"/>
+        <sequential>
+            <exec executable="java">
+                <arg line="org.apache.xalan.xslt.Process"/>
+                <arg line="-XSL ..\ant2dot.xsl"/>
+                <arg line="-IN @{file}.xml"/>
+                <arg line="-OUT @{file}.dot"/>
+            </exec>
+
+            <java classname="net.nike.cdm.FileReplacer" classpath="${cdm.main.approot}/cdm/APP-INF/classes">
+                <arg line="@{file}.dot"/>
+                <arg line=""/>
+                <arg line=""/>
+            </java>
+
+            <exec executable="dot">
+                <arg line="-Tepdf @{file}.dot"/>
+                <arg line="-o @{file}.pdf"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+</project>

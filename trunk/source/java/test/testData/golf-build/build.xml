@@ -1,0 +1,832 @@
+<?xml version="1.0"?>
+<!-- ================================================================ -->
+<!-- nike.net build file                                         -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                 -->
+<!-- ================================================================ -->
+<project name="nikenet-gcc" basedir="." default="help">
+
+    <!-- Access any environment variables -->
+    <property environment="env"/>
+
+    <!-- if the user has his own properties set then these will override
+    anything else. The USERPROFILE on Windows is set
+    to C:\Documents and Settings\USERNAME -->
+    <property file="${env.USERPROFILE}/gcc.properties"/>
+
+    <!-- Default standard system build properties -->
+    <property file="build.properties"/>
+
+    <!-- Windows developer deploy properties -->
+    <property file="om-windev-deploy.properties"/>
+
+    <taskdef name="list-files" classname="net.nike.common.build.ListFiles" classpath="${predeploy.lib.dir}/shared/nikenet-global.jar;${predeploy.lib.dir}/apache/jakarta/commons/commons-collections.jar"/>
+
+    <path id="compile.classpath">
+        <path refid="jaxb.classpath"/>
+        <path refid="lib.classpath"/>
+        <path refid="ant.classpath"/>
+        <path refid="dynamo.classpath"/>
+        <path refid="shared.classpath"/>
+    </path>
+
+    <path id="shared.classpath">
+        <pathelement location="${app.root.dir}/shared/classes"/>
+        
+        <pathelement location="${predeploy.lib.dir}/shared/nikenet-global.jar"/>
+        <pathelement location="${predeploy.lib.dir}/shared/nikenet-om.jar"/>
+    </path>
+
+    <path id="lib.classpath">
+        <pathelement location="${java.home.dir}/jre/lib/rt.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/log4j-1.2.8.jar"/>
+        <pathelement location="${predeploy.lib.dir}/taglib/displaytag.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-beanutils.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-collections.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-digester.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-lang.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-logging.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-pool.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-resources.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-validator.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/struts/struts.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/struts/struts-el.jar"/>
+        <pathelement location="${predeploy.lib.dir}/test/junit-3.8.1.jar"/>
+        <pathelement location="${predeploy.lib.dir}/sap/ipc/IPCClient.jar"/>
+        <pathelement location="${predeploy.lib.dir}/sap/ipc/IPCPatch.jar"/>
+        <pathelement location="${predeploy.lib.dir}/sap/ipc/zzthirdParty.jar"/>
+        <pathelement location="${predeploy.lib.dir}/egate/stcph.jar"/>
+        <pathelement location="${predeploy.lib.dir}/securetoken/nikeb2b_1c.jar"/>
+        <pathelement location="${predeploy.lib.dir}/xineo/xineo-xml-1.1.0.jar"/>
+        <pathelement location="${predeploy.lib.dir}/jce/jce1_2_2.jar"/>
+        <pathelement location="${predeploy.lib.dir}/apache/jakarta/commons/commons-codec-1.2.jar"/>
+    </path>
+
+    <path id="ant.classpath">
+        <pathelement location="${ant.home.dir}/lib/ant.jar"/>
+        <pathelement location="${ant.home.dir}/lib/optional.jar"/>
+        <pathelement location="${ant.home.dir}/lib/xml-apis.jar"/>
+    </path>
+
+    <path id="dynamo.classpath">
+        <pathelement location="${lib.build.dynamo.dir}/B2BCommerce/classes.jar"/>
+        <pathelement location="${lib.build.dynamo.dir}/DAS/classes.jar"/>
+        <pathelement location="${lib.build.dynamo.dir}/DCS/classes.jar"/>
+        <pathelement location="${lib.build.dynamo.dir}/DPS/classes.jar"/>
+        <pathelement location="${lib.build.dynamo.dir}/DSS/classes.jar"/>
+        <pathelement location="${lib.build.dynamo.dir}/J2EEServer/classes.jar"/>
+    </path>
+
+    <path id="config.classpath">
+        <!-- This is for Junit to run as expected with proper classpath (shemda) -->
+        <pathelement location="${app.root.dir}/webapps/nike-gcc/app-classpath"/>
+        <pathelement location="${app.config.dir}/gcc/classpath"/>
+        <pathelement location="${app.config.dir}/fulfillment/classpath"/>
+    </path>
+
+    <path id="test.classpath">
+            <pathelement location="${lib.test.dir}/strutstestcasecactus/strutstestcasecactus-all.jar"/>
+     </path>
+
+
+    <path id="jaxb.classpath">
+        <!-- JAXB stuff  -->
+        <!-- all these JARS come from Java Web Services Developer Pack 1.2 -->
+        <!-- http://java.sun.com/webservices/downloads/webservicespack.html -->
+        <pathelement location="${predeploy.lib.dir}/jaxb/jaxb-all.jar"/>
+    </path>
+
+    <target name="help" depends="usage" description="Help on what targets are available"/>
+
+    <target name="usage" description="Help on what targets are available">
+        <echo message="Nike.net GCC Build Script:"/>
+        <echo message=""/>
+        <echo message="Possible targets are:"/>
+        <echo message=""/>
+        <echo message="        usage         This message of all possible targets."/>
+        <echo message="        help          Same as usage."/>
+        <echo message="        init          Initialize everything."/>
+        <echo message="        compile       Compile gcc source tree."/>
+        <echo message="        compile-all   Compiles all gcc source trees (source and test-source)."/>
+        <echo message="        compile-all-clean   Cleans out classes before running compile-all."/>
+        <echo message="        jar           Create the gcc.jar."/>
+        <echo message="        tar           Creates a tarball of all the necessary files to run the jar and places it into dist dir."/>
+        <echo message="        clean         Cleans out all built classes, jars, and tars."/>
+        <echo message="        junit         Run all junit tests under test-source."/>
+    </target>
+
+
+    <target name="init" depends="make-dirs" description="Initializes all the variables needed for the build script">
+        <tstamp>
+            <format property="buildtime" pattern="yyyy-MM-dd'T'HH:mm:ss"/>
+        </tstamp>
+        <echo message="--------- ${ccproject.name} ---------"/>
+        <echo message="Timestamp: ${buildtime}"/>
+        <echo message="java.home = ${java.home}"/>
+        <echo message="ant.java.version = ${ant.java.version}"/>
+        <echo message="ant.version = ${ant.version}"/>
+        <echo message="ant.project.name = ${ant.project.name}"/>
+        <echo message="ant.file = ${ant.file}"/>
+
+        <available property="nike-gcc.link.exist" file="${nike-gcc.link}"/>
+        <available property="gcc.jaxb.files.exist.order" file="${gcc.jaxb.test.fileOrder}"/>
+        <available property="gcc.jaxb.files.exist.conf" file="${gcc.jaxb.test.fileConf}"/>
+    </target>
+
+    <target name="checkGCCOrderJaxbUpToDate" depends="init" if="gcc.jaxb.files.exist.order">
+        <uptodate property="gccJaxbGenerationNotNeeded" targetfile="${gcc.jaxb.test.fileOrder}" srcfile="${gcc.xsd}"/>
+    </target>
+    <target name="checkGCCConfJaxbUpToDate" depends="init" if="gcc.jaxb.files.exist.conf">
+        <uptodate property="gccJaxbGenerationNotNeeded" targetfile="${gcc.jaxb.test.fileConf}" srcfile="${gccConfirmation.xsd}"/>
+    </target>
+
+    <target name="gcc_jaxb" unless="gccJaxbGenerationNotNeeded" depends="init,checkGCCOrderJaxbUpToDate,checkGCCConfJaxbUpToDate">
+        <mkdir dir="${generated.source.dir}"/>
+        <echo message="Creating the Golf Custom Clubs Jaxb Classes"/>
+
+
+        <java fork="yes" classname="com.sun.tools.xjc.Driver" dir="." classpathref="jaxb.classpath">
+            <arg value="-d"/>
+            <arg value="${generated.source.dir}"/>
+            <arg value="-p"/>
+            <arg value="net.nike.gcc.jaxb.fulfiller.gccorder"/>
+            <arg value="-readOnly"/>
+            <arg value="${gcc.xsd}"/>
+        </java>
+
+        <java fork="yes" classname="com.sun.tools.xjc.Driver" dir="." classpathref="jaxb.classpath">
+            <arg value="-d"/>
+            <arg value="${generated.source.dir}"/>
+            <arg value="-p"/>
+            <arg value="net.nike.gcc.jaxb.fulfiller.confirmation"/>
+            <arg value="-readOnly"/>
+            <arg value="${gccConfirmation.xsd}"/>
+        </java>
+
+
+    </target>
+
+
+    <target name="make-dirs" description="Makes the directories that are needed for the build">
+        <mkdir dir="${app.compile.out.dir}"/>
+        <mkdir dir="${compile.out.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dependencies.dir}"/>
+        <mkdir dir="${dist.lib.dir}"/>
+        <mkdir dir="${gcc.war.app.classes}"/>
+        <mkdir dir="${junit.report.dir}"/>
+        <mkdir dir="${emma.report.dir}"/>
+    </target>
+
+     <target name="compile-all" depends="init,compile,compile-test" description="Compiles all source trees"/>
+
+    <target name="compile-all-clean" depends="clean,init,buildinfo,compile-all" description="Clean and compile all source"/>
+
+    <!-- compile all source for globally shared nike.net classes -->
+    <target name="compile" depends="init,gcc_jaxb" description="Compiles global source tree">
+
+        <!-- depend gives us greater control over dependencies in incremental builds -->
+        <depend srcdir="${source.dir}" destdir="${app.compile.out.dir}"
+            cache="${dist.dir}/dependencies" closure="true"/>
+        <javac
+            destdir="${app.compile.out.dir}"
+            fork="yes"
+            includeAntRuntime="false"
+            debug="${compile.debug}"
+            debugLevel="${compile.debugLevel}"
+            optimize="${compile.optimize}"
+            deprecation="${compile.deprecation}">
+            <src path="${generated.source.dir}"/>
+            <src path="${source.dir}"/>
+            <src path="${source.dir}/../shared/src"/>
+            <classpath refid="compile.classpath"></classpath>
+        </javac>
+        <copy todir="${compile.out.dir}" overwrite="true">
+            <fileset dir="${app.compile.out.dir}"/>
+        </copy>
+    </target>
+
+    <!-- compile all test source for om shared nike.net classes -->
+    <target name="compile-test" depends="compile" description="Compiles global test source tree.">
+        <javac
+            destdir="${compile.out.dir}"
+            fork="yes"
+            includeAntRuntime="true"
+            debug="${compile.debug}"
+            debugLevel="${compile.debugLevel}"
+            optimize="${compile.optimize}"
+            deprecation="${compile.deprecation}"
+            excludes="">
+            <src path="${test.source.standalone.dir}"/>
+            <src path="${test.source.incontainer.dir}"/>
+            <src path="${source.dir}/../shared/test-src"/>
+            <classpath path="${compile.out.dir}"></classpath>
+            <classpath refid="compile.classpath"></classpath>
+            <classpath refid="test.classpath"></classpath>
+            <classpath refid="emma.lib"></classpath>
+        </javac>
+    </target>
+
+     <!-- jars all the gcc classes -->
+     <target name="jar" depends="compile-all" description="Jars all the gcc classes">
+        <jar destfile="${dist.lib.dir}/${jar.file}"
+            compress="false">
+            <fileset dir="${compile.out.dir}"/>
+        </jar>
+    </target>
+
+    <target name="tar-init" depends="init,buildinfo" description="Initializes the build for tar file creation">
+        <mkdir dir="${staging.dir}"/>
+        <mkdir dir="${tar.staging.dir}"/>
+        <mkdir dir="${tar.staging.dir}/${nike.deploy.dir}"/>
+        <copy file="${dist.dir}/${buildinfo}" todir="${tar.staging.dir}/${nike.deploy.dir}"/>
+    </target>
+
+    <target name="tar-all" description="Creates all the tarballs for gcc. Look in the dist dir">
+        <antcall target="tar-gcc"/>
+        <antcall target="tar-fulfillment"/>
+    </target>
+
+    <target name="tar-gcc" depends="compile-all-clean,tar-init" description="Creates the GCC deployment tarball">
+
+       <!-- make a copy of all the webapp files, put them in the tar staging dir -->
+        <copy todir="${tar.staging.dir}" overwrite="true">
+           <fileset dir="${nike-gcc.webapp.dir}">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <exclude name="fulfiller-lib/**"/>
+                <exclude name="j2ee-apps/gcc/gcc.war/WEB-INF/DYNAMO-INF/jspbuild/**"/>
+                <exclude name="**/emma.jar" />
+                <include name="**/**"/>
+           </fileset>
+        </copy>
+
+        <!-- copy the libs -->
+        <antcall target="copy-lib-to-module">
+            <param name="module.lib.dir" value="${tar.staging.dir}/app-lib"/>
+             <param name="war.lib.dir" value="${tar.staging.dir}/j2ee-apps/gcc/gcc.war/WEB-INF/lib"/>
+        </antcall>
+
+        <!-- unjar shared configpath config files to the staging tar dir-->
+         <unjar dest="${tar.staging.dir}/config">
+            <fileset dir="${predeploy.lib.dir}/shared/configpath" includes="*.jar"/>
+         </unjar>
+
+        <!-- unjar shared classpath config files to the staging tar dir-->
+        <unjar dest="${tar.staging.dir}/j2ee-apps/gcc/gcc.war/WEB-INF/classes">
+            <fileset dir="${predeploy.lib.dir}/shared/classpath" includes="*.jar"/>
+         </unjar>
+
+        <!-- copy the configpath config files to the staging tar dir-->
+        <antcall target="copy-app-config-files">
+            <param name="copy.todir" value="${tar.staging.dir}/config"/>
+            <param name="app.dir" value="gcc"/>
+        </antcall>
+
+        <!-- copy the classpath config files to the staging tar dir-->
+        <antcall target="copy-webapp-classpath-files">
+            <param name="copy.wartodir" value="${tar.staging.dir}/j2ee-apps/gcc/gcc.war/WEB-INF/classes"/>
+            <param name="copy.globaltodir" value="${tar.staging.dir}/app-classpath"/>
+            <param name="app.dir" value="gcc"/>
+        </antcall>
+
+        <!-- copy the resource bundle files to the staging tar dir-->
+        <antcall target="copy-resourcebundle-files">
+            <param name="copy.todir" value="${tar.staging.dir}/j2ee-apps/gcc/gcc.war/WEB-INF/classes"/>
+            <param name="app.dir" value="gcc"/>
+        </antcall>
+
+         <!-- Utilizes the Ant task defined above to list the files in the fileset element. This list
+        of files describe the files to be worked on by unix deploy script for search and replace. -->
+        <list-files listfile="${tar.staging.dir}/${nike.deploy.dir}/substitutions.txt">
+            <fileset dir="${tar.staging.dir}">
+              <include name="**/*.xml"/>
+              <include name="**/*.properties"/>
+              <include name="**/*.html"/> 
+            </fileset>
+        </list-files>
+
+        <!-- convert all the text files in the tar staging dir from using CRLF to LF -->
+        <fixcrlf srcdir="${tar.staging.dir}"
+        eol="lf"
+        eof="remove"
+        excludes="**/*.class,**/*.zip,**/*.jar,**/*.gif,**/*.key,**/*.ser"/>
+
+        <!-- create the tarball -->
+        <tar tarfile="${dist.dir}/${tar.file}"
+            longfile="warn"
+            compression="gzip">
+             <tarfileset dir="${tar.staging.dir}" mode="755">
+                <include name="**/**"/>
+            </tarfileset>
+        </tar>
+    </target>
+
+
+    <target name="tar-fulfillment" depends="compile-all-clean,jar,tar-init" description="Creates the gcc fulfillment deploy tarball">
+
+        <!-- copy the gcc jar to the tar staging dir -->
+        <copy todir="${tar.staging.dir}/classpath" >
+            <fileset dir="${dist.lib.dir}">
+               <include name="${jar.file}"/>
+            </fileset>
+        </copy>
+
+         <!-- copy module config dir to the gcc fulfiller deploy dir -->
+         <copy todir="${tar.staging.dir}//META-INF" overwrite="true">
+            <fileset dir="${app.config.dir}/fulfillment/META-INF">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="**"/>
+            </fileset>
+        </copy>
+
+        <!-- copy fulfiller configpath config files to the tar staging dir -->
+        <antcall target="copy-app-config-files">
+            <param name="copy.todir" value="${tar.staging.dir}/configpath"/>
+            <param name="app.dir" value="fulfillment"/>
+        </antcall>
+
+        <!-- copy fulfiller claspspath config files to the tar staging dir -->
+        <antcall target="copy-fulfiller-classpath-files">
+            <param name="copy.todir" value="${tar.staging.dir}/classpath"/>
+            <param name="app.dir" value="fulfillment"/>
+        </antcall>
+
+        <!-- copy fulfiller resourcebundles to the tar staging dir -->
+        <antcall target="copy-resourcebundle-files">
+            <param name="copy.todir" value="${tar.staging.dir}/classpath"/>
+            <param name="app.dir" value="gcc"/>
+        </antcall>
+
+        <!-- copy shared classpath config files to the tar staging dir -->
+        <echo message="Copying shared classpath files to fulfiller classpath"/>
+        <copy todir="${tar.staging.dir}/gcc/classpath" overwrite="true">
+            <fileset dir="${app.config.dir}/../shared/classpath">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="net/**"/>
+            </fileset>
+        </copy>
+
+        <!-- copy shared configpath config files to the tar staging dir -->
+       <copy todir="${tar.staging.dir}/gcc/configpath" overwrite="true">
+            <fileset dir="${app.config.dir}/../shared/configpath">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="net/**"/>
+            </fileset>
+        </copy>
+
+         <!-- copy gcc configpath config files to the tar staging dir -->
+        <echo message="Copying GCC configpath files to fulfiller configpath"/>
+        <copy todir="${tar.staging.dir}/configpath" overwrite="true">
+            <fileset dir="${app.config.dir}/gcc/configpath">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="net/**"/>
+            </fileset>
+        </copy>
+
+        <!--copy the generated configuration for the JAXB stuff -->
+        <copy todir="${tar.staging.dir}/classpath" overwrite="true">
+            <fileset dir="${generated.source.dir}">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <exclude name="**/*.java"/>
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+
+        <!-- Utilizes the Ant task defined above to list the files in the fileset element. This list
+        of files describe the files to be worked on by unix deploy script for search and replace. -->
+        <list-files listfile="${tar.staging.dir}/${nike.deploy.dir}/substitutions.txt">
+            <fileset dir="${tar.staging.dir}">
+              <include name="**/*.xml"/>
+              <include name="**/*.properties"/>
+            </fileset>
+        </list-files>
+
+        <!-- convert all the text files in the tar staging dir from using CRLF to LF -->
+        <fixcrlf srcdir="${tar.staging.dir}"
+        eol="lf"
+        eof="remove"
+        excludes="**/*.class,**/*.zip,**/*.jar,**/*.gif,**/*.key,**/*.ser"/>
+
+
+        <!-- create the tarball -->
+        <tar tarfile="${dist.dir}/${fulfillment.tar.file}"
+            longfile="warn"
+            compression="gzip">
+             <tarfileset dir="${tar.staging.dir}" mode="755">
+                <include name="**/**"/>
+            </tarfileset>
+        </tar>
+    </target>
+
+
+    <!-- clean up stuff created from our build -->
+    <target name="clean" depends="delete-dirs,make-dirs" description="Cleans all the unnecessary files"/>
+
+    <target name="delete-dirs" description="Deletes directories for the build cleanup task">
+        <echo message="Deleting output directories"/>
+        <delete dir="${app.compile.out.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${compile.out.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${tar.staging.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${gcc.war.app.classes}" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${app.root.dir}/shared/classes" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${gcc.war.app}/WEB_INF/DYNAMO-INF" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${generated.source.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <delete dir="${report.dir}" failonerror="true" includeEmptyDirs="true" >
+            <exclude name="index.html" /> 
+        </delete>
+    </target>
+
+    <!-- Run the junit standalone unit tests -->
+    <target name="junit-standalone" depends="make-dirs"
+            description="Run the standalone junit tests.">
+
+        <junit printsummary="on" haltonfailure="false" fork="true"  showoutput="true">
+            <classpath path="${compile.out.dir}"/>
+            <classpath refid="compile.classpath"/>
+            <classpath refid="config.classpath"/>
+            <classpath refid="test.classpath"/>
+            <classpath refid="emma.lib"/>
+            <formatter type="xml" />
+            <formatter type="plain" usefile="false"/>
+            <jvmarg value="-Demma.coverage.out.file=${emma.coverage.file}"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+            <batchtest fork="yes" haltonerror="false" haltonfailure="false"   todir="${junit.report.dir}">
+                <fileset  dir="${test.source.standalone.dir}">
+                    <include name="**/*Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${junit.report.dir}">
+            <fileset dir = "${junit.report.dir}" includes = "TEST-*.xml" />
+            <report format="noframes" todir="${junit.report.dir}"/>
+        </junitreport>
+
+        <emma enabled="${emma.enabled}">
+            <report>
+                <sourcepath>
+                    <dirset dir="${source.dir}" />
+                    <dirset dir="${generated.source.dir}" />
+                    <dirset dir="${source.dir}/../shared/src" />
+                </sourcepath>
+                <fileset dir="${emma.report.dir}">
+                    <include name="*.emma"/>
+                    <include name="*.ec"/>
+                </fileset>
+                <txt outfile="${emma.report.dir}/coverage.txt"/>
+                <html outfile="${emma.report.dir}/coverage.html"/>
+            </report>
+        </emma>
+
+    </target>
+
+    <target name="junit-incontainer" depends="make-dirs"
+            description="Run the incontainer junit tests.">
+
+        <antcall target="execute"/>
+
+<!--        <antcall target="start-drp" />-->
+<!---->
+<!--        <antcall target="junit-incontainer-bare" />-->
+<!---->
+<!--        <antcall target="stop-drp" />-->
+
+    </target>
+
+    <target name="junit-incontainer-bare" depends="make-dirs"
+            description="Run the incontainer junit tests.">
+
+        <echo message="emma is enabled ${emma.enabled}" />
+        <junit printsummary="on" haltonfailure="false" fork="yes"  showoutput="true">
+            <classpath path="${compile.out.dir}"/>
+            <classpath refid="compile.classpath"/>
+            <classpath refid="config.classpath"/>
+            <classpath refid="test.classpath"/>
+            <classpath refid="emma.lib"/>
+            <formatter type="xml" />
+            <formatter type="plain" usefile="false"/>
+            <jvmarg value="-Demma.coverage.out.file=${emma.coverage.file}"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+            <batchtest haltonerror="false"  haltonfailure="false" fork="yes" todir="${junit.report.dir}">
+                <fileset dir="${test.source.incontainer.dir}">
+                    <include name="**/*Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junit printsummary="off" haltonfailure="false" fork="true" showoutput="false">
+            <classpath path="${compile.out.dir}"/>
+            <classpath refid="compile.classpath"/>
+            <classpath refid="config.classpath"/>
+            <classpath refid="test.classpath"/>
+            <classpath refid="emma.lib"/>
+            <jvmarg value="-Demma.coverage.out.file=${emma.coverage.file}"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+            <test name="net.nike.gcc.domain.common.FlushEmmaCoverage" haltonerror="false"  haltonfailure="false" fork="no" />
+        </junit>
+
+        <junitreport todir="${junit.report.dir}">
+            <fileset dir = "${junit.report.dir}" includes = "TEST-*.xml" />
+            <report format="noframes" todir="${junit.report.dir}"/>
+        </junitreport>
+
+        <emma enabled="${emma.enabled}">
+            <report>
+                <sourcepath>
+                    <dirset dir="${source.dir}" />
+                    <dirset dir="${generated.source.dir}" />
+                    <dirset dir="${source.dir}/../shared/src" />
+                </sourcepath>
+                <fileset dir="${emma.report.dir}">
+                    <include name="*.emma"/>
+                </fileset>
+
+                <fileset dir="${nike-gcc.link}">
+                    <include name="coverage.ec"/>
+                </fileset>
+
+                <txt outfile="${emma.report.dir}/coverage.txt"/>
+                <html outfile="${emma.report.dir}/coverage.html"/>
+            </report>
+        </emma>
+    </target>
+
+    <target name="junit" depends="junit-standalone,junit-incontainer"/>
+
+    <target name="junit-with-emma" depends="emma-init,emma-instrument,junit"/>
+
+    <property name="emma.dir" value="${predeploy.lib.dir}/test"/>
+    <path id="emma.lib">
+        <pathelement location="${emma.dir}/emma.jar"/>
+        <pathelement location="${emma.dir}/emma_ant.jar"/>
+    </path>
+    <taskdef resource="emma_ant.properties" classpathref="emma.lib"/>
+
+    <target name="emma-init" depends="init"
+        description="turns on EMMA instrumentation/reporting">
+        <property name="emma.enabled" value="true"/>
+        <!--we need the coverage file to be in the same place on each box, that way we only need one version of the emma.properties file-->
+        <property name="emma.coverage.file" value="${nike-gcc.link}/coverage.ec"/>
+        <property name="emma.meta.file" value="${emma.report.dir}/metadata.emma"/>
+        <echo message="${emma.coverage.file}"/>
+        <delete file="${emma.coverage.file}" />
+
+    </target>
+
+    <target name="emma-instrument" depends="compile,emma-init"
+        description="Instrument application code for code coverage tool.">
+        <!-- Use EMMA to instrument application code. Then overwrite classes -->
+        <!-- with the instrumented versions. -->
+        <echo message="${emma.meta.file}"/>
+        <emma enabled="${emma.enabled}">
+            <instr instrpath="${app.compile.out.dir}"
+                metadatafile="${emma.meta.file}"
+                merge="true"
+                mode="overwrite">
+                <filter includes="net.nike.*" excludes="net.nike.gcc.jaxb.*, org.*" />
+            </instr>
+        </emma>
+        <copy todir="${compile.out.dir}" overwrite="true">
+            <fileset dir="${app.compile.out.dir}"/>
+        </copy>
+        <copy file="${emma.dir}/emma.jar" todir="${gcc.war.deploy.lib}"/>
+        <!--put emma.properties in webinf classes
+            make sure emma.coverage.file is correct
+        -->
+        <copy file="${emma.dir}/emma.properties" todir="${gcc.war.app.classes}"/>
+    </target>
+
+     <!-- Create the build's info file and read its results into properties. -->
+    <target name="buildinfo" depends="init" description="Creates a build info file">
+        <!-- Collect baseline data from clearcase. -->
+        <exec executable="C:\Program Files\Rational\Clearcase\bin\cleartool"
+            os="Windows 2000"
+            output="${baselinefile}">
+            <arg value="lsbl"/>
+            <arg value="-fmt"/>
+            <arg value="%n\t%Fu\t%d\n"/>
+            <arg value="-stream"/>
+            <arg value="${baselinestream}"/>
+        </exec>
+        <java classname="net.nike.common.build.BaselineReader">
+            <arg value="${dist.dir}/"/>
+            <arg value="${buildinfo}"/>
+            <arg value="${app.root.dir}/build/${baselinefile}"/>
+            <classpath refid="compile.classpath" />
+        </java>
+        <property file="${dist.dir}/${buildinfo}"/>
+    </target>
+
+    <target name="copy-lib-to-module" description="Copies jars from the /lib dir to the war lib and app-lib directories">
+        <delete dir="${war.lib.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <mkdir dir="${war.lib.dir}"/>
+        <copy todir="${war.lib.dir}" flatten="true">
+            <fileset dir="${predeploy.lib.dir}">
+                <include name="securetoken/nikeb2b_1c.jar"/>
+                <include name="taglib/displaytag.jar"/>
+                <include name="taglib/taglibs-string.jar"/>
+                <include name="sap/ipc/*.jar"/>
+                <include name="shared/nikenet-global.jar"/>
+                <include name="shared/nikenet-om.jar"/>
+                <include name="apache/jakarta/commons/commons-collections.jar"/>
+                <include name="apache/jakarta/commons/commons-codec-1.2.jar"/>
+                <include name="apache/jakarta/commons/commons-beanutils.jar"/>
+                <include name="apache/jakarta/commons/commons-digester.jar"/>
+                <include name="apache/jakarta/commons/commons-lang.jar"/>
+                <include name="apache/jakarta/commons/commons-logging.jar"/>
+                <include name="apache/jakarta/commons/commons-resources.jar"/>
+                <include name="apache/jakarta/commons/commons-validator.jar"/>
+                <include name="apache/jakarta/taglibs/jstl.jar"/>
+                <include name="apache/jakarta/taglibs/standard.jar"/>
+                <include name="apache/jakarta/struts/struts.jar"/>
+                <include name="apache/jakarta/struts/struts-el.jar"/>
+                <include name="apache/xerces.jar"/>
+                <include name="xineo/xineo-xml-1.1.0.jar"/>
+                <!-- Following files are for Cactus tests -->
+                <include name="test/aspectjrt-1.1.1.jar"/>
+                <include name="test/cactus-1.5.jar"/>
+                <include name="test/junit-3.8.1.jar"/>
+                <include name="apache/jakarta/commons/commons-httpclient.jar"/>
+                <include name="jaxb/sax.jar" />
+                <include name="jaxb/dom.jar" />
+            </fileset>
+        </copy>
+    </target>
+
+       <target name="copy-to-fulfiller-lib" description="Copies Fulfiller 3rd party jars to the fullfiller lib directory">
+        <delete dir="${fulfiller.lib.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <mkdir dir="${fulfiller.lib.dir}"/>
+        <copy todir="${fulfiller.lib.dir}" flatten="true">
+            <fileset dir="${predeploy.lib.dir}">
+                <include name="${dist.lib.dir}/${jar.file}"/>
+                <include name="apache/jakarta/commons/*.jar"/>
+                <include name="apache/log4j*.jar"/>
+                <include name="patches/*.jar"/>
+                <include name="shared/*.jar"/>
+                <include name="oracle/*.zip"/>
+                <include name="jaxb/*.jar"/>
+                <include name="xineo/*.jar"/>
+                <include name="eGate/*.jar"/>
+                <include name="test/strutstestcasecactus/*.jar"/>
+            </fileset>
+            <fileset dir="${dist.lib.dir}">
+               <include name="${jar.file}"/>
+            </fileset>
+        </copy>
+    </target>
+
+
+
+
+       <target name="copy-app-config-files">
+           <echo message="from: ${app.config.dir}/${app.dir}/configpath/**  to: ${copy.todir}  "/>
+           <copy todir="${copy.todir}" overwrite="true">
+               <fileset dir="${app.config.dir}/${app.dir}/configpath">
+                   <exclude name="**/*.keep"/>
+                   <exclude name="**/*.contrib"/>
+                   <include name="**"/>
+               </fileset>
+           </copy>
+       </target>
+
+       <target name="copy-webapp-classpath-files">
+        <echo message="from: ${app.config.dir}/${app.dir}/classpath/**  to: ${copy.wartodir}  "/>
+        <copy todir="${copy.wartodir}" overwrite="true">
+            <fileset dir="${app.config.dir}/${app.dir}/classpath">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <exclude name="properties/**"/>
+                <include name="**"/>
+            </fileset>
+            <fileset dir="${dist.dir}">
+                <include name="${buildinfo}"/>
+            </fileset>
+        </copy>
+        <!-- Copy Buildinfo from buildinfo.txt to gccBuildInfo.txt -->
+           <echo message="COPY: ${copy.wartodir}/${buildinfo} TO ${copy.wartodir}/${gccbuildinfo}"/>
+           <copyfile src="${copy.wartodir}/${buildinfo}" dest="${copy.wartodir}/${gccbuildinfo}"/>
+
+        <echo message="from: ${app.config.dir}/${app.dir}/classpath/**  to: ${copy.globaltodir}  "/>
+        <copy todir="${copy.globaltodir}" overwrite="true">
+            <fileset dir="${app.config.dir}/${app.dir}/classpath">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="properties/**"/>
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="copy-fulfiller-classpath-files">
+        <echo message="from: ${app.config.dir}/${app.dir}/classpath/**  to: ${copy.todir}  "/>
+        <copy todir="${copy.todir}" overwrite="true">
+            <fileset dir="${app.config.dir}/${app.dir}/classpath">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="**"/>
+            </fileset>
+        </copy>
+    </target>
+
+       <target name="copy-resourcebundle-files">
+           <!--  resourcebundles  -->
+           <native2ascii encoding="UTF8"
+               src="${app.root.dir}/resourcebundles/${app.dir}"
+               dest="${copy.todir}"
+               includes="**/*.*"
+               ext=".properties">
+           </native2ascii>
+       </target>
+
+    <!-- Make symbolic link in windows 2000, called a junction in NTFS (www.sysinternals.com) -->
+    <target name="make-link" depends="init" unless="nike-gcc.link.exist">
+        <!--  test for existence of the link first -->
+        <available file="${nike-gcc.webapp.dir}" property="is.valid.webapp.dir"/>
+
+        <fail unless="is.valid.webapp.dir"
+            message="${nike-gcc.webapp.dir} does not reference a valid directory.  Please update om.properties (see build.properties for more information)."/>
+
+        <exec executable="${junction.bin}"
+            os="Windows 2000">
+            <arg value="${nike-gcc.link}"/>
+            <arg value="${nike-gcc.webapp.dir}"/>
+        </exec>
+    </target>
+
+    <target name="delete-link">
+        <!-- Collect baseline data from clearcase. -->
+        <exec executable="${junction.bin}"
+            os="Windows 2000">
+            <arg line="-d ${nike-gcc.link}"/>
+        </exec>
+    </target>
+
+    <!-- Freshen up the source files inn a clearCase View -->
+    <target name="clearcase-update" description="Update a clearcase project">
+        <ccupdate viewpath="${clearcase.viewname}" graphical="false" log="cclog.log"
+            overwrite="true" currenttime="true" rename="false"/>
+    </target>
+
+    <target name="start-drp">
+        <taskdef name="startDynamo"
+            classname="net.nike.common.build.StartDynamo"
+            classpath="${predeploy.lib.dir}/shared/nikenet-global.jar"/>
+                <startDynamo maxTimeInMinutes="15" startFile="${dynamo.start.file}" drp="${nike.gcc.drp}"/>
+        <echo message="nucleus is running"></echo>
+    </target>
+
+    <target name="stop-drp">
+        <echo message="Stopping Dynamo Server ${nike.gcc.drp}"/>
+        <get src="http://localhost:${nike.gcc.drp.admin.port}/nucleus/?op=shutdown" dest="shutdown_results.txt" username="admin" password="admin"/>
+    </target>
+
+<!--
+        ****************************************************
+        FOLLOWING TWO STONE AGE TASKS ARE
+        ADDED SIMPLY BECAUSE
+        startDynamo <ant> task is not working
+        as expected with GCC 6.4
+        - Salim Hemdani
+        *****************************************************
+ -->
+    <target name="start">
+       <exec executable="CMD.exe" dir="C:\WINNT\system32">
+       <arg value="/k"/>
+       <arg value="${clearcase.viewname}\build\runDynamo.bat"/>
+       </exec>
+    </target>
+
+   <target name="stop">
+       <sleep seconds="180"/>
+       <antcall target="junit-incontainer-bare" inheritall="true" />
+       <echo message="Stopping Dynamo Server"/>
+       <exec executable="C:\ATG\ATG6.4.0\home\bin\stopDynamo.bat" output="stop.log">
+           <arg value="drp-4"/>
+           <arg value="-user"/>
+           <arg value="admin"/>
+           <arg value="-password"/>
+           <arg value="admin"/>
+           <arg value="-verbose"/>
+       </exec>
+   </target>
+
+   <target name="execute">
+       <echo message="******* PARALLEL IN ACTION ********"/>
+       <parallel>
+           <antcall target="stop" inheritall="true" />
+           <antcall  target="start" inheritall="true"/>
+       </parallel>
+       <echo message="******* PARALLEL IN ACTION END ********"/>
+   </target>
+<!--
+        ************************************
+        END OF STONE AGE TASK
+        ***********************************
+-->
+
+
+</project>

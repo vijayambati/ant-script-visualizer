@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cdm-paths">
+    <!--    This is the "paths" target of CDM.  It contains all the project                                     -->
+    <!--    paths for reuse across buildfiles.                                                                  -->
+    <!--    You use this by pasting the following block into your build file (uncommented, of course):          -->
+    <!--        <import file="build_dir.xml"/>                                                            -->
+    <!--        <import file="build_properties.xml"/>                                                     -->
+    <!--        <import file="build_paths.xml"/>                                                          -->
+    <!--        <import file="build_taskdefs.xml"/>                                                       -->
+    <!--    and the targets of these files are magically imported into your buildfile.  Make your "init" target -->
+    <!--    have these as a dependency as follows, and you'll have all you need magically imported:             -->
+    <!--        <target name="init" depends="properties,paths,taskdefs" unless="init.done">                     -->
+
+    <target name="paths">
+        <!--            jaxb stuff-->
+        <path id="jaxb.path">
+            <pathelement location="${jaxb.output}"/>
+            <pathelement location="${lib.jaxb}/jax-qname.jar"/>
+            <pathelement location="${lib.jaxb}/jaxb-api.jar"/>
+            <pathelement location="${lib.jaxb}/jaxb-impl.jar"/>
+            <pathelement location="${lib.jaxb}/jaxb-libs.jar"/>
+            <pathelement location="${lib.jaxb}/jaxb-xjc.jar"/>
+            <pathelement location="${lib.jaxb}/jaxp-api.jar"/>
+            <pathelement location="${lib.jaxb}/relaxngDatatype.jar"/>
+            <pathelement location="${lib}/xsdlib.jar"/>
+            <pathelement location="${lib}/namespace.jar"/>
+        </path>
+
+        <path id="lib.path">
+            <!--            stuff for CDM-->
+            <!-- java runtime needed by jikes compiler -->
+            <pathelement location="${java.home}/lib/rt.jar"/>
+            <!-- http://www.jdom.org/ -->
+            <pathelement location="${lib}/jdom.jar"/>
+            <!-- http://jakarta.apache.org/log4j/ -->
+            <pathelement location="${lib}/log4j.jar"/>
+            <!-- weblogic -->
+            <pathelement location="${lib}/weblogic.jar"/>
+            <!-- http://xml.apache.org/ -->
+            <pathelement location="${lib}/xercesImpl.jar"/>
+            <!-- http://www.oracle.com -->
+            <pathelement location="${lib}/ojdbc14.jar"/>
+            <!-- http://www.w3.org/PICS/refcode/Parser/ -->
+            <pathelement location="${lib}/dsig.jar"/>
+            <!-- http://www.servlets.com/ -->
+            <pathelement location="${lib}/cos.jar"/>
+            <!-- http://www.enterprisedt.com/downloads/ftp.html -->
+            <pathelement location="${lib}/ftp.jar"/>
+            <!--  poi stuff for reading in spreadsheets - http://jakarta.apache.org/poi -->
+            <pathelement location="${lib}/poi-2.5.1-final-20040804.jar"/>
+
+            <!--  Fop and Avalon, for PDF generation in export  -->
+            <pathelement location="${lib}/fop.jar"/>
+            <pathelement location="${lib}/avalon-framework-cvs-20020806.jar"/>
+
+            <!--  Commons stuff - http://jakarta.apache.org/commons -->
+            <pathelement location="${lib.commons}/commons-beanutils.jar"/>
+            <pathelement location="${lib.commons}/commons-lang.jar"/>
+            <pathelement location="${lib.commons}/commons-validator.jar"/>
+            <pathelement location="${lib.commons}/commons-digester.jar"/>
+            <pathelement location="${lib.commons}/commons-httpclient.jar"/>
+            <pathelement location="${lib.commons}/commons-logging.jar"/>
+            <pathelement location="${lib.commons}/commons-collections.jar"/>
+            <pathelement location="${lib.commons}/commons-fileupload.jar"/>
+
+            <!-- located locally at nike \\Beavertn-svr-e1\eBiz$\B2C\shared\latest\lib : note this url points to the latest version of the file -->
+            <pathelement location="${lib}/shared.jar"/>
+
+            <pathelement location="${lib}/nikenet-global.jar"/>
+            <pathelement location="${lib}/xineo-xml-1.1.0.jar"/>
+
+            <!-- struts stuff -->
+            <pathelement location="${lib.struts}/struts.jar"/>
+            <pathelement location="${lib.struts}/strutstest-2.1.2.jar"/>
+            <pathelement location="${lib.struts}/struts-el.jar"/>
+            <pathelement location="${lib.struts}/providers.jar"/>
+            <pathelement location="${lib.struts}/standard.jar"/>
+            <pathelement location="${lib.struts}/nike-displaytag-1.0-rc1.jar"/>
+            <pathelement location="${lib.struts}/taglibs-log.jar"/>
+
+            <!--            testing stuff-->
+            <pathelement location="${lib.testing}/cactus-1.5.jar"/>
+            <pathelement location="${lib.testing}/junit.jar"/>
+
+            <!-- jaxb libs -->
+            <path refid="jaxb.path"/>
+
+            <!--            hibernate stuff-->
+            <pathelement location="${lib.hibernate}/hibernate2.jar"/>
+            <pathelement location="${lib.hibernate}/ehcache-0.7.jar"/>
+            <pathelement location="${lib.hibernate}/dom4j.jar"/>
+            <pathelement location="${lib.hibernate}/odmg.jar"/>
+            <pathelement location="${lib.hibernate}/jdbc2_0-stdext.jar"/>
+            <pathelement location="${lib.hibernate}/cglib2.jar"/>
+
+            <!--  Do we really need this?  Answer - yes, Cactus needs it -->
+            <pathelement location="${lib}/aspectjrt-1.1.1.jar"/>
+            <pathelement location="${lib}/jstl.jar"/>
+            <pathelement location="${lib}/"/>
+
+            <!--<pathelement location="${ant}/lib/ant.jar"/>-->
+            <pathelement location="${ant}/lib/ant-junit.jar"/>
+            <pathelement location="${ant}/lib/ant.jar"/>
+        </path>
+
+        <!--    </path>-->
+        <path id="config.path" location="${generated.conf}"/>
+        <path id="class.path">
+            <pathelement location="${cdm.main.approot}/cdm/APP-INF/classes"/>
+            <path refid="config.path"/>
+        </path>
+        <path id="class.lib.path">
+            <path refid="class.path"/>
+            <path refid="lib.path"/>
+        </path>
+        <path id="weblogic.path">
+            <pathelement location="${weblogic}/lib/weblogic.jar"/>
+        </path>
+        <path id="lib.weblogic.path">
+            <path refid="lib.path"/>
+            <path refid="weblogic.path"/>
+        </path>
+        <path id="class.weblogic.path">
+            <path refid="class.path"/>
+            <path refid="weblogic.path"/>
+        </path>
+        <path id="class.test.path">
+            <pathelement location="${test.classes}"/>
+            <pathelement location="${test.data.output}"/>
+            <pathelement location="${generated.conf}"/>
+            <pathelement location="${classes}"/>
+            <pathelement location="${base.dir}/web"/>
+            <pathelement location="${base.dir}/web/images"/>
+            <path refid="lib.path"/>
+        </path>
+        <path id="class.integration.test.path">
+            <pathelement location="${integration.classes}"/>
+            <path refid="class.test.path"/>
+            <path refid="weblogic.path"/>
+            <path refid="config.path"/>
+        </path>
+
+        <path id="ant.path">
+            <pathelement path="${java.class.path}"/>
+        </path>
+
+        <path id="emma.path">
+            <pathelement path="${deprecated.lib.ant}/emma/emma.jar"/>
+            <pathelement path="${deprecated.lib.ant}/emma/emma_ant.jar"/>
+        </path>
+
+        <path id="class.lib.weblogic.path">
+            <path refid="class.path"/>
+            <path refid="lib.weblogic.path"/>
+            <path refid="emma.path"/>
+        </path>
+
+        <path id="class.hibern8ide.path">
+            <path refid="class.lib.path"/>
+            <pathelement path="${deprecated.lib.ant}/hibern8ide/hibern8ide.jar"/>
+            <pathelement path="${deprecated.lib.ant}/hibern8ide/bsh-2.0b1.jar"/>
+            <pathelement path="${deprecated.lib.ant}/hibern8ide/forms-1.0.3.jar"/>
+            <pathelement path="${deprecated.lib.ant}/hibern8ide/jgraph.jar"/>
+            <pathelement path="${deprecated.lib.ant}/hibern8ide/looks-1.1.3.jar"/>
+            <pathelement path="${deprecated.lib.ant}/hibern8ide/pf-joi-full.jar"/>
+        </path>
+    </target>
+</project>

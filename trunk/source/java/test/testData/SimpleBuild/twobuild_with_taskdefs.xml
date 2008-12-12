@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="antscript_visualizer" default="all">
+
+
+	<path id="antscript.classpath">
+		<pathelement location="${basedir}/lib/jnlp.jar"/>
+		<pathelement location="${basedir}/lib/nikenet-global.jar"/>
+		<pathelement location="${basedir}/lib/log4j.jar"/>
+		<pathelement location="${basedir}/lib/jdom.jar"/>
+		<pathelement location="${basedir}/lib/commons-lang.jar"/>
+		<pathelement location="${basedir}/lib/xineo-xml-1.1.0.jar"/>
+		<pathelement location="${basedir}/lib/junit.jar"/>
+		<pathelement location="${basedir}/lib/javac2.jar"/>
+		<pathelement location="${basedir}/lib/bcel.jar"/>
+	</path>
+
+	<taskdef name="javac2" classname="com.intellij.uiDesigner.ant.Javac2" classpathref="antscript.classpath"/>
+
+	<target name="compile" description="compile module Ant script Visualizer production classes">
+		<javac2 />
+	</target>
+
+
+
+
+	<target name="init" description="Build initialization"/>
+	<target name="clean" depends="init" description="cleanup all"/>
+
+	<target name="all" depends="init, clean, compile" description="build all"/>
+
+	<target name="sign" depends="init,jar"/>
+
+	<target name="jar" depends="init">
+	</target>
+
+
+</project>

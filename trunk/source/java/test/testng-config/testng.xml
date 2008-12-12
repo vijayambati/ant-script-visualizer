@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Generated Suite">
+  <test verbose="1" name="cdmII tests" annotations="JDK">
+    <groups>
+      <run>
+        <include name="unit"/>
+        <exclude name="failedtests"  />
+      </run>
+    </groups>
+    <!--<classes>-->
+      <!--<class name="com.nike.admin.SomeTest"/>-->
+    <!--</classes>-->
+      <packages>
+            <package name="com.nike.cdm.*" />
+      </packages>
+  </test>
+
+
+
+</suite>

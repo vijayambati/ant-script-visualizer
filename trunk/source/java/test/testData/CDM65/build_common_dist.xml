@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="./ant2html.xsl"?>
+<!-- ================================================================ -->
+<!-- nike.net build file                                              -->
+<!-- The three build files for the server are as follows:                      -->
+<!--     build.xml - used to build/distribute/run the CDM app or legacy app    -->
+<!--                 on Windev.  Not for server distribution.                  -->
+<!--     build-main.xml - used to create/configure/install the "external"      -->
+<!--                      (outside cdm-main) data directory (cdm-main-data)    -->
+<!--     build-server.xml - used for configuring the Weblogic domain and       -->
+<!--                        "installing" CDM into that domain                  -->
+<!--     build-batch.xml - used to create the "external" (outside cdm-batch)   -->
+<!--                       data directory (cdm-batch-data)                     -->
+<!--                                                                           -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                 -->
+<!-- ================================================================ -->
+<project name="cdm-common-dist">
+
+    <macrodef name="copy-htdocs">
+        <attribute name="source"/>
+        <attribute name="target"/>
+        <sequential>
+            <echo message="copying htdocs from @{source} to @{target}"/>
+            <copy todir="@{target}" overwrite="true">
+                <fileset dir="@{source}"/>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copy-fix-build-script">
+        <attribute name="file"/>
+        <sequential>
+            <copy file="@{file}" tofile="${deploy.location}/build/build.sh"/>
+        </sequential>
+    </macrodef>
+
+   <macrodef name="fix-files">
+        <attribute name="dir"/>
+        <sequential>
+            <echo>Fixing files for dir @{dir}</echo>
+            <fixcrlf srcdir="@{dir}"
+                eol="unix"
+                eof="remove"
+                includes="**/*.sh,**/*.xml,**/*.properties"
+                excludes="**/*.TTF"
+                />
+        </sequential>
+    </macrodef>
+
+
+    <!--    Copies build files for the server to run during deployment.-->
+    <!--    Note that this is NOT a target - as it's never run standalone, it's a macro.  MUCH faster than calling antscript, -->
+    <!--    as it was executed before-->
+    <macrodef name="copy-build-stuff-for-server">
+        <attribute name="builddir"/>
+        <attribute name="buildfile"/>
+        <attribute name="antLocation"/>
+        <sequential>
+            <property name="deploy.location" value="${build}/serverdeploy"/>
+
+            <copy todir="${deploy.location}/build/build" overwrite="true">
+                <fileset file="@{builddir}/@{buildfile}"/>
+            </copy>
+            <copy todir="${deploy.location}/build/build" overwrite="true">
+                <fileset file="@{builddir}/build*.xml"/>
+                <fileset dir="@{builddir}" includes="*.properties" excludes="mybuild*.properties"/>
+            </copy>
+            <copy todir="${deploy.location}/build/apache-ant-1.6.2">
+                <!--  exclude weblogic.jar, we're going to get it from the BEA distribution already on the server.-->
+                <fileset dir="@{antLocation}" excludes="**/weblogic.jar"/>
+            </copy>
+
+            <!--           stuff for build config-->
+            <copy todir="${deploy.location}/build/conf" filtering="true" overwrite="true">
+                <fileset dir="${base.dir}/conf/multiconfig"/>
+                <filterset refid="cdmServerFilterSet"/>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copy-configure-fop-files">
+          <attribute name="filterset"/>
+          <sequential>
+          <copy overwrite="true" file="${conf}/resource/pdf/defaultXslFoStyleSheet_base.xsl" tofile="${generated.conf}/defaultXslFoStyleSheet.xsl">
+             <filterset refid="@{filterset}"/>
+          </copy>
+          </sequential>
+      </macrodef>
+
+
+</project>

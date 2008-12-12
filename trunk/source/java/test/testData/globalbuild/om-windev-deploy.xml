@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<!-- ================================================================ -->
+<!-- Windows Devleoper Deploy for the nike.net order management shared code -->
+<!-- Ant docs:  http://jakarta.apache.org/ant/manual/                 -->
+<!-- ================================================================ -->
+<project name="om-windev-deploy" basedir="." default="help">
+
+    <!-- Access any environment variables -->
+    <property environment="env"/>
+    
+     <!-- if the user has his own properties set then these will override
+    anything else. The USERPROFILE on Windows is set
+    to C:\Documents and Settings\USERNAME -->
+    <property file="${env.USERPROFILE}/nikenetshared.properties"/>
+
+    <!-- Default standard system build properties -->
+    <property file="om-build.properties"/>
+
+    <!-- Windows developer deploy properties -->
+    <property file="om-windev-deploy.properties"/>
+
+    <!-- global build properties -->
+    <property file="global-build.properties"/>
+
+    <target name="help" depends="usage"
+        description="Help on what targets are available"/>
+
+    <target name="usage" description="Help on what targets are available">
+        <echo level="info" message="Order Managerment Windows Developer Deploy Script:"/>
+        <echo level="info" message=""/>
+        <echo level="info" message="Possible targets are:"/>
+        <echo level="info" message=""/>
+        <echo level="info" message=" deploy-all                  Deploy all DRPs."/>
+        <echo level="info" message=" deploy-drp-2                Deploy DRP drp-2."/>
+        <echo level="info" message=" deploy-drp-4                Deploy DRP drp-4."/>
+        <echo level="info" message=" deploy-drp-bu               Deploy Backup drp."/>
+        <echo level="info" message=" help                        Same as usage."/>
+        <echo level="info" message=" usage                       This message of all possible targets."/>
+    </target>
+
+    <target name="deploy-all" depends="deploy-drp-2, deploy-drp-4, deploy-drp-bu" description="Deploys all drps to the windev env"/>
+
+    <target name="deploy-drp-2" description="Deploys the drp-2 to the windev env">
+        <delete dir="${drp-2.deploy.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <mkdir dir="${drp-2.deploy.dir}"/>
+        <mkdir dir="${drp-2.deploy.dir}/logs"/>
+        <!--  Erwin noticed that the data directory under drp.deploy.dir needed to be there for ATG,
+                otherwise, ATG would give an error on startup. -->
+        <mkdir dir="${drp-2.deploy.dir}/data"/>
+        <antcall target="copy-drp-files">
+            <param name="drp.deploy.dir" value="${drp-2.deploy.dir}"/>
+            <param name="drp.config.dir" value="${drp2.config.dir}"/>
+        </antcall>
+
+          <!-- make a copy of all the global classpath config files-->
+        <copy todir="${drp-2.deploy.dir}/classpath" overwrite="true">
+            <fileset dir="${global.app.config.dir}/classpath"/>
+       </copy>
+
+        <!-- make a copy of all the shared om configpath config files-->
+        <copy todir="${drp-2.deploy.dir}/localconfig" overwrite="true">
+            <fileset dir="${om.app.config.dir}/configpath"/>
+       </copy>
+
+        <!-- make a copy of all the shared om classpath config files-->
+        <copy todir="${drp-2.deploy.dir}/classpath" overwrite="true">
+            <fileset dir="${om.app.config.dir}/classpath"/>
+       </copy>
+
+        <!--   all the files under the localconfig/atg/dynamo/server directory are only needed for failover
+        in other environments and also cause ATG under the windows deploy to startup listening on 127.0.0.1,
+        which causes problems when needing to do cookie development, so we're deleting then for the windev deploy only.
+        -->
+        <delete dir="${drp-2.deploy.dir}/localconfig/atg/dynamo/server" failonerror="true" includeEmptyDirs="true"/>
+
+         <!-- copy all the libs for drp-2 -->
+        <copy todir="${drp-2.deploy.dir}/lib" flatten="true">
+             <fileset dir="${lib.dir}">
+                <include name="apache/jakarta/commons/*.jar"/>
+                <include name="apache/log4j*.jar"/>
+                <include name="oracle/*.zip"/>
+                <include name="patches/*.jar"/>
+                <include name="shared/*.jar"/>
+                <include name="jaxb1/jaxb-all.jar"/>
+                <include name="xineo*.jar"/>
+                <include name="egate/*.jar"/>
+                <include name="test/*.jar"/>
+                <include name="sap/*.jar"/>
+            </fileset>
+        </copy>
+        <copy todir="${drp-2.deploy.dir}/lib" flatten="true">
+            <fileset dir="${dist.dir}/published">
+                <include name="nikenet-global.jar"/>
+                <include name="nikenet-atgpatch.jar"/>
+                <include name="nikenet-om.jar"/>
+          </fileset>
+       </copy>
+
+        <!-- search and replace keys in the config files -->
+        <antcall target="search-replace-drp">
+            <param name="drp.deploy.dir" value="${drp-2.deploy.dir}"/>
+        </antcall>
+
+    </target>
+
+
+    <!-- Drp-4 deploy  with nikenet-om-configpath.jar config-->
+  <target name="deploy-drp-4" description="Deploys the drp-4 to the windev env">
+      <delete dir="${drp-4.deploy.dir}" failonerror="true" includeEmptyDirs="true"/>
+      <mkdir dir="${drp-4.deploy.dir}"/>
+      <mkdir dir="${drp-4.deploy.dir}/logs"/>
+      <unjar dest="${drp-4.deploy.dir}/localconfig">
+          <fileset dir="${dist.dir}/published" >
+            <include name="nikenet-om-configpath.jar"/>
+          </fileset>
+      </unjar>
+      <antcall target="copy-drp-files">
+          <param name="drp.deploy.dir" value="${drp-4.deploy.dir}"/>
+          <param name="drp.config.dir" value="${drp4.config.dir}"/>
+      </antcall>
+      <!--   all the files under the localconfig/atg/dynamo/server directory are only needed for failover
+            in other environments and also cause ATG under the windows deploy to startup listening on 127.0.0.1,
+            which causes problems when needing to do cookie development, so we're deleting then for the windev deploy only.
+            -->
+      <delete dir="${drp-4.deploy.dir}/localconfig/atg/dynamo/server" failonerror="true" includeEmptyDirs="true"/>
+
+    <antcall target="search-replace-drp">
+        <param name="drp.deploy.dir" value="${drp-4.deploy.dir}"/>
+    </antcall>
+  </target>
+
+    <target name="deploy-drp-bu" description="Deploys the drp-bu (backup server) to the windev env">
+        <delete dir="${drp-bu.deploy.dir}" failonerror="true" includeEmptyDirs="true"/>
+        <mkdir dir="${drp-bu.deploy.dir}"/>
+        <mkdir dir="${drp-bu.deploy.dir}/logs"/>
+        <!--  Erwin noticed that the date directory under drp.deploy.dir needed to be there for ATG,
+                otherwise, ATG would give an error on startup. -->
+        <mkdir dir="${drp-bu.deploy.dir}/data"/>
+        <antcall target="copy-drp-files">
+            <param name="drp.deploy.dir" value="${drp-bu.deploy.dir}"/>
+            <param name="drp.config.dir" value="${drp-bu.config.dir}"/>
+        </antcall>
+         <antcall target="search-replace-drp">
+            <param name="drp.deploy.dir" value="${drp-bu.deploy.dir}"/>
+        </antcall>
+        <copy todir="${drp-bu.deploy.dir}" overwrite="true">
+            <fileset dir="${app.root.dir}">
+                <include name="lib/oracle/**"/>
+                <include name="lib/patches/**/"/>
+            </fileset>
+        </copy>
+        <copy todir="${drp-bu.deploy.dir}/lib/shared" overwrite="true">
+            <fileset dir="${dist.dir}/published">
+                <include name="nikenet-atgpatch.jar"/>
+            </fileset>
+        </copy>
+    </target>
+
+<!-- Drp-test deploy  with nikenet-om-configpath.jar config
+    This is basicaly the same as the drp-4 deploy.
+ -->
+  <target name="deploy-drp-test" description="Deploys drp-test to the windev env">
+      <delete dir="${drp-test.deploy.dir}" failonerror="true" includeEmptyDirs="true"/>
+      <mkdir dir="${drp-test.deploy.dir}"/>
+      <mkdir dir="${drp-test.deploy.dir}/logs"/>
+      <copy todir="${drp-test.deploy.dir}/localconfig" overwrite="true">
+          <fileset dir="${om.app.config.dir}/configpath" />
+      </copy>
+      <antcall target="copy-drp-files">
+          <param name="drp.deploy.dir" value="${drp-test.deploy.dir}"/>
+          <param name="drp.config.dir" value="${drptest.config.dir}"/>
+      </antcall>
+      <!--   all the files under the localconfig/atg/dynamo/server directory are only needed for failover
+            in other environments and also cause ATG under the windows deploy to startup listening on 127.0.0.1,
+            which causes problems when needing to do cookie development, so we're deleting then for the windev deploy only.
+            -->
+      <delete dir="${drp-test.deploy.dir}/localconfig/atg/dynamo/server" failonerror="true" includeEmptyDirs="true"/>
+
+    <antcall target="search-replace-drp">
+        <param name="drp.deploy.dir" value="${drp-test.deploy.dir}"/>
+    </antcall>
+  </target>
+
+    <target name="deploy-nike-test" description="deploy nike-test" >
+        <mkdir dir="${atg.module.root.dir}" />
+        <delete dir="${test.webinf.classes.dir}" />
+        <mkdir dir="${test.webinf.classes.dir}" />
+        <copy todir="${atg.module.root.dir}" overwrite="true" >
+            <fileset dir="${module.root.dir}">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+            </fileset>
+        </copy>
+        <copy todir="${test.webinf.lib.dir}" overwrite="true" flatten="true" includeEmptyDirs="false" >
+            <fileset dir="${lib.dir}">
+                <exclude name="**/classes.jar"/>
+                <exclude name="**/log4j-1.2.8.jar" />
+                <exclude name="**/emma_ant.jar" />
+                <exclude name="**/jce1_2_2.jar" />
+                <exclude name="**/US_export_policy.jar" />
+                <exclude name="**/xerces.jar" />
+                <exclude name="**/classes12.zip" />
+                <exclude name="**/*.so" />
+            </fileset>
+            <!--<fileset dir="${dist.dir}/published">
+                <include name="nikenet-global.jar" />
+                <include name="nikenet-om.jar" />
+            </fileset>-->
+        </copy>
+
+        <copy todir="${test.webinf.classes.dir}" overwrite="true" includeEmptyDirs="false">
+            <fileset dir="${om.app.config.classpath.dir}" />
+            <fileset dir="${om.example.app.config.dir}" />
+            <fileset dir="${global.example.app.config.classpath.dir}" />
+        </copy>
+
+    </target>
+
+    <target name="copy-drp-files">
+        <copy todir="${drp.deploy.dir}" overwrite="true">
+            <fileset dir="${drp.config.common.dir}">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="localconfig/**"/>
+                <include name="pagebuild/**"/>
+                <include name="logs/**"/>
+            </fileset>
+        </copy>
+        <copy todir="${drp.deploy.dir}" overwrite="true">
+            <fileset dir="${drp.config.dir}">
+                <exclude name="**/*.keep"/>
+                <exclude name="**/*.contrib"/>
+                <include name="**"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="search-replace-drp">
+        <dirname property="vob.root" file="${basedir}.."/>
+        <dirset id="vob.root.dirset" dir="${vob.root}">
+            <exclude name="*/**"/>
+        </dirset>
+        <pathconvert dirsep="/" property="forwardslash.vob.root" refid="vob.root.dirset"/>
+        <replace file="${drp.deploy.dir}\localconfig\postEnvironment.bat"
+            token="%%vob.root%%" value="${vob.root}"/>
+        <replace dir="${drp.deploy.dir}"
+            token="%%common.dynamoroot%%"
+            value="${dynamo.root}"/>
+        <antcall target="run-envtool">
+            <param name="working.dir" value="${drp.deploy.dir}"/>
+        </antcall>
+    </target>
+
+    <target name="run-envtool">
+        <echo message="working.dir=${working.dir}"/>
+        <exec executable="${basedir}/../bin/envtool.bat" failonerror="true">
+            <arg value="${working.dir}"/>
+            <arg path="${envtool.location}"/>
+            <arg value="${envstore.location}"/>
+            <arg value="${envtool.key}"/>
+            <arg value="${envtool.log}"/>
+        </exec>
+    </target>
+
+    <target name="echo-info">
+            <echo message="java.home = ${java.home}"/>
+            <echo message="ant.java.version = ${ant.java.version}"/>
+            <echo message="ant.version = ${ant.version}"/>
+            <echo message="ant.project.name = ${ant.project.name}"/>
+        <echo message="ant.file = ${ant.file}"/>
+        <echo message="user.dir = ${user.dir}"/>
+        <echo message="basedir = ${basedir}"/>
+    </target>
+</project>
