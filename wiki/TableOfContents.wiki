@@ -1,2 +1,2 @@
-  * [Main What is the Ant Script Visualizer?]
+  * [Introduction What is the Ant Script Visualizer?]
     * [Using Using the Ant Script Visualizer?]
