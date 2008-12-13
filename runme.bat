@@ -1,1 +1,1 @@
-java -classpath lib\antscriptVisualizer.jar;lib\bcel.jar;lib\commons-lang.jar;lib\forms_rt.jar;lib\help.jar;lib\idea_rt.jar;lib\javac2.jar;lib\jdom.jar;lib\jhall.jar;lib\log4j.jar;lib\help;lib\images com.nurflugel.util.antscriptvisualizer.AntParserUiImpl
+java -classpath webstart\antscriptVisualizer.jar;webstart\bcel.jar;webstart\commons-lang.jar;webstart\help.jar;webstart\jdom.jar;webstart\jhall.jar;webstart\log4j.jar;webstart\help;webstart\images com.nurflugel.util.antscriptvisualizer.AntParserUiImpl

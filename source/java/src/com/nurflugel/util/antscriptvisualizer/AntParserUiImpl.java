@@ -346,6 +346,7 @@ public class AntParserUiImpl implements AntParserUi
 
     private void initializeUi()
     {
+        $$$setupUI$$$();
         ButtonGroup outputOptionsGroup = new ButtonGroup();
 
         outputOptionsGroup.add(svgRadioButton);
@@ -376,7 +377,7 @@ public class AntParserUiImpl implements AntParserUi
         try {
             outputFormat = valueOf(outputString);
         } catch (IllegalArgumentException e) {
-            outputFormat = OutputFormat.PNG;
+            outputFormat = PNG;
         }
 
         switch (outputFormat) {
