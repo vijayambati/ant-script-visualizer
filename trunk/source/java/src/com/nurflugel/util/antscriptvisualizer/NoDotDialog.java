@@ -1,9 +1,11 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import java.io.File;
+
+import javax.swing.*;
 
 
 /** Dialog to find where GraphViz is located. */
@@ -12,12 +14,12 @@ public class NoDotDialog extends JDialog
 
     /** Use serialVersionUID for interoperability. */
     private static final long serialVersionUID = 6408989705672527137L;
-    private File file;
-    private JButton buttonCancel;
-    private JButton buttonOK;
-    private JButton useTextBoxButton;
-    private JPanel contentPane;
-    private JTextField pathTextField;
+    private File              file;
+    private JButton           buttonCancel;
+    private JButton           buttonOK;
+    private JButton           useTextBoxButton;
+    private JPanel            contentPane;
+    private JTextField        pathTextField;
 
 
     public NoDotDialog(String dotExecutablePath)
@@ -27,49 +29,44 @@ public class NoDotDialog extends JDialog
         getRootPane().setDefaultButton(buttonOK);
         pathTextField.setText(dotExecutablePath);
 
-        buttonOK.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                onOK();
-            }
-        });
+        buttonOK.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    onOK();
+                }
+            });
 
-        useTextBoxButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                file = new File(pathTextField.getText());
-                dispose();
-            }
-        });
+        useTextBoxButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    file = new File(pathTextField.getText());
+                    dispose();
+                }
+            });
 
-        buttonCancel.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                onCancel();
-            }
-        });
+        buttonCancel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    onCancel();
+                }
+            });
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter()
-        {
-            public void windowClosing(WindowEvent e)
-            {
-                onCancel();
-            }
-        });
+        addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e)
+                {
+                    onCancel();
+                }
+            });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(new ActionListener() {
+                public void actionPerformed(ActionEvent e)
+                {
+                    onCancel();
+                }
+            }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         pack();
         center();
         show();
@@ -78,10 +75,10 @@ public class NoDotDialog extends JDialog
     /**  */
     private void center()
     {
-        Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = defaultToolkit.getScreenSize();
-        int x = (int) ((screenSize.getWidth() - getWidth()) / 2);
-        int y = (int) ((screenSize.getHeight() - getHeight()) / 2);
+        Toolkit   defaultToolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize     = defaultToolkit.getScreenSize();
+        int       x              = (int) ((screenSize.getWidth() - getWidth()) / 2);
+        int       y              = (int) ((screenSize.getHeight() - getHeight()) / 2);
 
         setBounds(x, y, getWidth(), getHeight());
     }
@@ -99,10 +96,9 @@ public class NoDotDialog extends JDialog
     {
 
         JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(this);
+        int          result      = fileChooser.showOpenDialog(this);
 
-        if (result == JFileChooser.APPROVE_OPTION)
-        {
+        if (result == JFileChooser.APPROVE_OPTION) {
             file = fileChooser.getSelectedFile();
         }
 
@@ -119,139 +115,145 @@ public class NoDotDialog extends JDialog
         System.exit(0);
     }
 
-    public File getFile()
-    {
-        return file;
-    }
+    public File getFile() { return file; }
 
     {
-// GUI initializer generated by IntelliJ IDEA GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
+
+        // GUI initializer generated by IntelliJ IDEA GUI Designer
+        // >>> IMPORTANT!! <<<
+        // DO NOT EDIT OR ADD ANY CODE HERE!
         $$$setupUI$$$();
     }
 
     /**
      * Method generated by IntelliJ IDEA GUI Designer >>> IMPORTANT!! <<< DO NOT edit this method OR call it in your code!
      *
-     * @noinspection ALL
+     * @noinspection  ALL
      */
     private void $$$setupUI$$$()
     {
         contentPane = new JPanel();
         contentPane.setLayout(new GridBagLayout());
+
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridBagLayout());
+
         GridBagConstraints gbc;
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill    = GridBagConstraints.BOTH;
         contentPane.add(panel1, gbc);
+
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill    = GridBagConstraints.BOTH;
         panel1.add(panel2, gbc);
+
         final JLabel label1 = new JLabel();
         label1.setText("GraphViz distribution, or click  \"Cancel\" to exit the application.");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 1;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor  = GridBagConstraints.WEST;
         panel2.add(label1, gbc);
+
         final JLabel label2 = new JLabel();
         label2.setText("Please use the  \"Open Dialog\" button or the text box to select the executable file in the");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor  = GridBagConstraints.WEST;
         panel2.add(label2, gbc);
+
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill    = GridBagConstraints.BOTH;
         contentPane.add(panel3, gbc);
+
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill    = GridBagConstraints.BOTH;
         panel3.add(panel4, gbc);
         buttonOK = new JButton();
         buttonOK.setText("Open Dialog");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill    = GridBagConstraints.HORIZONTAL;
         panel4.add(buttonOK, gbc);
+
         final JPanel panel5 = new JPanel();
         panel5.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 1;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill    = GridBagConstraints.BOTH;
         panel3.add(panel5, gbc);
         useTextBoxButton = new JButton();
         useTextBoxButton.setText("Use above path");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 1;
         gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill    = GridBagConstraints.HORIZONTAL;
         panel5.add(useTextBoxButton, gbc);
+
         final JPanel panel6 = new JPanel();
         panel6.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 2;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill    = GridBagConstraints.BOTH;
         panel3.add(panel6, gbc);
         buttonCancel = new JButton();
         buttonCancel.setText("Cancel");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc         = new GridBagConstraints();
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill    = GridBagConstraints.HORIZONTAL;
         panel6.add(buttonCancel, gbc);
         pathTextField = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc           = new GridBagConstraints();
+        gbc.gridx     = 0;
+        gbc.gridy     = 1;
+        gbc.weightx   = 1.0;
+        gbc.anchor    = GridBagConstraints.WEST;
+        gbc.fill      = GridBagConstraints.HORIZONTAL;
         contentPane.add(pathTextField, gbc);
     }
 
-    /** @noinspection ALL */
-    public JComponent $$$getRootComponent$$$()
-    {
-        return contentPane;
-    }
+    /**
+     * @noinspection  ALL
+     */
+    public JComponent $$$getRootComponent$$$() { return contentPane; }
 }
