@@ -6,7 +6,7 @@ import org.apache.log4j.PropertyConfigurator;
 import java.net.URL;
 
 
-/** Created by IntelliJ IDEA. User: Douglas Bullard Date: Jun 22, 2003 Time: 12:21:11 PM To change this template use Options | File Templates. */
+/** Loader for log4j. */
 @SuppressWarnings({ "UseOfSystemOutOrSystemErr" })
 public class LogFactory
 {

@@ -52,16 +52,27 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/LogFactory.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/LogFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/ExampleFileFilter.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/ExampleFileFilter.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/master-build/master-build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runme.sh" afterPath="$PROJECT_DIR$/runme.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/buildivy.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/repository.ivyconf.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsNewDialog.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsNewDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runme.bat" afterPath="$PROJECT_DIR$/runme.bat" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Constants.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iml" afterPath="$PROJECT_DIR$/AntScript Visualizer.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/Event.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/Event.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/OutputFormat.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/OutputFormat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runme.sh" afterPath="$PROJECT_DIR$/runme.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/ExecTest.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/ExecTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/buildivy.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/repository.ivyconf.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Version.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Version.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.ipr" afterPath="$PROJECT_DIR$/AntScript Visualizer.ipr" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/master-build/master-build.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUiImpl.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUiImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/EventCollector.java" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/EventCollector.java" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
@@ -242,78 +253,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/build.xml">
+      <file leaf-file-name="Include.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Include.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="42" selection-start="7743" selection-end="7743" vertical-scroll-proportion="-0.6315789">
+            <state line="5" column="13" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AntParserUiImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUiImpl.java">
+      <file leaf-file-name="Dependency.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Dependency.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="18" selection-start="6164" selection-end="6164" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1229143820000" expanded="true" signature="15855:29005" placeholder="UI Designer generated code" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="runme.sh" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/runme.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="13" selection-end="13" vertical-scroll-proportion="0.034833092">
+            <state line="13" column="13" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="runme.bat" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/runme.bat">
+      <file leaf-file-name="Antfile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Antfile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="223" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0">
+            <state line="23" column="13" selection-start="822" selection-end="822" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NoDotDialog.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/NoDotDialog.java">
+      <file leaf-file-name="AntCall.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/AntCall.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="13" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1229143367000" expanded="false" signature="3298:7926" placeholder="UI Designer generated code" />
-              </folding>
+            <state line="7" column="13" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WhatsnewDialogForm.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsnewDialogForm.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WhatsNewDialog.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsNewDialog.java">
+      <file leaf-file-name="Ant.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Ant.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="13" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1229143367000" expanded="false" signature="7001:8922" placeholder="UI Designer generated code" />
-              </folding>
+            <state line="6" column="13" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Version.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Version.java">
+      <file leaf-file-name="Classpath.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Classpath.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="13" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0">
+            <state line="30" column="13" selection-start="828" selection-end="828" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fileset.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Fileset.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="13" selection-start="715" selection-end="715" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Path.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Path.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="13" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PathSet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/PathSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="22" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Patternset.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="13" selection-start="512" selection-end="512" vertical-scroll-proportion="0.2538787">
               <folding />
             </state>
           </provider>
@@ -520,6 +544,372 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="webstart" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="webstart" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="images" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="antscriptvisualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="WhatsNewDialog" />
+          <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="antscriptvisualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="NoDotDialog" />
+          <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="antscriptvisualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="antscriptvisualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="nodes" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="antscriptvisualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="nodes" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="paths" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="antscriptvisualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="events" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="help" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="build" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
@@ -572,7 +962,7 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure PackagesPane="false" Scope="false" Favorites="false" ProjectPane="false" />
+      <showStructure Favorites="false" Scope="false" PackagesPane="false" ProjectPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
@@ -595,12 +985,12 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web21" value="/private/tmp/webExplodedDir25343tmp" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web5" value="/private/tmp/webExplodedDir25346tmp" />
-    <property name="options.lastSelected" value="project.propGUI" />
+    <property name="options.lastSelected" value="com.triemax.dmb" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web3" value="/private/tmp/webExplodedDir25345tmp" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web10" value="/private/tmp/webExplodedDir25342tmp" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web2" value="/private/tmp/webExplodedDir25336tmp" />
     <property name="TEMP_MODULE_EXPLODED_DIR_FOR_AntScript Visualizer/web/Web11" value="/private/tmp/webExplodedDir25348tmp" />
     <property name="options.searchVisible" value="true" />
@@ -1069,12 +1459,12 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31824714" sideWeight="0.59121174" order="3" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25862068" sideWeight="0.66311586" order="0" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25862068" sideWeight="0.66402113" order="0" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30290872" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Jalopy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Jalopy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671958" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39946738" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39870968" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4144144" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12643678" sideWeight="0.59121174" order="3" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2030825" sideWeight="0.5" order="1" side_tool="false" />
@@ -1170,7 +1560,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Run scripts work with jars now" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -1189,6 +1579,7 @@
     <MESSAGE value="Initial checkin of imported project" />
     <MESSAGE value="Switched to non-IDEA UI layout managers, so Eclipse/Ant users can build" />
     <MESSAGE value="Formatting" />
+    <MESSAGE value="Run scripts work with jars now" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1262,80 +1653,114 @@
     <option name="multicastPort" value="3274" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.sh">
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Property.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="66" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0">
+        <state line="13" column="13" selection-start="349" selection-end="349" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUi.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/build.xml">
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/PathElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="42" selection-start="7743" selection-end="7743" vertical-scroll-proportion="-0.6315789">
+        <state line="11" column="13" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/NoDotDialog.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsnewDialogForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/NoDotDialog.java">
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/NodeWithDependancies.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1229143367000" expanded="false" signature="3298:7926" placeholder="UI Designer generated code" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/WhatsNewDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1229143367000" expanded="false" signature="7001:8922" placeholder="UI Designer generated code" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/Version.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0">
+        <state line="16" column="22" selection-start="547" selection-end="547" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/AntParserUiImpl.java">
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/NodeType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="18" selection-start="6164" selection-end="6164" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1229143820000" expanded="true" signature="15855:29005" placeholder="UI Designer generated code" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/runme.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="223" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0">
+        <state line="3" column="12" selection-start="103" selection-end="103" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runme.sh">
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="13" selection-end="13" vertical-scroll-proportion="0.034833092">
+        <state line="20" column="22" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Macrodef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Include.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Dependency.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Antfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="13" selection-start="822" selection-end="822" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/AntCall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/Ant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Classpath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="13" selection-start="828" selection-end="828" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Fileset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="13" selection-start="715" selection-end="715" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="13" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/PathSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="22" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="512" selection-end="512" vertical-scroll-proportion="0.2538787">
           <folding />
         </state>
       </provider>
