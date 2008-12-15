@@ -1,8 +1,6 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-/**
- * Created by IntelliJ IDEA. User: douglasbullard Date: Mar 18, 2007 Time: 12:05:39 AM To change this template use File | Settings | File Templates.
- */
+/**  */
 public class Constants
 {
     public static final String PATTERNSET   = "patternset";

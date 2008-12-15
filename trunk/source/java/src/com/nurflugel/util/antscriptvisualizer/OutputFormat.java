@@ -2,7 +2,7 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 
-/** Enum for the variouis types of output. */
+/** Enum for the various types of output. */
 public enum OutputFormat
 {
     SVG("SVG", "svg", ".svg"),

@@ -1,11 +1,13 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import javax.swing.filechooser.FileFilter;
 import java.io.File;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.filechooser.FileFilter;
 
 
 /**
@@ -23,8 +25,7 @@ import java.util.Set;
  */
 public class ExampleFileFilter extends FileFilter
 {
-    private static String HIDDEN_FILE = "Hidden File";
-
+    private static String HIDDEN_FILE                = "Hidden File";
     private static String TYPE_UNKNOWN               = "Type Unknown";
     private boolean       useExtensionsInDescription = true;
 
@@ -72,8 +73,7 @@ public class ExampleFileFilter extends FileFilter
      *
      * @see  #addExtension
      */
-    public ExampleFileFilter(String[] filters,
-                             String   description)
+    public ExampleFileFilter(String[] filters, String description)
     {
         this();
 
@@ -93,8 +93,7 @@ public class ExampleFileFilter extends FileFilter
      *
      * @see  #addExtension
      */
-    public ExampleFileFilter(String extension,
-                             String description)
+    public ExampleFileFilter(String extension, String description)
     {
         this();
 
@@ -150,8 +149,7 @@ public class ExampleFileFilter extends FileFilter
      * @see  #getExtension
      * @see  FileFilter#accept(File)
      */
-    @Override
-    public boolean accept(File f)
+    @Override public boolean accept(File f)
     {
 
         if (f != null) {
@@ -193,8 +191,7 @@ public class ExampleFileFilter extends FileFilter
      * @see  #isExtensionListInDescription
      * @see  FileFilter#getDescription
      */
-    @Override
-    public String getDescription()
+    @Override public String getDescription()
     {
 
         if (fullDescription == null) {
