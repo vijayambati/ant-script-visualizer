@@ -1,0 +1,11 @@
+<ivy-module version="1.0">
+	<info organisation="net.sf.ant-contrib" module="ant-contrib" revision="1.0b2" status="release" publication="20050203143600" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="ant-contrib" type="jar" ext="jar" conf="default"/>
+		<artifact name="ant-contrib-source" type="zip" ext="zip" conf="source"/>
+	</publications>
+</ivy-module>
