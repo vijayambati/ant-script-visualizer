@@ -1,0 +1,9 @@
+<ivy-module version="1.0">
+	<info organisation="com.nike" module="nike-ivy" revision="1.4_0" status="release" publication="20061023190110" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="nike-ivy" type="jar" ext="jar" conf="default"/>
+	</publications>
+</ivy-module>

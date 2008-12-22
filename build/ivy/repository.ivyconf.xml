@@ -1,0 +1,27 @@
+<ivyconf>
+    <!-- This is the Ivy configuration file; documentation is at http://www.jayasoft.org/ivy/doc/configuration.-->
+    <property name="repository.url.http" value="http://ant-script-visualizer.googlecode.com/svn/repository"/>
+    <property name="repository.url.webdav" value="webdav://ant-script-visualizer.googlecode.com/svn/repository"/>
+    <conf defaultResolver="${ivy.resolver.default.from}" defaultCache="${ivy.cache.dir}"/>
+    <resolvers>
+        <filesystem name="local-libs" changingPattern="*-SNAPSHOT" changingMatcher="glob">
+            <ivy pattern="${lib.dir}/ivys/[module].ivy.xml"/>
+            <artifact pattern="${lib.dir}/[conf]/[artifact].[type]"/>
+        </filesystem>
+        <filesystem name="local-dist">
+            <ivy pattern="${dist.dir}/[module].ivy.xml"/>
+            <artifact pattern="${dist.dir}/[artifact].[type]"/>
+        </filesystem>
+        <url name="asv-repository" changingPattern="*-SNAPSHOT" changingMatcher="glob">
+            <ivy pattern="${repository.url.http}/[organisation]/[module]/[revision]/[module]-[revision].ivy.xml"/>
+            <artifact pattern="${repository.url.http}/[organisation]/[module]/[revision]/[artifact]-[revision].[type]"/>
+        </url>
+        <vfs name="asv-repository-publish">
+            <ivy pattern="${repository.url.webdav}/[organisation]/[module]/[revision]/[module]-[revision].ivy.xml"/>
+            <artifact pattern="${repository.url.webdav}/[organisation]/[module]/[revision]/[artifact]-[revision].[type]"/>
+        </vfs>
+        <chain name="libraries" returnFirst="true">
+            <resolver ref="asv-repository"/>
+        </chain>
+    </resolvers>
+</ivyconf>
