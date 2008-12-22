@@ -51,11 +51,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.jar" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/buildivy.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/repository.ivyconf.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
