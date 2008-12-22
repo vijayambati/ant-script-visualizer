@@ -11,7 +11,7 @@ goto end
 
 :ant
 REM .\apache-ant-1.6.2\bin\ant "%1" "%2" "%3" "%4" "%5" "%6" "%7" "%8" "%9"
-.\apache-ant-1.6.2\bin\ant %*
+.\apache-ant-1.6.2\bin\ant -f build\build.xml %*
 
 :end
 @endlocal
