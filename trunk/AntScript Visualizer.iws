@@ -51,135 +51,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_taskdefs.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jhall.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/lib/jdom.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/what_exactly_is_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/master-build/master-build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/bugs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_all.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/wing.jpg" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/testng-5.8-jdk15.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/updates.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/asvKeystore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/target_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/legend.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/forms_rt.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/depends_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/using_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/idea_rt.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/threebuild_nogrouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/whats_left_todo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/target_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/ant_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/wing1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/what_exactly_is_ant_script_vis.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/site.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/lib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_taskdefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/styles.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/help.hs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/twobuild_with_taskdefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_noconcentrate.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jdom.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/version_tool.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_beanmanaged.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/build/build.xml" afterPath="$PROJECT_DIR$/build/build_old.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_real.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/big_build_file.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/what_exactly_is_ant_script_visualizer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/grand.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/antcall_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/jhall.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/antscript.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/lib/jhall.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/antcall_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/threebuild_grouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/commons-lang.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/threebuild_nogrouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/what.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/javac2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/project-build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_targets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/buildivy.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.cmd" afterPath="$PROJECT_DIR$/build.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jnlp.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/taskdef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/jnlp.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_all.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/threebuild_grouping.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_real.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/taskdef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/fourbuild1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/twobuild_with_taskdef_and_macrodef.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_macrodefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/wing.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/threebuild.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/lib/log4j.jar" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/log4j.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/j2re-1_4_2_06-windows-i586-p-iftw.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/helpTOC.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/onebuild.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/log4j.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/lib/AntScriptVisualizer.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iml" afterPath="$PROJECT_DIR$/AntScript Visualizer.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/help.jhm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_noconcentrate.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/forms_rt.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/javac2.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.ipr" afterPath="$PROJECT_DIR$/AntScript Visualizer.ipr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/jdom.jar" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/junit.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/antscriptVisualizer.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/junit.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/depends_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/macrodef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/ant_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/bcel.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/wing.jpg" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-lang.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/lib/commons-lang.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.sh" afterPath="$PROJECT_DIR$/build.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_macrodefs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/contact_me.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/wing1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/macrodef_legend.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/version_tool.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/build_beanmanaged.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/bcel.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/idea_rt.jar" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/fourbuild.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/site.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/html/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/fourbuild.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/images/fourbuild1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/buildivy.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/repository.ivyconf.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/antscriptVisualizer.jnlp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webstart/help/html/assets/images/build_targets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/master-build/master-build.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
@@ -444,7 +320,7 @@
       <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="126" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.25074628">
+            <state line="17" column="15" selection-start="730" selection-end="730" vertical-scroll-proportion="0.12537314">
               <folding />
             </state>
           </provider>
@@ -1382,14 +1258,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17385058" sideWeight="0.5925433" order="0" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17385058" sideWeight="0.5925433" order="0" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30226365" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Jalopy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671958" sideWeight="0.5" order="8" side_tool="false" />
@@ -1694,7 +1570,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="126" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.25074628">
+        <state line="17" column="15" selection-start="730" selection-end="730" vertical-scroll-proportion="0.12537314">
           <folding />
         </state>
       </provider>
