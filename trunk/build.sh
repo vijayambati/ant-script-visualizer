@@ -12,4 +12,4 @@ export JAVA_HOME
 export ANT_OPTS=-Xmx640m
 
 #apache-ant-1.7.0/bin/ant -buildfile build.xml  $*
-ant -buildfile build.xml  $*
+ant -buildfile build/build.xml  $*
