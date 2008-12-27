@@ -1,0 +1,9 @@
+<ivy-module version="1.0">
+	<info organisation="w3c" module="dom" revision="1.0" status="release" publication="20070207143208"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="dom" type="jar" ext="jar" conf="default"/>
+	</publications>
+</ivy-module>

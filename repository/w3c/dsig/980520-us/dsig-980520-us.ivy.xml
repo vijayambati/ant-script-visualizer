@@ -1,0 +1,9 @@
+<ivy-module version="1.0">
+	<info organisation="w3c" module="dsig" revision="980520-us" status="release" publication="20070207143208"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="dsig" type="zip" ext="zip" conf="default"/>
+	</publications>
+</ivy-module>
