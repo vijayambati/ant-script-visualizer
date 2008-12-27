@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="1.0">
+  <info organisation="org.tmate" module="svnkit" revision="1.2.0.4949" status="release" publication="20081029133757" default="true"/>
+  <configurations>
+    <conf name="default" visibility="public"/>
+    <conf name="source" visibility="public"/>
+    <conf name="javadoc" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="svnkit" type="jar" ext="jar" conf="default"/>
+    <artifact name="svnkitsrc" type="zip" ext="zip" conf="source"/>
+  </publications>
+  <dependencies/>
+</ivy-module>
