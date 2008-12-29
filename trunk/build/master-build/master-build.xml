@@ -90,7 +90,7 @@
     <validateProperty propertyName="localenvstore.file" />
     <validateProperty propertyName="module.root.dir" />
     <validateProperty propertyName="project.name" />
-    <!--<validateProperty propertyName="nike.deploy.dir" />-->
+    <!--<validateProperty propertyName="nurflugel.deploy.dir" />-->
     <!--<validateProperty propertyName="release.number" />-->
     <!--<validateProperty propertyName="resourcebundles.dir" />-->
     <validateProperty propertyName="src.dir" />
@@ -133,15 +133,15 @@
                 <pathelement location="${lib.build}/commons-lang.jar" />
                 <pathelement location="${lib.build}/commons-collections.jar" />
             </path>
-            <!--<taskdef name="loadEnvstoreTask" classname="net.nike.build.ant.task.LoadEnvstore" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="buildInfoTask" classname="net.nike.build.ant.task.svn.BuildInfoTask" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="listContentFilesTask" classname="net.nike.build.ant.task.ListFilesContentBuild" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="listFilesTask" classname="net.nike.build.ant.task.ListFiles" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="ivyCheckoutTask" classname="net.nike.build.ant.task.svn.IvyCheckoutTask" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="ivyCommitTask" classname="net.nike.build.ant.task.svn.IvyCommitTask" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="ivyVersionFinderTask" classname="net.nike.build.ant.task.svn.IvyVersionFinderTask" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="ivyVersionSelectorTask" classname="net.nike.build.ant.task.svn.IvyVersionSelectorTask" classpathref="classpath.ant.niketasks" />-->
-            <!--<taskdef name="validateChoicesTask" classname="net.nike.build.ant.task.ValidateChoicesTask" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="loadEnvstoreTask" classname="net.nurflugel.build.ant.task.LoadEnvstore" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="buildInfoTask" classname="net.nurflugel.build.ant.task.svn.BuildInfoTask" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="listContentFilesTask" classname="net.nurflugel.build.ant.task.ListFilesContentBuild" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="listFilesTask" classname="net.nurflugel.build.ant.task.ListFiles" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="ivyCheckoutTask" classname="net.nurflugel.build.ant.task.svn.IvyCheckoutTask" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="ivyCommitTask" classname="net.nurflugel.build.ant.task.svn.IvyCommitTask" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="ivyVersionFinderTask" classname="net.nurflugel.build.ant.task.svn.IvyVersionFinderTask" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="ivyVersionSelectorTask" classname="net.nurflugel.build.ant.task.svn.IvyVersionSelectorTask" classpathref="classpath.ant.niketasks" />-->
+            <!--<taskdef name="validateChoicesTask" classname="net.nurflugel.build.ant.task.ValidateChoicesTask" classpathref="classpath.ant.niketasks" />-->
         </sequential>
     </macrodef>
 
@@ -368,8 +368,8 @@
 
     <!--this macrodef has a funny name because "buildInfoTask" is a task, so we needed to name the macrodef differently...-->
     <!--<macrodef name="buildInfo" description="Create the build's info file and read its results into properties">-->
-        <!--<attribute name="dir" default="${nike.deploy.dir}"-->
-        <!--<attribute name="dir" default="${nike.deploy.dir}" description="The target dir the file will be located in. Defaults to the tar dir's nike-deploy dir." />-->
+        <!--<attribute name="dir" default="${nurflugel.deploy.dir}"-->
+        <!--<attribute name="dir" default="${nurflugel.deploy.dir}" description="The target dir the file will be located in. Defaults to the tar dir's nurflugel-deploy dir." />-->
         <!--<sequential>-->
             <!--<echo level="verbose">    Macrodef::master.buildInfo dir=@{dir}</echo>-->
             <!--<mkdir dir="@{dir}" />-->
@@ -403,7 +403,7 @@
         <attribute name="destinationDir" />
         <attribute name="package" />
         <attribute name="xsd" />
-        <attribute name="testDir" default="${jaxb.gen.src.dir}/net/nike" description="This is the directory used to test the existence of previously generated files." />
+        <attribute name="testDir" default="${jaxb.gen.src.dir}/net/nurflugel" description="This is the directory used to test the existence of previously generated files." />
         <sequential>
             <echo level="verbose">    Macrodef::master.compileJaxbXsd
                  :::package=        @{package}
@@ -756,7 +756,7 @@
                 <isset property="test.single" />
             </not>
             <then>
-                <echo>Usage: ant test-single -Dtest.single=[fully-qualified-classname] (e.g. ant test-single -Dtest.single=net.nike.oc.ui.campaign.util.CampaignJaxbUtilTest)</echo>
+                <echo>Usage: ant test-single -Dtest.single=[fully-qualified-classname] (e.g. ant test-single -Dtest.single=net.nurflugel.oc.ui.campaign.util.CampaignJaxbUtilTest)</echo>
                 <fail message="Please specify a class to test by setting the test.single property to the class name." />
             </then>
         </if>
@@ -770,11 +770,11 @@
     <!--<macrodef name="listFiles" description="List the files in the fileset element. This list of files describe the files to be worked on by unix deploy script for search and replace">-->
         <!--<sequential>-->
             <!--<echo level="verbose">    Macrodef::master.listFiles</echo>-->
-            <!--<mkdir dir="${nike.deploy.dir}" />-->
-            <!--<copy todir="${nike.deploy.dir}" failonerror="false">-->
-                <!--<fileset dir="${app.root.dir}/nike-deploy"/>-->
+            <!--<mkdir dir="${nurflugel.deploy.dir}" />-->
+            <!--<copy todir="${nurflugel.deploy.dir}" failonerror="false">-->
+                <!--<fileset dir="${app.root.dir}/nurflugel-deploy"/>-->
             <!--</copy>-->
-            <!--<listFilesTask listfile="${nike.deploy.dir}/substitutions.txt">-->
+            <!--<listFilesTask listfile="${nurflugel.deploy.dir}/substitutions.txt">-->
                 <!--<fileset dir="${tar.stage.dir}">-->
                     <!--<include name="**/*.xml" />-->
                     <!--<include name="**/*.properties" />-->
@@ -819,7 +819,7 @@
         <echo level="verbose">Target::master.javadoc</echo>
         <cleanDir dirName="${javadoc.dir}" />
         <mkdir dir="${javadoc.dir}" />
-        <javadoc sourcepath="${java.src.dir}" destdir="${javadoc.dir}" packagenames="net.nike.*, com.nike.*" author="true" private="true" maxmemory="128m" use="true" version="true" windowtitle="Nike.net Documentation" doctitle="&lt;h1&gt;Nike.net Documentation&lt;/h1&gt;"
+        <javadoc sourcepath="${java.src.dir}" destdir="${javadoc.dir}" packagenames="net.nurflugel.*, com.nurflugel.*" author="true" private="true" maxmemory="128m" use="true" version="true" windowtitle="Nike.net Documentation" doctitle="&lt;h1&gt;Nike.net Documentation&lt;/h1&gt;"
         bottom="Copyright &#169; 2002 - 2009 Nike, Inc.">
             <classpath refid="classpath.compile" />
         </javadoc>
@@ -1004,7 +1004,7 @@
 
     <!--<macrodef name="createIvyVersion" description="Creates an Ivy entry of the jar dir at the parent Subversion URL. Only works if the parent URL already exists. Also creates checksums, and handles checkouts and commits from Subversion.">-->
         <!--<attribute name="jarDir" default="${client.jar.dir}" description="The dir with the jars" />-->
-        <!--<attribute name="parentRepositoryUrl" default="${ivy.repository.url}" description="The URL in Subversion where these will be to - should be like http://camb2bp2:8090/svn/javaexternals/trunk/repository/com.nike/atlas.productservice.rest.client" />-->
+        <!--<attribute name="parentRepositoryUrl" default="${ivy.repository.url}" description="The URL in Subversion where these will be to - should be like http://camb2bp2:8090/svn/javaexternals/trunk/repository/com.nurflugellugel/atlas.productservice.rest.client" />-->
         <!--<attribute name="ivyVersionNumber" default="${desired.ivy.version.number}" description="The version for Ivy, something like '1.1' or '1.2.3'  Must not already exist." />-->
         <!--<element name="makeJarsBlock" description="The block of code to create whatever jars you want snapshotted" />-->
         <!--<element name="writeIvyFileBlock" description="The block of code to write the Ivy file to the shapshot dir" />-->

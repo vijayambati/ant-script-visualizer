@@ -4,7 +4,7 @@
             xsi:noNamespaceSchemaLocation="http://ant-script-visualizer.googlecode.com/svn/repository/ivy-1.4.xsd">
     <!-- This is the module definition file; documentation is at http://www.jayasoft.org/ivy/doc/ivyfile. -->
     <!--TODO :  clean up unwanted  jar files in build and dist-war dir - Karthick -->
-    <info organisation="com.nike" module="ReferenceService" revision="snapshot">
+    <info organisation="com.nurflugel" module="ReferenceService" revision="snapshot">
         <license name="Nike Internal Only"/>
         <ivyauthor name="Douglas Bullard"/>
         <repository name="asv-repository" url="http://ant-script-visualizer.googlecode.com/svn/repository" ivys="true" artifacts="true"/>
