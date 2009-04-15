@@ -1,0 +1,12 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-vfs" revision="1.0" status="release" publication="20070322090502" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-vfs" type="jar" ext="jar" conf="default"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.apache" name="commons-logging" rev="1.0.4" conf="default"/>
+	</dependencies>
+</ivy-module>

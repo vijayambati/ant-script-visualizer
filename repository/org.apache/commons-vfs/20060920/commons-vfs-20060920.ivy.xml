@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="http://www.jayasoft.fr/org/ivyrep/ivy-doc.xsl"?>
+<ivy-module version="1.0">
+    <info organisation="org.apache" module="commons-vfs" revision="20060920" status="integration" publication="20060921061708">
+		<license name="Apache" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+		<ivyauthor name="jayasoft" url="http://www.jayasoft.org/"/>
+
+		<repository name="ivyrep" url="http://ivyrep.jayasoft.org/" pattern="[organisation]/[module]/ivy-[revision].xml" ivys="true" artifacts="false"/>
+		<repository name="ivyrep" url="http://ivyrep.jayasoft.org/" pattern="[organisation]/[module]/[revision]/[artifact].[ext]" ivys="false" artifacts="true"/>
+
+		<description homepage="http://jakarta.apache.org/commons/vfs/">
+	  Commons VFS provides a single API for accessing various different file systems. It presents a uniform view of the files from various different sources, such as the files on local disk, on an HTTP server, or inside a Zip archive.<br/>
+		</description>
+	</info>
+	<configurations>
+		<conf name="default"/>
+		<conf name="lru-cache" extends="default"/>
+		<conf name="ftp" extends="default"/>
+		<conf name="webdav" extends="default"/>
+		<conf name="cifs" extends="default"/>
+		<conf name="sftp" extends="default"/>
+		<conf name="tar" extends="default"/>
+	</configurations>
+	<dependencies>
+		<dependency org="org.apache" name="commons-logging" rev="1.0.4" conf="default"/>
+		<dependency org="org.apache" name="commons-collections" rev="3.1" conf="lru-cache->default"/>
+		<dependency org="org.apache" name="commons-net" rev="1.4.1" conf="ftp->default"/>
+		<dependency org="org.apache" name="commons-httpclient" rev="2.0" conf="webdav->default"/>
+		<dependency org="org.apache" name="oro" rev="2.0.8" conf="webdav,ftp->default"/>
+		<dependency org="org.apache" name="commons-compress" rev="20050911" conf="tar->default"/>
+	    <dependency org="org.apache" name="jcifs" rev="0.8.3" conf="cifs->default"/>
+	    <dependency org="org.apache" name="jsch" rev="0.1.25" conf="sftp->default"/>
+	    <dependency org="org.apache" name="slide" rev="20050629.161100" conf="webdav->default">
+	      	<artifact name="slide-webdavlib" type="jar"/>
+	    </dependency>
+
+		<dependency org="org.jdom" name="jdom" rev="1.0" conf="webdav->default"/>
+	</dependencies>
+</ivy-module>

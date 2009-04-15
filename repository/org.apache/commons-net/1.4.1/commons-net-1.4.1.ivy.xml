@@ -1,0 +1,9 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-net" revision="1.4.1" status="release" publication="20061023171948" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-net" type="jar" ext="jar" conf="default"/>
+	</publications>
+</ivy-module>
