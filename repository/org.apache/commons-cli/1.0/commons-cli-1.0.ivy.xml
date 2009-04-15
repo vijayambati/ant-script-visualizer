@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="http://ivyrep.jayasoft.org/ivy-doc.xsl"?>
+<ivy-module version="1.0">
+    <info organisation="org.apache" module="commons-cli" revision="1.0" status="release" publication="20021227095900">
+		<license name="Apache" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+		<ivyauthor name="jayasoft" url="http://www.jayasoft.org/"/>
+
+		<repository name="ivyrep" url="http://www.jayasoft.fr/org/ivyrep/" pattern="[organisation]/[module]/ivy-[revision].xml" ivys="true" artifacts="false"/>
+		<repository name="ibiblio" url="http://www.ibiblio.org/maven/" pattern="[module]/jars/[artifact]-[revision].jar" ivys="false" artifacts="true"/>
+
+		<description homepage="http://jakarta.apache.org/commons/cli/">
+	    The CLI library provides a simple and easy to use API for working with the command line arguments and options.<br/>
+		</description>
+	</info>
+		<configurations>
+			<conf name="default" visibility="public"/>
+			<conf name="javadoc" visibility="public"/>
+			<conf name="source" visibility="public"/>
+		</configurations>
+		<publications>
+			<artifact name="commons-cli" type="jar" ext="jar" conf="default"/>
+			<artifact name="commons-cli-javadoc" type="jar" ext="jar" conf="javadoc"/>
+			<artifact name="commons-cli-source" type="jar" ext="jar" conf="source"/>
+	</publications>
+    <dependencies>
+        <dependency org="org.apache" name="commons-lang" rev="1.0"/>
+        <dependency org="org.apache" name="commons-logging" rev="1.0"/>
+    </dependencies>
+</ivy-module>

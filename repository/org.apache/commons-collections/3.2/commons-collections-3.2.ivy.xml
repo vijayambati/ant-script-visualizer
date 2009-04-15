@@ -1,0 +1,11 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-collections" revision="3.2" status="release" publication="20061102145402" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-collections" type="jar" ext="jar" conf="default"/>
+		<artifact name="commons-collections-src" type="zip" ext="zip" conf="source"/>
+	</publications>
+</ivy-module>

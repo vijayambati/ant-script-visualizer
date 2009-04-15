@@ -1,0 +1,15 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-dbcp" revision="1.2.1" status="release" publication="20070214100532" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-dbcp" type="jar" ext="jar" conf="default"/>
+		<artifact name="commons-dbcp-src" type="zip" ext="zip" conf="source"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.apache" name="commons-collections" rev="3.2" force="true" conf="default,source"/>
+		<dependency org="org.apache" name="commons-pool" rev="1.3" force="true" conf="default,source"/>
+	</dependencies>
+</ivy-module>
