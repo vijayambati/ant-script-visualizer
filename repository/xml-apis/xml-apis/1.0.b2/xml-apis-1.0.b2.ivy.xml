@@ -1,0 +1,11 @@
+<ivy-module version="1.0">
+	<info organisation="xml-apis" module="xml-apis" revision="1.0.b2" status="integration" publication="20070208163046"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="xml-apis" type="jar" ext="jar" conf="default"/>
+		<artifact name="xml-apis-sources" type="jar" ext="jar" conf="source"/>
+	</publications>
+</ivy-module>

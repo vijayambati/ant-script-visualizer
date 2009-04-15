@@ -1,0 +1,15 @@
+<ivy-module version="1.0">
+	<info organisation="relaxngDatatype"
+		module="relaxngDatatype"
+		revision="20020414"
+		status="release"
+		publication="20070210002404"
+		default="true"
+	/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="relaxngDatatype" type="jar" ext="jar" conf="default"/>
+	</publications>
+</ivy-module>
