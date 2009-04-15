@@ -1,0 +1,9 @@
+<ivy-module version="1.0">
+	<info organisation="com.oracle" module="ojdbc14" revision="10.2.0.3.0" status="release" publication="20060926094324" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="ojdbc14" type="jar" ext="jar" conf="default"/>
+	</publications>
+</ivy-module>
