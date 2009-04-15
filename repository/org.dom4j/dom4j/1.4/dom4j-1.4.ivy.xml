@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="http://ivyrep.jayasoft.org/ivy-doc.xsl"?>
+<ivy-module version="1.0">
+    <info organisation="org.dom4j" module="dom4j" revision="1.4" status="release" publication="20030407173500">
+		<license name="BSD" url="http://dom4j.org/license.html"/>
+		<ivyauthor name="jayasoft" url="http://www.jayasoft.org/"/>
+
+		<repository name="ivyrep" url="http://www.jayasoft.fr/org/ivyrep/" pattern="[organisation]/[module]/ivy-[revision].xml" ivys="true" artifacts="false"/>
+		<repository name="ibiblio" url="http://www.ibiblio.org/maven/" pattern="[module]/jars/[artifact]-[revision].jar" ivys="false" artifacts="true"/>
+
+		<description homepage="http://www.dom4j.org/">
+	  dom4j is an easy to use, open source library for working with XML, XPath and 
+    XSLT on the Java platform using the Java Collections Framework and with full 
+    support for DOM, SAX and JAXP.<br/>
+		</description>
+	</info>
+</ivy-module>
