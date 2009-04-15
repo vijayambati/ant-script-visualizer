@@ -1,0 +1,9 @@
+<ivy-module version="1.0">
+	<info organisation="org.springframework" module="spring-struts" revision="2.0" status="release" publication="20061004024947"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="spring-struts" type="jar" ext="jar" conf="default"/>
+	</publications>
+</ivy-module>
