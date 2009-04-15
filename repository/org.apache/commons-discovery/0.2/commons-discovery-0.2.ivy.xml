@@ -1,0 +1,16 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-discovery" revision="0.2" status="release" publication="20061025173348" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="javadoc" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-discovery" type="jar" ext="jar" conf="default"/>
+		<artifact name="commons-discovery-javadoc" type="jar" ext="jar" conf="javadoc"/>
+		<artifact name="commons-discovery-source" type="jar" ext="jar" conf="source"/>
+	</publications>
+	<dependencies>
+			        <dependency org="org.apache" name="commons-logging" rev="1.0.3" conf="default"/>
+    	</dependencies>
+</ivy-module>

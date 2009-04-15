@@ -1,0 +1,15 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-logging" revision="1.1" status="release" publication="20061102145302" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-logging" type="jar" ext="jar" conf="default"/>
+		<artifact name="commons-logging-source" type="zip" ext="zip" conf="source"/>
+	</publications>
+	<dependencies>
+			<dependency org="org.apache" name="log4j" rev="1.2.12" force="true" conf="default"/>
+			<dependency org="avalon" name="avalon-framework" rev="4.1.3" force="true" conf="default"/>
+	</dependencies>
+</ivy-module>

@@ -1,0 +1,15 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-httpclient" revision="3.0.1" status="release" publication="20061102145404" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-httpclient" type="jar" ext="jar" conf="default"/>
+		<artifact name="commons-httpclient-src" type="zip" ext="zip" conf="source"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.apache" name="commons-logging" rev="1.0.3" force="true" conf="default"/>
+		<dependency org="org.apache" name="commons-codec" rev="1.2" force="true" conf="default"/>
+	</dependencies>
+	</ivy-module>
