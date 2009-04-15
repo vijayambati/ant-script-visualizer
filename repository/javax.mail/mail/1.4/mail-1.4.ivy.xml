@@ -1,0 +1,19 @@
+<ivy-module version="1.0">
+	<info organisation="javax.mail" module="mail" revision="1.4" status="release" publication="20061125170218" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="javadocs" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="mail" type="jar" ext="jar" conf="default"/>
+		<artifact name="mail-javadocs" type="jar" ext="jar" conf="javadocs"/>
+	</publications>
+	<dependencies>
+		<dependency org="com.sun" name="activation" rev="1.1" conf="default"/>
+		<dependency org="javax.mail" name="dsn" rev="1.4" conf="default"/>
+		<dependency org="javax.mail" name="imap" rev="1.4" conf="default"/>
+		<dependency org="javax.mail" name="mailapi" rev="1.4" conf="default"/>
+		<dependency org="javax.mail" name="pop3" rev="1.4" conf="default"/>
+		<dependency org="javax.mail" name="smtp" rev="1.4" conf="default"/>
+	</dependencies>
+</ivy-module>

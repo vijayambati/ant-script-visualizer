@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="1.0">
+  <info organisation="org.codehaus" module="stax" revision="1.2.0" status="release" publication="20080122161256" default="true"/>
+  <configurations>
+    <conf name="default" visibility="public"/>
+    <conf name="source" visibility="public"/>
+    <conf name="javadoc" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="stax-src" type="zip" ext="zip" conf="source"/>
+    <artifact name="stax" type="jar" ext="jar" conf="default"/>
+  </publications>
+  <dependencies>
+    <dependency org="org.codehaus" name="stax-api" rev="1.0.1" conf="default"/>
+  </dependencies>
+</ivy-module>
