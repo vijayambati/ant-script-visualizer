@@ -1,0 +1,17 @@
+<ivy-module version="1.0">
+	<info organisation="org.apache" module="commons-beanutils" revision="1.7.0" status="release" publication="20070309213659" default="true"/>
+	<configurations>
+		<conf name="default" visibility="public"/>
+		<conf name="javadoc" visibility="public"/>
+		<conf name="source" visibility="public"/>
+	</configurations>
+	<publications>
+		<artifact name="commons-beanutils" type="jar" ext="jar" conf="default"/>
+		<artifact name="commons-beanutils-javadoc" type="jar" ext="jar" conf="javadoc"/>
+		<artifact name="commons-beanutils-source" type="jar" ext="jar" conf="source"/>
+	</publications>
+	<dependencies>
+	        <dependency org="org.apache" name="commons-logging" rev="1.0" conf="default"/>
+	        <dependency org="org.apache" name="commons-collections" rev="2.0" conf="default"/>
+    	</dependencies>
+</ivy-module>

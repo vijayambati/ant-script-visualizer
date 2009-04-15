@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="1.0">
+  <info organisation="org.apache" module="commons-attributes" revision="2.2" status="release" publication="20081029022547" default="true"/>
+  <configurations>
+    <conf name="default" visibility="public"/>
+    <conf name="source" visibility="public"/>
+    <conf name="javadoc" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="commons-attributes-api" type="jar" ext="jar" conf="default"/>
+    <artifact name="commons-attributes-compiler" type="jar" ext="jar" conf="default"/>
+    <artifact name="commons-attributes-javadocs" type="jar" ext="jar" conf="javadoc"/>
+  </publications>
+  <dependencies>
+    <dependency org="org.codehaus" name="qdox" rev="1.6.3" conf="default"/>
+  </dependencies>
+</ivy-module>
