@@ -51,10 +51,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/ivy/buildivy.xml" afterPath="$PROJECT_DIR$/build/ivy/buildivy.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml" afterPath="$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web" afterPath="$PROJECT_DIR$/source/app/web" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testng-config" afterPath="$PROJECT_DIR$/source/java/test/testng-config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/conf" afterPath="$PROJECT_DIR$/source/conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com" afterPath="$PROJECT_DIR$/source/java/test/src/com" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html/assets" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/assets/images" afterPath="$PROJECT_DIR$/source/help/html/assets/images" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app" afterPath="$PROJECT_DIR$/source/app" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/Dependency Test" afterPath="$PROJECT_DIR$/source/java/test/testData/Dependency Test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/CDM5" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/master-build/master-build.xml" afterPath="$PROJECT_DIR$/build/master-build/master-build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help" afterPath="$PROJECT_DIR$/source/app/web/help" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java" afterPath="$PROJECT_DIR$/source/java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src" afterPath="$PROJECT_DIR$/source/java/src" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData" afterPath="$PROJECT_DIR$/source/java/test/testData" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/globalbuild" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src" afterPath="$PROJECT_DIR$/source/java/test/src" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source" afterPath="$PROJECT_DIR$/source" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html" afterPath="$PROJECT_DIR$/source/help/html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/Import Test" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/html" afterPath="$PROJECT_DIR$/source/help/html/html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com" afterPath="$PROJECT_DIR$/source/java/src/com" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help" afterPath="$PROJECT_DIR$/source/help" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/net/nike/util" afterPath="$PROJECT_DIR$/source/java/test/src/net/nike/util" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test" afterPath="$PROJECT_DIR$/source/java/test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/C_Roy" afterPath="$PROJECT_DIR$/source/java/test/testData/C_Roy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html/assets/images" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/golf-build" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/CDM65" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html" afterPath="$PROJECT_DIR$/source/app/web/help/html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/assets" afterPath="$PROJECT_DIR$/source/help/html/assets" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/images" afterPath="$PROJECT_DIR$/source/app/web/images" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/net" afterPath="$PROJECT_DIR$/source/java/test/src/net" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/net/nike" afterPath="$PROJECT_DIR$/source/java/test/src/net/nike" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html/html" afterPath="$PROJECT_DIR$/source/app/web/help/html/html" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
@@ -62,6 +113,14 @@
     <testPatterns>
       <classPattern testClass="test/$CLASS$Test" testedClass="$CLASS$" />
     </testPatterns>
+  </component>
+  <component name="CodeExplorer">
+    <option name="filters">
+      <list>
+        <LibraryFilter />
+      </list>
+    </option>
+    <option name="showMethodBody" value="true" />
   </component>
   <component name="Commander">
     <leftPanel />
@@ -244,82 +303,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Patternset.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Patternset.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="643" selection-end="643" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="master-build.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/master-build/master-build.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="14" selection-start="1492" selection-end="1492" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="master-build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/master-build/master-build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="625" column="93" selection-start="35674" selection-end="35674" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ivy.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/ivy.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="128" selection-start="2850" selection-end="2850" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ivy-1.4_0.ivy.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="repository.ivyconf.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/ivy/repository.ivyconf.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="30" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="buildivy.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/ivy/buildivy.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="0" selection-start="1176" selection-end="1305" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project-build.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/project-build.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="48" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build/build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="40" selection-start="830" selection-end="830" vertical-scroll-proportion="0.02877698">
+            <state line="16" column="16" selection-start="391" selection-end="391" vertical-scroll-proportion="0.0373444">
               <folding />
             </state>
           </provider>
@@ -498,6 +485,38 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
         </PATH_ELEMENT>
       </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="build" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
     </subPane>
   </component>
   <component name="ProjectReloadState">
@@ -524,7 +543,7 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure PackagesPane="false" Scope="false" Favorites="false" ProjectPane="false" />
+      <showStructure Favorites="false" Scope="false" PackagesPane="false" ProjectPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
@@ -612,6 +631,337 @@
     </targets>
     <general-options create-missing-dirs="true" save-before-copy="true" simulation-mode="false" />
     <log-options fontFamily="Monospaced" fontSize="12" showExcludedPaths="false" showSrcPaths="false" />
+  </component>
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="5/3/09 10:08 PM" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy/ivy-1.4_0.jar</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy/buildivy.xml</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy/repository.ivyconf.xml</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build/master-build.properties</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build/master-build.xml</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build/bin</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build/bin/junction.exe</PATH>
+            <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build/bin/grep.exe</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM5/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM5/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/conf/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/conf/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Import Test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Import Test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testng-config/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testng-config/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/golf-build/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/golf-build/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/html/build/ivy</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Externals" />
+          <option name="myStatusName" value="Externals" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="external" />
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/assets/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM5/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM5/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/conf/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/conf/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Import Test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Import Test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testng-config/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testng-config/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/com/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/golf-build/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/golf-build/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/test/testData/CDM65/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/build/ivy</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/html/build/master-build</PATH>
+          <PATH vcs="svn" revision="53">$PROJECT_DIR$/source/app/web/help/html/html/build/ivy</PATH>
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
   </component>
   <component name="RunManager" selected="Application.UI">
     <tempConfiguration default="false" name="Antfile" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
@@ -1017,32 +1367,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="874" extended-state="0" />
+    <frame x="1036" y="79" width="1280" height="874" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Profile CPU" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17385058" sideWeight="0.66311586" order="0" side_tool="false" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30226365" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12643678" sideWeight="0.59121174" order="3" side_tool="false" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2030825" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Profile Memory" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35681292" sideWeight="0.5" order="4" side_tool="false" x="937" y="189" width="990" height="1292" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28165585" sideWeight="0.6644474" order="0" side_tool="false" />
       <window_info id="Jalopy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671958" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30226365" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3981358" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4144144" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12643678" sideWeight="0.59121174" order="3" side_tool="false" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2030825" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Code explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271523" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34886816" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35681292" sideWeight="0.5" order="4" side_tool="false" x="937" y="189" width="990" height="1292" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288948" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="IG Telemetry" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31824714" sideWeight="0.59121174" order="3" side_tool="false" />
@@ -1051,17 +1404,18 @@
       <window_info id="IdeaSpring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Sequence" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IDEtalk History" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Hibernate Tools" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Library Finder" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Metrics Reloaded" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Lib Finder" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Tasks" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Code explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Tasks" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="IDE talk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Maven" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25278664" sideWeight="0.5" order="2" side_tool="false" />
@@ -1071,12 +1425,10 @@
       <window_info id="Character Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Workspaces" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Properties File Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="SVN Properties" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Profile CPU" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3262317" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Favorites" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IntelliTail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Profile Memory" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32471263" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Compare Directories" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
@@ -1130,7 +1482,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="First build with new bulid scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Package refactoring" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -1153,6 +1505,7 @@
     <MESSAGE value="Added docs, runtime paths for scripts" />
     <MESSAGE value="temp location for Ivy files" />
     <MESSAGE value="First build with new bulid scripts" />
+    <MESSAGE value="Package refactoring" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1268,58 +1621,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/PathSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="22" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="643" selection-end="643" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/master-build/master-build.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="14" selection-start="1492" selection-end="1492" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/master-build/master-build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="625" column="93" selection-start="35674" selection-end="35674" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/ivy.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="128" selection-start="2850" selection-end="2850" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/ivy/ivy-1.4_0.ivy.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/ivy/repository.ivyconf.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="30" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/ivy/buildivy.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="1176" selection-end="1305" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1333,7 +1637,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="40" selection-start="830" selection-end="830" vertical-scroll-proportion="0.02877698">
+        <state line="19" column="40" selection-start="830" selection-end="830" vertical-scroll-proportion="0.028571429">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/PathSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="22" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="16" selection-start="391" selection-end="391" vertical-scroll-proportion="0.0373444">
           <folding />
         </state>
       </provider>
