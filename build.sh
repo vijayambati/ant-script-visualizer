@@ -4,7 +4,7 @@
 #set JAVA_HOME=/usr
 #solaris
 
-JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Home/
+JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/
 
 #set PATH=$PATH:$JAVA_HOME/bin
 export PATH
