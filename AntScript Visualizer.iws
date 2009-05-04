@@ -51,10 +51,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.pdf" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html/assets/images" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets/images" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/assets/images" afterPath="$PROJECT_DIR$/source/help/html/assets/images" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source" afterPath="$PROJECT_DIR$/source" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
@@ -1384,6 +1382,120 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="help" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="html" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="help" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="html" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="html" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="help" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="html" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="assets" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="images" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="build" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
@@ -1504,7 +1616,7 @@
     <log-options fontFamily="Monospaced" fontSize="12" showExcludedPaths="false" showSrcPaths="false" />
   </component>
   <component name="RestoreUpdateTree">
-    <UpdateInfo date="5/3/09 10:29 PM" ActionInfo="_Update">
+    <UpdateInfo date="5/3/09 10:30 PM" ActionInfo="_Update">
       <UpdatedFiles>
         <FILE-GROUP>
           <option name="myUpdateName" value="Updated from server" />
@@ -1554,14 +1666,12 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="SKIPPED" />
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/ivy</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/ivy</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/conf/build/master-build</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/conf/build/ivy</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Merged with conflicts" />
@@ -1611,14 +1721,12 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="external" />
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/ivy</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/ivy</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/conf/build/master-build</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/conf/build/ivy</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="57">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
         </FILE-GROUP>
       </UpdatedFiles>
     </UpdateInfo>
