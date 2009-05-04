@@ -51,55 +51,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web" afterPath="$PROJECT_DIR$/source/app/web" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testng-config" afterPath="$PROJECT_DIR$/source/java/test/testng-config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com" afterPath="$PROJECT_DIR$/source/java/test/src/com" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html/assets" afterPath="$PROJECT_DIR$/source/app/web/help/html/assets" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app" afterPath="$PROJECT_DIR$/source/app" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/Dependency Test" afterPath="$PROJECT_DIR$/source/java/test/testData/Dependency Test" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/CDM5" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.pdf" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test/threebuild.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help" afterPath="$PROJECT_DIR$/source/app/web/help" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java" afterPath="$PROJECT_DIR$/source/java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src" afterPath="$PROJECT_DIR$/source/java/src" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData" afterPath="$PROJECT_DIR$/source/java/test/testData" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src" afterPath="$PROJECT_DIR$/source/java/test/src" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/globalbuild" afterPath="$PROJECT_DIR$/source/java/test/testData/globalbuild" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html" afterPath="$PROJECT_DIR$/source/help/html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/Import Test" afterPath="$PROJECT_DIR$/source/java/test/testData/Import Test" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/html" afterPath="$PROJECT_DIR$/source/help/html/html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com" afterPath="$PROJECT_DIR$/source/java/src/com" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test" afterPath="$PROJECT_DIR$/source/java/test/testData/ENTITY property Test" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help" afterPath="$PROJECT_DIR$/source/help" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events" afterPath="$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test" afterPath="$PROJECT_DIR$/source/java/test" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65/cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/C_Roy" afterPath="$PROJECT_DIR$/source/java/test/testData/C_Roy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer" afterPath="$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/golf-build" afterPath="$PROJECT_DIR$/source/java/test/testData/golf-build" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html" afterPath="$PROJECT_DIR$/source/app/web/help/html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/CDM65" afterPath="$PROJECT_DIR$/source/java/test/testData/CDM65" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/assets" afterPath="$PROJECT_DIR$/source/help/html/assets" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/NAnt examples" afterPath="$PROJECT_DIR$/source/java/test/testData/NAnt examples" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild" afterPath="$PROJECT_DIR$/source/java/test/testData/SimpleBuild" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/images" afterPath="$PROJECT_DIR$/source/app/web/images" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/net" afterPath="$PROJECT_DIR$/source/java/test/src/net" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/app/web/help/html/html" afterPath="$PROJECT_DIR$/source/app/web/help/html/html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/java/test/src/net/nike" afterPath="$PROJECT_DIR$/source/java/test/src/net/nike" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/help/html/assets/images" afterPath="$PROJECT_DIR$/source/help/html/assets/images" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source" afterPath="$PROJECT_DIR$/source" />
     </list>
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
@@ -300,7 +255,7 @@
       <file leaf-file-name="Patternset.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="16" selection-start="391" selection-end="391" vertical-scroll-proportion="0.047879618">
+            <state line="16" column="16" selection-start="391" selection-end="391" vertical-scroll-proportion="0.20111732">
               <folding />
             </state>
           </provider>
@@ -1172,296 +1127,6 @@
           <option name="myItemId" value="net" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nike" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="build" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="net" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nike" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="net" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="antscriptvisualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nodes" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="antscriptvisualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
       </PATH>
       <PATH>
         <PATH_ELEMENT>
@@ -1515,353 +1180,7 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="build" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
           <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="antscriptvisualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="antscriptvisualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nodes" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="antscriptvisualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nodes" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="paths" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="util" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="antscriptvisualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="events" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="nurflugel" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="build" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="com" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="build" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -1931,7 +1250,37 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="build" />
+          <option name="myItemId" value="help" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="html" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="assets" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="images" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -1958,6 +1307,36 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="AntScript Visualizer" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="trunk" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="source" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="app" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="web" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="images" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -1988,100 +1367,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="help" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="web" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="help" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="html" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="web" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="help" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="html" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="html" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="AntScript Visualizer" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="trunk" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="source" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="app" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -2123,11 +1408,11 @@
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="0.11111111" version="1" splitterProportion="0.5">
-      <flattenPackages />
+      <flattenPackages ProjectPane="false" />
       <showMembers />
       <showModules />
       <showLibraryContents />
-      <hideEmptyPackages />
+      <hideEmptyPackages ProjectPane="false" />
       <abbreviatePackageNames />
       <showStructure Favorites="false" Scope="false" PackagesPane="false" ProjectPane="false" />
       <autoscrollToSource />
@@ -2219,7 +1504,7 @@
     <log-options fontFamily="Monospaced" fontSize="12" showExcludedPaths="false" showSrcPaths="false" />
   </component>
   <component name="RestoreUpdateTree">
-    <UpdateInfo date="5/3/09 10:19 PM" ActionInfo="_Update">
+    <UpdateInfo date="5/3/09 10:29 PM" ActionInfo="_Update">
       <UpdatedFiles>
         <FILE-GROUP>
           <option name="myUpdateName" value="Updated from server" />
@@ -2269,112 +1554,14 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="SKIPPED" />
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM5/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM5/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/conf/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/conf/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Import Test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Import Test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testng-config/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testng-config/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/golf-build/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/golf-build/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/html/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Merged with conflicts" />
@@ -2424,112 +1611,14 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="external" />
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWorld/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/ENTITY property Test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/cc/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/assets/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM5/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM5/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/conf/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/conf/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/globalbuild/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/ScriptTask/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/UserTask/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Import Test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Import Test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testng-config/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testng-config/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/Simple/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/nurflugel/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/SimpleBuild/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/events/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/NAnt examples/HelloWindowsForms/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/C_Roy/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/com/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/golf-build/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/golf-build/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/html/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/Dependency Test/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/images/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/help/html/assets/images/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/test/testData/CDM65/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/build/ivy</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/html/build/master-build</PATH>
-          <PATH vcs="svn" revision="55">$PROJECT_DIR$/source/app/web/help/html/html/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/app/web/help/html/assets/images/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/conf/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/build/ivy</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/master-build</PATH>
+          <PATH vcs="svn" revision="56">$PROJECT_DIR$/source/java/test/src/net/nike/util/build/ivy</PATH>
         </FILE-GROUP>
       </UpdatedFiles>
     </UpdateInfo>
@@ -2951,10 +2040,10 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2030825" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Profile Memory" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35681292" sideWeight="0.5" order="4" side_tool="false" x="937" y="189" width="990" height="1292" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32739863" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2743083" sideWeight="0.75074184" order="0" side_tool="false" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46561265" sideWeight="0.75074184" order="0" side_tool="false" />
       <window_info id="Jalopy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671958" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30226365" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
@@ -3223,7 +2312,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/java/src/com/nurflugel/util/antscriptvisualizer/nodes/paths/Patternset.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="16" selection-start="391" selection-end="391" vertical-scroll-proportion="0.047879618">
+        <state line="16" column="16" selection-start="391" selection-end="391" vertical-scroll-proportion="0.20111732">
           <folding />
         </state>
       </provider>
