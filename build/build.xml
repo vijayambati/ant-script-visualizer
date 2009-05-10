@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE  project  [
         ]>
-<project name="ivyBrowser" basedir=".." default="help">
+<project name="antScriptVisualizer" basedir=".." default="help">
 
     <import file="master-build/master-webstart-build.xml"/>
 

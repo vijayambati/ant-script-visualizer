@@ -2,7 +2,7 @@
 <!-- JNLP File for Ant ScriptDependency Visualizer client application -->
 <jnlp
     spec="1.0+"
-    codebase="http://@hostname@/webstart/AntScriptVisualizer"
+    codebase="http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/"
     href="antscriptVisualizer.jnlp">
     <information>
         <title>Ant Script Visualizer</title>
@@ -16,7 +16,7 @@
         <all-permissions/>
     </security>
     <resources>
-        <j2se version="1.5+"  initial-heap-size="64m" max-heap-size="512m"/>
+        <j2se version="1.6+"  initial-heap-size="64m" max-heap-size="512m"/>
         <jar href="antscriptVisualizer.jar"/>
         <jar href="commons-lang.jar"/>
         <jar href="help.jar"/>
