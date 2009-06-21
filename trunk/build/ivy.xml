@@ -7,7 +7,7 @@
       <ivyauthor name="Douglas Bullard" />
       <repository name="asv-repository" url="http://www.nurflugel.com/Home/repository" ivys="true" artifacts="true" />
     </info>
-    <configurations defaultconfmapping="build,dist,test-&gt;default">
+    <configurations defaultconfmapping="build,dist,test->default">
             <conf name="build"   visibility="public"  description="Dependencies only used during the build process." />
             <conf name="dist"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
             <conf name="javadoc" visibility="public"  description="Some libraries provide separate javadoc packages." />
@@ -23,9 +23,9 @@
     <dependencies>
             <dependency org="net.sf.ant-contrib" name="ant-contrib"  rev="1.0b2"        conf="build" />
             <dependency org="org.jdom"           name="jdom"         rev="1.0"          conf="build,dist,test" />
-            <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,source,dist,test" />
-            <dependency org="org.apache"         name="log4j"        rev="1.2.15"       conf="build,source,dist,test" />
-            <dependency org="org.testng"         name="testng"       rev="5.8-jdk1.5"   conf="build,source,test" />
+            <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,dist,test,source" />
+            <dependency org="org.apache"         name="log4j"        rev="1.2.15"       conf="build,dist,test,source" />
+            <dependency org="org.testng"         name="testng"       rev="5.8-jdk1.5"   conf="build,test,source" />
             <dependency org="com.ryangrier.ant"  name="version_tool" rev="1.1.4_fixed"  conf="build,javadoc" />
             <dependency org="com.nurflugel"      name="buildtasks"   rev="1.0-SNAPSHOT" conf="build" />
             <dependency org="org.apache"         name="commons-lang" rev="2.4"          conf="build,dist" />
