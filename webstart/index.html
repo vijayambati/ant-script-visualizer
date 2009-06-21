@@ -16,35 +16,36 @@
 <BODY NOF="(MB=(ZeroMargins, 0, 0, 0, 0), L=(indexLayout, 758, 1114))" STYLE="background-color: rgb(255,255,255); background-image: url('help/html/assets/images/wing1.jpg');" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
     <TABLE CELLPADDING=0 CELLSPACING=0 WIDTH="100%" HEIGHT="100%" VALIGN=TOP>
         <TR>
-            <TD VALIGN=TOP CLASS="TextObject" STYLE="background-image: url('help/html/assets/images/wing1.jpg');"><SCRIPT LANGUAGE="Javascript">
-				  var javawsInstalled = 0;
-				  isIE = "false";
+            <TD VALIGN=TOP CLASS="TextObject" STYLE="background-image: url('help/html/assets/images/wing1.jpg');">
+                <!--<SCRIPT LANGUAGE="Javascript">-->
+				  <!--var javawsInstalled = 0;-->
+				  <!--isIE = "false";-->
 
-				  if (navigator.mimeTypes && navigator.mimeTypes.length) {
-					 x = navigator.mimeTypes['application/x-java-jnlp-file'];
-					 if (x) javawsInstalled = 1;
-				  } else {
-					 isIE = "true";
-				  }
+				  <!--if (navigator.mimeTypes && navigator.mimeTypes.length) {-->
+					 <!--x = navigator.mimeTypes['application/x-java-jnlp-file'];-->
+					 <!--if (x) javawsInstalled = 1;-->
+				  <!--} else {-->
+					 <!--isIE = "true";-->
+				  <!--}-->
 
-				  function insertLink(url, name) {
-				   if (javawsInstalled) {
-						document.write("<a href=" + url + ">"  + name + "</a>");
-					 } else {
-						document.write("Need to install Java Web Start");
-					 }
-				  }
-			  </SCRIPT>
-<SCRIPT LANGUAGE="VBScript">
-				  on error resume next
-				  If isIE = "true" Then
-					If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then
-						  javawsInstalled = 0
-					Else
-						  javawsInstalled = 1
-					End If
-				  End If
-			  </SCRIPT>
+				  <!--function insertLink(url, name) {-->
+				   <!--if (javawsInstalled) {-->
+						<!--document.write("<a href=" + url + ">"  + name + "</a>");-->
+					 <!--} else {-->
+						<!--document.write("Need to install Java Web Start");-->
+					 <!--}-->
+				  <!--}-->
+			  <!--</SCRIPT>-->
+<!--<SCRIPT LANGUAGE="VBScript">-->
+				  <!--on error resume next-->
+				  <!--If isIE = "true" Then-->
+					<!--If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then-->
+						  <!--javawsInstalled = 0-->
+					<!--Else-->
+						  <!--javawsInstalled = 1-->
+					<!--End If-->
+				  <!--End If-->
+			  <!--</SCRIPT>-->
 
                 <P STYLE="text-align: center;"><B><SPAN STYLE="font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, Helvetica, Sans-serif, sans-serif; font-size: medium;"/></B><B><SPAN STYLE="font-size: x-large;">Ant Script Visualizer</SPAN></B></P>
                 <P STYLE="text-align: left;"><B><SPAN STYLE="font-size: medium;">Welcome to the Ant Script Visualizer!<IMG ID="Picture1" HEIGHT=294 WIDTH=433 SRC="help/html/assets/images/build_small.png" VSPACE=0 HSPACE=0 ALIGN="RIGHT" BORDER=0 ALT=""></SPAN></B></P>

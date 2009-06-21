@@ -46,8 +46,9 @@ public class AntFileParser
     public AntFileParser(AntParserUi ui,
                          File[]      filesToParse)
     {
-        this.ui          = ui; // todo cheat adn just add everything except the first file to the list of files to import
-        this.fileToParse = filesToParse[0];
+        this.ui          = ui; // todo cheat and just add everything except the first file to the list of files to import
+
+        fileToParse = filesToParse[0];
 
         for (int i = 1; i < filesToParse.length; i++) {
 
