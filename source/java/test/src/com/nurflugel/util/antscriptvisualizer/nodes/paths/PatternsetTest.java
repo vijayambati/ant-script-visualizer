@@ -18,7 +18,7 @@ public class PatternsetTest
     ///// <include name="**/*.java"/>
     ///// <exclude name="**/*Test*"/>
     // </patternset>
-    @Test
+    @Test(groups="unit")
     public void testSimpleIncludesExcludes()
     {
 
@@ -44,7 +44,7 @@ public class PatternsetTest
 
 
     // <patternset id="non.test.sources" includes ="**/*Dibble*.java,**/*Dabble*.*" excludes="**/*Test*"/>
-    @Test
+    @Test(groups="unit")
     public void testInlinedIncludesExcludes()
     {
 
