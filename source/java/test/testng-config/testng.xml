@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Generated Suite">
-  <test verbose="1" name="cdmII tests" annotations="JDK">
+  <test verbose="1" name="ASV tests" annotations="JDK">
     <groups>
       <run>
         <include name="unit"/>
@@ -8,10 +8,10 @@
       </run>
     </groups>
     <!--<classes>-->
-      <!--<class name="com.nike.admin.SomeTest"/>-->
+      <!--<class name="com.nurflugel.SomeTest"/>-->
     <!--</classes>-->
       <packages>
-            <package name="com.nike.cdm.*" />
+            <package name="com.nurflugel.*" />
       </packages>
   </test>
 
