@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="false" version="4">
+<project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build/build.xml">
@@ -108,7 +108,6 @@
         </ADDITIONAL_INDENT_OPTIONS>
       </value>
     </option>
-    <option name="USE_PER_PROJECT_SETTINGS" value="false" />
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
@@ -128,6 +127,7 @@
       <entry name="?*.jpeg" />
       <entry name="?*.jpg" />
     </wildcardResourcePatterns>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -182,13 +182,39 @@
   </component>
   <component name="IdProvider" IDEtalkID="216B3161182382996D16674464740EC2" />
   <component name="InspectionProjectProfileManager">
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_PROFILE" value="true" />
-    <version value="1.0" />
     <profiles>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
+        <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
+          <option name="TOP_LEVEL_CLASS_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="" />
+            </value>
+          </option>
+          <option name="INNER_CLASS_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="" />
+            </value>
+          </option>
+          <option name="METHOD_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
+            </value>
+          </option>
+          <option name="FIELD_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="" />
+            </value>
+          </option>
+          <option name="IGNORE_DEPRECATED" value="false" />
+          <option name="IGNORE_JAVADOC_PERIOD" value="true" />
+          <option name="myAdditionalJavadocTags" value="" />
+        </inspection_tool>
         <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="groups">
             <value>
@@ -298,6 +324,7 @@
         <inspection_tool class="ConstantDeclaredInInterface" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="ConstantMathCall" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="ConstantNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="onlyCheckImmutables" value="false" />
           <option name="m_regex" value="[A-Z_]*" />
           <option name="m_minLength" value="2" />
           <option name="m_maxLength" value="64" />
@@ -647,9 +674,6 @@
         <inspection_tool class="SamePackageImport" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="SerialPersistentFieldsWithWrongSignature" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="SerialVersionUIDNotStaticFinal" enabled="true" level="ERROR" enabled_by_default="true" />
-        <inspection_tool class="SerializableHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true">
-          <option name="superClassString" value="java.awt.Component" />
-        </inspection_tool>
         <inspection_tool class="SerializableWithUnconstructableAncestor" enabled="true" level="ERROR" enabled_by_default="true" />
         <inspection_tool class="SetReplaceableByEnumSet" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="SetupCallsSuperSetup" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -682,6 +706,7 @@
         <inspection_tool class="StaticNonFinalField" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="StaticSuite" enabled="true" level="ERROR" enabled_by_default="true" />
         <inspection_tool class="StaticVariableNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="checkMutableFinals" value="false" />
           <option name="m_regex" value="[a-z][A-Za-z]*" />
           <option name="m_minLength" value="3" />
           <option name="m_maxLength" value="64" />
@@ -810,10 +835,13 @@
         </inspection_tool>
       </profile>
     </profiles>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TYPO" />
-      <item index="1" class="java.lang.String" itemvalue="SERVER PROBLEM" />
-      <item index="2" class="java.lang.String" itemvalue="INFO" />
+      <item index="0" class="java.lang.String" itemvalue="SERVER PROBLEM" />
+      <item index="1" class="java.lang.String" itemvalue="INFO" />
+      <item index="2" class="java.lang.String" itemvalue="TYPO" />
       <item index="3" class="java.lang.String" itemvalue="WARNING" />
       <item index="4" class="java.lang.String" itemvalue="ERROR" />
     </list>
@@ -1109,8 +1137,5 @@
     <option name="INSTRUMENT_CLASSES" value="false" />
     <option name="DEFAULT_LAYOUT_MANAGER" value="GridBagLayout" />
   </component>
-  <UsedPathMacros>
-    <macro name="TEMPLATE" />
-  </UsedPathMacros>
 </project>
 

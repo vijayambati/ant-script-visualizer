@@ -3,11 +3,9 @@ package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 import static com.nurflugel.util.antscriptvisualizer.Constants.INCLUDESFILE;
 import org.jdom.Attribute;
 import org.jdom.Element;
-
 import java.io.File;
 
 // A Patternset can be like this:
-
 
 // <patternset id="non.test.sources">
 ///// <include name="**/*.java"/>
@@ -19,50 +17,46 @@ import java.io.File;
 // <patternset id="non.test.sources" includes ="**/*Dibble*.java,**/*Dabble*.*" excludes="**/*Test*"/>
 public class Patternset extends PathSet
 {
+  private File includesFile;
 
-    private File includesFile;
+  public Patternset(Element element)
+  {
+    super(element);
 
-    public Patternset(Element element)
+    Attribute attribute = element.getAttribute("id");
+
+    id = attribute.getValue();
+    getIncludesFile();
+    getExcludesFile();
+    getIncludes();
+    getExcludes();
+  }
+
+  private void getIncludesFile()
+  {
+    Attribute attribute = element.getAttribute(INCLUDESFILE);
+
+    if (attribute != null)
     {
-        super(element);
+      String fileName = attribute.getValue();
+      File   file     = new File(fileName);
 
-        Attribute attribute = element.getAttribute("id");
-        id = attribute.getValue();
-        getIncludesFile();
-        getExcludesFile();
-        getIncludes();
-        getExcludes();
+      // todo read in from file
+      System.out.println("This function not yet implemented");
     }
+  }
 
-    private void getIncludesFile()
+  private void getExcludesFile()
+  {
+    Attribute attribute = element.getAttribute(INCLUDESFILE);
+
+    if (attribute != null)
     {
-        Attribute attribute = element.getAttribute(INCLUDESFILE);
+      String fileName = attribute.getValue();
+      File   file     = new File(fileName);
 
-        if (attribute != null) {
-            String fileName = attribute.getValue();
-            File   file     = new File(fileName);
-
-            // todo read in from file
-            System.out.println("This function not yet implemented");
-
-        }
-
+      // todo read in from file
+      System.out.println("This function not yet implemented");
     }
-
-    private void getExcludesFile()
-    {
-        Attribute attribute = element.getAttribute(INCLUDESFILE);
-
-        if (attribute != null) {
-            String fileName = attribute.getValue();
-            File   file     = new File(fileName);
-
-            // todo read in from file
-            System.out.println("This function not yet implemented");
-
-        }
-
-    }
-
-
+  }
 }

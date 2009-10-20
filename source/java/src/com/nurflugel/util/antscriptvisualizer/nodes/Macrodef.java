@@ -5,52 +5,46 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import org.jdom.Element;
 import org.jdom.filter.ElementFilter;
-
 import java.util.Iterator;
 import java.util.List;
-
 
 /** Representation of an Ant macrodef. */
 public class Macrodef extends NodeWithDependancies
 {
+  /**  */
+  public Macrodef(String name, Antfile antfile, Element element)
+  {
+    super(name, antfile);
+    shape        = "ellipse";
+    color        = "red";
+    this.element = element;
+  }
 
-    /**  */
-    public Macrodef(String  name,
-                    Antfile antfile,
-                    Element element)
+  @Override
+  protected void setNodeType()
+  {
+    nodeType = NodeType.MACRODEF;
+  }
+
+  public void parseForDependencies()
+  {
+    super.parseAntCalls(element);
+  }
+
+  /**
+   * Parse the targets in this buildFile for any usages of the localTaskdefs in the array. If found, add them to the depends for the target they're
+   * used in. todo how to deal with parallel and sequence branches
+   */
+  public void parseForTaskdefUsage(List<Taskdef> taskdefs)
+  {
+    for (Taskdef taskdef : taskdefs)
     {
-        super(name, antfile);
-        shape        = "ellipse";
-        color        = "red";
-        this.element = element;
+      Iterator taskdefElements = element.getDescendants(new ElementFilter(taskdef.getName()));
+
+      if (taskdefElements.hasNext())  // we found one!
+      {
+        addDependency(taskdef);
+      }
     }
-
-
-    @Override
-    protected void setNodeType()
-    {
-        nodeType = NodeType.MACRODEF;
-    }
-
-    public void parseForDependencies()
-    {
-        super.parseAntCalls(element);
-    }
-
-    /**
-     * Parse the targets in this buildFile for any usages of the localTaskdefs in the array. If found, add them to the depends for the target they're
-     * used in. todo how to deal with parallel and sequence branches
-     */
-    public void parseForTaskdefUsage(List<Taskdef> taskdefs)
-    {
-
-        for (Taskdef taskdef : taskdefs) {
-            Iterator taskdefElements = element.getDescendants(new ElementFilter(taskdef.getName()));
-
-            if (taskdefElements.hasNext()) // we found one!
-            {
-                addDependency(taskdef);
-            }
-        }
-    }
+  }
 }

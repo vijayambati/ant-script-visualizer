@@ -5,9 +5,7 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-
 import java.util.List;
-
 
 /**
  * Representation of a taskdef in an Ant build script.
@@ -33,113 +31,119 @@ import java.util.List;
  */
 public class Taskdef extends Node
 {
-    public Taskdef(Element element,
-                   Antfile antfile)
+  public Taskdef(Element element, Antfile antfile)
+  {
+    shape        = "hexagon";
+    color        = "green";
+    this.element = element;
+
+    Attribute fileAttribute = element.getAttribute("file");
+    Attribute nameAttribute = element.getAttribute("name");
+    Attribute resourceAttribute = element.getAttribute("resource");
+
+    if (fileAttribute != null)
     {
-        shape        = "hexagon";
-        color        = "green";
-        this.element = element;
+      getTaskdefFromFile(fileAttribute);
+    }
+    else if (nameAttribute != null)
+    {
+      getTaskdefFromLine(nameAttribute);
+    }
+    else if (resourceAttribute != null)
+    {
+      getTaskdefFromResource(element);
+    }
+    else
+    {
+      name = (resourceAttribute != null) ? resourceAttribute.getValue()
+                                         : "UnidentifiedTask";
+    }
 
-        Attribute fileAttribute     = element.getAttribute("file");
-        Attribute nameAttribute     = element.getAttribute("name");
-        Attribute resourceAttribute = element.getAttribute("resource");
+    setAntfile(antfile);
+  }
 
-        if (fileAttribute != null) {
-            getTaskdefFromFile(fileAttribute);
-        } else if (nameAttribute != null) {
-            getTaskdefFromLine(nameAttribute);
-        } else if (resourceAttribute != null) {
-            getTaskdefFromResource(element);
-        } else {
-            name = (resourceAttribute != null)
-                ? resourceAttribute.getValue()
-                : "UnidentifiedTask";
+  /** Case 5: <taskdef file="blash.properties"/> */
+  private void getTaskdefFromFile(Attribute fileAttribute)
+  {
+    // Todo
+  }
+
+  /** Case 1: <taskdef name="versionupdate" classname="com.ryangrier.ant.VersionUpdate" classpath="${basedir}/lib/version_tool.jar"/> */
+  private void getTaskdefFromLine(Attribute nameAttribute)
+  {
+    name = nameAttribute.getValue();
+  }
+
+  /**  */
+  private void getTaskdefFromResource(Element theElement)
+  {
+    Attribute resourceAttribute = theElement.getAttribute("resource");
+
+    if (resourceAttribute != null)
+    {
+      Attribute classpathrefAttribute = theElement.getAttribute("classpathref");
+
+      if (classpathrefAttribute != null)
+      {
+        getTaskdefFromClasspathref(theElement);
+      }
+      else
+      {
+        Element child = theElement.getChild("classpath");
+
+        if (child != null)
+        {
+          getTaskdefFromClasspath(resourceAttribute, theElement, child);
         }
-
-        setAntfile(antfile);
+      }
     }
+  }
 
-    /** Case 5: <taskdef file="blash.properties"/> */
-    private void getTaskdefFromFile(Attribute fileAttribute)
+  /**  */
+  private void getTaskdefFromClasspath(Attribute resourceAttribute, Element taskdefElement, Element classpathElement)
+  {
+    if (resourceAttribute != null)
     {
-        // Todo
+      List      pathElements       = classpathElement.getChildren("pathelement");
+      Attribute classpathAttribute = classpathElement.getAttribute("classpath");
+
+      if (!pathElements.isEmpty())
+      {
+        getTaskdefFromClasspathElements(resourceAttribute, taskdefElement, classpathElement, pathElements);
+      }
+      else if (classpathAttribute != null)
+      {
+        getTaskdefFromClasspathAttribute(resourceAttribute, taskdefElement, classpathElement, classpathAttribute);
+      }
     }
+  }
 
-    /** Case 1: <taskdef name="versionupdate" classname="com.ryangrier.ant.VersionUpdate" classpath="${basedir}/lib/version_tool.jar"/> */
-    private void getTaskdefFromLine(Attribute nameAttribute)
-    {
-        name = nameAttribute.getValue();
-    }
+  /** Case 2: <taskdef file="blash.properties"/> */
+  private void getTaskdefFromClasspathAttribute(Attribute resourceAttribute, Element taskdefElement, Element classpathElement,
+                                                Attribute classpathAttribute)
+  {
+    // Todo
+  }
 
-    /**  */
-    private void getTaskdefFromResource(Element theElement)
-    {
-        Attribute resourceAttribute = theElement.getAttribute("resource");
+  /**
+   * handles case 3: <code><taskdef resource="cactus.tasks"> <classpath> <pathelement location="${lib.testing}/cactus-1.5.jar"/> <pathelement
+   * location="${lib.testing}/cactus-ant-1.5.jar"/> <pathelement location="${lib.commons}/commons-httpclient.jar"/> <pathelement
+   * location="${lib.commons}/commons-logging.jar"/> <pathelement location="${lib}/aspectjrt-1.1.1.jar"/> </classpath> </taskdef></code>
+   */
+  private void getTaskdefFromClasspathElements(Attribute resourceAttribute, Element taskdefElement, Element classpathElement, List pathElements)
+  {
+    String name1 = resourceAttribute.getName();
+  }
 
-        if (resourceAttribute != null) {
-            Attribute classpathrefAttribute = theElement.getAttribute("classpathref");
+  /** Handles parsing case 4: <taskdef resource="emma_ant.properties" classpathref="emma.path"/> */
+  private void getTaskdefFromClasspathref(Element element)
+  {
+    // Todo
+  }
 
-            if (classpathrefAttribute != null) {
-                getTaskdefFromClasspathref(theElement);
-            } else {
-                Element child = theElement.getChild("classpath");
-
-                if (child != null) {
-                    getTaskdefFromClasspath(resourceAttribute, theElement, child);
-                }
-            }
-        }
-    }
-
-    /**  */
-    private void getTaskdefFromClasspath(Attribute resourceAttribute,
-                                         Element   taskdefElement,
-                                         Element   classpathElement)
-    {
-
-        if (resourceAttribute != null) {
-            List      pathElements       = classpathElement.getChildren("pathelement");
-            Attribute classpathAttribute = classpathElement.getAttribute("classpath");
-
-            if (!pathElements.isEmpty()) {
-                getTaskdefFromClasspathElements(resourceAttribute, taskdefElement, classpathElement, pathElements);
-            } else if (classpathAttribute != null) {
-                getTaskdefFromClasspathAttribute(resourceAttribute, taskdefElement, classpathElement, classpathAttribute);
-            }
-        }
-    }
-
-    /** Case 2: <taskdef file="blash.properties"/> */
-    private void getTaskdefFromClasspathAttribute(Attribute resourceAttribute,
-                                                  Element   taskdefElement,
-                                                  Element   classpathElement,
-                                                  Attribute classpathAttribute)
-    {
-        // Todo
-    }
-
-    /**
-     * handles case 3: <code><taskdef resource="cactus.tasks"> <classpath> <pathelement location="${lib.testing}/cactus-1.5.jar"/> <pathelement
-     * location="${lib.testing}/cactus-ant-1.5.jar"/> <pathelement location="${lib.commons}/commons-httpclient.jar"/> <pathelement
-     * location="${lib.commons}/commons-logging.jar"/> <pathelement location="${lib}/aspectjrt-1.1.1.jar"/> </classpath> </taskdef></code>
-     */
-    private void getTaskdefFromClasspathElements(Attribute resourceAttribute,
-                                                 Element   taskdefElement,
-                                                 Element   classpathElement,
-                                                 List      pathElements)
-    {
-        String name1 = resourceAttribute.getName();
-    }
-
-    /** Handles parsing case 4: <taskdef resource="emma_ant.properties" classpathref="emma.path"/> */
-    private void getTaskdefFromClasspathref(Element element)
-    {
-        // Todo
-    }
-
-    @Override
-    protected void setNodeType()
-    {
-        nodeType = NodeType.TASKDEF;
-    }
+  @Override
+  protected void setNodeType()
+  {
+    nodeType = NodeType.TASKDEF;
+  }
 }

@@ -13,35 +13,38 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
  */
 public class Dependency extends Target
 {
-    private boolean resolved;
+  private boolean resolved;
 
-    public Dependency(String  name,
-                      Antfile antfile)
-    {
-        super(name, antfile);
-    }
+  public Dependency(String name, Antfile antfile)
+  {
+    super(name, antfile);
+  }
 
-    public Dependency(String  name,
-                      String  description,
-                      Antfile antfile)
-    {
-        super(name, description, antfile);
-    }
+  public Dependency(String name, String description, Antfile antfile)
+  {
+    super(name, description, antfile);
+  }
 
-    @Override
-    @SuppressWarnings({ "RefusedBequest" })
-    public boolean isDependency() { return true; }
+  @Override
+  @SuppressWarnings({ "RefusedBequest" })
+  public boolean isDependency()
+  {
+    return true;
+  }
 
-    /** Has this dependency been resolved? */
-    public boolean isResolved() { return resolved; }
+  /** Has this dependency been resolved? */
+  public boolean isResolved()
+  {
+    return resolved;
+  }
 
-    public void setResolved(boolean resolved)
-    {
-        this.resolved = resolved;
-    }
+  public void setResolved(boolean resolved)
+  {
+    this.resolved = resolved;
+  }
 
-    public void setBuildFile(Antfile antfile)
-    {
-        buildFile = antfile;
-    }
+  public void setBuildFile(Antfile antfile)
+  {
+    buildFile = antfile;
+  }
 }
