@@ -4,7 +4,6 @@ import com.nurflugel.util.antscriptvisualizer.nodes.NodeType;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-
 // <classpath>
 // <pathelement path="${classpath}"/>
 // <pathelement location="lib/helper.jar"/>
@@ -30,19 +29,19 @@ import org.jdom.Element;
  */
 public class Classpath extends Path
 {
-    public Classpath(Element element)
-    {
-        super(element);
-        shape = "rectangle";
-        color = "blue";
+  public Classpath(Element element)
+  {
+    super(element);
+    shape = "rectangle";
+    color = "blue";
 
-        Attribute attribute = element.getAttribute("id");
-        String    id        = attribute.getValue();
-    }
+    Attribute attribute = element.getAttribute("id");
+    String    id = attribute.getValue();
+  }
 
-    @Override
-    protected void setNodeType()
-    {
-        nodeType = NodeType.CLASSPATH;
-    }
+  @Override
+  protected void setNodeType()
+  {
+    nodeType = NodeType.CLASSPATH;
+  }
 }

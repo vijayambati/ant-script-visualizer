@@ -5,61 +5,54 @@ import org.jdom.Element;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
-
 import java.io.File;
-
 
 /** Patternset Tester. */
 public class PatternsetTest
 {
+  // <patternset id="non.test.sources">
+  ///// <include name="**/*.java"/>
+  ///// <exclude name="**/*Test*"/>
+  // </patternset>
+  @Test(groups = "unit")
+  public void testSimpleIncludesExcludes()
+  {
+    Element element = new Element(PATTERNSET);
 
+    element.setAttribute(ID, "non.test.sources");
 
-    // <patternset id="non.test.sources">
-    ///// <include name="**/*.java"/>
-    ///// <exclude name="**/*Test*"/>
-    // </patternset>
-    @Test(groups="unit")
-    public void testSimpleIncludesExcludes()
-    {
+    Element includeElement = new Element(INCLUDE);
 
-        Element element = new Element(PATTERNSET);
-        element.setAttribute(ID, "non.test.sources");
+    includeElement.setAttribute(NAME, "**/*.java");
+    element.addContent(includeElement);
 
-        Element includeElement = new Element(INCLUDE);
-        includeElement.setAttribute(NAME, "**/*.java");
-        element.addContent(includeElement);
+    Element excludeElement = new Element(EXCLUDE);
 
-        Element excludeElement = new Element(EXCLUDE);
-        excludeElement.setAttribute(NAME, "**/*Test*");
-        element.addContent(excludeElement);
+    excludeElement.setAttribute(NAME, "**/*Test*");
+    element.addContent(excludeElement);
 
+    Patternset patternset = new Patternset(element);
 
-        Patternset patternset = new Patternset(element);
+    assertTrue(patternset.isFileOk(new File("Fibble.java")));
+    assertFalse(patternset.isFileOk(new File("Fibble.xml")));
+    assertFalse(patternset.isFileOk(new File("FibbleTest.java")));
+  }
 
-        assertTrue(patternset.isFileOk(new File("Fibble.java")));
-        assertFalse(patternset.isFileOk(new File("Fibble.xml")));
-        assertFalse(patternset.isFileOk(new File("FibbleTest.java")));
+  // <patternset id="non.test.sources" includes ="**/*Dibble*.java,**/*Dabble*.*" excludes="**/*Test*"/>
+  @Test(groups = "unit")
+  public void testInlinedIncludesExcludes()
+  {
+    Element element = new Element(PATTERNSET);
 
-    }
+    element.setAttribute(ID, "non.test.sources");
+    element.setAttribute(INCLUDES, "**/*Dibble*.java,**/*Dabble*.java");
+    element.setAttribute(EXCLUDES, "**/*Test*");
 
+    Patternset patternset = new Patternset(element);
 
-    // <patternset id="non.test.sources" includes ="**/*Dibble*.java,**/*Dabble*.*" excludes="**/*Test*"/>
-    @Test(groups="unit")
-    public void testInlinedIncludesExcludes()
-    {
-
-        Element element = new Element(PATTERNSET);
-        element.setAttribute(ID, "non.test.sources");
-        element.setAttribute(INCLUDES, "**/*Dibble*.java,**/*Dabble*.java");
-        element.setAttribute(EXCLUDES, "**/*Test*");
-
-        Patternset patternset = new Patternset(element);
-
-        assertTrue(patternset.isFileOk(new File("Dibble.java")));
-        assertTrue(patternset.isFileOk(new File("DibbleBibble.java")));
-        assertFalse(patternset.isFileOk(new File("Dabble.xml")));
-        assertFalse(patternset.isFileOk(new File("DibbleTest.java")));
-
-    }
-
+    assertTrue(patternset.isFileOk(new File("Dibble.java")));
+    assertTrue(patternset.isFileOk(new File("DibbleBibble.java")));
+    assertFalse(patternset.isFileOk(new File("Dabble.xml")));
+    assertFalse(patternset.isFileOk(new File("DibbleTest.java")));
+  }
 }

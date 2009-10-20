@@ -2,11 +2,9 @@ package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /** Representation of an Ant file set. */
 
@@ -37,54 +35,60 @@ import java.util.List;
 
 public class Fileset extends PathSet
 {
-    private File       dir;
-    private File       file;
-    private Patternset patternset;
+  private File       dir;
+  private File       file;
+  private Patternset patternset;
 
-    public Fileset(Element element)
+  public Fileset(Element element)
+  {
+    super(element);
+
+    Attribute attribute = element.getAttribute("id");
+
+    id   = attribute.getValue();
+    dir  = getFileOrDir("dir");
+    file = getFileOrDir("file");
+
+    getIncludes();
+    getExcludes();
+  }
+
+  /** Gets either hte file or dir for the attribute name. */
+  private File getFileOrDir(String attributeName)
+  {
+    File      theFile   = null;
+    Attribute attribute = element.getAttribute(attributeName);
+
+    if (attribute != null)
     {
-        super(element);
-
-        Attribute attribute = element.getAttribute("id");
-        id   = attribute.getValue();
-        dir  = getFileOrDir("dir");
-        file = getFileOrDir("file");
-
-        getIncludes();
-        getExcludes();
+      theFile = new File(attribute.getValue());
     }
 
-    /** Gets either hte file or dir for the attribute name. */
-    private File getFileOrDir(String attributeName)
-    {
-        File      theFile   = null;
-        Attribute attribute = element.getAttribute(attributeName);
+    return theFile;
+  }
 
-        if (attribute != null) {
-            theFile = new File(attribute.getValue());
+  /** Get the file or list of files contained by this file set. */
+  public List<File> getFiles()
+  {
+    List<File> files = new ArrayList<File>();
+
+    if (file != null)
+    {
+      files.add(file);
+    }
+    else
+    {
+      File[] children = dir.listFiles();
+
+      for (File child : children)
+      {
+        if (isFileOk(child))
+        {
+          files.add(child);
         }
-
-        return theFile;
+      }
     }
 
-    /** Get the file or list of files contained by this file set. */
-    public List<File> getFiles()
-    {
-        List<File> files = new ArrayList<File>();
-
-        if (file != null) {
-            files.add(file);
-        } else {
-            File[] children = dir.listFiles();
-
-            for (File child : children) {
-
-                if (isFileOk(child)) {
-                    files.add(child);
-                }
-            }
-        }
-
-        return files;
-    }
+    return files;
+  }
 }
