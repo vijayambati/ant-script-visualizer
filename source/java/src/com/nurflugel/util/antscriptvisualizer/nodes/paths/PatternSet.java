@@ -5,7 +5,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import java.io.File;
 
-// A PatternSett can be like this:
+// A PatternSet can be like this:
 
 // <patternset id="non.test.sources">
 ///// <include name="**/*.java"/>
@@ -15,11 +15,11 @@ import java.io.File;
 // or like this:
 ///
 // <patternset id="non.test.sources" includes ="**/*Dibble*.java,**/*Dabble*.*" excludes="**/*Test*"/>
-public class PatternSett extends PathSet
+public class PatternSet extends PathSet
 {
   private File includesFile;
 
-  public PatternSett(Element element)
+  public PatternSet(Element element)
   {
     super(element);
 
