@@ -15,8 +15,8 @@ import java.util.*;
 @SuppressWarnings({ "CallToRuntimeExec", "AssignmentToCollectionOrArrayFieldFromParameter" })
 public class OutputHandler
 {
-  public static final Logger logger = LogFactory.getLogger(OutputHandler.class);
-  public static final String NEW_LINE = "\n";
+  public static final Logger    logger                = LogFactory.getLogger(OutputHandler.class);
+  public static final String    NEW_LINE              = "\n";
   protected static final String CLOSING_LINE_DOTGRAPH = "}";
   protected static final String OPENING_LINE_DOTGRAPH = "digraph G {\nnode [shape=box,fontname=\"Arial\",fontsize=\"10\"];\nedge [fontname=\"Arial\",fontsize=\"8\"];\nrankdir=RL;\n\n";
   protected static final String OPENING_LINE_SUBGRAPH = "subgraph ";

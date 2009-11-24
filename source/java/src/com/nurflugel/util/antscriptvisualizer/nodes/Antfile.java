@@ -363,11 +363,11 @@ public class Antfile
 
     while (descendants.hasNext())
     {
-      Element targetElement = (Element) descendants.next();
-      String targetName = targetElement.getAttribute("name").getValue().trim();
+      Element   targetElement      = (Element) descendants.next();
+      String    targetName         = targetElement.getAttribute("name").getValue().trim();
       Attribute descriptionElement = targetElement.getAttribute("description");
-      String description = (descriptionElement != null) ? descriptionElement.getValue().trim()
-                                                        : "";
+      String    description        = (descriptionElement != null) ? descriptionElement.getValue().trim()
+                                                                  : "";
       Target target = new Target(targetName, description, this, targetElement);  // these could be in an imported ant buildFile -
                                                                                  // need to find them, maybe later
 

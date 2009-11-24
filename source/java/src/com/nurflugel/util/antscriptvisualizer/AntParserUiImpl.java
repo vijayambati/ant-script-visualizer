@@ -97,21 +97,25 @@ public class AntParserUiImpl implements AntParserUi
   /**
    * Get the dot executable path if it already exists in Preferences, or is intalled. If not easily findable, as the user where the hell he put it.
    */
+  @Override
   public String getDotExecutablePath()
   {
     return dotExecutablePath;
   }
 
+  @Override
   public boolean showLegend()
   {
     return showLegendCheckBox.isSelected();
   }
 
+  @Override
   public JFrame getFrame()
   {
     return frame;
   }
 
+  @Override
   public OutputFormat getOutputFormat()
   {
     if (svgRadioButton.isSelected())
@@ -127,51 +131,61 @@ public class AntParserUiImpl implements AntParserUi
     return PNG;
   }
 
+  @Override
   public boolean shouldConcentrate()
   {
     return concentrateCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldDeleteDotFilesOnExit()
   {
     return deleteDotFilesCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldGroupByBuildfiles()
   {
     return groupNodesByBuildfileCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldIncludeImportedFiles()
   {
     return includeImportedFilesCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldShowAntcalls()
   {
     return showAntcallsCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldShowLeftToRight()
   {
     return leftToRightRadioButton.isSelected();
   }
 
+  @Override
   public boolean shouldShowMacrodefs()
   {
     return showMacrodefsCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldShowTargets()
   {
     return showTargetsCheckbox.isSelected();
   }
 
+  @Override
   public boolean shouldShowTaskdefs()
   {
     return showTaskdefsCheckBox.isSelected();
   }
 
+  @Override
   public boolean shouldUseAbsolutePaths()
   {
     return showFilePathsCheckBox.isSelected();
@@ -181,6 +195,7 @@ public class AntParserUiImpl implements AntParserUi
   {
     frame.addWindowListener(new WindowAdapter()
       {
+        @Override
         public void windowClosing(WindowEvent e)
         {
           doQuitAction();
@@ -222,8 +237,8 @@ public class AntParserUiImpl implements AntParserUi
 
       helpSet = new HelpSet(null, hsURL);
     }
-    catch (Exception ee)
-    {  // Say what the exception really is
+    catch (Exception ee)  // Say what the exception really is
+    {
       LOGGER.error("HelpSet " + ee.getMessage());
       LOGGER.error("HelpSet " + HELP_HS + " not found");
 

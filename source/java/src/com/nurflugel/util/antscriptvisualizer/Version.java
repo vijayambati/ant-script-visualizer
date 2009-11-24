@@ -55,6 +55,7 @@ public class Version implements Comparable
     return point;
   }
 
+  @Override
   public int compareTo(Object object)
   {
     Version otherVersion = (Version) object;
@@ -96,6 +97,7 @@ public class Version implements Comparable
     return 0;
   }
 
+  @Override
   public String toString()
   {
     return major + "." + minor + "." + point;

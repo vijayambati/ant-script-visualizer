@@ -80,10 +80,10 @@ public class Property
       try
       {
         String fileName = Utility.expandPropertyName(fileAttribute.getValue(), properties);
-        File file1 = new File(antfile.getBuildFile().getParent(), fileName);
-        File file2 = new File(fileName);
-        File file = file1.exists() ? file1
-                                   : file2;  // lame hack - replace basedir with . later on to fix???
+        File   file1    = new File(antfile.getBuildFile().getParent(), fileName);
+        File   file2    = new File(fileName);
+        File   file     = file1.exists() ? file1
+                                         : file2;  // lame hack - replace basedir with . later on to fix???
 
         if (file.exists())
         {
@@ -101,8 +101,8 @@ public class Property
         logger.debug("done with reading file " + fileName);
       }
       catch (FileNotFoundException e)
-      {                                      // logger.error("Error finding file ", e);
-                                             // capture the event
+      {                                            // logger.error("Error finding file ", e);
+                                                   // capture the event
       }
       catch (IOException e)
       {
@@ -134,7 +134,7 @@ public class Property
           logger.debug("Yeah, yeah", e);
         }
       }
-    }                                        // end if
+    }                                              // end if
   }
 
   /** Processes the line looking for properies. */
@@ -146,9 +146,9 @@ public class Property
     {
       String[] strings = line.split("=");
 
-      String key = strings[0];
-      String keyValue = (strings.length > 1) ? strings[1]
-                                             : "";  // default to empty if no value defined.
+      String   key     = strings[0];
+      String   keyValue = (strings.length > 1) ? strings[1]
+                                               : "";  // default to empty if no value defined.
 
       String originalValue = keyValue;
 
@@ -158,7 +158,7 @@ public class Property
 
       properties.put(property.getName(), property);
 
-      if (keyValue.contains("${"))                  // still has unresolved properties (lines out of order)
+      if (keyValue.contains("${"))                    // still has unresolved properties (lines out of order)
       {
         logger.debug("Adding unresolved " + keyValue + " to be resolved later");
         unresolvedProperties.add(property);

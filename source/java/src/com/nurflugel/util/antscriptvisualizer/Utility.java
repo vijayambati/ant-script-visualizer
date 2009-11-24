@@ -23,11 +23,11 @@ public class Utility
     {
       while (openIndex > -1)
       {
-        int endIndex = modifiedName.indexOf("}");
-        String beginning = modifiedName.substring(0, openIndex);
+        int    endIndex     = modifiedName.indexOf("}");
+        String beginning    = modifiedName.substring(0, openIndex);
         String propertyName = modifiedName.substring(openIndex + 2, endIndex);
-        String end = (endIndex <= modifiedName.length()) ? modifiedName.substring(endIndex + 1)
-                                                         : "";
+        String end          = (endIndex <= modifiedName.length()) ? modifiedName.substring(endIndex + 1)
+                                                                  : "";
         Property property = (Property) properties.get(propertyName);
 
         if (property != null)
