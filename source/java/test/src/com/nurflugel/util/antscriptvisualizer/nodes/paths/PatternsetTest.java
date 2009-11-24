@@ -7,7 +7,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
 import java.io.File;
 
-/** Patternset Tester. */
+/** PatternSett Tester. */
 public class PatternsetTest
 {
   // <patternset id="non.test.sources">
@@ -31,11 +31,11 @@ public class PatternsetTest
     excludeElement.setAttribute(NAME, "**/*Test*");
     element.addContent(excludeElement);
 
-    Patternset patternset = new Patternset(element);
+    PatternSett patternSett = new PatternSett(element);
 
-    assertTrue(patternset.isFileOk(new File("Fibble.java")));
-    assertFalse(patternset.isFileOk(new File("Fibble.xml")));
-    assertFalse(patternset.isFileOk(new File("FibbleTest.java")));
+    assertTrue(patternSett.isFileOk(new File("Fibble.java")));
+    assertFalse(patternSett.isFileOk(new File("Fibble.xml")));
+    assertFalse(patternSett.isFileOk(new File("FibbleTest.java")));
   }
 
   // <patternset id="non.test.sources" includes ="**/*Dibble*.java,**/*Dabble*.*" excludes="**/*Test*"/>
@@ -48,11 +48,11 @@ public class PatternsetTest
     element.setAttribute(INCLUDES, "**/*Dibble*.java,**/*Dabble*.java");
     element.setAttribute(EXCLUDES, "**/*Test*");
 
-    Patternset patternset = new Patternset(element);
+    PatternSett patternSett = new PatternSett(element);
 
-    assertTrue(patternset.isFileOk(new File("Dibble.java")));
-    assertTrue(patternset.isFileOk(new File("DibbleBibble.java")));
-    assertFalse(patternset.isFileOk(new File("Dabble.xml")));
-    assertFalse(patternset.isFileOk(new File("DibbleTest.java")));
+    assertTrue(patternSett.isFileOk(new File("Dibble.java")));
+    assertTrue(patternSett.isFileOk(new File("DibbleBibble.java")));
+    assertFalse(patternSett.isFileOk(new File("Dabble.xml")));
+    assertFalse(patternSett.isFileOk(new File("DibbleTest.java")));
   }
 }

@@ -18,10 +18,10 @@ import java.util.List;
 //
 // case 2
 // <fileset dir="${server.src}" casesensitive="yes">
-////  <patternset id="non.test.sources">
+////  <patternSett id="non.test.sources">
 //////    <include name="**/*.java"/>
 //////    <exclude name="**/*Test*"/>
-// // </patternset>
+// // </patternSett>
 // </fileset>
 //
 // also
@@ -37,9 +37,9 @@ public class Fileset extends PathSet
 {
   private File       dir;
   private File       file;
-  private Patternset patternset;
+  private PatternSett patternSett;
 
-  public Fileset(Element element)
+    public Fileset(Element element)
   {
     super(element);
 

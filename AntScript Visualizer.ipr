@@ -111,7 +111,6 @@
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <option name="DEPLOY_AFTER_MAKE" value="0" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -127,7 +126,7 @@
       <entry name="?*.jpeg" />
       <entry name="?*.jpg" />
     </wildcardResourcePatterns>
-    <annotationProcessing enabled="false" useClasspath="true" />
+    <annotationProcessing enabled="false" useClasspath="true" generatedDirName="generated" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -685,9 +684,9 @@
         </inspection_tool>
         <inspection_tool class="SleepWhileHoldingLock" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="SocketResource" enabled="true" level="WARNING" enabled_by_default="true" />
-        <inspection_tool class="SqlIdentifierInspection" level="WARNING" enabled="true" />
-        <inspection_tool class="SqlResolveInspection" level="WARNING" enabled="true" />
-        <inspection_tool class="SqlTypeInspection" level="WARNING" enabled="true" />
+        <inspection_tool class="SqlIdentifierInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="SqlResolveInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="SqlTypeInspection" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="StandardVariableNames" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="StatementsPerFunctionJS" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="m_limit" value="30" />
@@ -1050,7 +1049,7 @@
       <module fileurl="file://$PROJECT_DIR$/AntScript Visualizer.iml" filepath="$PROJECT_DIR$/AntScript Visualizer.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6 OS X" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
   <component name="ResourceManagerContainer">
