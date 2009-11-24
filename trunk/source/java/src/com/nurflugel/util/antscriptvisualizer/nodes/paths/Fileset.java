@@ -39,7 +39,7 @@ public class Fileset extends PathSet
   private File       file;
   private PatternSet patternSet;
 
-    public Fileset(Element element)
+  public Fileset(Element element)
   {
     super(element);
 

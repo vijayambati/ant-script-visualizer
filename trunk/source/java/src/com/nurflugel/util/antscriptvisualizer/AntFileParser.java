@@ -197,9 +197,9 @@ public class AntFileParser
     importsToProcess.remove(fileToProcess);
     importsAlreadyProcessed.add(fileToProcess);
 
-    File buildFile = fileToProcess.getBuildFile();
-    String fileName = (buildFile != null) ? buildFile.getName()
-                                          : "";
+    File   buildFile = fileToProcess.getBuildFile();
+    String fileName  = (buildFile != null) ? buildFile.getName()
+                                           : "";
 
     try
     {

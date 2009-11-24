@@ -32,7 +32,7 @@ public class PatternSet extends PathSet
     getExcludes();
   }
 
-    private void getIncludesFile()
+  private void getIncludesFile()
   {
     Attribute attribute = element.getAttribute(INCLUDESFILE);
 
