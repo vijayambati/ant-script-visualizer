@@ -323,4 +323,15 @@
       </component>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="renderingGroup">
+      <member id="8a91f"/>
+      <member id="b2389"/>
+      <member id="530a3"/>
+    </group>
+    <group name="buttonGroup1">
+      <member id="ca3c1"/>
+      <member id="6548e"/>
+    </group>
+  </buttonGroups>
 </form>

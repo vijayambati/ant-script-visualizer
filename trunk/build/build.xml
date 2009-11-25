@@ -5,4 +5,7 @@
 
     <import file="master-build/master-webstart-build.xml"/>
 
+    <target name="configure" depends="master.configure"/>
+
+
 </project>
