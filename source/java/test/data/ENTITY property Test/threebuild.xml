@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<!DOCTYPE project [
+    <!ENTITY properties SYSTEM "properties.xml">
+]>
+
+
+<project name="antscript_visualizer" default="all">
+	<import file="threebuild_importA.xml"/>
+	<import file="threebuild_importB.xml"/>
+	<property environment="env" />
+	<property name="prop1" value="clean"/>
+	&properties;
+	<target name="compile" depends="init" description="compile module Ant script Visualizer production classes"/>
+	<target name="init" description="Build initialization"/>
+	<target name="clean" depends="init" description="cleanup all"/>
+	<target name="${env.os.name}" depends="init" description="cleanup all"/>
+	<target name="all" depends="init, clean, compile,bart" description="build all"/>
+	<target name="sign" depends="init,jar">
+		<antcall target="${prop1}"/>
+	</target>
+	<target name="jar" depends="init"/>
+</project>
