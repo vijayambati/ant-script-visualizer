@@ -1,0 +1,26 @@
+digraph G {
+node [shape=box,fontname="Arial",fontsize="10"];
+edge [fontname="Arial",fontsize="8"];
+rankdir=RL;
+
+concentrate=true;
+	subgraph cluster_0 {
+		label="build-batch.xml"
+		build_batch_target_init [label="init" shape=box color=black ]; 
+		build_batch_target_pre_init [label="pre-init" shape=box color=black ]; 
+	}
+	subgraph cluster_1 {
+		label="build_dir.xml"
+		build_dir_target_dir [label="dir" shape=box color=black ]; 
+		build_dir_target_main_data_dir [label="main-data-dir" shape=box color=black ]; 
+		build_dir_target_main_server_dir [label="main-server-dir" shape=box color=black ]; 
+		build_dir_target_batch_data_dir [label="batch-data-dir" shape=box color=black ]; 
+		build_dir_macrodef_make_dirs [label="make-dirs" shape=ellipse color=red ]; 
+	}
+		build_batch_target_init -> build_batch_target_pre_init;
+		build_dir_target_dir -> build_dir_macrodef_make_dirs;
+		build_dir_target_batch_data_dir -> build_batch_target_init;
+		build_dir_target_main_data_dir -> build_batch_target_init;
+		build_dir_target_dir -> build_batch_target_init;
+		build_dir_target_main_server_dir -> build_batch_target_init;
+}

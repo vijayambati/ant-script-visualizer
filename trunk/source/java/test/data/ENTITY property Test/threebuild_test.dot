@@ -1,0 +1,40 @@
+digraph G {
+node [shape=box,fontname="Arial",fontsize="10"];
+edge [fontname="Arial",fontsize="8"];
+rankdir=RL;
+
+concentrate=true;
+	subgraph cluster_0 {
+		label="threebuild.xml"
+		threebuild_target_compile [label="compile" shape=box color=black ]; 
+		threebuild_target_init [label="init" shape=box color=black ]; 
+		threebuild_target_clean [label="clean" shape=box color=black ]; 
+		threebuild_target_${env_os_name} [label="${env.os.name}" shape=box color=black ]; 
+		threebuild_target_all [label="all" shape=box color=black ]; 
+		threebuild_target_sign [label="sign" shape=box color=black ]; 
+		threebuild_target_jar [label="jar" shape=box color=black ]; 
+	}
+	subgraph cluster_1 {
+		label="threebuild_importA.xml"
+		threebuild_importA_target_playdoh [label="playdoh" shape=box color=black ]; 
+	}
+	subgraph cluster_2 {
+		label="threebuild_importB.xml"
+		threebuild_importB_target_bart [label="bart" shape=box color=black ]; 
+		threebuild_importB_target_maggie [label="maggie" shape=box color=black ]; 
+	}
+		threebuild_target_all -> threebuild_importB_target_bart;
+		threebuild_target_all -> threebuild_target_init;
+		threebuild_target_clean -> threebuild_target_init;
+		threebuild_target_${env_os_name} -> threebuild_target_init;
+		threebuild_target_compile -> threebuild_target_init;
+		threebuild_importA_target_playdoh -> threebuild_target_clean;
+		threebuild_target_all -> threebuild_target_clean;
+		threebuild_target_all -> threebuild_target_compile;
+		threebuild_target_jar -> threebuild_target_init;
+		threebuild_importB_target_bart -> threebuild_importA_target_playdoh;
+		threebuild_importA_target_playdoh -> threebuild_importB_target_maggie;
+		threebuild_target_sign -> threebuild_target_jar;
+		threebuild_target_sign -> threebuild_target_init;
+		threebuild_target_sign -> threebuild_target_clean[color=green,style=dotted];
+}
