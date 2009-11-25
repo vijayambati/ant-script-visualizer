@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="antscript_visualizer" default="clean">
-
-	<target name="init" />
-	<target name="clean" depends="init" description="cleanup all"/>
-</project>

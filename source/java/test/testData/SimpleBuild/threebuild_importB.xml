@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="antscript_visualizer" >
-	<import file="threebuild_importA.xml"/>
-	<property name="dah" value="doh"/>
-	<target name="bart" depends="playdoh"/>
-</project>

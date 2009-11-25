@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="antscript_visualizer" >
-<target name="playdoh" depends="clean,maggie"/>
-	<property name="duh" value="doh"/>
-</project>
