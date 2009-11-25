@@ -18,9 +18,9 @@ concentrate=true;
 		build_dir_macrodef_make_dirs [label="make-dirs" shape=ellipse color=red ]; 
 	}
 		build_batch_target_init -> build_batch_target_pre_init;
-		build_dir_target_batch_data_dir -> build_batch_target_init;
-		build_dir_target_dir -> build_batch_target_init;
 		build_dir_target_dir -> build_dir_macrodef_make_dirs;
+		build_dir_target_batch_data_dir -> build_batch_target_init;
 		build_dir_target_main_data_dir -> build_batch_target_init;
+		build_dir_target_dir -> build_batch_target_init;
 		build_dir_target_main_server_dir -> build_batch_target_init;
 }

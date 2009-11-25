@@ -192,30 +192,36 @@ public class AntFileParser
   /** Pretty self-explanitory name. */
   private void parseForImports(EventCollector eventCollector, Antfile antfile)
   {
-    Antfile fileToProcess = importsToProcess.get(0);
-
-    importsToProcess.remove(fileToProcess);
-    importsAlreadyProcessed.add(fileToProcess);
-
-    File   buildFile = fileToProcess.getBuildFile();
-    String fileName  = (buildFile != null) ? buildFile.getName()
-                                           : "";
-
-    try
+    if (!importsToProcess.isEmpty())
     {
-      Antfile anImportedAntfile = new Antfile(buildFile, properties);
+      Antfile fileToProcess = importsToProcess.get(0);
 
-      anImportedAntfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, ui);
-      antfile.addImport(anImportedAntfile);
-      antfiles.add(anImportedAntfile);
-    }
-    catch (IOException e)
-    {
-      eventCollector.addEvent(new Event("Couldn't find or open imported Ant file: " + fileName, e));
-    }
-    catch (JDOMException e)
-    {
-      eventCollector.addEvent(new Event("Couldn't parse Ant file: " + fileName, e));
+      if (fileToProcess != null)
+      {
+        importsToProcess.remove(fileToProcess);
+        importsAlreadyProcessed.add(fileToProcess);
+
+        File   buildFile = fileToProcess.getBuildFile();
+        String fileName  = (buildFile != null) ? buildFile.getName()
+                                               : "";
+
+        try
+        {
+          Antfile anImportedAntfile = new Antfile(buildFile, properties);
+
+          anImportedAntfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, ui);
+          antfile.addImport(anImportedAntfile);
+          antfiles.add(anImportedAntfile);
+        }
+        catch (IOException e)
+        {
+          eventCollector.addEvent(new Event("Couldn't find or open imported Ant file: " + fileName, e));
+        }
+        catch (JDOMException e)
+        {
+          eventCollector.addEvent(new Event("Couldn't parse Ant file: " + fileName, e));
+        }
+      }
     }
   }
 

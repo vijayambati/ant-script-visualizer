@@ -13,6 +13,10 @@
         <priority value="debug"/>
         <appender-ref ref="console"/>
     </category>
+    <category name="org.jdom" additivity="false">
+        <priority value="debug"/>
+        <appender-ref ref="console"/>
+    </category>
 
     <root>
         <priority value="debug"/>
