@@ -3,13 +3,15 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
-import com.nurflugel.util.antscriptvisualizer.AntParserUi;
-import static com.nurflugel.util.antscriptvisualizer.OutputHandler.NEW_LINE;
+import com.nurflugel.util.antscriptvisualizer.Preferences;
 import com.nurflugel.util.antscriptvisualizer.Utility;
 import org.jdom.Element;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Map;
+
+import static com.nurflugel.util.antscriptvisualizer.OutputHandler.NEW_LINE;
 
 /**
  * Base representation of a Node - amost all objects in the graph are types of nodes. Since they have so much common behavior, it made sense to have a
@@ -150,13 +152,13 @@ public abstract class Node
   }
 
   /** Write the DOT file output for this node. */
-  public void writeOutput(DataOutputStream out, AntParserUi ui) throws IOException
+  public void writeOutput(DataOutputStream out, Preferences preferences) throws IOException
   {
     if (name != null)
     {
       String niceName = getNiceName();
 
-      if (shouldPrint(ui.shouldShowTaskdefs(), ui.shouldShowMacrodefs(), ui.shouldShowAntcalls(), ui.shouldShowAntcalls(), ui.shouldShowTargets()))
+      if (shouldPrint(preferences))
       {
         String line = "\t\t" + niceName + " [label=\"" + name + "\" shape=" + shape + " color=" + color + " ]; ";
 
@@ -175,25 +177,15 @@ public abstract class Node
     return buildFileName + "_" + NodeType.TARGET + "_" + nicename;
   }
 
-  /**
-   * Should this node print out in the final image?
-   *
-   * @param   includeTaskdefs   if true, taskdefs will be printed
-   * @param   includeMacrodefs  if true, macrodefs will be printed
-   * @param   includeAnts       if true, ants will be printed
-   * @param   includeAntCalls   if true, antcalls will be printed
-   * @param   includeTargets    if true, targets will be printed
-   *
-   * @return
-   */
+  /** Should this node print out in the final image? */
   @SuppressWarnings({ "OverlyComplexBooleanExpression" })
-  public boolean shouldPrint(boolean includeTaskdefs, boolean includeMacrodefs, boolean includeAnts, boolean includeAntCalls, boolean includeTargets)
+  public boolean shouldPrint(Preferences preferences)
   {
-    boolean isTaskdef  = (includeTaskdefs && (nodeType == NodeType.TASKDEF));
-    boolean istarget   = (includeTargets && (nodeType == NodeType.TARGET));
-    boolean isMacrodef = (includeMacrodefs && (nodeType == NodeType.MACRODEF));
-    boolean isAntCall  = (includeAntCalls && (nodeType == NodeType.ANTCALL));
-    boolean isAnt      = (includeAnts && (nodeType == NodeType.ANT));
+    boolean isTaskdef  = (preferences.shouldShowTaskdefs() && (nodeType == NodeType.TASKDEF));
+    boolean istarget   = (preferences.shouldShowTargets() && (nodeType == NodeType.TARGET));
+    boolean isMacrodef = (preferences.shouldShowMacrodefs() && (nodeType == NodeType.MACRODEF));
+    boolean isAntCall  = (preferences.shouldShowAntcalls() && (nodeType == NodeType.ANTCALL));
+    boolean isAnt      = (preferences.shouldShowAnts() && (nodeType == NodeType.ANT));
 
     return (isTaskdef || istarget || isMacrodef || isAnt || isAntCall);
   }

@@ -8,8 +8,26 @@ import java.net.URL;
 @SuppressWarnings({ "UseOfSystemOutOrSystemErr" })
 public class LogFactory
 {
-  private static boolean configured = false;
-  private static Logger  instance;
+  static
+  {
+    try
+    {
+      ClassLoader classLoader = LogFactory.class.getClassLoader();
+      URL         resource    = classLoader.getResource("conf/log4j.prop");
+
+      System.out.println("resource = " + resource);
+
+      final URL resource2 = classLoader.getResource("log4j.prop");
+
+      System.out.println("resource2 = " + resource2);
+
+      PropertyConfigurator.configure(resource2);
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
 
   /** Creates a new LogFactory object. */
   private LogFactory() {}
@@ -17,27 +35,7 @@ public class LogFactory
   /**  */
   public static Logger getLogger(final Class daClass)
   {
-    synchronized (LogFactory.class)
-    {
-      if (!configured)
-      {
-        final ClassLoader classLoader = LogFactory.class.getClassLoader();
-        final URL         resource    = classLoader.getResource("conf/log4j.prop");
-
-        System.out.println("resource = " + resource);
-
-        final URL resource2 = classLoader.getResource("log4j.prop");
-
-        System.out.println("resource2 = " + resource2);
-
-        PropertyConfigurator.configure(resource2);
-
-        configured = true;
-      }
-    }
-
-    instance = Logger.getLogger(daClass);
-
-    return instance;
+      Logger logger = Logger.getLogger(daClass);
+      return logger;
   }
 }

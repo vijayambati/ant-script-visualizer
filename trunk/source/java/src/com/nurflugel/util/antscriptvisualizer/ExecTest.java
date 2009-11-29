@@ -5,6 +5,7 @@ package com.nurflugel.util.antscriptvisualizer;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+
 import java.io.File;
 
 /** This isn't really a unit test, just a test of making sure things execute the way I think they're going to. */

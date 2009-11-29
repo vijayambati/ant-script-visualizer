@@ -1,9 +1,11 @@
 package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 
-import static com.nurflugel.util.antscriptvisualizer.Constants.INCLUDESFILE;
 import org.jdom.Attribute;
 import org.jdom.Element;
+
 import java.io.File;
+
+import static com.nurflugel.util.antscriptvisualizer.Constants.INCLUDESFILE;
 
 // A PatternSet can be like this:
 

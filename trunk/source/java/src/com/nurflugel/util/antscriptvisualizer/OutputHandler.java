@@ -5,7 +5,9 @@ import com.nurflugel.util.antscriptvisualizer.nodes.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import java.io.*;
+import java.lang.reflect.Method;
 import java.util.*;
+import static com.nurflugel.util.antscriptvisualizer.Os.*;
 
 /**
  * This class is involved in parsing the Ant file and generating the DOT output.
@@ -21,30 +23,26 @@ public class OutputHandler
   protected static final String OPENING_LINE_DOTGRAPH = "digraph G {\nnode [shape=box,fontname=\"Arial\",fontsize=\"10\"];\nedge [fontname=\"Arial\",fontsize=\"8\"];\nrankdir=RL;\n\n";
   protected static final String OPENING_LINE_SUBGRAPH = "subgraph ";
   private AntFileParser         parser;
-  private AntParserUi           ui;
+  private Os                    os;
+  private boolean               generateGraphicOutput;
+  private Preferences           preferences;
   private List<Antfile>         antfiles;
-  private String                os                    = System.getProperty("os.name");
 
-  public OutputHandler(AntParserUi ui, List<Antfile> antfiles, AntFileParser antFileParser)
+  /**
+   * @param  preferences            Preferences from the UI
+   * @param  antfiles               List of Ant files to parse
+   * @param  generateGraphicOutput  if true, the graphic output (PDF, PNG, etc) will be generated, if false, not.
+   */
+  public OutputHandler(Preferences preferences, List<Antfile> antfiles, AntFileParser antFileParser, Os os, boolean generateGraphicOutput)
   {
-    this.ui       = ui;
-    this.antfiles = antfiles;
-    parser        = antFileParser;
+    this.preferences           = preferences;
+    this.antfiles              = antfiles;
+    parser                     = antFileParser;
+    this.os                    = os;
+    this.generateGraphicOutput = generateGraphicOutput;
   }
 
-  /** @return  true if the OS is OS X */
-  private boolean isOsX()
-  {
-    return os.toLowerCase().startsWith("mac os");
-  }
-
-  /** @return  true if the OS is Windoze */
-  private boolean isWindows()
-  {
-    return (os.toLowerCase().startsWith("windows"));
-  }
-
-  /**  */
+  /** Write all the output for the given ant files. */
   void writeOutputFiles(List<Antfile> antfile)
   {
     try
@@ -53,9 +51,12 @@ public class OutputHandler
 
       File dotFile = writeDotFile(antfile);
 
-      processDotFile(dotFile);
+      if (generateGraphicOutput)
+      {
+        processDotFile(dotFile);
+      }
 
-      if (ui.shouldDeleteDotFilesOnExit())
+      if (preferences.shouldDeleteDotFilesOnExit())
       {
         dotFile.deleteOnExit();
       }
@@ -72,7 +73,7 @@ public class OutputHandler
   {
     try
     {
-      String outputFileName = getOutputFileName(dotFile, ui.getOutputFormat().getExtension());
+      String outputFileName = getOutputFileName(dotFile, preferences.getOutputFormat().getExtension());
       File   outputFile     = new File(dotFile.getParent(), outputFileName);
       File   parentFile     = outputFile.getParentFile();
       String dotFilePath    = dotFile.getAbsolutePath();
@@ -84,8 +85,8 @@ public class OutputHandler
         outputFile.delete();  // delete the file before generating it if it exists
       }
 
-      String   outputFormat = ui.getOutputFormat().getType();
-      String[] command      = { ui.getDotExecutablePath(), "-T" + outputFormat, dotFilePath, "-o" + outputFilePath };
+      String   outputFormat = preferences.getOutputFormat().getType();
+      String[] command      = { preferences.getDotExecutablePath(), "-T" + outputFormat, dotFilePath, "-o" + outputFilePath };
 
       logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
 
@@ -100,7 +101,7 @@ public class OutputHandler
 
       List<String> commandList = new ArrayList<String>();
 
-      if (isOsX())
+      if (os == OS_X)
       {
         // This method doesn't work
         // calling FileManager to open the URL works, if we replace spaces with %20
@@ -109,11 +110,22 @@ public class OutputHandler
         String fileUrl = "file://" + outputFilePath;
 
         logger.debug("Trying to open URL: " + fileUrl);
-        FileManager.openURL(fileUrl);
+
+        try
+        {
+          Class<?> aClass = Class.forName("com.apple.eio.FileManager");
+          Method   method = aClass.getMethod("openURL", String.class);
+
+          method.invoke(null, fileUrl);
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+        }
       }
       else
       {
-        if (isWindows())
+        if (os == WINDOWS)
         {
           commandList.add("cmd.exe");
           commandList.add("/c");
@@ -132,11 +144,7 @@ public class OutputHandler
     }
   }
 
-  /**
-   * @param   commands  dibble
-   *
-   * @return  dibble
-   */
+  /** Join the array together as one string, with spaces between the elements. */
   private String concatenate(String[] commands)
   {
     StringBuilder stringBuffer = new StringBuilder();
@@ -147,7 +155,7 @@ public class OutputHandler
       stringBuffer.append(command);
     }
 
-    return stringBuffer.toString();
+    return stringBuffer.toString().trim();
   }
 
   /** Takes someting like build.dot and returns build.png. */
@@ -178,7 +186,7 @@ public class OutputHandler
     }
   }
 
-  /**  */
+  /** Write the resulting dot file to the file system. */
   private File writeDotFile(List<Antfile> file) throws IOException
   {
     String fileName = getDotFilename(file.get(0));
@@ -192,12 +200,12 @@ public class OutputHandler
     // open a new .dot file
     out.writeBytes(OPENING_LINE_DOTGRAPH);
 
-    if (!ui.shouldGroupByBuildfiles())
+    if (!preferences.shouldGroupByBuildfiles())
     {
       out.writeBytes("clusterrank=none;\n");
     }
 
-    if (ui.shouldConcentrate())
+    if (preferences.shouldConcentrate())
     {
       out.writeBytes("concentrate=true;\n");
     }
@@ -205,7 +213,7 @@ public class OutputHandler
     // todo only print primary build file if supposed to
     writeDotFileTargetDeclarations(out);
 
-    if (ui.showLegend())
+    if (preferences.shouldShowLegend())
     {
       writeLegend(out);
     }
@@ -221,6 +229,7 @@ public class OutputHandler
     return dotFile;
   }
 
+  /** Generates a legend. */
   private void writeLegend(DataOutputStream out) throws IOException
   {
     out.writeBytes("\t" + OPENING_LINE_SUBGRAPH + "cluster_legend {" + NEW_LINE);
@@ -239,7 +248,7 @@ public class OutputHandler
     out.writeBytes("\ttarget -> target3[label=<antcall> color=green,style=dotted];" + NEW_LINE);
   }
 
-  /**  */
+  /** Get the dot file name from the ant file name. */
   private String getDotFilename(Antfile antFile)
   {
     File   file         = antFile.getBuildFile();
@@ -249,7 +258,7 @@ public class OutputHandler
     return newPath;
   }
 
-  /**  */
+  /** Write out the dependencies. */
   @SuppressWarnings({ "OverlyNestedMethod" })
   private void writeDotDependencies(Map<Node, List<Node>> dependencies, DataOutputStream out) throws IOException
   {
@@ -262,8 +271,7 @@ public class OutputHandler
 
       if (theNode instanceof NodeWithDependancies)
       {
-        if (theNode.shouldPrint(ui.shouldShowTaskdefs(), ui.shouldShowMacrodefs(), ui.shouldShowAntcalls(), ui.shouldShowAntcalls(),
-                                  ui.shouldShowTargets()))
+        if (theNode.shouldPrint(preferences))
         {
           NodeWithDependancies node           = (NodeWithDependancies) theNode;
           String               niceName       = node.getNiceName();
@@ -276,8 +284,7 @@ public class OutputHandler
               String dependantNodeNiceName = dependantNode.getNiceName();
               String dependencyExtraInfo   = dependantNode.getDependencyExtraInfo();
 
-              if (dependantNode.shouldPrint(ui.shouldShowTaskdefs(), ui.shouldShowMacrodefs(), ui.shouldShowAntcalls(), ui.shouldShowAntcalls(),
-                                              ui.shouldShowTargets()))
+              if (dependantNode.shouldPrint(preferences))
               {
                 String line = "\t\t" + niceName + " -> " + dependantNodeNiceName + dependencyExtraInfo + ";";
 
@@ -297,7 +304,7 @@ public class OutputHandler
     }
   }
 
-  /**  */
+  /** Write out all the dot declarations. */
   private void writeDotFileTargetDeclarations(DataOutputStream out) throws IOException
   {
     int clusterIndex = 0;
@@ -308,7 +315,7 @@ public class OutputHandler
 
       String fileName;
 
-      if (ui.shouldUseAbsolutePaths())
+      if (preferences.shouldUseAbsolutePaths())
       {
         fileName = antfile.getBuildFile().getAbsolutePath();
       }
@@ -347,6 +354,6 @@ public class OutputHandler
   /**  */
   private void writeOutputForNode(Node node, DataOutputStream out) throws IOException
   {
-    node.writeOutput(out, ui);
+    node.writeOutput(out, preferences);
   }
 }

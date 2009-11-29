@@ -7,6 +7,7 @@ import com.nurflugel.util.antscriptvisualizer.UniqueList;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
 import org.jdom.Element;
 import org.jdom.filter.ElementFilter;
+
 import java.util.Iterator;
 import java.util.List;
 
