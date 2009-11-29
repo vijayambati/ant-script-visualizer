@@ -13,6 +13,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.filter.ElementFilter;
 import org.jdom.input.SAXBuilder;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -306,13 +307,14 @@ public class Antfile
    * @param  parser                   the parser which will be used to parse this file.
    * @param  importsToProcess         The list of imports which need to be processed.
    * @param  importsAlreadyProcessed  the list of imports which have already been processed.
+   * @param preferences
    */
   public void parse(AntFileParser parser, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed, EventCollector eventCollector,
-                    AntParserUi ui) throws IOException, JDOMException
+                    Preferences preferences) throws IOException, JDOMException
   {
     logger.debug("processing " + buildFile);
     parseImports(parser, importsToProcess, importsAlreadyProcessed, eventCollector);
-    parseTargets(eventCollector, importsToProcess, importsAlreadyProcessed, ui);
+    parseTargets(eventCollector, importsToProcess, importsAlreadyProcessed, preferences);
   }
 
   /** Get any imports from this ant file. */
@@ -357,7 +359,7 @@ public class Antfile
   }
 
   /** Parse the targets in this build file. */
-  private void parseTargets(EventCollector eventCollector, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed, AntParserUi ui)
+  private void parseTargets(EventCollector eventCollector, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed, Preferences preferences)
   {
     Iterator descendants = rootElement.getDescendants(new ElementFilter("target"));
 
@@ -375,12 +377,12 @@ public class Antfile
 
       target.parseDepends();
 
-      if (ui.shouldShowAntcalls())
+      if (preferences.shouldShowAntcalls())
       {
         target.parseAntCalls(targetElement);
       }
 
-      if (ui.shouldShowAntcalls())
+      if (preferences.shouldShowAntcalls())
       {
         target.parseAnts(targetElement, eventCollector, importsToProcess, importsAlreadyProcessed);
       }

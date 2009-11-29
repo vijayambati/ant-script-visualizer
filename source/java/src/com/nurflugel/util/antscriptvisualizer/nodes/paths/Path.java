@@ -5,6 +5,7 @@ import com.nurflugel.util.antscriptvisualizer.nodes.NodeType;
 import com.nurflugel.util.antscriptvisualizer.nodes.PathElement;
 import org.jdom.Attribute;
 import org.jdom.Element;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,89 +3,81 @@
  */
 package com.nurflugel.util.antscriptvisualizer;
 
-import static com.nurflugel.util.antscriptvisualizer.OutputFormat.*;
 import org.apache.log4j.Logger;
+import javax.swing.*;
 import java.awt.*;
-import static java.awt.Cursor.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.net.URL;
-import java.util.prefs.Preferences;
-import javax.help.CSH;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.swing.*;
-import static javax.swing.SwingUtilities.*;
+import static com.nurflugel.util.antscriptvisualizer.Os.OS_X;
+import static com.nurflugel.util.antscriptvisualizer.Os.findOs;
+import static com.nurflugel.util.antscriptvisualizer.OutputFormat.*;
+import static com.nurflugel.util.antscriptvisualizer.Util.*;
+import static java.awt.Cursor.*;
 
 /** The main UI class and entry point for the app. */
 @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion", "CallToSystemExit" })
 public class AntParserUiImpl implements AntParserUi
 {
-  public static final String    HELP_HS                       = "help.hs";
-  public static final String    VERSION                       = "2.1.1";
-  protected static final String LAST_DIR                      = "LAST_DIR";
-  private static final Logger   LOGGER                        = Logger.getLogger(AntParserUiImpl.class);
-  private static final String   CONCENTRATE_LINES             = "concentrateLines";
-  private static final String   DELETE_DOT_FILES_ON_EXIT      = "deleteDotFilesOnExit";
-  private static final String   DOT_EXECUTABLE                = "dotExecutable";
-  private static final String   GROUP_NODES_BY_BUILDFILE      = "groupNodesByBuildfile";
-  private static final String   INCLUDE_IMPORTED_ANT_FILES    = "includeImportedAntFiles";
-  private static final String   OUTPUT_FORMAT                 = "outputFormat";
-  private static final String   SHOW_ABSOLUTE_FILE_PATHS      = "show_absolute_file_paths";
-  private static final String   SHOW_ANTCALLS                 = "showAntcalls";
-  private static final String   SHOW_MACRODEFS                = "showMacrodefs";
-  private static final String   SHOW_TARGETS                  = "showTargets";
-  private static final String   SHOW_TASKDEFS                 = "showTaskdefs";
-  private static final String   VERSION_FIELD                 = "version";
-  private Cursor                normalCursor                  = getPredefinedCursor(DEFAULT_CURSOR);
-  private Cursor                busyCursor                    = getPredefinedCursor(WAIT_CURSOR);
-  private JCheckBox             concentrateCheckbox;
-  private JCheckBox             deleteDotFilesCheckbox;
-  private String                dotExecutablePath;
-  private JCheckBox             filterFromNodeCheckbox;
-  private JCheckBox             filterThroughNodeCheckbox;
-  private JButton               findDotButton;
-  private JFrame                frame;
-  private JCheckBox             groupNodesByBuildfileCheckbox;
-  private JButton               helpButton;
-  private JCheckBox             includeImportedFilesCheckbox;
-  private JRadioButton          leftToRightRadioButton;
-  private JPanel                mainPanel;
-  private String                os;
-  private JPanel                parseFileOptionsPanel;
-  private JRadioButton          pdfRadioButton;
-  private JRadioButton          pngRadioButton;
-  private Preferences           preferences;
-  private JButton               quitButton;
-  private JRadioButton          rightToLeftRadioButton;
-  private JButton               selectAntFileButton;
-  private JButton               selectDirButton;
-  private JCheckBox             showAntcallsCheckbox;
-  private JCheckBox             showFilePathsCheckBox;
-  private JCheckBox             showMacrodefsCheckbox;
-  private JCheckBox             showTargetsCheckbox;
-  private JCheckBox             showTaskdefsCheckBox;
-  private JLabel                statusLabel;
-  private JRadioButton          svgRadioButton;
-  private JCheckBox             showLegendCheckBox;
+  public static final String  HELP_HS                       = "help.hs";
+  public static final String  VERSION                       = "2.1.1";
+  private static final Logger LOGGER                        = Logger.getLogger(AntParserUiImpl.class);
+  private Cursor              normalCursor                  = getPredefinedCursor(DEFAULT_CURSOR);
+  private Cursor              busyCursor                    = getPredefinedCursor(WAIT_CURSOR);
+  private JButton             findDotButton;
+  private JButton             helpButton;
+  private JButton             quitButton;
+  private JButton             selectAntFileButton;
+  private JButton             selectDirButton;
+  private JCheckBox           concentrateCheckbox;
+  private JCheckBox           deleteDotFilesCheckbox;
+  private JCheckBox           filterFromNodeCheckbox;
+  private JCheckBox           filterThroughNodeCheckbox;
+  private JCheckBox           groupNodesByBuildfileCheckbox;
+  private JCheckBox           includeImportedFilesCheckbox;
+  private JCheckBox           showAntcallsCheckbox;
+  private JCheckBox           showFilePathsCheckBox;
+  private JCheckBox           showLegendCheckBox;
+  private JCheckBox           showMacrodefsCheckbox;
+  private JCheckBox           showTargetsCheckbox;
+  private JCheckBox           showTaskdefsCheckBox;
+  private JFrame              frame;
+  private JLabel              statusLabel;
+  private JPanel              mainPanel;
+  private JPanel              parseFileOptionsPanel;
+  private JRadioButton        leftToRightRadioButton;
+  private JRadioButton        pdfRadioButton;
+  private JRadioButton        pngRadioButton;
+  private JRadioButton        rightToLeftRadioButton;
+  private JRadioButton        svgRadioButton;
+  private Os                  os;
+  private String              dotExecutablePath;
+  private Preferences         preferences;
 
   /** Creates a new AntParserUi object. */
   public AntParserUiImpl()
   {
     LOGGER.error("Bad programmer, no donut!");
-    os          = System.getProperty("os.name");
-    preferences = Preferences.userNodeForPackage(AntParserUiImpl.class);
-    frame       = new JFrame();
+    os                = findOs();
+    preferences       = new Preferences();
+    dotExecutablePath = preferences.getDotExecutablePath();//todo this is ugly, fix it somehow
+
+    if ((dotExecutablePath == null) || (dotExecutablePath.length() == 0))
+    {
+      dotExecutablePath = os.getDefaultDotPath();
+    }
+      preferences.setDotExecutablePath(dotExecutablePath);
+
+    frame = new JFrame();
     frame.setContentPane(mainPanel);
     initializeUi();
     setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel", frame);
     frame.pack();
-    center();
-    showNewStuff();
+    center(frame);
     frame.setVisible(true);
+    showNewStuff();
     setDefaultDotLocation();
   }
 
@@ -94,21 +86,6 @@ public class AntParserUiImpl implements AntParserUi
     AntParserUi ui = new AntParserUiImpl();
   }
   // ------------------------ OTHER METHODS ------------------------
-
-  /**
-   * Get the dot executable path if it already exists in Preferences, or is intalled. If not easily findable, as the user where the hell he put it.
-   */
-  @Override
-  public String getDotExecutablePath()
-  {
-    return dotExecutablePath;
-  }
-
-  @Override
-  public boolean showLegend()
-  {
-    return showLegendCheckBox.isSelected();
-  }
 
   @Override
   public JFrame getFrame()
@@ -132,66 +109,6 @@ public class AntParserUiImpl implements AntParserUi
     return PNG;
   }
 
-  @Override
-  public boolean shouldConcentrate()
-  {
-    return concentrateCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldDeleteDotFilesOnExit()
-  {
-    return deleteDotFilesCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldGroupByBuildfiles()
-  {
-    return groupNodesByBuildfileCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldIncludeImportedFiles()
-  {
-    return includeImportedFilesCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldShowAntcalls()
-  {
-    return showAntcallsCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldShowLeftToRight()
-  {
-    return leftToRightRadioButton.isSelected();
-  }
-
-  @Override
-  public boolean shouldShowMacrodefs()
-  {
-    return showMacrodefsCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldShowTargets()
-  {
-    return showTargetsCheckbox.isSelected();
-  }
-
-  @Override
-  public boolean shouldShowTaskdefs()
-  {
-    return showTaskdefsCheckBox.isSelected();
-  }
-
-  @Override
-  public boolean shouldUseAbsolutePaths()
-  {
-    return showFilePathsCheckBox.isSelected();
-  }
-
   private void addActionListeners()
   {
     frame.addWindowListener(new WindowAdapter()
@@ -202,6 +119,9 @@ public class AntParserUiImpl implements AntParserUi
           doQuitAction();
         }
       });
+
+    // todo ad listeners to deal with selections ->> preferences
+    // lkjlkjlk
     selectAntFileButton.addActionListener(new ActionListener()
       {
         public void actionPerformed(ActionEvent event)
@@ -223,44 +143,8 @@ public class AntParserUiImpl implements AntParserUi
           doQuitAction();
         }
       });
-    addHelpListener();
-  }
 
-  /** Add the help listener - link to the help files. */
-  private void addHelpListener()
-  {
-    ClassLoader classLoader = AntParserUiImpl.class.getClassLoader();
-    HelpSet     helpSet;
-
-    try
-    {
-      URL hsURL = HelpSet.findHelpSet(classLoader, HELP_HS);
-
-      helpSet = new HelpSet(null, hsURL);
-    }
-    catch (Exception ee)  // Say what the exception really is
-    {
-      LOGGER.error("HelpSet " + ee.getMessage());
-      LOGGER.error("HelpSet " + HELP_HS + " not found");
-
-      return;
-    }
-
-    // Create a HelpBroker object:
-    HelpBroker                helpBroker            = helpSet.createHelpBroker();
-    CSH.DisplayHelpFromSource displayHelpFromSource = new CSH.DisplayHelpFromSource(helpBroker);
-
-    helpButton.addActionListener(displayHelpFromSource);
-  }
-
-  private void center()
-  {
-    Toolkit   defaultToolkit = Toolkit.getDefaultToolkit();
-    Dimension screenSize     = defaultToolkit.getScreenSize();
-    int       x              = (int) ((screenSize.getWidth() - frame.getWidth()) / 2);
-    int       y              = (int) ((screenSize.getHeight() - frame.getHeight()) / 2);
-
-    frame.setBounds(x, y, frame.getWidth(), frame.getHeight());
+    addHelpListener(HELP_HS, helpButton, frame);
   }
 
   private void doHelpAction()
@@ -275,17 +159,24 @@ public class AntParserUiImpl implements AntParserUi
 
   private void doQuitAction()
   {
-    preferences.putBoolean(GROUP_NODES_BY_BUILDFILE, shouldGroupByBuildfiles());
-    preferences.putBoolean(INCLUDE_IMPORTED_ANT_FILES, shouldIncludeImportedFiles());
-    preferences.putBoolean(CONCENTRATE_LINES, shouldConcentrate());
-    preferences.putBoolean(SHOW_MACRODEFS, shouldShowMacrodefs());
-    preferences.putBoolean(SHOW_TASKDEFS, shouldShowTaskdefs());
-    preferences.putBoolean(SHOW_ANTCALLS, shouldShowAntcalls());
-    preferences.putBoolean(SHOW_TARGETS, shouldShowTargets());
-    preferences.putBoolean(DELETE_DOT_FILES_ON_EXIT, shouldDeleteDotFilesOnExit());
-    preferences.put(OUTPUT_FORMAT, getOutputFormat().getDisplayLabel());
-    preferences.putBoolean(SHOW_ABSOLUTE_FILE_PATHS, shouldUseAbsolutePaths());
+    getOutputPreferencesFromUi();
+    preferences.save();
     System.exit(0);
+  }
+
+  private void getOutputPreferencesFromUi()
+  {
+    preferences.setShouldGroupByBuildfiles(groupNodesByBuildfileCheckbox.isSelected());
+    preferences.setShouldIncludeImportedFiles(includeImportedFilesCheckbox.isSelected());
+    preferences.setShouldConcentrate(concentrateCheckbox.isSelected());
+    preferences.setShouldShowMacrodefs(showMacrodefsCheckbox.isSelected());
+    preferences.setShouldShowAntcalls(showAntcallsCheckbox.isSelected());
+    preferences.setShouldShowTargets(showTargetsCheckbox.isSelected());
+    preferences.setShouldDeleteDotFilesOnExit(deleteDotFilesCheckbox.isSelected());
+    preferences.setOutputFormat(getOutputFormat());
+    preferences.setShouldUseAbsolutePaths(showFilePathsCheckBox.isSelected());
+    preferences.setShouldShowTaskdefs(showTaskdefsCheckBox.isSelected());
+    preferences.setShouldShowLegend(showLegendCheckBox.isSelected());
   }
 
   private void doSelectAntFileAction()
@@ -299,6 +190,7 @@ public class AntParserUiImpl implements AntParserUi
     }
     else
     {
+      getOutputPreferencesFromUi();
       frame.setCursor(busyCursor);
       statusLabel.setText("Parsing Ant files... ");
 
@@ -310,7 +202,7 @@ public class AntParserUiImpl implements AntParserUi
       filter.setDescription("Ant build files");
       fileChooser.setFileFilter(filter);
 
-      String lastDir = preferences.get(LAST_DIR, "");
+      String lastDir = preferences.getLastDir();
 
       if (lastDir != null)
       {
@@ -325,13 +217,13 @@ public class AntParserUiImpl implements AntParserUi
       {
         File[] selectedFiles = fileChooser.getSelectedFiles();
 
-        preferences.put(LAST_DIR, selectedFiles[0].getParent());
+        preferences.setLastDir(selectedFiles[0].getParent());
 
-        AntFileParser fileParser = new AntFileParser(this, selectedFiles);
+        AntFileParser fileParser = new AntFileParser(os, preferences, this, selectedFiles);
 
         try
         {
-          fileParser.processBuildFile();
+          fileParser.processBuildFile(true);
         }
         catch (Exception e)
         {
@@ -350,42 +242,34 @@ public class AntParserUiImpl implements AntParserUi
     // todo
   }
 
-  private void doSelectShowImportsAction()
-  {
-    parseFileOptionsPanel.setVisible(false);
-    selectDirButton.setVisible(true);
-  }
-
-  private void doSelectShowMacrodefDependenciesAction()
-  {
-    parseFileOptionsPanel.setVisible(false);
-    selectDirButton.setVisible(true);
-  }
+  // private void doSelectShowImportsAction()
+  // {
+  // parseFileOptionsPanel.setVisible(false);
+  // selectDirButton.setVisible(true);
+  // }
+  //
+  // private void doSelectShowMacrodefDependenciesAction()
+  // {
+  // parseFileOptionsPanel.setVisible(false);
+  // selectDirButton.setVisible(true);
+  // }
 
   private void findDotExecutablePath()
   {
-    dotExecutablePath = preferences.get(DOT_EXECUTABLE, "");
+    dotExecutablePath = preferences.getDotExecutablePath();
 
     if ((dotExecutablePath == null) || (dotExecutablePath.length() == 0))
     {
-      if (os.startsWith("Mac OS"))
-      {
-        dotExecutablePath = "/Applications/Graphviz.app/Contents/MacOS/dot";
-      }
-      else  // if (os.toLowerCase().startsWith("windows"))
-      {
-        dotExecutablePath = "\"C:\\Program Files\\ATT\\Graphviz\\bin\\dot.exe\"";
-      }
+      dotExecutablePath = os.getDefaultDotPath();
     }
 
-    // Create a file chooser
     NoDotDialog dialog            = new NoDotDialog(dotExecutablePath);
     File        dotExecutableFile = dialog.getFile();
 
     if (dotExecutableFile != null)
     {
       dotExecutablePath = dotExecutableFile.getAbsolutePath();
-      preferences.put(DOT_EXECUTABLE, dotExecutablePath);
+      preferences.setDotExecutablePath(dotExecutablePath);
     }
     else
     {
@@ -395,47 +279,23 @@ public class AntParserUiImpl implements AntParserUi
     }
   }
 
-  /** Sets the look and feel. */
-  public static void setLookAndFeel(String feelName, Component component)
-  {
-    try
-    {
-      UIManager.setLookAndFeel(feelName);
-      updateComponentTreeUI(component);
-    }
-    catch (Exception e)
-    {
-      System.out.println("Error setting native LAF: " + feelName + e.getMessage());
-    }
-  }
-
   private void initializeUi()
   {
     // $$$setupUI$$$();
 
     addActionListeners();
     doParseAntFileRadiobuttonAction();
-    groupNodesByBuildfileCheckbox.setSelected(preferences.getBoolean(GROUP_NODES_BY_BUILDFILE, true));
-    includeImportedFilesCheckbox.setSelected(preferences.getBoolean(INCLUDE_IMPORTED_ANT_FILES, true));
-    concentrateCheckbox.setSelected(preferences.getBoolean(CONCENTRATE_LINES, true));
-    showMacrodefsCheckbox.setSelected(preferences.getBoolean(SHOW_MACRODEFS, true));
-    showTaskdefsCheckBox.setSelected(preferences.getBoolean(SHOW_TASKDEFS, true));
-    showAntcallsCheckbox.setSelected(preferences.getBoolean(SHOW_ANTCALLS, true));
-    showTargetsCheckbox.setSelected(preferences.getBoolean(SHOW_TARGETS, true));
-    deleteDotFilesCheckbox.setSelected(preferences.getBoolean(DELETE_DOT_FILES_ON_EXIT, true));
-    showFilePathsCheckBox.setSelected(preferences.getBoolean(SHOW_ABSOLUTE_FILE_PATHS, false));
+    groupNodesByBuildfileCheckbox.setSelected(preferences.shouldGroupByBuildfiles());
+    includeImportedFilesCheckbox.setSelected(preferences.shouldIncludeImportedFiles());
+    concentrateCheckbox.setSelected(preferences.shouldConcentrate());
+    showMacrodefsCheckbox.setSelected(preferences.shouldShowMacrodefs());
+    showTaskdefsCheckBox.setSelected(preferences.shouldShowTaskdefs());
+    showAntcallsCheckbox.setSelected(preferences.shouldShowAntcalls());
+    showTargetsCheckbox.setSelected(preferences.shouldShowTargets());
+    deleteDotFilesCheckbox.setSelected(preferences.shouldDeleteDotFilesOnExit());
+    showFilePathsCheckBox.setSelected(preferences.shouldUseAbsolutePaths());
 
-    String       outputString = preferences.get(OUTPUT_FORMAT, PNG.getDisplayLabel());
-    OutputFormat outputFormat;
-
-    try
-    {
-      outputFormat = valueOf(outputString);
-    }
-    catch (IllegalArgumentException e)
-    {
-      outputFormat = PNG;
-    }
+    OutputFormat outputFormat = preferences.getOutputFormat();
 
     switch (outputFormat)
     {
@@ -451,9 +311,9 @@ public class AntParserUiImpl implements AntParserUi
         svgRadioButton.setSelected(true);
     }
 
-    preferences.put(OUTPUT_FORMAT, getOutputFormat().toString());
+    // preferences.put(OUTPUT_FORMAT, getOutputFormat().toString());
 
-    if (os.startsWith("Mac OS"))
+    if (os == OS_X)
     {
       pdfRadioButton.setSelected(true);
     }
@@ -461,30 +321,23 @@ public class AntParserUiImpl implements AntParserUi
 
   private void setDefaultDotLocation()
   {
-    dotExecutablePath = preferences.get(DOT_EXECUTABLE, "");
+    dotExecutablePath = preferences.getDotExecutablePath();
 
     if ((dotExecutablePath == null) || (dotExecutablePath.length() == 0))
     {
-      if (os.startsWith("Mac OS"))
-      {
-        dotExecutablePath = "/Applications/Graphviz.app/Contents/MacOS/dot";
-      }
-      else  // if (os.toLowerCase().startsWith("windows"))
-      {
-        dotExecutablePath = "\"C:\\Program Files\\ATT\\Graphviz\\bin\\dot.exe\"";
-      }
+      dotExecutablePath = os.getDefaultDotPath();
     }
   }
 
   /** If they're running a new version, show a dialog showing the new stuff. */
   private void showNewStuff()
   {
-    Version previousVersion = new Version(preferences.get(VERSION_FIELD, ""));
+    Version previousVersion = new Version(preferences.getPreviousVersion());
 
     // Version previousVersion = new Version("0.0.0");
     String currentVersionString = VERSION;
 
-    preferences.put(VERSION_FIELD, currentVersionString);
+    preferences.setPreviousVersion(currentVersionString);
 
     // preferences.put(VERSION,"0.0.0");
     Version currentVersion = new Version(currentVersionString);

@@ -1,11 +1,11 @@
 package com.nurflugel.util.antscriptvisualizer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 
 /**
  * This dialog appears when a new version arrives and you haven't seen the new features dialog yet.

@@ -1,9 +1,9 @@
 package com.nurflugel.util.antscriptvisualizer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import javax.swing.*;
 
 /** Dialog to find where GraphViz is located. */
 public class NoDotDialog extends JDialog

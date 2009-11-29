@@ -11,13 +11,13 @@ import com.nurflugel.util.antscriptvisualizer.nodes.paths.Classpath;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Path;
 import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.*;
 
 /**
  * This class is involved in parsing the Ant file and generating the DOT output.
@@ -28,19 +28,23 @@ import javax.swing.*;
 public class AntFileParser
 {
   public static final Logger    logger                  = LogFactory.getLogger(AntFileParser.class);
-  private AntParserUi           ui;
   private File                  fileToParse;
   private List<Antfile>         antfiles;
   private List<Antfile>         importsAlreadyProcessed = new UniqueList<Antfile>();
   private List<Antfile>         importsToProcess        = new UniqueList<Antfile>();
   private Map<String, Property> properties              = new HashMap<String, Property>();
+  private Os                    os;
+  private Preferences           preferences;
+  private AntParserUiImpl       ui;
 
   /** Creates a new AntFileParser object. */
-  public AntFileParser(AntParserUi ui, File[] filesToParse)
+  public AntFileParser(Os os, Preferences preferences, AntParserUiImpl ui, File... filesToParse)
   {
-    this.ui     = ui;  // todo cheat and just add everything except the first file to the list of files to import
+    this.os          = os;
+    this.preferences = preferences;
+    this.ui          = ui;
 
-    fileToParse = filesToParse[0];
+    fileToParse      = filesToParse[0];
 
     for (int i = 1; i < filesToParse.length; i++)
     {
@@ -59,26 +63,18 @@ public class AntFileParser
     }
   }
 
-  @SuppressWarnings({ "CallToSystemExit" })
-  public static void main(String[] args)
-  {
-    AntParserUi   fakeUi = new MockAntParserUi();
-    AntFileParser parser = new AntFileParser(fakeUi, new File[] { new File("testData/globalbuild/global-build.xml") });
-
-    parser.processBuildFile();
-    System.exit(0);
-  }
-
-  /** Executed for each Ant file chosen from the UI. */
-  public void processBuildFile()
+  /** Executed for each Ant file chosen from the UI.
+   * @param generateGraphicOutput*/
+  public List<Antfile> processBuildFile(boolean generateGraphicOutput)
   {
     EventCollector eventCollector = new EventCollector();
+    List<Antfile>  antfiles       = new ArrayList<Antfile>();
 
     try
     {
-      List<Antfile> antfiles = parse(eventCollector);
+      antfiles = parse(eventCollector);
 
-      writeOutputFiles(antfiles);
+      writeOutputFiles(antfiles,generateGraphicOutput);
       processEvents(eventCollector);
     }
     catch (GenericException e)
@@ -90,6 +86,8 @@ public class AntFileParser
       logger.error("There has been a severe error, stopping all activity.", e);
       System.exit(1);
     }
+
+    return antfiles;
   }
 
   /**
@@ -105,13 +103,12 @@ public class AntFileParser
     List<Macrodef>  macrodefs  = new UniqueList<Macrodef>();
     List<Path>      paths      = new UniqueList<Path>();
     List<Classpath> classpaths = new UniqueList<Classpath>();
-
     Antfile         antfile;
 
     try
     {
       antfile = new Antfile(fileToParse, properties);
-      antfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, ui);
+      antfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, preferences);
 
       antfiles = new UniqueList<Antfile>();
       antfiles.add(antfile);
@@ -131,7 +128,7 @@ public class AntFileParser
       throw new GenericException(e);
     }
 
-    if (ui.shouldIncludeImportedFiles())
+    if (preferences.shouldIncludeImportedFiles())
     {
       while (!importsToProcess.isEmpty())
       {
@@ -209,7 +206,7 @@ public class AntFileParser
         {
           Antfile anImportedAntfile = new Antfile(buildFile, properties);
 
-          anImportedAntfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, ui);
+          anImportedAntfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, preferences);
           antfile.addImport(anImportedAntfile);
           antfiles.add(anImportedAntfile);
         }
@@ -254,7 +251,7 @@ public class AntFileParser
       output += ("    " + event.getReason() + "\n\t\t" + event.getException().getMessage() + "\n");
     }
 
-    if (!events.isEmpty())
+    if (!events.isEmpty() && (ui != null))
     {
       JOptionPane.showMessageDialog(ui.getFrame(), output);
     }
@@ -280,13 +277,16 @@ public class AntFileParser
                   + "any properties in the imports or Ant calls?  That's not supported yet.";
     }
 
-    JOptionPane.showMessageDialog(ui.getFrame(), "Something terrible happend: " + extrainfo + "\n\n" + buffer.toString());
+    if (ui != null)
+    {
+      JOptionPane.showMessageDialog(ui.getFrame(), "Something terrible happend: " + extrainfo + "\n\n" + buffer.toString());
+    }
   }
 
   /**  */
-  private void writeOutputFiles(List<Antfile> antfile)
+  private void writeOutputFiles(List<Antfile> antfile, boolean generateGraphicOutput)
   {
-    OutputHandler outputHandler = new OutputHandler(ui, antfiles, this);
+    OutputHandler outputHandler = new OutputHandler(preferences, antfiles, this, os,generateGraphicOutput);
 
     outputHandler.writeOutputFiles(antfile);
   }
@@ -330,8 +330,7 @@ public class AntFileParser
   /** Get the dependencies for a particular node. */
   private void getDependenciesForNode(Node target, List<Node> depends, Map<Node, List<Node>> dependencies)
   {
-    if (target.shouldPrint(ui.shouldShowTaskdefs(), ui.shouldShowMacrodefs(), ui.shouldShowAntcalls(), ui.shouldShowAntcalls(),
-                             ui.shouldShowTargets()))
+    if (target.shouldPrint(preferences))
     {
       dependencies.put(target, depends);
     }
@@ -340,7 +339,7 @@ public class AntFileParser
   /** Pass-through for radio button value - should we include imported values? todo this method name sucks! */
   public boolean includeImportedFiles()
   {
-    return ui.shouldIncludeImportedFiles();
+    return preferences.shouldIncludeImportedFiles();
   }
 
   /**

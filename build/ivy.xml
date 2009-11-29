@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="http://www.nurflugel.com/Home/repository/ivy-2.1.0-rc1.xsl"?>
 <ivy-module version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.nurflugel.com/Home/repository/ivy-2.1.0-rc1.xsd">
-    <!-- This is the module definition file; documentation is at http://www.jayasoft.org/ivy/doc/ivyfile. -->
-    <info organisation="com.nurflugel" module="ant-script-visualizer-javadoc" revision="snapshot">
-      <license name="Apache" />
-      <ivyauthor name="Douglas Bullard" />
-      <repository name="asv-repository" url="http://www.nurflugel.com/Home/repository" ivys="true" artifacts="true" />
-    </info>
-    <configurations defaultconfmapping="build,dist,test->default">
-            <conf name="build"   visibility="public"  description="Dependencies only used during the build process." />
-            <conf name="dist"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
-            <conf name="javadoc" visibility="public"  description="Some libraries provide separate javadoc packages." />
-            <conf name="test"    visibility="private" description="Dependencies only used during unit testing." />
-            <conf name="source"  visibility="public"  description="Dependencies' source code packages." />
-    </configurations>
+<!-- This is the module definition file; documentation is at http://www.jayasoft.org/ivy/doc/ivyfile. -->
+<info organisation="com.nurflugel" module="ant-script-visualizer-javadoc" revision="snapshot">
+  <license name="Apache" />
+  <ivyauthor name="Douglas Bullard" />
+  <repository name="asv-repository" url="http://www.nurflugel.com/Home/repository" ivys="true" artifacts="true" />
+</info>
+<configurations defaultconfmapping="build,dist,test->default">
+        <conf name="build"   visibility="public"  description="Dependencies only used during the build process." />
+        <conf name="dist"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
+        <conf name="javadoc" visibility="public"  description="Some libraries provide separate javadoc packages." />
+        <conf name="test"    visibility="private" description="Dependencies only used during unit testing." />
+        <conf name="source"  visibility="public"  description="Dependencies' source code packages." />
+</configurations>
 
-    <publications>
-            <artifact name="ant-script-visualizer-javadoc" type="javadoc" ext="zip" conf="javadoc" />
-            <artifact name="ant-script-visualizer-source"  type="source"  ext="zip" conf="source" />
-    </publications>
+<publications>
+        <artifact name="ant-script-visualizer-javadoc" type="javadoc" ext="zip" conf="javadoc" />
+        <artifact name="ant-script-visualizer-source"  type="source"  ext="zip" conf="source" />
+</publications>
 
-    <dependencies>
-            <dependency org="net.sf.ant-contrib" name="ant-contrib"  rev="1.0b2"        conf="build" />
-            <dependency org="org.jdom"           name="jdom"         rev="1.0"          conf="build,dist,test" />
-            <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,dist,test,source" />
-            <dependency org="org.apache"         name="log4j"        rev="1.2.15"       conf="build,dist,test,source" />
-            <dependency org="org.testng"         name="testng"       rev="5.8-jdk1.5"   conf="build,test,source" />
-            <dependency org="com.ryangrier.ant"  name="version_tool" rev="1.1.4_fixed"  conf="build,javadoc" />
-            <dependency org="com.nurflugel"      name="buildtasks"   rev="1.0-SNAPSHOT" conf="build" />
-            <dependency org="org.apache"         name="commons-lang" rev="2.4"          conf="build,dist" />
-    </dependencies>
+<dependencies>
+        <dependency org="net.sf.ant-contrib" name="ant-contrib"  rev="1.0b2"        conf="build" />
+        <dependency org="org.jdom"           name="jdom"         rev="1.0"          conf="build,dist,test" />
+        <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,dist,test,source" />
+        <dependency org="org.apache"         name="log4j"        rev="1.2.15"       conf="build,dist,test,source" />
+        <dependency org="org.testng"         name="testng"       rev="5.8-jdk1.5"   conf="build,test,source" />
+        <dependency org="com.ryangrier.ant"  name="version_tool" rev="1.1.4_fixed"  conf="build,javadoc" />
+        <dependency org="com.nurflugel"      name="buildtasks"   rev="1.0-SNAPSHOT" conf="build" />
+        <dependency org="org.apache"         name="commons-lang" rev="2.4"          conf="build,dist,test,source,javadoc" />
+        <dependency org="org.apache"         name="commons-io"   rev="1.4"          conf="build,dist,test,source,javadoc"/>
+</dependencies>
 </ivy-module>

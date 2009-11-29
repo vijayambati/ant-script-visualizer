@@ -37,7 +37,9 @@
           <root url="jar://$MODULE_DIR$/unversioned/lib/build/commons-lang.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/unversioned/lib/source/commons-lang-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
@@ -101,6 +103,17 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/unversioned/lib/build/commons-io.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/unversioned/lib/source/commons-io-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <annotation-paths>

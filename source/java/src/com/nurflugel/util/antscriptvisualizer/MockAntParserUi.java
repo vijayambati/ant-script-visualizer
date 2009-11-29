@@ -9,95 +9,14 @@ import javax.swing.*;
 public class MockAntParserUi implements AntParserUi
 {
   @Override
-  public boolean shouldConcentrate()
+  public OutputFormat getOutputFormat()
   {
-    return false;
-  }
-
-  @Override
-  public boolean shouldDeleteDotFilesOnExit()
-  {
-    return true;
-  }
-
-  @Override
-  public String getDotExecutablePath()
-  {
-    String os = System.getProperty("os.name");
-
-    if (os.startsWith("Mac OS"))
-    {
-      return "/Applications/Graphviz.app/Contents/MacOS/dot ";
-    }
-    else  // if (os.toLowerCase().startsWith("windows"))
-    {
-      return "\"C:\\Program Files\\ATT\\Graphviz\\bin\\dot.exe\" ";
-    }
-  }
-
-  @Override
-  public boolean showLegend()
-  {
-    return true;
+    return null;  // To change body of implemented methods use File | Settings | File Templates.
   }
 
   @Override
   public JFrame getFrame()
   {
-    return new JFrame();
-  }
-
-  @Override
-  public OutputFormat getOutputFormat()
-  {
-    return OutputFormat.PDF;
-  }
-
-  @Override
-  public boolean shouldGroupByBuildfiles()
-  {
-    return true;
-  }
-
-  @Override
-  public boolean shouldIncludeImportedFiles()
-  {
-    return true;
-  }
-
-  @Override
-  public boolean shouldShowLeftToRight()
-  {
-    return false;
-  }
-
-  @Override
-  public boolean shouldShowAntcalls()
-  {
-    return true;
-  }
-
-  @Override
-  public boolean shouldShowMacrodefs()
-  {
-    return true;
-  }
-
-  @Override
-  public boolean shouldShowTargets()
-  {
-    return true;
-  }
-
-  @Override
-  public boolean shouldShowTaskdefs()
-  {
-    return true;
-  }
-
-  @Override
-  public boolean shouldUseAbsolutePaths()
-  {
-    return false;
+    return null;  // To change body of implemented methods use File | Settings | File Templates.
   }
 }
