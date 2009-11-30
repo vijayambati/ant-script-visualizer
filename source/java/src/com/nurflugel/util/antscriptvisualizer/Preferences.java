@@ -28,7 +28,7 @@ public class Preferences
   private boolean                     shouldIncludeImportedFiles = true;
   private boolean                     shouldConcentrate          = true;
   private boolean                     shouldShowMacrodefs        = true;
-  private boolean                     shouldShowAntcalls         = true;
+  private boolean                     shouldShowAntCalls         = true;
   private boolean                     shouldShowTargets          = true;
   private boolean                     shouldDeleteDotFilesOnExit = true;
   private OutputFormat                outputFormat               = PDF;
@@ -49,7 +49,7 @@ public class Preferences
     shouldConcentrate          = preferencesStore.getBoolean(CONCENTRATE_LINES, true);
     shouldShowMacrodefs        = preferencesStore.getBoolean(SHOW_MACRODEFS, true);
     shouldShowTaskdefs         = preferencesStore.getBoolean(SHOW_TASKDEFS, true);
-    shouldShowAntcalls         = preferencesStore.getBoolean(SHOW_ANTCALLS, true);
+    shouldShowAntCalls         = preferencesStore.getBoolean(SHOW_ANTCALLS, true);
     shouldShowAnts             = preferencesStore.getBoolean(SHOW_ANTS, true);
     shouldShowTargets          = preferencesStore.getBoolean(SHOW_TARGETS, true);
     shouldDeleteDotFilesOnExit = preferencesStore.getBoolean(DELETE_DOT_FILES_ON_EXIT, true);
@@ -62,8 +62,8 @@ public class Preferences
 
   public Preferences(boolean dummyFlag)
   {
-    preferencesStore           = java.util.prefs.Preferences.userNodeForPackage(AntParserUiImpl.class);
-    dotExecutablePath          = preferencesStore.get(DOT_EXECUTABLE, "");
+    preferencesStore  = java.util.prefs.Preferences.userNodeForPackage(AntParserUiImpl.class);
+    dotExecutablePath = preferencesStore.get(DOT_EXECUTABLE, "");
   }
 
   public void save()
@@ -73,7 +73,7 @@ public class Preferences
     preferencesStore.putBoolean(CONCENTRATE_LINES, shouldConcentrate);
     preferencesStore.putBoolean(SHOW_MACRODEFS, shouldShowMacrodefs);
     preferencesStore.putBoolean(SHOW_TASKDEFS, shouldShowTaskdefs);
-    preferencesStore.putBoolean(SHOW_ANTCALLS, shouldShowAntcalls);
+    preferencesStore.putBoolean(SHOW_ANTCALLS, shouldShowAntCalls);
     preferencesStore.putBoolean(SHOW_ANTS, shouldShowAnts);
     preferencesStore.putBoolean(SHOW_TARGETS, shouldShowTargets);
     preferencesStore.putBoolean(DELETE_DOT_FILES_ON_EXIT, shouldDeleteDotFilesOnExit);
@@ -104,9 +104,9 @@ public class Preferences
     this.shouldShowMacrodefs = shouldShowMacrodefs;
   }
 
-  public void setShouldShowAntcalls(boolean shouldShowAntcalls)
+  public void setShouldShowAntCalls(boolean shouldShowAntCalls)
   {
-    this.shouldShowAntcalls = shouldShowAntcalls;
+    this.shouldShowAntCalls = shouldShowAntCalls;
   }
 
   public void setShouldShowTargets(boolean shouldShowTargets)
@@ -142,7 +142,7 @@ public class Preferences
   public void setLastDir(String lastDir)
   {
     this.lastDir = lastDir;
-      save();
+    save();
   }
 
   public String getDotExecutablePath()
@@ -182,7 +182,7 @@ public class Preferences
 
   public boolean shouldShowAntcalls()
   {
-    return shouldShowAntcalls;
+    return shouldShowAntCalls;
   }
 
   public boolean shouldShowTargets()

@@ -382,7 +382,7 @@ public class Antfile
         target.parseAntCalls(targetElement);
       }
 
-      if (preferences.shouldShowAntcalls())
+      if (preferences.shouldShowAnts())
       {
         target.parseAnts(targetElement, eventCollector, importsToProcess, importsAlreadyProcessed);
       }
