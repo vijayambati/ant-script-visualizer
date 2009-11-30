@@ -1,6 +1,7 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 import org.apache.commons.io.FileUtils;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -141,5 +142,11 @@ public class OutputTest
   {
     preferences.setShouldIncludeImportedFiles(false);
     testDotFile("unversioned/config/Import Test/noImports");
+  }
+
+  @Test(groups = "dot")
+  public void testMasterBuild() throws IOException
+  {
+    testDotFile("unversioned/config/MasterBuildExamples/build");
   }
 }
