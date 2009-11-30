@@ -138,11 +138,8 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCompilerSettings">
-    <option name="DEBUGGING_INFO" value="true" />
     <option name="GENERATE_NO_WARNINGS" value="true" />
     <option name="DEPRECATION" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EclipseEmbeddedCompilerSettings">
     <option name="DEBUGGING_INFO" value="true" />
@@ -217,8 +214,9 @@
         <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="groups">
             <value>
-              <list size="1">
+              <list size="2">
                 <item index="0" class="java.lang.String" itemvalue="unit" />
+                <item index="1" class="java.lang.String" itemvalue="dot" />
               </list>
             </value>
           </option>
@@ -869,12 +867,8 @@
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
   <component name="JikesSettings">
-    <option name="JIKES_PATH" value="" />
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="DEPRECATION" value="false" />
     <option name="GENERATE_NO_WARNINGS" value="true" />
-    <option name="IS_EMACS_ERRORS_MODE" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
+    <option name="DEPRECATION" value="false" />
   </component>
   <component name="LibFinderHistory">
     <history />

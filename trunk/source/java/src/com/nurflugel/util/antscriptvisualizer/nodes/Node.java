@@ -160,14 +160,14 @@ public abstract class Node
 
       if (shouldPrint(preferences))
       {
-        String line = "\t\t" + niceName + " [label=\"" + name + "\" shape=" + shape + " color=" + color + " ]; ";
+        String line = "\t\t" + niceName + " [label=\"" + name + "\" shape=" + shape + " color=" + color + " ];";
 
         out.writeBytes(line + NEW_LINE);
       }
     }
   }
 
-  /** Get's a name for the node which will work with GraphViz - it' doesn't like /, ', etc. */
+  /** Gets a name for the node which will work with GraphViz - it' doesn't like /, ', etc. */
   public String getNiceName()
   {
     String nicename      = Utility.replaceBadChars(name).trim();

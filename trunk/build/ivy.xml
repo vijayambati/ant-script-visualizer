@@ -26,6 +26,7 @@
         <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,dist,test,source" />
         <dependency org="org.apache"         name="log4j"        rev="1.2.15"       conf="build,dist,test,source" />
         <dependency org="org.testng"         name="testng"       rev="5.8-jdk1.5"   conf="build,test,source" />
+        <dependency org="org.testng"         name="testng-xslt"  rev="1.1"          conf="test" />
         <dependency org="com.ryangrier.ant"  name="version_tool" rev="1.1.4_fixed"  conf="build,javadoc" />
         <dependency org="com.nurflugel"      name="buildtasks"   rev="1.0-SNAPSHOT" conf="build" />
         <dependency org="org.apache"         name="commons-lang" rev="2.4"          conf="build,dist,test,source,javadoc" />

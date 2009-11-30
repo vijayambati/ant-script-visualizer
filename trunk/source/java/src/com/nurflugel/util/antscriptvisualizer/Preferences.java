@@ -60,6 +60,12 @@ public class Preferences
     previousVersion            = preferencesStore.get(PREVIOUS_VERSION, "");
   }
 
+  public Preferences(boolean dummyFlag)
+  {
+    preferencesStore           = java.util.prefs.Preferences.userNodeForPackage(AntParserUiImpl.class);
+    dotExecutablePath          = preferencesStore.get(DOT_EXECUTABLE, "");
+  }
+
   public void save()
   {
     preferencesStore.putBoolean(GROUP_NODES_BY_BUILDFILE, shouldGroupByBuildfiles);

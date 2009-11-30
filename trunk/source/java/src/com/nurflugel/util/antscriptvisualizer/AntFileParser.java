@@ -36,6 +36,7 @@ public class AntFileParser
   private Os                    os;
   private Preferences           preferences;
   private AntParserUiImpl       ui;
+  private EventCollector        eventCollector          = new EventCollector();
 
   /** Creates a new AntFileParser object. */
   public AntFileParser(Os os, Preferences preferences, AntParserUiImpl ui, File... filesToParse)
@@ -63,19 +64,23 @@ public class AntFileParser
     }
   }
 
-  /** Executed for each Ant file chosen from the UI.
-   * @param generateGraphicOutput*/
+  /**
+   * Executed for each Ant file chosen from the UI.
+   *
+   * @param  generateGraphicOutput
+   */
   public List<Antfile> processBuildFile(boolean generateGraphicOutput)
   {
-    EventCollector eventCollector = new EventCollector();
-    List<Antfile>  antfiles       = new ArrayList<Antfile>();
+    eventCollector.clear();
+
+    List<Antfile> antfiles = new ArrayList<Antfile>();
 
     try
     {
-      antfiles = parse(eventCollector);
+      antfiles = parse();
 
-      writeOutputFiles(antfiles,generateGraphicOutput);
-      processEvents(eventCollector);
+      writeOutputFiles(antfiles, generateGraphicOutput);
+      processEvents();
     }
     catch (GenericException e)
     {
@@ -97,7 +102,7 @@ public class AntFileParser
    * @return  the antfile that was specified from the file selector. This is needed, even though it's in the list of antfiles, because we need to know
    *          the file name for writing the .dot file later.
    */
-  private List<Antfile> parse(EventCollector eventCollector) throws GenericException
+  private List<Antfile> parse() throws GenericException
   {
     List<Taskdef>   taskdefs   = new UniqueList<Taskdef>();
     List<Macrodef>  macrodefs  = new UniqueList<Macrodef>();
@@ -113,7 +118,7 @@ public class AntFileParser
       antfiles = new UniqueList<Antfile>();
       antfiles.add(antfile);
 
-      parseAllFilesForAntUsage(eventCollector);
+      parseAllFilesForAntUsage();
     }
     catch (IOException e)
     {
@@ -132,7 +137,7 @@ public class AntFileParser
     {
       while (!importsToProcess.isEmpty())
       {
-        parseForImports(eventCollector, antfile);
+        parseForImports(antfile);
       }
     }
 
@@ -160,7 +165,7 @@ public class AntFileParser
    * Go through all the files already known, and look for any usages of "ant", which could be using a file yet unknown. If so, add it to the list. In
    * any case, add the Ant call to the list of "depends" in the Target.
    */
-  private void parseAllFilesForAntUsage(EventCollector eventCollector) throws IOException, JDOMException
+  private void parseAllFilesForAntUsage() throws IOException, JDOMException
   {
     for (Antfile antfile : antfiles)
     {
@@ -187,7 +192,7 @@ public class AntFileParser
   }
 
   /** Pretty self-explanitory name. */
-  private void parseForImports(EventCollector eventCollector, Antfile antfile)
+  private void parseForImports(Antfile antfile)
   {
     if (!importsToProcess.isEmpty())
     {
@@ -241,7 +246,7 @@ public class AntFileParser
   }
 
   /** Handle any events that were generated during the processing. */
-  private void processEvents(EventCollector eventCollector)
+  private void processEvents()
   {
     List<Event> events = eventCollector.getEvents();
     String      output = "The following problems occured while parsing the ant files:\n";
@@ -286,7 +291,7 @@ public class AntFileParser
   /**  */
   private void writeOutputFiles(List<Antfile> antfile, boolean generateGraphicOutput)
   {
-    OutputHandler outputHandler = new OutputHandler(preferences, antfiles, this, os,generateGraphicOutput);
+    OutputHandler outputHandler = new OutputHandler(preferences, antfiles, this, os, generateGraphicOutput);
 
     outputHandler.writeOutputFiles(antfile);
   }
@@ -357,5 +362,10 @@ public class AntFileParser
       antfile.resolveInternalDependencies();
       antfile.resolveExternalDependencies(antfiles);
     }
+  }
+
+  public EventCollector getEventCollector()
+  {
+    return eventCollector;
   }
 }

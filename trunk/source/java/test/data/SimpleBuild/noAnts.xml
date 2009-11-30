@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="antscript_visualizer" default="all">
+	<target name="compile" depends="init" description="compile module Ant script Visualizer production classes">
+		<ant antfile="fourbuilda.xml" target="clean"/>
+	</target>
+
+	<target name="init"  description="cleanup all"/>
+	<target name="jar" depends="compile" description="cleanup all"/>
+	<target name="all" depends="init, compile" description="build all">
+		<antcall target="sign"/>
+	</target>
+	<target name="sign" />
+</project>
