@@ -2,7 +2,6 @@ package com.nurflugel.util.antscriptvisualizer;
 
 import org.apache.commons.io.FileUtils;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
@@ -112,7 +111,7 @@ public class OutputTest
   @Test(groups = "dot")
   public void testNoAntCalls() throws IOException
   {
-    preferences.setShouldShowAntcalls(false);
+    preferences.setShouldShowAntCalls(false);
     testDotFile("unversioned/config/SimpleBuild/noAntCalls");
   }
 

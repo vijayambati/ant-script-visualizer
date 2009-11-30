@@ -170,7 +170,7 @@ public class AntParserUiImpl implements AntParserUi
     preferences.setShouldIncludeImportedFiles(includeImportedFilesCheckbox.isSelected());
     preferences.setShouldConcentrate(concentrateCheckbox.isSelected());
     preferences.setShouldShowMacrodefs(showMacrodefsCheckbox.isSelected());
-    preferences.setShouldShowAntcalls(showAntcallsCheckbox.isSelected());
+    preferences.setShouldShowAntCalls(showAntcallsCheckbox.isSelected());
     preferences.setShouldShowTargets(showTargetsCheckbox.isSelected());
     preferences.setShouldDeleteDotFilesOnExit(deleteDotFilesCheckbox.isSelected());
     preferences.setOutputFormat(getOutputFormat());
