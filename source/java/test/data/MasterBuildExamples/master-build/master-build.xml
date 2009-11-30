@@ -1,24 +1,1015 @@
 <?xml version="1.0"?>
-<project name="ivyBrowser" basedir=".." default="compile">
+<!--Do NOT alter this without discussing it with either Douglas Bullard or Justin Redd or Anil!!        -->
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="master" basedir=".." default="help">
 
-    <import file="master-build/master-webstart-build.xml"/>
+    <!-- Access any environment variables -->
+    <property environment="env" />
 
+    <!-- Load properties specific to this working copy; these will override anything else. -->
+    <property file="${basedir}/build/local.properties" />
 
-    <target name="compile" depends="-generate" unless="nocompile" description="Compiles all the Java code in the project. If you override this target, be sure to include the dependency on '-generate' and the call to super.compile. Calling Ant with -Dnocompile=t will skip compiling for speedier deployments.">
-        <echo>
-            Using classpath ${lib.build}/javac2.jar,${lib.build}/asm.jar for taskdef
-        </echo>
+    <!--This takes all the properties files and puts them into a single file which is used by all scripts-->
+    <delete file="${basedir}/unversioned/build.properties" failonerror="true" deleteonexit="false" />
+    <available file="${basedir}/unversioned/build.properties" type="file" property="build.properties.exists" />
+    <fail if="build.properties.exists" message="Didn't really delete build.properties like we should have" />
+    <concat destfile="${basedir}/unversioned/build.properties">
+        <fileset dir="${basedir}/build/master-build" includes="master-build.properties" />
+        <fileset dir="${basedir}/build/master-build" includes="master-webstart-build.properties" />
+        <fileset dir="${basedir}/build/master-build" includes="master-j2ee-build.properties" />
+        <fileset dir="${basedir}/build/master-build" includes="*${container}*.properties" />
+        <fileset dir="${basedir}/build" includes="project-build.properties" />
+    </concat>
+    <property file="${basedir}/unversioned/build.properties" />
 
-        <path id="classpath.javac2">
-                <pathelement location="${lib.build}/javac2.jar"/>
-                <pathelement location="${lib.build}/asm.jar"/>
-                <pathelement location="${lib.build}/asm-commons.jar"/>
-                <pathelement location="${lib.build}/jdom.jar"/>
+    <path id="classpath.compile">
+        <fileset dir="${lib.build}" includes="*.jar" />
+    </path>
+
+    <path id="classpath.test.compile">
+        <fileset dir="${lib.test}" excludes="*.dll" />
+    </path>
+
+    <path id="classpath.test.run">
+        <path refid="classpath.test.compile" />
+        <fileset dir="${test.data.dir}" />
+        <fileset dir="${config.data.dir}" />
+    </path>
+
+    <path id="classpath.testng.run">
+        <path refid="classpath.test.compile" />
+        <!-- <fileset dir="${test.data.dir}"/> -->
+        <pathelement path="${config.data.dir}" />
+        <pathelement path="${compile.out.dir}" />
+    </path>
+
+    <!--Validate the existance of a property.  Fail the build if it's not set.  We don't care what it is, as long as it exists-->
+    <macrodef name="validateProperty">
+        <attribute name="propertyName" />
+        <attribute name="message" default="" />
+        <attribute name="description" default="" />
+        <sequential>
+            <fail unless="@{propertyName}">Unable to proceed. @{propertyName} is a required property. @{message}</fail>
+            <echo level="verbose">Validated existence of property @{propertyName}: value is ${@{propertyName}}</echo>
+        </sequential>
+    </macrodef>
+
+    <!--Validate the existance of a property.  Fail the build if it's not set.  We don't care what it is, as long as it exists-->
+    <macrodef name="validatePropertiesNew">
+        <!--<attribute name="buildFile"/>-->
+        <attribute name="exceptions" default=""/>
+        <sequential>
+            <path id="classpath.buildtasks">
+                <pathelement location="${lib.build}/buildtasks.jar"/>
+                <!--<pathelement path="${unversioned.dir}/classes"/>-->
             </path>
-        <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="classpath.javac2"/>
+            <taskdef name="validatePropertiesTask" classname="com.nurflugel.buildtasks.ValidatePropertiesTask" classpathref="classpath.buildtasks"/>
+             <validatePropertiesTask  exceptions="@{exceptions}"/>
+            <echo> ::::::::::::::ant.file = ${ant.file} </echo>
+            <!--<echo> ::::::::::::::missing property = @{dibble.dabble} </echo>-->
+            <!--<echoproperties />-->
+             <!--<validatePropertiesTask />-->
+             <!--<validatePropertiesTask buildFile="${ant.file}" exceptions="@{exceptions}"/>-->
+        </sequential>
+    </macrodef>
+    <!---->
+           <!--<validatePropertiesNew-->
+                <!--exceptions="BaselineName, ivy.repository.url, desired.ivy.version.number, rmlinkout, envstore-load.localfile.dir, repositoryUrl, mklinkout, src, test.single, testng.src.dir, nurflugel.deploy.dir, container, formal.app.name, buildtime, client.jar.dir, envstore.namespace, junit.data.dir"/>-->
 
-        <echo level="verbose">Target::ivyBrowser.compile</echo>
-        <super.compile useJavac2="true"/>
+    <!--validate project specific properties-->
+    <!--<validateProperty propertyName="make.me.fail"/>-->
+    <!--<validateProperty propertyName="app.name" />-->
+    <!--<validateProperty propertyName="compile.debug" />-->
+    <!--<validateProperty propertyName="compile.debugLevel" />-->
+    <!--<validateProperty propertyName="compile.deprecation" />-->
+    <!--<validateProperty propertyName="compile.optimize" />-->
+    <!--<validateProperty propertyName="compile.out.dir" />-->
+    <!--<validateProperty propertyName="dist.dir" />-->
+    <!--<validateProperty propertyName="docs.dir" />-->
+    <!--<validateProperty propertyName="envstore.file" />-->
+    <!--<validateProperty propertyName="envstore.location" />-->
+    <!--<validateProperty propertyName="envstore.update" />-->
+    <!--<validateProperty propertyName="formal.app.name" />-->
+    <!--<validateProperty propertyName="gen.src.dir" />-->
+    <!--<validateProperty propertyName="ivy.dep.file" />-->
+    <!--<validateProperty propertyName="ivy.jar.file" />-->
+    <!--<validateProperty propertyName="ivy.showprogress" />-->
+    <!--<validateProperty propertyName="java.src.dir" />-->
+    <!--<validateProperty propertyName="javadoc.dir" />-->
+    <!--<validateProperty propertyName="jaxb.test.dir" />-->
+    <!--<validateProperty propertyName="junit.doc.dir" />-->
+    <!--<validateProperty propertyName="lib.build" />-->
+    <!--<validateProperty propertyName="lib.dir" />-->
+    <!--<validateProperty propertyName="lib.test" />-->
+    <!--<validateProperty propertyName="localenvstore.file" />-->
+    <!--<validateProperty propertyName="module.root.dir" />-->
+    <!--<validateProperty propertyName="project.name" />-->
+    <!--<validateProperty propertyName="src.dir" />-->
+    <!--<validateProperty propertyName="short.app.name" />-->
+    <!--<validateProperty propertyName="generated.src.dir" />-->
+    <!--<validateProperty propertyName="test.src.dir" />-->
+    <!--<validateProperty propertyName="unversioned.dir" />-->
+    <!--<validateProperty propertyName="testng.config.dir" />-->
+    <!--<validateProperty propertyName="testng.src.dir" />-->
+
+
+    <tstamp>
+        <format property="buildtime" pattern="yyyy-MM-dd'T'HH:mm:ss" />
+    </tstamp>
+
+    <tstamp>
+        <format property="ivyTimestamp" pattern="yyyyMMddHHmmss" />
+    </tstamp>
+
+    <!--This is the initialization target that should be a dependency of all other targets.  Its name is preceded by a '-' so it's not
+        callable from the command line.  -->
+    <target name="-init" depends="ivy">
+        <echo level="verbose">Target::master.-init</echo>
+        <showSystemInfo />
+        <createTaskdefs />
+        <property environment="env" />
+        <mkdirs />
+        <validatePropertiesNew
+                        exceptions="BaselineName, ivy.repository.url, desired.ivy.version.number, rmlinkout, envstore-load.localfile.dir, repositoryUrl, mklinkout, src, test.single, testng.src.dir, nurflugel.deploy.dir, container, formal.app.name, buildtime, client.jar.dir, envstore.namespace, junit.data.dir"/>
+
     </target>
+
+    <macrodef name="createTaskdefs" description="Create all the taskdefs needed for the build.">
+        <sequential>
+            <echo level="verbose">    Macrodef::createTaskdefs</echo>
+            <!--bring in the optional tasks, such as "if"-->
+            <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib.build}/ant-contrib.jar" />
+            <path id="classpath.ant.tasks">
+                <!--<pathelement location="${lib.build}/svnkit.jar" />-->
+                <!--<pathelement location="${lib.build}/buildtasks.jar" />-->
+                <pathelement location="${lib.build}/commons-lang.jar" />
+                <pathelement location="${lib.build}/commons-collections.jar" />
+            </path>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="showSystemInfo" description="Show the system information">
+        <sequential>
+            <echo>--------- ${formal.app.name} ---------
+                Timestamp:          ${buildtime}
+                java.home =         ${java.home}
+                ant.java.version =  ${ant.java.version}
+                ant.version =       ${ant.version}
+                ant.project.name =  ${ant.project.name}
+                ant.file =          ${ant.file}
+                os.name=            ${os.name}</echo>
+        </sequential>
+    </macrodef>
+
+    <target name="ivy" unless="noivy" description="Ivy brings in all jars for the project. If you want to skip this, run the build with '-Dnoivy=t'.">
+        <echo level="verbose">Target::master.ivy</echo>
+        <ivy />
+    </target>
+
+    <macrodef name="ivy" description="Get all libraries from Ivy">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.ivy</echo>
+            <path id="ivy.lib.path">
+                <fileset dir="${ivy.conf.dir}/ivy" includes="*.jar"/>
+                <fileset dir="${lib.build}" includes="*.jar" />
+            </path>
+            <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+            <ivy:resolve file="${ivy.dep.file}" transitive="true" showprogress="${ivy.showprogress}" />
+            <ivy:retrieve sync="true" />
+            <!--make an empty container dir in case no container jars are specified.  This keeps the build scripts tidy, and keeps them -->
+            <!--from failing if the container lib dir doesn't appear in the compile path.-->
+            <mkdir dir="${lib.container}" />
+            <!--we define this here again, as if it was tried to be defined in the init target before Ivy was
+                ever run, it'll bomb, as there are no jars.  If we define it here again, then it works the second time.
+                Why not just have this the only definition?  Because then you'll have to run Ivy EVERY time, and it's slow. -->
+            <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib.build}/ant-contrib.jar" />
+            <property name="noivy" value="true" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ivybuildtasks" description="Get all libraries from Ivy needed to do the build">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.ivybuildtasks</echo>
+             <path id="ivy.lib.path">
+                <fileset dir="${ivy.conf.dir}/ivy" includes="*.jar"/>
+            </path>
+            <taskdef resource="org/apache/ivy/ant/antlib.xml"
+                uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+            <ivy:resolve file="${basedir}/build/ivy/buildivy.xml" transitive="true" showprogress="${ivy.showprogress}" />
+            <ivy:retrieve sync="true" />
+            <createTaskdefs />
+        </sequential>
+    </macrodef>
+
+    <!--abstract macrodef for generating code.  Override with your own version if needed-->
+    <!--This is where you'd call generate jaxb, web services, etc.-->
+    <macrodef name="macroGenerate">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.macroGenerate</echo>
+        </sequential>
+    </macrodef>
+
+    <target name="-generate" depends="-init" description="Generates any code requried for the project. If you need to use this, create a macrodef in your project called 'generateJaxb-details' and implement code generation there.">
+        <echo level="verbose">Target::master.-generate</echo>
+        <macroGenerate />
+    </target>
+
+    <target name="compile" depends="-generate" unless="nocompile"
+    description="Compiles all the Java code in the project. If you override this target, be sure to include the dependency on '-generate' and the call to super.compile. Calling Ant with -Dnocompile=t will skip compiling for speedier deployments.">
+        <echo level="verbose">Target::master.compile</echo>
+        <super.compile />
+    </target>
+
+    <macrodef name="super.compile" description="    Macrodef to do the actual work of compilation-">
+        <attribute name="excludes" default="" description="Classes/paths we don't want to compile" />
+        <attribute name="source" description="javac -source flag" default="${java.specification.version}"/>
+        <attribute name="target" description="javac -target flag" default="${java.specification.version}"/>
+        <attribute name="useJavac2" description="if true, use the javac2 compiler from JetBrains" default="false"/>
+        <sequential>
+            <echo level="verbose">    Macrodef::master.super.compile</echo>
+            <mkdir dir="${compile.out.dir}" />
+            <compileCode srcdir="${gen.src.dir}" classpathRef="classpath.compile" excludes="@{excludes}" source="@{source}" target="@{target}" useJavac2="@{useJavac2}"/>
+            <compileCode srcdir="${java.src.dir}" classpathRef="classpath.compile" excludes="@{excludes}" source="@{source}" target="@{target}" useJavac2="@{useJavac2}"/>
+            <if>
+                <isset property="testng" />
+                <then>
+                    <echo>Compiling TestNG source dirs</echo>
+                    <compileCode srcdir="${test.src.dir}" classpathRef="classpath.compile" excludes="@{excludes}" source="@{source}" target="@{target}"/>
+                </then>
+                <else>
+                    <echo>Compiling JUnit source dirs</echo>
+                    <compileCode type="sourcePaths" classpathRef="classpath.test.compile" excludes="@{excludes}" source="@{source}" target="@{target}">
+                        <sourcePaths>
+                            <src path="${test.src.dir}" />
+                        </sourcePaths>
+                    </compileCode>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compileCode" description="Compiles a directory of source code">
+        <attribute name="type" default="srcDir" description="Either 'srcDir' or 'sourcePaths" />
+        <attribute name="srcdir" default="${test.src.dir}" description="The location of the source code dir. You can provide either a srcdir or source paths, but not both." />
+        <attribute name="includeAnt" default="false" description="Should we include the ant libraries?" />
+        <attribute name="classpathRef" description="The classpath to use for compilation" />
+        <attribute name="excludes" description="Classes/paths we don't want to compile" />
+        <attribute name="source" description="javac -source flag" default="${java.specification.version}"/>
+        <attribute name="target" description="javac -target flag" default="${java.specification.version}"/>
+        <attribute name="useJavac2" description="if true, use the javac2 compiler from JetBrains" default="false"/>
+        <element name="sourcePaths" optional="yes" description="XML for sourcepaths - a series of src path='${src}' lines (substitue double quotes for single quotes" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.compileCode
+                 :::srcdir=         @{srcdir}
+                 :::type=           @{type}
+                 :::includeAnt=     @{includeAnt}
+                 :::classpathRef=   @{classpathRef}
+                 :::destdir=        ${compile.out.dir}                 :::excludes=       @{excludes}
+                 :::source=         @{source}
+                 :::target=         @{target}
+            </echo>
+            <mkdir dir="${compile.out.dir}" />
+            <!--Stupid, but if these dirs don't exist, compiling the non-existant test dirs fail, and I don't want to turn of failure errors altogether.-->
+            <!--Easiest to just create empty dirs if they don't already exist and prevent failures due to missing dirs-->
+            <mkdir dir="${test.src.dir}" />
+            <if>
+                <equals arg1="@{type}" arg2="srcDir" />
+                <then>
+                    <echo>Compiling @{srcdir} with classpath @{classpathRef}</echo>
+                    <available file="@{srcdir}" type="dir" property="@{srcdir}_exists" value="true" />
+                    <if>
+                        <equals arg1="${@{srcDir}_exists}" arg2="true" />
+                        <then>
+                            <if>
+                                <equals arg1="@{useJavac2}" arg2="true"/>
+                                <then>
+                                    <javac2 srcdir="@{srcdir}" classpathref="@{classpathRef}" destdir="${compile.out.dir}" debug="${compile.debug}" debugLevel="${compile.debugLevel}" deprecation="${compile.deprecation}" includeAntRuntime="@{includeAnt}" excludes="@{excludes}" optimize="${compile.optimize}" source="@{source}" target="@{target}"/>
+                                </then>
+                                <else>
+                                    <javac srcdir="@{srcdir}" classpathref="@{classpathRef}" destdir="${compile.out.dir}" debug="${compile.debug}" debugLevel="${compile.debugLevel}" deprecation="${compile.deprecation}" includeAntRuntime="@{includeAnt}" excludes="@{excludes}" optimize="${compile.optimize}" source="@{source}" target="@{target}"/>
+                                </else>
+                            </if>
+                        </then>
+                        <else>
+                            <echo>::::::Skipping compilation of @{srcdir} as it didn't exist!</echo>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <echo>Compiling source paths with classpath @{classpathRef}</echo>
+
+                    <if>
+                        <equals arg1="@{useJavac2}" arg2="true"/>
+                        <then>
+                            <javac2 classpathref="@{classpathRef}" destdir="${compile.out.dir}" debug="${compile.debug}" debugLevel="${compile.debugLevel}" deprecation="${compile.deprecation}" includeAntRuntime="@{includeAnt}" excludes="@{excludes}" optimize="${compile.optimize}" source="@{source}" target="@{target}">
+                                <sourcePaths />
+                            </javac2>
+                        </then>
+                        <else>
+                            <javac classpathref="@{classpathRef}" destdir="${compile.out.dir}" debug="${compile.debug}" debugLevel="${compile.debugLevel}" deprecation="${compile.deprecation}" includeAntRuntime="@{includeAnt}" excludes="@{excludes}" optimize="${compile.optimize}" source="@{source}" target="@{target}">
+                                <sourcePaths />
+                            </javac>
+                        </else>
+                    </if>
+
+
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="help" description="Default help target, shows all usable commands">
+        <!--This gets around us having to need a "help" target which duplicates all the description stuff-->
+        <showSystemInfo />
+        <!--For windows environments-->
+        <!--The "grep" command filters out duplicate targets - all imported scripts show their targets as their own,-->
+        <!--then the imported script's version of them as well-->
+        <exec osfamily="Windows" executable="cmd">
+            <arg value="/c" />
+            <arg value="build" />
+            <arg value="-p" />
+            <arg value="|" />
+            <arg value="build\master-build\bin\grep.exe" />
+            <arg value="-v" />
+            <arg value="master\." />
+            <arg value="|" />
+            <arg value="build\master-build\bin\grep.exe" />
+            <arg value="-v" />
+            <arg value="master\-.*\." />
+            <!--filter out any "hidden" targets that begin with a "-" -->
+            <arg value="|" />
+            <arg value="build\master-build\bin\grep.exe" />
+            <arg value="-v" />
+            <arg value=" \-.*" />
+            <!--filter out any output that starts with "trying" -->
+            <arg value="|" />
+            <arg value="build\master-build\bin\grep.exe" />
+            <arg value="-v" />
+            <arg value=".*Trying.*" />
+        </exec>
+        <!--for non-windows environments-->
+        <exec osfamily="Unix" executable="build.sh">
+            <arg value="-p" />
+            <arg value="|" />
+            <arg value="grep" />
+            <arg value="-v" />
+            <arg value="master\." />
+            <arg value="|" />
+            <arg value="grep" />
+            <arg value="-v" />
+            <arg value="master\-.*\." />
+            <arg value="|" />
+            <arg value="grep" />
+            <arg value="-v" />
+            <arg value=" \-.*" />
+            <arg value="|" />
+            <arg value="grep" />
+            <arg value="-v" />
+            <arg value=".*Trying.*" />
+        </exec>
+    </target>
+
+    <target name="clean" description="Removes all files not in source control">
+        <echo level="verbose">Target::master.clean</echo>
+        <master.clean />
+    </target>
+
+    <macrodef name="master.clean" description="Remove all files not in source control. Guts of the target, so scripts can call this out of sequence">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.clean</echo>
+            <!--everything except libs-->
+            <delete includeemptydirs="true">
+                <fileset dir="${unversioned.dir}">
+                    <include name="**/*" />
+                    <exclude name="lib/**/*.jar" />
+                </fileset>
+            </delete>
+            <!--just the libs - it's OK to fail on these, as ATG and IDEA tend to lock them-->
+            <delete dir="${unversioned.dir}/lib" failonerror="false" />
+            <mkdirs />
+            <!--now, get the Ivy libs back so other tasks don't fail-->
+            <ivybuildtasks />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="mkdirs" description="Makes all required dirs">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.mkdirs</echo>
+            <mkdir dir="${dist.dir}" />
+            <mkdir dir="${docs.dir}" />
+            <mkdir dir="${javadoc.dir}" />
+            <mkdir dir="${config.data.dir}" />
+            <!--<mkdir dir="${junit.data.dir}" />-->
+            <!--<mkdir dir="${junit.doc.dir}" />-->
+            <mkdir dir="${lib.dir}" />
+            <mkdir dir="${compile.out.dir}" />
+        </sequential>
+    </macrodef>
+
+    <!--this macrodef has a funny name because "buildInfoTask" is a task, so we needed to name the macrodef differently...-->
+    <!--<macrodef name="buildInfo" description="Create the build's info file and read its results into properties">-->
+        <!--<attribute name="dir" default="${nurflugel.deploy.dir}"-->
+        <!--<attribute name="dir" default="${nurflugel.deploy.dir}" description="The target dir the file will be located in. Defaults to the tar dir's nurflugel-deploy dir." />-->
+        <!--<sequential>-->
+            <!--<echo level="verbose">    Macrodef::master.buildInfo dir=@{dir}</echo>-->
+            <!--<mkdir dir="@{dir}" />-->
+            <!-- Collect revision data from Subversion. -->
+            <!--<echo>buildinfo workingDirectory="${app.root.dir}" buildinfoFileName="@{dir}/buildinfo.txt"</echo>-->
+            <!--<buildInfoTask workingDirectory="${app.root.dir}" buildinfoFileName="@{dir}/buildinfo.txt" />-->
+            <!--<property file="@{dir}/buildinfo.txt" />-->
+            <!--<echo>Subversion branch/tag name = ${BaselineName}</echo>-->
+        <!--</sequential>-->
+    <!--</macrodef>-->
+
+    <macrodef name="cleanDir" description="Delete a dir to clean it out and recreate it">
+        <attribute name="dirName" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.cleanDir dirName=@{dirName}</echo>
+            <delete dir="@{dirName}" />
+            <mkdir dir="@{dirName}" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="generateJaxb" description="Generate java code from a JAXB .xsd file.">
+        <element name="jaxbDetails" optional="no" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.generateJaxb</echo>
+            <jaxbDetails />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compileJaxbXsd" description="Generates java code from a JAXB .xsd file. Tests to see if the output dir exists, if so, skips. Run a 'clean' if you want to force generation">
+        <attribute name="classpathRef" default="classpath.compile" description="The classpath to use." />
+        <attribute name="destinationDir" />
+        <attribute name="package" />
+        <attribute name="xsd" />
+        <attribute name="testDir" default="${jaxb.gen.src.dir}/net/nurflugel" description="This is the directory used to test the existence of previously generated files." />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.compileJaxbXsd
+                 :::package=        @{package}
+                 :::classpathRef=   @{classpathRef}
+                 :::destinationDir= @{destinationDir}
+                 :::xsd=            @{xsd}</echo>
+            <echo level="verbose">    Macrodef::generateJaxb</echo>
+            <echo>Testing for existence of @{testDir}</echo>
+            <available property="jaxb.files.exist" value="true" file="@{testDir}" />
+            <if>
+                <equals arg1="${jaxb.files.exist}" arg2="true" />
+                <then>
+                    <echo>Skipping JAXB generation, as @{testDir} exists. If you wish to re-generate them, run "clean" again</echo>
+                </then>
+                <else>
+                    <echo>Creating the JAXB classes for ${app.name}.</echo>
+                    <java fork="yes" classname="com.sun.tools.xjc.Driver" dir="." classpathref="@{classpathRef}">
+                        <arg value="-d" />
+                        <arg value="@{destinationDir}" />
+                        <arg value="-p" />
+                        <arg value="@{package}" />
+                        <arg value="-readOnly" />
+                        <arg value="@{xsd}" />
+                    </java>
+                </else>
+            </if>
+            <var name="jaxb.files.exist" unset="true"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copyFiles"
+              description="Creates a dir, copies contents but not .svn files.  This should be used whenever copying files.">
+        <attribute name="toDir" description="The destination dir.  Will be created if it doesn't exist."/>
+        <attribute name="fromDir" description="The dir to copy"/>
+        <attribute name="excludesBlock" default="" description="Files to exclude.  "/>
+        <attribute name="includesBlock" default="**/*.*" description="Files to inlude."/>
+        <attribute name="overwrite" default="false" description="Overwrite existing files."/>
+        <attribute name="failOnError" default="false" description="Fail for any errors."/>
+        <attribute name="filtersetref" default="" description="Fiterset ref to use when copying.  If specified, must be a valid filterset refid"/>
+        <sequential>
+            <echo level="verbose">    Macrodef::master.copyFiles  fromDir=@{fromDir}  toDir=@{toDir}
+                :::toDir=          @{toDir}
+                :::fromDir=        @{fromDir}
+                :::excludesBlock=  @{excludesBlock}
+                :::includesBlock=  @{includesBlock}
+                :::overwrite=      @{overwrite}
+                :::failOnError=    @{failOnError}
+                :::filtersetref=   @{filtersetref}
+            </echo>
+            <mkdir dir="@{toDir}"/>
+            <if>
+                <equals arg1="@{excludesBlock}" arg2=""/>
+                <then>
+                    <copy todir="@{toDir}" overwrite="@{overwrite}" failonerror="@{failOnError}" includeEmptyDirs="true">
+                        <fileset dir="@{fromDir}" excludes=".svn" includes="@{includesBlock}"/>
+                    </copy>
+                </then>
+                <else>
+                    <copy todir="@{toDir}" overwrite="@{overwrite}" failonerror="@{failOnError}"  includeEmptyDirs="true">
+                        <fileset dir="@{fromDir}" excludes=".svn,@{excludesBlock}" includes="@{includesBlock}"/>
+                    </copy>
+                </else>
+            </if>
+            <if>
+                <not>
+                    <!--if they've passed in a filterset argument, then do a seperate copy of .xml and .property files with the filterset-->
+                    <equals arg1="@{filtersetref}" arg2=""/>
+                </not>
+                <then>
+                    <copyFilesWithFiltersets toDir="@{toDir}" fromDir="@{fromDir}" failonerror="@{failOnError}" includesBlock="@{includesBlock}" excludesBlock="@{excludesBlock}" filtersetref="@{filtersetref}"/>
+                </then>
+
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copyFilesWithFiltersets"
+              description="Creates a dir, copies contents but not .svn files.  This should be used whenever copying files.">
+      <attribute name="toDir" description="The destination dir.  Will be created if it doesn't exist."/>
+        <attribute name="fromDir" description="The dir to copy"/>
+        <attribute name="excludesBlock" default="" description="Files to exclude.  "/>
+        <attribute name="includesBlock" default="**/*.xml,**/*.properties" description="Files to inlude."/>
+        <attribute name="failOnError"  description="Fail for any errors"/>
+        <attribute name="filtersetref" default="" description="Fiterset ref to use when copying.  If specified, must be a valid filterset refid"/>
+        <sequential>
+            <echo level="verbose">    Macrodef::master.copyFilesWithFiltersets  toDir=@{toDir}  fromDir=@{fromDir}
+                :::toDir=          @{toDir}
+                :::fromDir=        @{fromDir}
+                :::excludesBlock=  @{excludesBlock}
+                :::includesBlock=  @{includesBlock}
+                :::filtersetref=   @{filtersetref}
+            </echo>
+            <mkdir dir="@{toDir}"/>
+            <record action="start" loglevel="debug" name="build.out"/>
+            <if>
+                <equals arg1="@{excludesBlock}" arg2=""/>
+                <then>
+                    <copy todir="@{toDir}" overwrite="true" failonerror="@{failOnError}" includeEmptyDirs="true" >
+                        <fileset dir="@{fromDir}" excludes=".svn,**/*.jar,**/*.zip,**/*.rar,**/*.class" includes="@{includesBlock}"/>
+                        <filterset refid="@{filtersetref}"/>
+                    </copy>
+                </then>
+                <else>
+                    <copy todir="@{toDir}" overwrite="@{overwrite}" failonerror="@{failOnError}"  includeEmptyDirs="true" >
+                        <fileset dir="@{fromDir}" excludes=".svn,**/*.jar,**/*.zip,**/*.rar,**/*.class,@{excludesBlock}" includes="@{includesBlock}"/>
+                        <filterset refid="@{filtersetref}}"/>
+                    </copy>
+                </else>
+            </if>
+            <record action="stop" name="build.out"/>
+        </sequential>
+    </macrodef>
+
+    <!--This loads the envstore contents for the project into a file.  This should not be calld by anyone
+    other then envstoreReplace  -->
+    <macrodef name="envstoreLoad" description="Loads key/value pairs for the current environment from the environment store.">
+        <attribute name="server" default="${envstore.location}" description="The URI to read from, like http://camb2bp1:8080/env/lookup.cgi" />
+        <attribute name="namespace" default="${envstore.namespace}" description="Environment namespace to use (e.g. om.12.windev)." />
+        <attribute name="localfile" default="${envstore.file}" description="File that will be written with the contents of the envstore" />
+        <attribute name="update" default="${envstore.update}" description="????" />
+        <attribute name="force" default="true" description="If set to false, will use whatever is in an existing local file. If true, will overwrite the file." />
+        <attribute name="overrideFileUrl" default="" description="Use this file to override keys (or add new ones)" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.envstoreLoad
+                 :::server=         @{server}
+                 :::namespace=      @{namespace}
+                 :::localfile=      @{localfile}
+                 :::update=         @{update}
+                 :::force=          @{force}
+                 :::overrideFileUrl=@{overrideFileUrl}</echo>
+            <echo>"Loading envstore values for @{namespace}..."</echo>
+            <!--<if>-->
+                <!--<or>-->
+                    <!--<equals arg1="@{force}" arg2="true" casesensitive="false" trim="true" />-->
+                    <!--<not>-->
+                        <!--<available file="@{localfile}" />-->
+                    <!--</not>-->
+                <!--</or>-->
+                <!--<then>-->
+                    <!--<echo>  Reading in envstore properties</echo>-->
+                    <!--<dirname file="@{localfile}" property="envstore-load.localfile.dir" />-->
+                    <!--<mkdir dir="${envstore-load.localfile.dir}" />-->
+                    <!--if the user has specified the skip.envstoreLoad=t, and the file already exists, skip-->
+                    <!--loading it for speedy deployments-->
+                    <!--<available property="envstoreLoadFile.exists" value="true" file="@{localfile}" />-->
+                    <!--<if>-->
+                        <!--<and>-->
+                            <!--<isset property="skip.envstoreLoad" />-->
+                            <!--<isset property="envstoreLoadFile.exists" />-->
+                        <!--</and>-->
+                        <!--<then>-->
+                            <!--do nothing-->
+                        <!--</then>-->
+                        <!--<else>-->
+                            <!--<loadEnvstoreTask namespace="@{namespace}." envstoreFile="@{localfile}" envstoreUrls="@{server}@{overrideFileUrl}" updateEnvstore="@{update}" />-->
+                        <!--</else>-->
+                    <!--</if>-->
+                <!--</then>-->
+            <!--</if>-->
+        </sequential>
+    </macrodef>
+
+    <macrodef name="envstoreReplace" description="Replaces environment store keys with the appropriate values.">
+        <attribute name="target" description="Root directory for replacement." />
+        <attribute name="includes" default="**/*.xml,**/*.properties,**/*.js" description="File inclusion filter for replacement." />
+        <attribute name="excludes" default="" description="File exclusion filter for replacement." />
+        <attribute name="namespace" default="${envstore.namespace}" description="Environment namespace to use (e.g. om.15.windev)." />
+        <attribute name="server" default="${envstore.location}" />
+        <attribute name="localFile" default="${envstore.file}" />
+        <attribute name="update" default="${envstore.update}" />
+        <attribute name="caseSensitive" default="false" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.envstoreReplace
+                 :::target=         @{target}
+                 :::incluides=      @{includes}
+                 :::excludes=       @{excludes}
+                 :::namespace=      @{namespace}
+                 :::server=         @{server}
+                 :::localFile=      @{localFile}
+                 :::update=         @{update}
+                 :::caseSensitive=  @{caseSensitive}</echo>
+            <!--Do any local override file FIRST - this will fail if the file doesn't exist, so we wrap it in an 'if' block -->
+            <if>
+                <available file="${localenvstore.file}" />
+                <then>
+                    <replace dir="@{target}" includes="@{includes}" excludes="@{excludes}" replacefilterfile="${localenvstore.file}" summary="yes" casesensitive="@{casesensitive}" />
+                </then>
+            </if>
+            <!--get the values from the envstore and put them into a file-->
+            <!--todo - there is no envstore server - if you have one, uncomment the line below and set the server name properly in the properites-->
+            <!--<envstoreLoad server="@{server}" namespace="@{namespace}" localfile="@{localfile}" update="@{update}" force="false" />-->
+            <!--Now do the envstore-->
+            <!--<replace dir="@{target}" includes="@{includes}" excludes="@{excludes}" replacefilterfile="@{localfile}" summary="yes" casesensitive="@{casesensitive}" />-->
+        </sequential>
+    </macrodef>
+
+    <!--<macrodef name="setPropertyFromEnvstore" description="Talk to the envstore, set a specific property from it.  Won't call the fetch url if the file already exists (for speed)">-->
+        <!--<attribute name="propertyName"  description="key from envstore, will have leading and trailing %%"/>-->
+        <!--<attribute name="envstoreKey" description="key from envstore, will have leading and trailing %%"/>-->
+        <!--<sequential>-->
+            <!--<echo level="verbose">    Macrodef::master.setPropertyFromEnvstore-->
+                <!--:::propertyName=@{propertyName}-->
+                <!--:::envstoreKey=@{envstoreKey}-->
+            <!--</echo>-->
+            <!--<envstoreLoad force="false"/>-->
+            <!--<property file="${envstore.file}"/>-->
+            <!--<property name="@{propertyName}" value="${@{envstoreKey}}"/>-->
+            <!--<echo>@{propertyName} is now ${@{propertyName}}</echo>-->
+        <!--</sequential>-->
+    <!--</macrodef>-->
+
+    <macrodef name="junitBatch" description="Run a series of unit tests.">
+        <attribute name="filesetDir" description="The directory of files to test" />
+        <attribute name="includeName" default="**/*Test.java" description="The pattern of files to test against" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.junitBatch
+                 :::filesetDir=     @{filesetDir}
+                 :::includeName=    @{includeName}</echo>
+            <junitTestCore>
+                <whatToTest>
+                    <batchtest fork="yes" haltonerror="false" haltonfailure="false" todir="${junit.data.dir}">
+                        <fileset dir="@{filesetDir}">
+                            <include name="@{includeName}" />
+                        </fileset>
+                    </batchtest>
+                </whatToTest>
+            </junitTestCore>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="junitTestCore" description="The guts of the test stuff.">
+        <attribute name="target" default="${junit.data.dir}" description="Directory for writing the JUnit test result metadata." />
+        <attribute name="classpathRef" default="classpath.test.run" />
+        <element name="whatToTest" optional="no" description="A block of XML representing the actual chunk to test" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.junitTestCore
+                 :::target=         @{target}
+                 :::classpathRef=   @{classpathRef}</echo>
+            <mkdir dir="@{target}" />
+            <junit fork="yes" haltonfailure="false" failureproperty="test.failed" errorproperty="test.failed" showoutput="true" printsummary="on">
+                <sysproperty key="app.root.dir" value="${app.root.dir}" />
+                <sysproperty key="fromant" value="yep" />
+                <classpath path="${compile.out.dir}" />
+                <classpath path="${config.data.dir}" />
+                <classpath path="${test.data.dir}" />
+                <classpath refid="@{classpathRef}" />
+                <formatter type="xml" />
+                <!--<formatter type="brief" usefile="false"/>-->
+                <whatToTest />
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="junitReport" description="Generates the JUnit reports">
+        <attribute name="source" default="${junit.data.dir}" description="Source directory containing JUnit test result data." />
+        <attribute name="target" default="${junit.doc.dir}" description="Target directory for writing JUnit test results report." />
+        <attribute name="sourceIncludes" default="*.xml" description="Include filter for source files." />
+        <attribute name="targetFormat" default="frames" description="Report output format (frames,noframes)." />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.junitReport
+                 :::source=         @{source}
+                 :::target=         @{target}
+                 :::sourceIncludes= @{sourceIncludes}
+                 :::targetFormat=   @{targetFormat}</echo>
+            <mkdir dir="@{target}" />
+            <junitreport todir="@{target}">
+                <fileset dir="@{source}" includes="@{sourceIncludes}" />
+                <report todir="@{target}" format="@{targetFormat}" />
+            </junitreport>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="masterXjc" description="Simplifies common options and values for xjc task.">
+        <attribute name="schema" description="Source schema." />
+        <attribute name="package" description="Java package generated sources will belong to." />
+        <attribute name="target" default="${generated.src.dir}" description="Output directory for generated sources." />
+        <attribute name="readOnly" default="true" description="Whether generated files will be in read-only mode (true/false)." />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.masterXjc
+                 :::schema=     @{schema}
+                 :::package=    @{package}
+                 :::target=     @{target}
+                 :::readOnly=   @{readOnly}</echo>
+            <xjc schema="@{schema}" package="@{package}" target="@{target}" readonly="@{readonly}" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="testTestNG" description="Run the tests via TestNG.">
+        <attribute name="configDir" default="${testng.config.dir}" description="The testNG config dir to use" />
+        <attribute name="configFile" default="testng.xml" description="The testNG config file to use" />
+        <attribute name="outputDir" default="${unversioned.dir}/test-output" description="The output directory for testNG to use for generating reports" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.testTestNG
+                 :::configDir=  @{configDir}
+                 :::configFile= @{configFile}
+                 :::outputDir= ${unversioned.dir}/@{outputDir}</echo>
+            <taskdef resource="testngtasks" classpath="${lib.test}/testng.jar" />
+            <testng sourcedir="${test.src.dir}"
+                    annotations="JDK"
+                    classpathref="classpath.testng.run"
+                    outputdir="@{outputDir}"
+                    haltOnfailure="false">
+                <xmlfileset dir="@{configDir}" includes="@{configFile}" />
+            </testng>
+
+            <formatTestNgOutput testNgOutputDir="@{outputDir}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef  name="formatTestNgOutput">
+        <attribute name="testNgOutputDir"/>
+        <attribute name="outputDir" default="${unversioned.dir}/test-output/formattedOutput"/>
+        <sequential>
+            <echo  level="verbose">    Macrodef::master.formatTestNgOutput
+                testNgOutputDir=@{testNgOutputDir}
+                outputDir=@{outputDir}
+            </echo>
+            <mkdir dir="@{outputDir}"/>
+            <xslt in="@{testNgOutputDir}/testng-results.xml"
+                  style="${lib.test}/testng-results.xsl"
+                  out="@{outputDir}/index.html">
+                <param name="testNgXslt.outputDir" expression="@{outputDir}/"/>
+                <param name="testNgXslt.sortTestCaseLinks" expression="true"/>
+                <param name="testNgXslt.testDetailsFilter" expression="FAIL,SKIP,PASS"/>
+                <classpath refid="classpath.testng.run"/>
+            </xslt>
+        </sequential>
+    </macrodef>
+
+    <target name="test" depends="compile,configure" description="Run the unit tests.">
+        <echo level="verbose">Target::master.test</echo>
+        <if>
+            <!--todo - find testng config file instead-->
+            <isset property="testng" />
+            <then>
+                <cleanDir dirName="${testng.doc.dir}" />
+                <!--<testTestNG configdir="${testng.config.dir}/testng.xml"/>-->
+                <testTestNG />
+                <if>
+                    <isset property="has.incontainer.test" />
+                    <then>
+                        <j2eeTestNG />
+                    </then>
+                </if>
+            </then>
+            <else>
+                <testJunit />
+            </else>
+        </if>
+    </target>
+
+    <target name="test-failed" depends="compile,configure" description="Run the failed tests.">
+        <echo level="verbose">Target::master.test</echo>
+        <if>
+            <isset property="testng" />
+            <then>
+                <testTestNG configDir="${unversioned.dir}/test-output" configFile="testng-failed.xml" />
+            </then>
+        </if>
+    </target>
+
+    <macrodef name="testJunit" description="Run JUnit tests">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.test</echo>
+            <cleanDir dirName="${junit.doc.dir}" />
+            <junitBatch filesetDir="${test.src.dir}" />
+            <junitReport />
+        </sequential>
+    </macrodef>
+
+    <target name="test-single" depends="compile,configure" description="Run a single unit test. Pass in the classname with a '-Dtest.single=[fully.qualified.classname]' argument">
+        <echo level="verbose">Target::master.test-single</echo>
+        <if>
+            <not>
+                <isset property="test.single" />
+            </not>
+            <then>
+                <echo>Usage: ant test-single -Dtest.single=[fully-qualified-classname] (e.g. ant test-single -Dtest.single=net.nurflugel.oc.ui.campaign.util.CampaignJaxbUtilTest)</echo>
+                <fail message="Please specify a class to test by setting the test.single property to the class name." />
+            </then>
+        </if>
+        <junitTestCore>
+            <whatToTest>
+                <test fork="yes" haltonerror="false" haltonfailure="false" name="${test.single}" todir="${junit.data.dir}" />
+            </whatToTest>
+        </junitTestCore>
+    </target>
+
+    <!--empty macrodef so we can have a placeholder for j2ee config in the configure task-->
+    <macrodef name="copyJ2eeConfig">
+        <sequential>
+            <echo level="verbose">    Macrodef::master.listFiles</echo>
+        </sequential>
+    </macrodef>
+
+    <target name="configure" depends="-init" description="Copy all needed data into a staging area and envstore it for use in testing. This can be skipped for speed by passing in '-Dnoconfigure=t'" unless="noconfigure">
+        <echo level="verbose">
+            Target::master.configure
+                :::{config.data.dir}=${config.data.dir}
+                :::{src.dir}/config=${src.dir}/config
+        </echo>
+        <copyFiles toDir="${config.data.dir}" fromDir="${src.dir}/config" />
+        <copyFiles toDir="${config.data.dir}" fromDir="${test.resources.dir}" />
+        <copyJ2eeConfig />
+        <!--<fulfillerCopyConfig />-->
+        <copyTestData />
+        <envstoreReplace target="${config.data.dir}" />
+    </target>
+
+    <macrodef name="copyTestData">
+        <sequential>
+            <echo level="verbose">
+                Macrodef::master.copyTestData
+                :::{config.data.dir}=${config.data.dir}
+                :::{test.data.dir}=${test.data.dir}
+
+            </echo>
+            <!--copy any test data in test resources to the config dir and configure it-->
+            <copyFiles toDir="${config.data.dir}" fromDir="${test.data.dir}" />
+        </sequential>
+    </macrodef>
+
+    <target name="javadoc" depends="-init" description="Create the project javadocs">
+        <echo level="verbose">Target::master.javadoc</echo>
+        <cleanDir dirName="${javadoc.dir}" />
+        <mkdir dir="${javadoc.dir}" />
+        <javadoc sourcepath="${java.src.dir}" destdir="${javadoc.dir}" packagenames="net.nurflugel.*, com.nurflugel.*" author="true" private="true" maxmemory="128m" use="true" version="true"  >
+            <classpath refid="classpath.compile" />
+        </javadoc>
+    </target>
+
+    <macrodef name="generateMd5Sum" description="Generates checksums for distribution files">
+            <attribute name="destinationDir" default="${dist.dir}" />
+        <attribute name="include" default="**/*.tar.gz" description="Files to be included" />
+        <attribute name="exclude" default="**/*.sha1,**/*.md5,**/*.MD5" description="Files to be excluded" />
+        <attribute name="fileext" default="MD5" description="The extension to use" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.generateMd5Sum
+                 :::destinationDir= @{destinationDir}
+                 :::include=        @{include}
+                 :::exclude=        @{exclude}
+                 :::fileext=        @{fileext}</echo>
+            <makeChecksum destinationDir="@{destinationDir}" include="@{include}" exclude="@{exclude}" fileext="@{fileext}" algorithm="MD5" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="generateSha1Sum" description="Generates checksums for distribution files">
+        <attribute name="destinationDir" default="${dist.dir}" description="The dir to write the checksums to" />
+        <attribute name="include" default="**/*.tar.gz" description="Files to be included" />
+        <attribute name="exclude" default="**/*.sha1,**/*.md5,**/*.MD5" description="Files to be excluded" />
+        <attribute name="fileext" default="sha1" description="The extension to use" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.generateSha1Sum
+                 :::destinationDir= @{destinationDir}
+                 :::include=        @{include}
+                 :::exclude=        @{exclude}
+                 :::fileext=        @{fileext}</echo>
+            <makeChecksum destinationDir="@{destinationDir}" include="@{include}" exclude="@{exclude}" fileext="@{fileext}" algorithm="SHA" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="makeChecksum" description="Makes checksums for the files.">
+        <attribute name="destinationDir" description="The dir the checksums will go into" />
+        <attribute name="include" description="Files to be included" />
+        <attribute name="exclude" description="Files to be exlucded" />
+        <attribute name="fileext" description="The extension of the checksums" />
+        <attribute name="algorithm" description="The algorithm to be used." default="MD5" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.makeChecksum
+                 :::destinationDir= @{destinationDir}
+                 :::include=        @{include}
+                 :::exclude=        @{exclude}
+                 :::fileext=        @{fileext}
+                 :::algorithm=      @{algorithm}</echo>
+            <for param="fileToCheck">
+                <path>
+                    <fileset dir="@{destinationDir}" includes="@{include}" excludes="@{exclude}" />
+                </path>
+                <sequential>
+                    <checksum file="@{fileToCheck}" property="@{fileext}.checksum.@{fileToCheck}" algorithm="@{algorithm}" />
+                    <echo message="@{fileext} sum: ${@{fileext}.checksum.@{fileToCheck}} @{fileToCheck}" />
+                    <echo>writing checksum file checksum @{fileToCheck}.@{fileext}</echo>
+                    <checksum file="@{fileToCheck}" forceOverwrite="yes" fileext=".@{fileext}" algorithm="@{algorithm}" />
+                </sequential>
+            </for>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="makeLink" description="Creates a link to a directory. Fails the build if the link creation fails.">
+        <attribute name="linkDir" description="The location we're going to create the link in" />
+        <attribute name="fromDir" description="The locatin we're going to create the link to" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.makeLink
+                 :::linkDir= @{linkDir}
+                 :::fromDir= @{fromDir}</echo>
+            <!--now, make the link-->
+            <if>
+                <os family="windows" />
+                <then>
+                    <!--Windows machines-->
+                    <exec executable="cmd.exe" outputproperty="mklinkout" failonerror="true">
+                        <arg value="/C" />
+                        <arg value="${bin.dir}\\junction.exe" />
+                        <arg value="@{linkDir}" />
+                        <arg value="@{fromDir}" />
+                    </exec>
+                </then>
+                <else>
+                    <!--Unix-->
+                    <exec executable="ln" outputproperty="mklinkout">
+                        <arg value="-s" />
+                        <arg value="@{fromDir}" />
+                        <arg value="@{linkDir}" />
+                    </exec>
+                </else>
+            </if>
+            <echo>${mklinkout}</echo>
+            <!--fail if link not created-->
+            <available property="jsp.link.exists.@{linkDir}" value="true" file="@{linkDir}" />
+            <fail unless="jsp.link.exists.@{linkDir}" message="Failed to create the JSP dir link at @{linkDir}, stopping build" />
+            <echo>Link at @{linkDir} to @{fromDir} successfully created</echo>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="breakLink" description="Break the link between the linked dir and the source controlled dir. Fails the build if it can't be dropped.">
+        <attribute name="linkDir" description="The symlink to be broken" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.breakLink
+                 :::linkDir= @{linkDir}</echo>
+            <if>
+                <os family="windows" />
+                <then>
+                    <!--for Windows-->
+                    <exec executable="cmd.exe" outputproperty="rmlinkout" failonerror="true">
+                        <arg value="/C" />
+                        <arg value="${bin.dir}\junction.exe" />
+                        <arg value="-D" />
+                        <arg value="@{linkDir}" />
+                    </exec>
+                </then>
+                <else>
+                    <!--for Unix-->
+                    <exec executable="unlink" failifexecutionfails="false" outputproperty="rmlinkout">
+                        <!--<arg value="-d"/>-->
+                        <!--<arg value="-v"/>-->
+                        <arg value="@{linkDir}" />
+                    </exec>
+                </else>
+            </if>
+            <echo level="verbose">link success code is ${rmlinkout}</echo>
+            <!--fail if link not removed-->
+            <available property="old.link.exists.@{linkDir}" value="true" file="@{linkDir}" />
+            <fail if="old.link.exists.@{linkDir}" message="Failed to delete the old JSP dir link, stopping build" />
+            <echo>Link at @{linkDir} has been dropped</echo>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="makeIvyChecksums" description="Makes sha1 and MD5 checksums for all files in the given dir">
+        <attribute name="dir" description="The dir to create checksums in" />
+        <sequential>
+            <echo level="verbose">    Macrodef::master.makeIvyChecksums
+                 :::dir= @{dir}</echo>
+            <generateMd5Sum destinationDir="@{dir}" include="*.*" fileext="md5" />
+            <generateSha1Sum destinationDir="@{dir}" include="*.*" />
+        </sequential>
+    </macrodef>
+
+  
 
 </project>
