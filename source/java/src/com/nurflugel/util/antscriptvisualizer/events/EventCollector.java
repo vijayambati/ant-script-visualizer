@@ -25,4 +25,9 @@ public class EventCollector
   {
     events.add(event);
   }
+
+  public void clear()
+  {
+    events.clear();
+  }
 }

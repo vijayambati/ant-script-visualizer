@@ -7,5 +7,15 @@
 
     <target name="configure" depends="master.configure"/>
 
+    <!--<target  name="test" depends="master.test">-->
+    <!---->
+        <!--<xslt in="${test.dir}/${dir}/testng-results.xml" style="src/main/resources/testng-results.xsl"-->
+              <!--out="${test.dir}/${dir}/output/index.html">-->
+            <!--<param name="testNgXslt.outputDir" expression="${basedir}/${test.dir}/${dir}/output/"/>-->
+            <!--<param name="testNgXslt.sortTestCaseLinks" expression="true"/>-->
+            <!--<param name="testNgXslt.testDetailsFilter" expression="FAIL,SKIP,PASS"/>-->
+            <!--<classpath refid="test.classpath"/>-->
+        <!--</xslt>-->
+    <!--</target>-->
 
 </project>

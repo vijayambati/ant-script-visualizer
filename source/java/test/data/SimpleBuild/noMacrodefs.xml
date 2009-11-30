@@ -16,15 +16,32 @@
 
 	<taskdef name="javac2" classname="com.intellij.uiDesigner.ant.Javac2" classpathref="antscript.classpath"/>
 
+
 	<target name="compile" description="compile module Ant script Visualizer production classes">
+		<silly-macrodef/>
 		<javac2 />
 	</target>
+
 
 	<target name="init" description="Build initialization"/>
 	<target name="clean" depends="init" description="cleanup all"/>
 	<target name="all" depends="init, clean, compile" description="build all"/>
 	<target name="sign" depends="init,jar"/>
-	<target name="jar" depends="init"/>
 
+	<target name="jar" depends="init">
+		<silly-macrodef/>
+	</target>
+
+	<macrodef name="silly-macrodef">
+		<sequential>
+            <embedded-macrodef/>
+        </sequential>
+	</macrodef>
+
+    <macrodef name="embedded-macrodef">
+		<sequential>
+            <javac2/>
+        </sequential>
+	</macrodef>
 
 </project>

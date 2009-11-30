@@ -1,10 +1,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Generated Suite">
-  <test verbose="1" name="ASV tests" annotations="JDK">
+<suite name="AntScriptVisualizer Suite">
+  <test verbose="1" name="Unit tests" annotations="JDK">
     <groups>
       <run>
         <include name="unit"/>
-        <exclude name="failedtests"  />
+        <!--<include name="dot"/>-->
+        <exclude name="failed"  />
+      </run>
+    </groups>
+    <!--<classes>-->
+      <!--<class name="com.nurflugel.SomeTest"/>-->
+    <!--</classes>-->
+      <packages>
+            <package name="com.nurflugel.*" />
+      </packages>
+  </test>
+
+  <test verbose="1" name="DOT tests" annotations="JDK">
+    <groups>
+      <run>
+        <!--<include name="unit"/>-->
+        <include name="dot"/>
+        <exclude name="failed"  />
       </run>
     </groups>
     <!--<classes>-->
