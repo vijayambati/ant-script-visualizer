@@ -7,17 +7,18 @@
   <ivyauthor name="Douglas Bullard" />
   <repository name="asv-repository" url="http://www.nurflugel.com/Home/repository" ivys="true" artifacts="true" />
 </info>
-<configurations defaultconfmapping="build,dist,test->default">
+<configurations defaultconfmapping="build,dist,test,test-formatTestNg->default">
         <conf name="build"   visibility="public"  description="Dependencies only used during the build process." />
         <conf name="dist"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
         <conf name="javadoc" visibility="public"  description="Some libraries provide separate javadoc packages." />
         <conf name="test"    visibility="private" description="Dependencies only used during unit testing." />
+        <conf name="test-formatTestNg" visibility="public"  description="Test jars" />
         <conf name="source"  visibility="public"  description="Dependencies' source code packages." />
 </configurations>
 
 <publications>
-        <artifact name="ant-script-visualizer-javadoc" type="javadoc" ext="zip" conf="javadoc" />
-        <artifact name="ant-script-visualizer-source"  type="source"  ext="zip" conf="source" />
+        <!--<artifact name="ant-script-visualizer-javadoc" type="javadoc" ext="zip" conf="javadoc" />-->
+        <artifact name="ant-script-visualizer-src"  type="source"  ext="jar" conf="source" />
 </publications>
 
 <dependencies>
@@ -31,5 +32,6 @@
         <dependency org="com.nurflugel"      name="buildtasks"   rev="1.0-SNAPSHOT" conf="build" />
         <dependency org="org.apache"         name="commons-lang" rev="2.4"          conf="build,dist,test,source,javadoc" />
         <dependency org="org.apache"         name="commons-io"   rev="1.4"          conf="build,dist,test,source,javadoc"/>
+        <dependency org="org.apache"         name="commons-logging"   rev="1.0.4"   conf="build"/>
 </dependencies>
 </ivy-module>

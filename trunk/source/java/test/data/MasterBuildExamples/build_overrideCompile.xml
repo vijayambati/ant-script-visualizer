@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE  project  [
+        ]>
+<project name="antScriptVisualizer" basedir=".." default="help">
+
+    <import file="master-build/master-webstart-build.xml"/>
+
+    <target name="compile" depends="-init"/>
+    <target  name="clean" depends="master.clean"/>
+    <macrodef name="copyJ2eeConfig">
+        <sequential>
+        </sequential>
+    </macrodef>
+
+</project>

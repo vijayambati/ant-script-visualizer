@@ -144,9 +144,33 @@ public class OutputTest
     testDotFile("unversioned/config/Import Test/noImports");
   }
 
-  @Test(groups = "dot")
+  @Test(groups = "master")
   public void testMasterBuild() throws IOException
   {
     testDotFile("unversioned/config/MasterBuildExamples/build");
+  }
+
+  @Test(groups = "master")
+  public void testMasterBuildOverride() throws IOException
+  {
+    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile");
+  }
+
+  @Test(groups = "master")
+  public void testMasterBuildOverrideNoShowOverridden() throws IOException
+  {
+    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoShowOverridden");
+  }
+
+  @Test(groups = "master")
+  public void testMasterBuildOverrideNoUnusedDefs() throws IOException
+  {
+    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoUnusedDefs");
+  }
+
+  @Test(groups = "master")
+  public void testMasterBuildOverrideJustJavadoc() throws IOException
+  {
+    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_JustJavadoc");
   }
 }
