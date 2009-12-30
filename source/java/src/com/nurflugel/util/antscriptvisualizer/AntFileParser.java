@@ -89,7 +89,8 @@ public class AntFileParser
     catch (Exception e)
     {
       logger.error("There has been a severe error, stopping all activity.", e);
-      System.exit(1);
+        //todo something
+//      System.exit(1);
     }
 
     return antfiles;

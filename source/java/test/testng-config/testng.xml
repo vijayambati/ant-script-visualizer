@@ -4,13 +4,9 @@
     <groups>
       <run>
         <include name="unit"/>
-        <!--<include name="dot"/>-->
         <exclude name="failed"  />
       </run>
     </groups>
-    <!--<classes>-->
-      <!--<class name="com.nurflugel.SomeTest"/>-->
-    <!--</classes>-->
       <packages>
             <package name="com.nurflugel.*" />
       </packages>
@@ -19,14 +15,22 @@
   <test verbose="1" name="DOT tests" annotations="JDK">
     <groups>
       <run>
-        <!--<include name="unit"/>-->
         <include name="dot"/>
         <exclude name="failed"  />
       </run>
     </groups>
-    <!--<classes>-->
-      <!--<class name="com.nurflugel.SomeTest"/>-->
-    <!--</classes>-->
+      <packages>
+            <package name="com.nurflugel.*" />
+      </packages>
+  </test>
+
+  <test verbose="1" name="Master build tests" annotations="JDK">
+    <groups>
+      <run>
+        <include name="master"/>
+        <exclude name="failed"  />
+      </run>
+    </groups>
       <packages>
             <package name="com.nurflugel.*" />
       </packages>

@@ -1,21 +1,22 @@
 <?xml version="1.0"?>
-<!DOCTYPE  project  [
-        ]>
-<project name="antScriptVisualizer" basedir=".." default="help">
+<project name="antScriptVisualizer" basedir=".." default="help" xmlns:ivy="antlib:org.apache.ivy.ant">
 
     <import file="master-build/master-webstart-build.xml"/>
 
     <target name="configure" depends="master.configure"/>
 
-    <!--<target  name="test" depends="master.test">-->
+    <target  name="ivyPublish" depends="-init">
+
+        <!--<ivy:publish resolver="local-dist" pubrevision="1.0">-->
+           <!--<artifacts pattern="unversioned/dist/[artifact].[ext]" />-->
+           <!--&lt;!&ndash;<artifacts pattern="2/[artifact].[ext]" />&ndash;&gt;-->
+        <!--</ivy:publish>-->
     <!---->
-        <!--<xslt in="${test.dir}/${dir}/testng-results.xml" style="src/main/resources/testng-results.xsl"-->
-              <!--out="${test.dir}/${dir}/output/index.html">-->
-            <!--<param name="testNgXslt.outputDir" expression="${basedir}/${test.dir}/${dir}/output/"/>-->
-            <!--<param name="testNgXslt.sortTestCaseLinks" expression="true"/>-->
-            <!--<param name="testNgXslt.testDetailsFilter" expression="FAIL,SKIP,PASS"/>-->
-            <!--<classpath refid="test.classpath"/>-->
-        <!--</xslt>-->
-    <!--</target>-->
+    </target>
+
+    <target name="formatTest" depends="-init">
+           <formatTestNgOutput testNgOutputDir="/Users/douglasbullard/Documents/JavaStuff/Nike_Subversion_Projects/ProductSearch/productSearch/unversioned/test-output"/>
+    </target>
+
 
 </project>
