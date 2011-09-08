@@ -3,6 +3,7 @@ package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 import com.nurflugel.util.antscriptvisualizer.nodes.Node;
 import com.nurflugel.util.antscriptvisualizer.nodes.NodeType;
 import com.nurflugel.util.antscriptvisualizer.nodes.PathElement;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
@@ -24,7 +25,6 @@ import java.util.List;
 // <path refid="base.path"/>
 // <pathelement location="testclasses"/>
 // </path>
-
 public class Path extends Node
 {
   private List<Fileset>     filesets     = new ArrayList<Fileset>();

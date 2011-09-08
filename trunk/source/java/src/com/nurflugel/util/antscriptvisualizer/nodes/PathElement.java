@@ -3,7 +3,6 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Path;
 
 /** Representation of a Path element. */
-
 // <pathelement path="${classpath}"/>
 // <pathelement location="classes"/>
 // are path and location the same thing???

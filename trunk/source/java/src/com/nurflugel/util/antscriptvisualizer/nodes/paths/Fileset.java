@@ -4,11 +4,11 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /** Representation of an Ant file set. */
-
 // case 1
 // <fileset dir="lib">
 // //<include name="**/*.jar"/>
@@ -33,7 +33,6 @@ import java.util.List;
 //
 // case
 // <fileset dir="src" includes="main/" />
-
 public class Fileset extends PathSet
 {
   private File       dir;
@@ -49,7 +48,6 @@ public class Fileset extends PathSet
     id   = attribute.getValue();
     dir  = getFileOrDir("dir");
     file = getFileOrDir("file");
-
     getIncludes();
     getExcludes();
   }

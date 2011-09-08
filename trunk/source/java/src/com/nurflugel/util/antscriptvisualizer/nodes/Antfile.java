@@ -3,20 +3,33 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
-import com.nurflugel.util.antscriptvisualizer.*;
+import com.nurflugel.util.antscriptvisualizer.AntFileParser;
+import com.nurflugel.util.antscriptvisualizer.LogFactory;
+import com.nurflugel.util.antscriptvisualizer.Preferences;
+import com.nurflugel.util.antscriptvisualizer.UniqueList;
+import com.nurflugel.util.antscriptvisualizer.Utility;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
+
 import org.apache.log4j.Logger;
+
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+
 import org.jdom.filter.ElementFilter;
+
 import org.jdom.input.SAXBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /** Represention of an Ant file (typically, "build.xml"). todo - replace the properties with a Configuration object. */
 @SuppressWarnings({ "ReturnOfCollectionOrArrayField", "OverlyComplexClass" })
@@ -33,6 +46,7 @@ public class Antfile
   private List<Macrodef>               localMacrodefs         = new UniqueList<Macrodef>();
   private List<Target>                 targets                = new UniqueList<Target>();
   private List<Taskdef>                localTaskdefs          = new UniqueList<Taskdef>();
+  private String                       projectName;
 
   private Antfile() {}
 
@@ -41,7 +55,10 @@ public class Antfile
     buildFile  = antFile;
     properties = aproperties;  // todo why am I doing this?
 
-    logger.debug("Trying to open " + buildFile);
+    if (logger.isDebugEnabled())
+    {
+      logger.debug("Trying to open " + buildFile);
+    }
 
     // todo if buildfile is composed of a property, try to resolve the property
     String name = buildFile.getAbsolutePath();
@@ -58,6 +75,17 @@ public class Antfile
     defaultTargetAttribute = rootElement.getAttribute("default");
     parseBasedir();
     parseProperties();
+    parseName();
+  }
+
+  private void parseName()
+  {
+    Attribute nameAttribute = rootElement.getAttribute("name");
+
+    if (nameAttribute != null)
+    {
+      projectName = nameAttribute.getValue();
+    }
   }
 
   private void parseBasedir()
@@ -156,7 +184,6 @@ public class Antfile
     for (Object aChildren : children)
     {
       Element  child    = (Element) aChildren;
-
       Property property = new Property(child, properties, this);
     }
   }
@@ -227,7 +254,6 @@ public class Antfile
     String result2 = Utility.expandPropertyName("${dibble}bruce", props);
     String result3 = Utility.expandPropertyName("doug${dibble}", props);
   }
-
   // ------------------------ OTHER METHODS ------------------------
 
   /** Add an import to the list of targest in this ant buildFile. */
@@ -307,12 +333,16 @@ public class Antfile
    * @param  parser                   the parser which will be used to parse this file.
    * @param  importsToProcess         The list of imports which need to be processed.
    * @param  importsAlreadyProcessed  the list of imports which have already been processed.
-   * @param preferences
+   * @param  preferences
    */
   public void parse(AntFileParser parser, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed, EventCollector eventCollector,
                     Preferences preferences) throws IOException, JDOMException
   {
-    logger.debug("processing " + buildFile);
+    if (logger.isDebugEnabled())
+    {
+      logger.debug("processing " + buildFile);
+    }
+
     parseImports(parser, importsToProcess, importsAlreadyProcessed, eventCollector);
     parseTargets(eventCollector, importsToProcess, importsAlreadyProcessed, preferences);
   }
@@ -359,7 +389,8 @@ public class Antfile
   }
 
   /** Parse the targets in this build file. */
-  private void parseTargets(EventCollector eventCollector, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed, Preferences preferences)
+  private void parseTargets(EventCollector eventCollector, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed,
+                            Preferences preferences)
   {
     Iterator descendants = rootElement.getDescendants(new ElementFilter("target"));
 
@@ -368,13 +399,12 @@ public class Antfile
       Element   targetElement      = (Element) descendants.next();
       String    targetName         = targetElement.getAttribute("name").getValue().trim();
       Attribute descriptionElement = targetElement.getAttribute("description");
-      String    description        = (descriptionElement != null) ? descriptionElement.getValue().trim()
+      String    description        = (descriptionElement != null) ? descriptionElement.getValue().trim()  // todo replace with StringUtils
                                                                   : "";
-      Target target = new Target(targetName, description, this, targetElement);  // these could be in an imported ant buildFile -
-                                                                                 // need to find them, maybe later
+      Target target = new Target(targetName, description, this, targetElement);                 // these could be in an imported ant buildFile -
+                                                                                                // need to find them, maybe later
 
       addTarget(target);
-
       target.parseDepends();
 
       if (preferences.shouldShowAntcalls())
@@ -408,8 +438,7 @@ public class Antfile
         Element targetElement = (Element) targetsIterator.next();
 
         if (targetElement.getAttribute("name").getValue().equalsIgnoreCase(calledFromTarget.getName()))                // parse this calledFromTarget
-                                                                                                                       // for
-                                                                                                                       // usages of "ant"
+                                                                                                                       // for usages of "ant"
         {
           for (Iterator antIterator = targetElement.getDescendants(new ElementFilter("ant")); antIterator.hasNext();)  // we found one!
           {
@@ -479,7 +508,6 @@ public class Antfile
       }
 
       String    antdir          = null;
-
       Attribute antDirAttribute = antElement.getAttribute("dir");
 
       if (antDirAttribute != null)
@@ -558,7 +586,7 @@ public class Antfile
       Element targetElement = (Element) targetElements.next();
       Target  target        = getMatchingTarget(targetElement);
 
-      for (Node macrodef : macrodefs)
+      for (Macrodef macrodef : macrodefs)
       {
         Iterator macrodefElements = targetElement.getDescendants(new ElementFilter(macrodef.getName()));
 
@@ -625,10 +653,8 @@ public class Antfile
     for (Iterator targetsIterator = element.getDescendants(new ElementFilter("macrodef")); targetsIterator.hasNext();)
     {
       Element   macrodefElement = (Element) targetsIterator.next();
-
       Attribute nameAttribute   = macrodefElement.getAttribute("name");
       String    name            = nameAttribute.getValue();
-
       Macrodef  macrodef        = new Macrodef(name, this, macrodefElement);
 
       addMacrodef(macrodef);
@@ -649,14 +675,14 @@ public class Antfile
    * Parse the targets in this buildFile for any usages of the localTaskdefs in the array. If found, add them to the depends for the target they're
    * used in. todo how to deal with parallel and sequence branches
    */
-  public void parseForTaskdefUsage(List<Taskdef> defs)
+  public void parseForTaskdefUsage(List<Taskdef> taskdefs)
   {
     for (Iterator targetElements = rootElement.getDescendants(new ElementFilter("target")); targetElements.hasNext();)
     {
       Element targetElement = (Element) targetElements.next();
       Target  target        = getMatchingTarget(targetElement);
 
-      for (Node taskdef : defs)
+      for (Taskdef taskdef : taskdefs)
       {
         Iterator taskdefElements = targetElement.getDescendants(new ElementFilter(taskdef.getName()));
 
@@ -706,7 +732,8 @@ public class Antfile
   {
     for (Iterator targetsIterator = element.getDescendants(new ElementFilter("taskdef")); targetsIterator.hasNext();)
     {
-      Taskdef taskdef = new Taskdef((Element) targetsIterator.next(), this);
+      Element taskdefElement = (Element) targetsIterator.next();
+      Taskdef taskdef        = new Taskdef(taskdefElement, this);
 
       addTaskdef(taskdef);
     }
@@ -731,7 +758,8 @@ public class Antfile
 
     for (Dependency unresolvedDependency : unresolvedDependencies)
     {
-      boolean found = false;
+      boolean found                    = false;
+      String  unresolvedDependencyName = unresolvedDependency.getName();
 
       for (Antfile antfile : antfiles)
       {
@@ -741,10 +769,10 @@ public class Antfile
 
           for (Target target : targets)
           {
-            String unresolvedDependencyName = unresolvedDependency.getName();
-            String targetName               = target.getName();
+            String targetName          = target.getName();
+            String qualifiedTargetname = antfile.getProjectName() + "." + targetName;
 
-            if (unresolvedDependencyName.equals(targetName))
+            if (unresolvedDependencyName.equals(targetName) || unresolvedDependencyName.equals(qualifiedTargetname))
             {
               unresolvedDependency.setResolved(true);
               unresolvedDependency.setBuildFile(antfile);
@@ -774,7 +802,16 @@ public class Antfile
 
       for (Target target : allTargets)
       {
-        if (dependency.getName().equals(target.getName()))
+        String dependencyName = dependency.getName();
+        String targetName     = target.getName();
+
+        System.out.println("Antfile.resolveInternalDependencies dependencyName, targetName = " + dependencyName + " " + targetName);
+
+        if (dependencyName == null)
+        {
+          System.out.println("Antfile.resolveInternalDependencies dependency = " + dependency);
+        }
+        else if (dependencyName.equals(targetName))
         {
           dependency.setResolved(true);
 
@@ -792,16 +829,13 @@ public class Antfile
 
     for (Target target : allTargets)
     {
-      List<Node> depends = target.getDepends();
+      List<Dependency> depends = target.getDepends();
 
-      for (Node depend : depends)
+      for (Dependency depend : depends)
       {
-        if (depend.isDependency())  // great - now is this dependency name one of the targets in THIS file?
+        if (!depend.isResolved())
         {
-          if (!((Dependency) depend).isResolved())
-          {
-            unresolvedDepends.add((Dependency) depend);
-          }
+          unresolvedDepends.add(depend);
         }
       }
     }
@@ -820,5 +854,10 @@ public class Antfile
     allTargets.addAll(fileAntcalls);
 
     return allTargets;
+  }
+
+  public String getProjectName()
+  {
+    return projectName;
   }
 }

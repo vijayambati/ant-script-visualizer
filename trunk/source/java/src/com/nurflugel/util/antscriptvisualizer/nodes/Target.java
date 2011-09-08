@@ -4,7 +4,9 @@
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import com.nurflugel.util.antscriptvisualizer.LogFactory;
+
 import org.apache.log4j.Logger;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
@@ -70,9 +72,9 @@ public class Target extends NodeWithDependancies
 
           if ((dependsName != null) && (dependsName.length() > 0))
           {
-            Dependency dependancy = new Dependency(dependsName, buildFile);
+            Dependency dependency = new Target(dependsName, buildFile);
 
-            addDependency(dependancy);
+            addDependency(dependency);
           }
         }
       }

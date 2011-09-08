@@ -4,6 +4,7 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 import org.apache.commons.lang.StringUtils;
+
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -16,7 +17,6 @@ public class ExecTest
   private static final String dotPath    = "/Applications/Graphviz.app/Contents/MacOS/dot";
   private static File         outputFile;
   private static File         dotFile;
-
   private String              os         = System.getProperty("os.name");
 
   /** @param  args  dibble */
@@ -69,10 +69,12 @@ public class ExecTest
     {
       String dotFilePath    = dotFile.getAbsolutePath();
       String outputFilePath = outputFile.getAbsolutePath() + "_testDelimted.pdf";
-
       String command        = dotPath + " -Tpdf " + dotFilePath + " -o " + "\"" + StringUtils.replace(outputFilePath, " ", "\\ ") + "\"";
 
-      logger.debug("testDelimted Command to run: " + command);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("testDelimted Command to run: " + command);
+      }
 
       Runtime runtime = Runtime.getRuntime();
 
@@ -88,13 +90,20 @@ public class ExecTest
       }
 
       command += ("\"" + StringUtils.replace(outputFilePath, " ", "\\ ") + "\"");
-      logger.debug("Command to run: " + command);
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Command to run: " + command);
+      }
 
       runtime.exec(command);
     }
     catch (Exception e)
     {
-      logger.debug(e);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug(e);
+      }
     }
   }
 
@@ -105,10 +114,12 @@ public class ExecTest
     {
       String dotFilePath    = dotFile.getAbsolutePath();
       String outputFilePath = outputFile.getAbsolutePath() + "_testDoubleQuotes.pdf";
-
       String command        = dotPath + " -Tpdf " + "\"" + dotFilePath + "\"" + " -o " + "\"" + outputFilePath + "\"";
 
-      logger.debug("testDoubleQuotes Command to run: " + command);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("testDoubleQuotes Command to run: " + command);
+      }
 
       Runtime runtime = Runtime.getRuntime();
 
@@ -124,13 +135,20 @@ public class ExecTest
       }
 
       command += ("\"" + outputFilePath + "\"");
-      logger.debug("Command to run: " + command);
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Command to run: " + command);
+      }
 
       runtime.exec(command);
     }
     catch (Exception e)
     {
-      logger.debug(e);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug(e);
+      }
     }
   }
 
@@ -141,10 +159,12 @@ public class ExecTest
     {
       String dotFilePath    = dotFile.getAbsolutePath();
       String outputFilePath = outputFile.getAbsolutePath() + "_testNothing.pdf";
-
       String command        = dotPath + " -Tpdf " + dotFilePath + " -o" + outputFilePath;
 
-      logger.debug("testNothing Command to run: " + command);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("testNothing Command to run: " + command);
+      }
 
       Runtime runtime = Runtime.getRuntime();
 
@@ -160,13 +180,20 @@ public class ExecTest
       }
 
       command += outputFilePath;
-      logger.debug("testNothing Command to run: " + command);
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("testNothing Command to run: " + command);
+      }
 
       runtime.exec(command);
     }
     catch (Exception e)
     {
-      logger.debug(e);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug(e);
+      }
     }
   }
 
@@ -178,10 +205,12 @@ public class ExecTest
       String   dotFilePath    = dotFile.getAbsolutePath();
       String   outputFilePath = outputFile.getAbsolutePath() + "_testPreparsedExec.pdf";
       String   cmd;
-
       String[] command        = { dotPath, "-Tpdf", dotFilePath, "-o", outputFilePath };
 
-      logger.debug("testPreparsedExec Command to run: " + concatenate(command));
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("testPreparsedExec Command to run: " + concatenate(command));
+      }
 
       Runtime runtime = Runtime.getRuntime();
 
@@ -197,13 +226,20 @@ public class ExecTest
       }
 
       command = new String[] { cmd, outputFilePath };
-      logger.debug("Command to run: " + concatenate(command));
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Command to run: " + concatenate(command));
+      }
 
       runtime.exec(command);
     }
     catch (Exception e)
     {
-      logger.debug(e);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug(e);
+      }
     }
   }
 
@@ -214,10 +250,12 @@ public class ExecTest
     {
       String dotFilePath    = dotFile.getAbsolutePath();
       String outputFilePath = outputFile.getAbsolutePath() + "_testSingleQuotes.pdf";
-
       String command        = dotPath + " -Tpdf " + "'" + dotFilePath + "'" + " -o " + "'" + outputFilePath + "'";
 
-      logger.debug("testSingleQuotes Command to run: " + command);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("testSingleQuotes Command to run: " + command);
+      }
 
       Runtime runtime = Runtime.getRuntime();
 
@@ -233,13 +271,20 @@ public class ExecTest
       }
 
       command += ("'" + outputFilePath + "'");
-      logger.debug("Command to run: " + command);
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Command to run: " + command);
+      }
 
       runtime.exec(command);
     }
     catch (Exception e)
     {
-      logger.debug(e);
+      if (logger.isDebugEnabled())
+      {
+        logger.debug(e);
+      }
     }
   }
 }

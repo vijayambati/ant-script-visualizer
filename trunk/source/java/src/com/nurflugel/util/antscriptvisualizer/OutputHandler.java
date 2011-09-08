@@ -1,13 +1,33 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import com.apple.eio.FileManager;
-import com.nurflugel.util.antscriptvisualizer.nodes.*;
+import static com.nurflugel.util.antscriptvisualizer.Os.OS_X;
+import static com.nurflugel.util.antscriptvisualizer.Os.WINDOWS;
+import com.nurflugel.util.antscriptvisualizer.nodes.Antfile;
+import com.nurflugel.util.antscriptvisualizer.nodes.Dependency;
+import com.nurflugel.util.antscriptvisualizer.nodes.Macrodef;
+import com.nurflugel.util.antscriptvisualizer.nodes.Node;
+import com.nurflugel.util.antscriptvisualizer.nodes.NodeWithDependancies;
+import com.nurflugel.util.antscriptvisualizer.nodes.Target;
+import com.nurflugel.util.antscriptvisualizer.nodes.Taskdef;
+
 import org.apache.commons.lang.StringUtils;
+
 import org.apache.log4j.Logger;
-import java.io.*;
+
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import java.lang.reflect.Method;
-import java.util.*;
-import static com.nurflugel.util.antscriptvisualizer.Os.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This class is involved in parsing the Ant file and generating the DOT output.
@@ -63,7 +83,7 @@ public class OutputHandler
     }
     catch (IOException e)
     {
-      logger.debug(e);
+      logger.error("Unexpected exception", e);
     }
   }
 
@@ -81,14 +101,21 @@ public class OutputHandler
 
       if (outputFile.exists())
       {
-        logger.debug("Deleting existing version of " + outputFilePath);
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Deleting existing version of " + outputFilePath);
+        }
+
         outputFile.delete();  // delete the file before generating it if it exists
       }
 
       String   outputFormat = preferences.getOutputFormat().getType();
       String[] command      = { preferences.getDotExecutablePath(), "-T" + outputFormat, dotFilePath, "-o" + outputFilePath };
 
-      logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
+      }
 
       Runtime runtime = Runtime.getRuntime();
       long    start   = new Date().getTime();
@@ -97,7 +124,10 @@ public class OutputHandler
 
       long end = new Date().getTime();
 
-      logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
+      }
 
       List<String> commandList = new ArrayList<String>();
 
@@ -109,7 +139,10 @@ public class OutputHandler
 
         String fileUrl = "file://" + outputFilePath;
 
-        logger.debug("Trying to open URL: " + fileUrl);
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Trying to open URL: " + fileUrl);
+        }
 
         try
         {
@@ -133,7 +166,11 @@ public class OutputHandler
 
         commandList.add(outputFilePath);
         command = commandList.toArray(new String[commandList.size()]);
-        logger.debug("Command to run: " + concatenate(command));
+
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Command to run: " + concatenate(command));
+        }
 
         runtime.exec(command);
       }
@@ -192,7 +229,10 @@ public class OutputHandler
     String fileName = getDotFilename(file.get(0));
     File   dotFile  = new File(fileName);
 
-    logger.debug("Writing output to file " + dotFile.getAbsolutePath());
+    if (logger.isDebugEnabled())
+    {
+      logger.debug("Writing output to file " + dotFile.getAbsolutePath());
+    }
 
     OutputStream     outputStream = new FileOutputStream(dotFile);
     DataOutputStream out          = new DataOutputStream(outputStream);
@@ -218,12 +258,10 @@ public class OutputHandler
       writeLegend(out);
     }
 
-    Map<Node, List<Node>> dependencies = parser.getDependencies();
+    Map<Node, List<Dependency>> dependencies = parser.getDependencies();
 
     writeDotDependencies(dependencies, out);
-
     out.writeBytes(CLOSING_LINE_DOTGRAPH);
-
     outputStream.close();
 
     return dotFile;
@@ -233,9 +271,7 @@ public class OutputHandler
   private void writeLegend(DataOutputStream out) throws IOException
   {
     out.writeBytes("\t" + OPENING_LINE_SUBGRAPH + "cluster_legend {" + NEW_LINE);
-
     out.writeBytes("\t\tlabel=\"legend\"" + NEW_LINE);
-
     out.writeBytes("\t\ttarget [label=\"target\" shape=box color=black ];" + NEW_LINE);
     out.writeBytes("\t\ttarget2 [label=\"target\" shape=box color=black ];" + NEW_LINE);
     out.writeBytes("\t\ttarget3 [label=\"target\" shape=box color=black ];" + NEW_LINE);
@@ -260,7 +296,7 @@ public class OutputHandler
 
   /** Write out the dependencies. */
   @SuppressWarnings({ "OverlyNestedMethod" })
-  private void writeDotDependencies(Map<Node, List<Node>> dependencies, DataOutputStream out) throws IOException
+  private void writeDotDependencies(Map<Node, List<Dependency>> dependencies, DataOutputStream out) throws IOException
   {
     Set<Node>   set       = dependencies.keySet();
     Set<String> resultSet = new HashSet<String>();
@@ -275,9 +311,9 @@ public class OutputHandler
         {
           NodeWithDependancies node           = (NodeWithDependancies) theNode;
           String               niceName       = node.getNiceName();
-          List<Node>           dependentNodes = node.getDepends();
+          List<Dependency>     dependentNodes = node.getDepends();
 
-          for (Node dependantNode : dependentNodes)
+          for (Dependency dependantNode : dependentNodes)
           {
             if (dependantNode.getName() != null)
             {
@@ -346,7 +382,6 @@ public class OutputHandler
       }
 
       out.writeBytes("\t}" + NEW_LINE);
-
       clusterIndex++;
     }  // end for
   }

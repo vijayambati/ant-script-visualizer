@@ -42,6 +42,9 @@ public class Taskdef extends Node
     Attribute nameAttribute = element.getAttribute("name");
     Attribute resourceAttribute = element.getAttribute("resource");
 
+    name = (nameAttribute != null) ? nameAttribute.getValue()
+                                   : "UnidentifiedTask";
+
     if (fileAttribute != null)
     {
       getTaskdefFromFile(fileAttribute);
@@ -53,11 +56,6 @@ public class Taskdef extends Node
     else if (resourceAttribute != null)
     {
       getTaskdefFromResource(element);
-    }
-    else
-    {
-      name = (resourceAttribute != null) ? resourceAttribute.getValue()
-                                         : "UnidentifiedTask";
     }
 
     setAntfile(antfile);

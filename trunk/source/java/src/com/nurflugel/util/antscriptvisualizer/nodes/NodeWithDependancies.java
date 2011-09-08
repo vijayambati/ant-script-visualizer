@@ -5,7 +5,9 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import com.nurflugel.util.antscriptvisualizer.UniqueList;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
+
 import org.jdom.Element;
+
 import org.jdom.filter.ElementFilter;
 
 import java.util.Iterator;
@@ -15,7 +17,7 @@ import java.util.List;
 @SuppressWarnings({ "ClassReferencesSubclass", "ReturnOfCollectionOrArrayField" })
 public abstract class NodeWithDependancies extends Node
 {
-  private List<Node> depends = new UniqueList<Node>();
+  private List<Dependency> depends = new UniqueList<Dependency>();
 
   protected NodeWithDependancies(String name, Antfile antfile)
   {
@@ -27,7 +29,7 @@ public abstract class NodeWithDependancies extends Node
   {
     String result = super.toString() + " {";
 
-    for (Node node : depends)
+    for (Dependency node : depends)
     {
       result += (" " + node.getName());
     }
@@ -36,7 +38,7 @@ public abstract class NodeWithDependancies extends Node
   }
 
   /** Get the list of dependencies for this node. */
-  public List<Node> getDepends()
+  public List<Dependency> getDepends()
   {
     return depends;
   }
@@ -47,18 +49,16 @@ public abstract class NodeWithDependancies extends Node
     for (Iterator antcallIterator = subElement.getDescendants(new ElementFilter("antcall")); antcallIterator.hasNext();)
     {
       Element antcall      = (Element) antcallIterator.next();
-
       String  calledTarget = antcall.getAttribute("target").getValue();
       AntCall dependancy   = new AntCall(calledTarget, this, buildFile);
 
       buildFile.addAntCall(dependancy);
-
       addDependency(dependancy);
     }
   }
 
   /** Add a dependency to this node. */
-  public void addDependency(Node node)
+  public void addDependency(Dependency node)
   {
     if (!depends.contains(node))
     {

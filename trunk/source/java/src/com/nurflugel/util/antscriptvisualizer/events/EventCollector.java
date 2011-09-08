@@ -13,12 +13,7 @@ import java.util.List;
 public class EventCollector
 {
   private List<Event> events = new ArrayList<Event>();
-
-  /**  */
-  public List<Event> getEvents()
-  {
-    return events;
-  }
+  // -------------------------- OTHER METHODS --------------------------
 
   /** .* */
   public void addEvent(Event event)
@@ -29,5 +24,12 @@ public class EventCollector
   public void clear()
   {
     events.clear();
+  }
+  // --------------------- GETTER / SETTER METHODS ---------------------
+
+  /**  */
+  public List<Event> getEvents()
+  {
+    return events;
   }
 }

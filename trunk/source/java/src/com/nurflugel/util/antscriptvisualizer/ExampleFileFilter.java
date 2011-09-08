@@ -1,11 +1,13 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import javax.swing.filechooser.FileFilter;
 import java.io.File;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.filechooser.FileFilter;
 
 /**
  * A convenience implementation of FileFilter that filters out all files except for those type extensions that it knows about.
@@ -137,7 +139,6 @@ public class ExampleFileFilter extends FileFilter
     this.description = description;
     fullDescription  = null;
   }
-
   // ------------------------ OTHER METHODS ------------------------
 
   /**

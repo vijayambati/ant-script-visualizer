@@ -18,6 +18,7 @@ public class Event
     this.reason    = reason;
     this.exception = exception;
   }
+  // --------------------- GETTER / SETTER METHODS ---------------------
 
   /**  */
   public Exception getException()

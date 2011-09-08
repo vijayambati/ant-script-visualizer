@@ -1,4 +1,3 @@
-
 package com.nurflugel.util.antscriptvisualizer;
 
 /** Enum for the various types of output. */

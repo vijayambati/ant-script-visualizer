@@ -1,20 +1,32 @@
 package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 
-import static com.nurflugel.util.antscriptvisualizer.Constants.*;
+import com.dibble.BadClass;
+
+import static com.nurflugel.util.antscriptvisualizer.Constants.EXCLUDE;
+import static com.nurflugel.util.antscriptvisualizer.Constants.EXCLUDES;
+import static com.nurflugel.util.antscriptvisualizer.Constants.ID;
+import static com.nurflugel.util.antscriptvisualizer.Constants.INCLUDE;
+import static com.nurflugel.util.antscriptvisualizer.Constants.INCLUDES;
+import static com.nurflugel.util.antscriptvisualizer.Constants.NAME;
+import static com.nurflugel.util.antscriptvisualizer.Constants.PATTERNSET;
+
 import org.jdom.Element;
+
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
+
 import org.testng.annotations.Test;
+
 import java.io.File;
 
 /** PatternSet Tester. */
-public class PatternsetTest
+public class PatternsetTest extends BadClass
 {
   // <patternset id="non.test.sources">
   ///// <include name="**/*.java"/>
   ///// <exclude name="**/*Test*"/>
   // </patternset>
-  @Test(groups = "unit")
+  @Test(groups = { "unit" })
   public void testSimpleIncludesExcludes()
   {
     Element element = new Element(PATTERNSET);

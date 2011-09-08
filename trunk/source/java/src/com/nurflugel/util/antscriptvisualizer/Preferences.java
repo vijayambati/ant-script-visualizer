@@ -1,6 +1,6 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import static com.nurflugel.util.antscriptvisualizer.OutputFormat.*;
+import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PDF;
 import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PNG;
 
 /**

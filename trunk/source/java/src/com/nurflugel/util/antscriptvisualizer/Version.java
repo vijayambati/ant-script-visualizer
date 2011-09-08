@@ -1,7 +1,6 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 /** This class represents a version of the app. That includes the version number, as well as a list of new features. */
-
 @SuppressWarnings({ "AccessingNonPublicFieldOfAnotherObject" })
 public class Version implements Comparable
 {

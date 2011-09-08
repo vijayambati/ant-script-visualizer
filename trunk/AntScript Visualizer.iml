@@ -16,15 +16,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/javaee.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/unversioned/lib/build/commons-lang.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -90,7 +81,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../Downloads/Lombok/lombok.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/Lombok/lombok.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -117,7 +108,7 @@
       </library>
     </orderEntry>
     <annotation-paths>
-      <root url="jar://$MODULE_DIR$/../../../../../Downloads/Lombok/lombok.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Lombok/lombok.jar!/" />
     </annotation-paths>
   </component>
   <component name="PluginUploader.UploadConfigurable">

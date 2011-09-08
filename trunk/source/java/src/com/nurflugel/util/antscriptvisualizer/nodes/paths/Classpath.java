@@ -1,6 +1,7 @@
 package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 
 import com.nurflugel.util.antscriptvisualizer.nodes.NodeType;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
@@ -22,7 +23,6 @@ import org.jdom.Element;
 // </dirset>
 // <filelist refid="third-party_jars"/>
 // </classpath>
-
 /**
  * The representation of a classpath in Ant. Although this strictly isn't a node (graphic node) at this time, I might want to visually display it in
  * the future, so I'm extending Node.

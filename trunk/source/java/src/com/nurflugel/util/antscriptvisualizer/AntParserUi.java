@@ -3,21 +3,22 @@
  */
 package com.nurflugel.util.antscriptvisualizer;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public interface AntParserUi
 {
   OutputFormat getOutputFormat();
-//  boolean shouldGroupByBuildfiles();
-//  boolean setShouldIncludeImportedFiles();
-//  boolean shouldShowLeftToRight();
-//  boolean shouldShowAntcalls();
-//  boolean shouldShowMacrodefs();
-//  boolean shouldShowTargets();
-//  boolean shouldShowTaskdefs();
-//  boolean shouldConcentrate();
-//  boolean shouldDeleteDotFilesOnExit();
-//  boolean shouldUseAbsolutePaths();
+
+  // boolean shouldGroupByBuildfiles();
+  // boolean setShouldIncludeImportedFiles();
+  // boolean shouldShowLeftToRight();
+  // boolean shouldShowAntcalls();
+  // boolean shouldShowMacrodefs();
+  // boolean shouldShowTargets();
+  // boolean shouldShowTaskdefs();
+  // boolean shouldConcentrate();
+  // boolean shouldDeleteDotFilesOnExit();
+  // boolean shouldUseAbsolutePaths();
   JFrame getFrame();
 
   /**

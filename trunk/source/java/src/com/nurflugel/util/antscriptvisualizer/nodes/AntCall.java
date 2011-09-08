@@ -3,6 +3,8 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
+import static com.nurflugel.util.antscriptvisualizer.nodes.NodeType.ANTCALL;
+
 /** The representation of an Antcall call. */
 public class AntCall extends Ant
 {
@@ -14,6 +16,7 @@ public class AntCall extends Ant
     shape                 = "hexagon";
     color                 = "blue";
     this.calledFromTarget = calledFromTarget;
+    setNodeType(ANTCALL);
   }
 
   @Override
@@ -21,13 +24,6 @@ public class AntCall extends Ant
   public String getDependencyExtraInfo()
   {
     return "[color=green,style=dotted]";
-  }
-
-  @Override
-  @SuppressWarnings({ "RefusedBequest" })
-  protected void setNodeType()
-  {
-    nodeType = NodeType.ANTCALL;
   }
 
   public NodeWithDependancies getCalledFromTarget()

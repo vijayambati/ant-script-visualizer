@@ -8,7 +8,6 @@ public class GenericException extends Exception
 {
   /** Use serialVersionUID for interoperability. */
   private static final long serialVersionUID = -4742666104116163474L;
-
   private Exception         exception;
 
   /** Creates a new GenericException object. */
@@ -25,18 +24,19 @@ public class GenericException extends Exception
   }
 
   /** Creates a new GenericException object. */
-  public GenericException(String s, Throwable throwable, Exception exception)
-  {
-    super(s, throwable);
-    this.exception = exception;
-  }
-
-  /** Creates a new GenericException object. */
   public GenericException(Throwable throwable, Exception exception)
   {
     super(throwable);
     this.exception = exception;
   }
+
+  /** Creates a new GenericException object. */
+  public GenericException(String s, Throwable throwable, Exception exception)
+  {
+    super(s, throwable);
+    this.exception = exception;
+  }
+  // --------------------- GETTER / SETTER METHODS ---------------------
 
   /**  */
   public Exception getException()

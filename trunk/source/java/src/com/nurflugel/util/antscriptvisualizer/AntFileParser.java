@@ -6,18 +6,29 @@ package com.nurflugel.util.antscriptvisualizer;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
 import com.nurflugel.util.antscriptvisualizer.events.GenericException;
-import com.nurflugel.util.antscriptvisualizer.nodes.*;
+import com.nurflugel.util.antscriptvisualizer.nodes.Antfile;
+import com.nurflugel.util.antscriptvisualizer.nodes.Dependency;
+import com.nurflugel.util.antscriptvisualizer.nodes.Macrodef;
+import com.nurflugel.util.antscriptvisualizer.nodes.Node;
+import com.nurflugel.util.antscriptvisualizer.nodes.Property;
+import com.nurflugel.util.antscriptvisualizer.nodes.Target;
+import com.nurflugel.util.antscriptvisualizer.nodes.Taskdef;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Classpath;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Path;
+
 import org.apache.log4j.Logger;
+
 import org.jdom.JDOMException;
-import javax.swing.*;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JOptionPane;
 
 /**
  * This class is involved in parsing the Ant file and generating the DOT output.
@@ -44,7 +55,6 @@ public class AntFileParser
     this.os          = os;
     this.preferences = preferences;
     this.ui          = ui;
-
     fileToParse      = filesToParse[0];
 
     for (int i = 1; i < filesToParse.length; i++)
@@ -78,7 +88,6 @@ public class AntFileParser
     try
     {
       antfiles = parse();
-
       writeOutputFiles(antfiles, generateGraphicOutput);
       processEvents();
     }
@@ -89,8 +98,8 @@ public class AntFileParser
     catch (Exception e)
     {
       logger.error("There has been a severe error, stopping all activity.", e);
-        //todo something
-//      System.exit(1);
+      // todo something
+      // System.exit(1);
     }
 
     return antfiles;
@@ -115,10 +124,8 @@ public class AntFileParser
     {
       antfile = new Antfile(fileToParse, properties);
       antfile.parse(this, importsToProcess, importsAlreadyProcessed, eventCollector, preferences);
-
       antfiles = new UniqueList<Antfile>();
       antfiles.add(antfile);
-
       parseAllFilesForAntUsage();
     }
     catch (IOException e)
@@ -144,6 +151,7 @@ public class AntFileParser
 
     for (Antfile theAntFile : antfiles)
     {
+      logger.error("Processing bulk files " + theAntFile.getBuildFile());
       parseForMacrodefsAndTaskdefs(theAntFile, taskdefs, macrodefs);
       parseForPaths(theAntFile, paths);
       parseForClasspaths(theAntFile, classpaths);
@@ -151,12 +159,20 @@ public class AntFileParser
 
     for (Antfile theAntFile : antfiles)
     {
+      logger.error("Processing imported files for macrodefs and taskdefs " + theAntFile.getBuildFile());
       parseAntfilesForMacrodefsAndTaskdefs(theAntFile, macrodefs, taskdefs);
     }
 
     for (Macrodef macrodef : macrodefs)
     {
+      logger.error("Processing imported files for taskdef usage " + macrodef.getName());
       macrodef.parseForTaskdefUsage(taskdefs);
+    }
+
+    for (Antfile theAntFile : antfiles)
+    {
+      theAntFile.resolveInternalDependencies();
+      theAntFile.resolveExternalDependencies(antfiles);
     }
 
     return antfiles;
@@ -232,7 +248,6 @@ public class AntFileParser
   private void parseForMacrodefsAndTaskdefs(Antfile anAntFile, List<Taskdef> taskdefs, List<Macrodef> macrodefs)
   {
     // dgbtodo anAntFile.parseForAntcalls();???
-
     List<Taskdef>  antfileTaskdefs  = anAntFile.parseForTaskdefs();
     List<Macrodef> antfileMacrodefs = anAntFile.parseForMacrodefs();
 
@@ -280,7 +295,7 @@ public class AntFileParser
     if ((exception instanceof IOException) || (exception instanceof JDOMException))
     {
       extrainfo = "there was an error parsing one of the xml files.  Do you have\n"
-                  + "any properties in the imports or Ant calls?  That's not supported yet.";
+                    + "any properties in the imports or Ant calls?  That's not supported yet.";
     }
 
     if (ui != null)
@@ -298,9 +313,9 @@ public class AntFileParser
   }
 
   /** Get the dependencies for all the build file nodes. */
-  Map<Node, List<Node>> getDependencies()
+  Map<Node, List<Dependency>> getDependencies()
   {
-    Map<Node, List<Node>> dependencies = new HashMap<Node, List<Node>>();
+    Map<Node, List<Dependency>> dependencies = new HashMap<Node, List<Dependency>>();
 
     for (Antfile antfile : antfiles)
     {
@@ -310,21 +325,21 @@ public class AntFileParser
 
       for (Target target : targets)
       {
-        List<Node> depends = target.getDepends();
+        List<Dependency> depends = target.getDepends();
 
         getDependenciesForNode(target, depends, dependencies);
       }
 
       for (Macrodef localMacrodef : localMacrodefs)
       {
-        List<Node> depends = localMacrodef.getDepends();
+        List<Dependency> depends = localMacrodef.getDepends();
 
         getDependenciesForNode(localMacrodef, depends, dependencies);
       }
 
       for (Taskdef localTaskdef : localTaskdefs)
       {
-        List<Node> depends = new ArrayList<Node>();
+        List<Dependency> depends = new ArrayList<Dependency>();
 
         getDependenciesForNode(localTaskdef, depends, dependencies);
       }
@@ -334,7 +349,7 @@ public class AntFileParser
   }
 
   /** Get the dependencies for a particular node. */
-  private void getDependenciesForNode(Node target, List<Node> depends, Map<Node, List<Node>> dependencies)
+  private void getDependenciesForNode(Node target, List<Dependency> depends, Map<Node, List<Dependency>> dependencies)
   {
     if (target.shouldPrint(preferences))
     {
