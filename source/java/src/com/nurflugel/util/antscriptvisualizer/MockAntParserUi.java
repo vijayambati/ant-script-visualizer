@@ -3,7 +3,7 @@
  */
 package com.nurflugel.util.antscriptvisualizer;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /** Copyright 2005, Nurflugel.com. */
 public class MockAntParserUi implements AntParserUi

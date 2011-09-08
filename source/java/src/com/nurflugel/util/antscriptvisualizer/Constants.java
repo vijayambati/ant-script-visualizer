@@ -1,6 +1,5 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-/**  */
 public class Constants
 {
   public static final String PATTERNSET   = "patternset";

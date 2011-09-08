@@ -1,7 +1,9 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 import com.nurflugel.util.antscriptvisualizer.nodes.Property;
+
 import org.apache.commons.lang.StringUtils;
+
 import org.apache.log4j.Logger;
 
 import java.util.Map;

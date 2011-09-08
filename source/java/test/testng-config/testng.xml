@@ -1,9 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="AntScriptVisualizer Suite">
-  <test verbose="1" name="Unit tests" annotations="JDK">
+  <test verbose="105" name="Unit tests" annotations="JDK">
     <groups>
       <run>
         <include name="unit"/>
+        <!--<include name="cRoy"/>-->
         <exclude name="failed"  />
       </run>
     </groups>

@@ -2,18 +2,28 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import com.nurflugel.util.antscriptvisualizer.LogFactory;
 import com.nurflugel.util.antscriptvisualizer.Utility;
+
 import org.apache.log4j.Logger;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 /** Representation a a Property in Ant. */
 public class Property
 {
   private static final Logger logger = LogFactory.getLogger(Property.class);
-
   private String              name;
   private String              value;
 
@@ -62,7 +72,11 @@ public class Property
         Property property = new Property(envName + "." + key, envValue);
 
         properties.put(property.getName(), property);
-        logger.debug("Adding " + property + " to properties");
+
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Adding " + property + " to properties");
+        }
       }
     }
   }
@@ -99,7 +113,10 @@ public class Property
           }
         }
 
-        logger.debug("done with reading file " + fileName);
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("done with reading file " + fileName);
+        }
       }
       catch (FileNotFoundException e)
       {                                            // logger.error("Error finding file ", e);
@@ -132,7 +149,10 @@ public class Property
         }
         catch (Exception e)
         {
-          logger.debug("Yeah, yeah", e);
+          if (logger.isDebugEnabled())
+          {
+            logger.debug("Yeah, yeah", e);
+          }
         }
       }
     }                                              // end if
@@ -141,16 +161,17 @@ public class Property
   /** Processes the line looking for properies. */
   private int processLine(int lineNumber, String fileName, String line, Map<String, Property> properties, List<Property> unresolvedProperties)
   {
-    logger.debug("Reading in line " + lineNumber++ + "of file " + fileName + ": " + line);
+    if (logger.isDebugEnabled())
+    {
+      logger.debug("Reading in line " + lineNumber++ + "of file " + fileName + ": " + line);
+    }
 
     if ((line.trim().length() > 0) && !line.startsWith("#") && !line.startsWith("--"))
     {
-      String[] strings = line.split("=");
-
-      String   key     = strings[0];
+      String[] strings  = line.split("=");
+      String   key      = strings[0];
       String   keyValue = (strings.length > 1) ? strings[1]
                                                : "";  // default to empty if no value defined.
-
       String originalValue = keyValue;
 
       keyValue = Utility.expandPropertyName(keyValue, properties);
@@ -161,12 +182,19 @@ public class Property
 
       if (keyValue.contains("${"))                    // still has unresolved properties (lines out of order)
       {
-        logger.debug("Adding unresolved " + keyValue + " to be resolved later");
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Adding unresolved " + keyValue + " to be resolved later");
+        }
+
         unresolvedProperties.add(property);
       }
       else
       {
-        logger.debug("Resolved " + originalValue + " to " + keyValue);
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Resolved " + originalValue + " to " + keyValue);
+        }
       }
     }
 
@@ -183,7 +211,6 @@ public class Property
       Attribute valueAttribute = child.getAttribute("value");
       String    theName        = nameAttribute.getValue();
       String    theValue       = valueAttribute.getValue();
-
       Property  property       = new Property(theName, theValue);
 
       properties.put(property.getName(), property);

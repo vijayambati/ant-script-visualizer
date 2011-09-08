@@ -1,21 +1,33 @@
 package com.nurflugel.util.antscriptvisualizer;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import java.io.File;
+
+import java.net.URL;
+
+import java.util.Date;
+
 import javax.help.CSH;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.net.URL;
-import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /** Util class. */
 public class Util
 {
   public static final Cursor busyCursor   = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
   public static final Cursor normalCursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-
   // -------------------------- STATIC METHODS --------------------------
 
   /** Firgures out how much time is remaining in the task. */

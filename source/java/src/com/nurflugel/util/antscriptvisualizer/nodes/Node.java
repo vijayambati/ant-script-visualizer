@@ -3,22 +3,23 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
+import static com.nurflugel.util.antscriptvisualizer.OutputHandler.NEW_LINE;
 import com.nurflugel.util.antscriptvisualizer.Preferences;
 import com.nurflugel.util.antscriptvisualizer.Utility;
+
 import org.jdom.Element;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import java.util.Map;
 
-import static com.nurflugel.util.antscriptvisualizer.OutputHandler.NEW_LINE;
-
 /**
- * Base representation of a Node - amost all objects in the graph are types of nodes. Since they have so much common behavior, it made sense to have a
- * superclass. Screw the people who say inheritence is a bad idea!
+ * Base representation of a Node - almost all objects in the graph are types of nodes. Since they have so much common behavior, it made sense to have
+ * a superclass. Screw the people who say inheritance is a bad idea!
  */
 @SuppressWarnings({ "ProtectedField" })
-public abstract class Node
+public abstract class Node implements Dependency
 {
   protected Antfile  buildFile;
   protected Element  element;
@@ -26,6 +27,7 @@ public abstract class Node
   protected String   color;
   protected String   name;
   protected String   shape;
+  private boolean    resolved;
 
   @SuppressWarnings({ "OverriddenMethodCallInConstructor", "AbstractMethodCallInConstructor" })
   protected Node()
@@ -95,6 +97,11 @@ public abstract class Node
     return buildFile;
   }
 
+  public void setBuildFile(Antfile buildFile)
+  {
+    this.buildFile = buildFile;
+  }
+
   public String getColor()
   {
     return color;
@@ -126,7 +133,7 @@ public abstract class Node
     return name;
   }
 
-  protected void setName(String name)
+  public void setName(String name)
   {
     this.name = name;
   }
@@ -171,7 +178,6 @@ public abstract class Node
   public String getNiceName()
   {
     String nicename      = Utility.replaceBadChars(name).trim();
-
     String buildFileName = Utility.replaceBadChars(getBuildFile().getBuildFile().getAbsolutePath());
 
     return buildFileName + "_" + NodeType.TARGET + "_" + nicename;
@@ -188,5 +194,15 @@ public abstract class Node
     boolean isAnt      = (preferences.shouldShowAnts() && (nodeType == NodeType.ANT));
 
     return (isTaskdef || istarget || isMacrodef || isAnt || isAntCall);
+  }
+
+  public boolean isResolved()
+  {
+    return resolved;
+  }
+
+  public void setResolved(boolean resolved)
+  {
+    this.resolved = resolved;
   }
 }

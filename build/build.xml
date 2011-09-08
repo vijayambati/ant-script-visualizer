@@ -19,4 +19,24 @@
     </target>
 
 
+    <!--Validate the existance of a property.  Fail the build if it's not set.  We don't care what it is, as long as it exists-->
+    <macrodef name="validatePropertiesNew">
+        <!--<attribute name="buildFile"/>-->
+        <attribute name="exceptions" default=""/>
+        <sequential>
+            <path id="classpath.buildtasks">
+                <pathelement location="${lib.build}/buildtasks.jar"/>
+                <!--<pathelement path="${unversioned.dir}/classes"/>-->
+            </path>
+            <taskdef name="validatePropertiesTask" classname="com.nurflugel.buildtasks.ValidatePropertiesTask" classpathref="classpath.buildtasks"/>
+             <validatePropertiesTask  exceptions="@{exceptions}"/>
+            <echo> ::::::::::::::ant.file = ${ant.file} </echo>
+            <!--<echo> ::::::::::::::missing property = @{dibble.dabble} </echo>-->
+            <!--<echoproperties />-->
+             <!--<validatePropertiesTask />-->
+             <!--<validatePropertiesTask buildFile="${ant.file}" exceptions="@{exceptions}"/>-->
+        </sequential>
+    </macrodef>
+
+
 </project>

@@ -1,12 +1,19 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import org.apache.commons.io.FileUtils;
-import org.testng.annotations.AfterTest;
+import static com.nurflugel.util.antscriptvisualizer.Os.findOs;
+import com.nurflugel.util.antscriptvisualizer.events.Event;
+
+import static org.apache.commons.io.FileUtils.contentEquals;
+
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.IOException;
-import static org.testng.Assert.assertTrue;
+
+import java.util.List;
 
 /** Test class to exercise the app and compare it to known good results. */
 public class OutputTest
@@ -14,7 +21,7 @@ public class OutputTest
   private Preferences preferences;
 
   /** Here we set up preferences, overriding the defaults as needed. */
-  @BeforeMethod(groups = "dot")
+  @BeforeMethod(groups = { "dot", "master", "cRoy" })
   public void doSetup()
   {
     preferences = new Preferences(true);
@@ -30,10 +37,13 @@ public class OutputTest
 
   private void testDotFile(String baseName) throws IOException
   {
-    AntFileParser fileParser = new AntFileParser(Os.findOs(), preferences, null, new File(baseName + ".xml"));
+    AntFileParser fileParser = new AntFileParser(findOs(), preferences, null, new File(baseName + ".xml"));
 
     fileParser.processBuildFile(false);
-    assertTrue(fileParser.getEventCollector().getEvents().isEmpty(), "Should not have any events");
+
+    List<Event> events = fileParser.getEventCollector().getEvents();
+
+    assertTrue(events.isEmpty(), "Should not have any events");
 
     File testFile     = new File(baseName + ".dot");
     File standardFile = new File(baseName + "_test.dot");
@@ -41,7 +51,7 @@ public class OutputTest
     System.out.println("file length=" + testFile.length());
     System.out.println("std file length=" + standardFile.length());
 
-    boolean areEqual = FileUtils.contentEquals(testFile, standardFile);
+    boolean areEqual = contentEquals(testFile, standardFile);
 
     assertTrue(areEqual, "File contents should be identical");
   }
@@ -67,25 +77,7 @@ public class OutputTest
   @Test(groups = "dot")
   public void testSimpleFour() throws IOException
   {
-    testDotFile("unversioned/config/Simplebuild/fourbuild");
-  }
-
-  @Test(groups = "dot")
-  public void testDependency() throws IOException
-  {
-    testDotFile("unversioned/config/Dependency Test/build-batch");
-  }
-
-  @Test(groups = "dot")
-  public void testEntity() throws IOException
-  {
-    testDotFile("unversioned/config/ENTITY property Test/threebuild");
-  }
-
-  @Test(groups = "dot")
-  public void testImport() throws IOException
-  {
-    testDotFile("unversioned/config/Import Test/threebuild");
+    testDotFile("unversioned/config/SimpleBuild/fourbuild");
   }
 
   @Test(groups = "dot")
@@ -130,6 +122,30 @@ public class OutputTest
     testDotFile("unversioned/config/SimpleBuild/noTargets");
   }
 
+  @Test(groups = "cRoy")  // todo
+  public void testCRoy() throws IOException
+  {
+    testDotFile("unversioned/config/C_Roy/build");
+  }
+
+  @Test(groups = "dot")
+  public void testDependency() throws IOException
+  {
+    testDotFile("unversioned/config/Dependency Test/build-batch");
+  }
+
+  @Test(groups = "dot")
+  public void testEntity() throws IOException
+  {
+    testDotFile("unversioned/config/ENTITY property Test/threebuild");
+  }
+
+  @Test(groups = "dot")
+  public void testImport() throws IOException
+  {
+    testDotFile("unversioned/config/Import Test/threebuild");
+  }
+
   @Test(groups = "dot")
   public void testNoGrouping() throws IOException
   {
@@ -144,13 +160,13 @@ public class OutputTest
     testDotFile("unversioned/config/Import Test/noImports");
   }
 
-  @Test(groups = "master")
+  @Test(groups = "master")  // todo
   public void testMasterBuild() throws IOException
   {
     testDotFile("unversioned/config/MasterBuildExamples/build");
   }
 
-  @Test(groups = "master")
+  @Test(groups = "master")  // todo
   public void testMasterBuildOverride() throws IOException
   {
     testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile");
@@ -159,7 +175,7 @@ public class OutputTest
   @Test(groups = "master")
   public void testMasterBuildOverrideNoShowOverridden() throws IOException
   {
-    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoShowOverridden");
+    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoShowOverriden");
   }
 
   @Test(groups = "master")
@@ -168,7 +184,7 @@ public class OutputTest
     testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoUnusedDefs");
   }
 
-  @Test(groups = "master")
+  @Test(groups = { "master", "failed" })
   public void testMasterBuildOverrideJustJavadoc() throws IOException
   {
     testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_JustJavadoc");

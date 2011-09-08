@@ -1,9 +1,11 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import java.awt.*;
-import java.io.File;
 import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PDF;
 import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PNG;
+
+import java.awt.Component;
+
+import java.io.File;
 
 /** Enum of operating systems, and methods to deal with differenes between them. */
 @SuppressWarnings({ "EnumeratedClassNamingConvention", "EnumeratedConstantNamingConvention" })
@@ -21,7 +23,6 @@ public enum Os
   private OutputFormat outputFormat;
 
   // -------------------------- STATIC METHODS --------------------------
-
   public static Os findOs()
   {
     String osName = System.getProperty("os.name");
@@ -50,14 +51,12 @@ public enum Os
   }
 
   // -------------------------- OTHER METHODS --------------------------
-
   public String getBuildCommandPath(String basePath)
   {
     return basePath + File.separator + buildCommand;
   }
 
   // --------------------- GETTER / SETTER METHODS ---------------------
-
   public String getDefaultDotPath()
   {
     return defaultDotPath;

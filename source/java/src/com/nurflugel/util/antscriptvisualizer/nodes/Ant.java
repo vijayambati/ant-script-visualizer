@@ -3,16 +3,48 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
+import static com.nurflugel.util.antscriptvisualizer.nodes.NodeType.ANT;
+
 /** The representation of an Ant call. */
-public class Ant extends Dependency
+public class Ant extends Target
 {
-  public Ant(String targetName, Antfile antFile)
+  private NodeType nodeType;
+  private Antfile  buildFile;
+  private boolean  resolved;
+
+  public Ant(String name, Antfile antFile)
   {
-    super(targetName, antFile);
+    super(name, antFile);
+    nodeType = ANT;
+  }
+  // ------------------------ INTERFACE METHODS ------------------------
+
+  // --------------------- Interface Dependency ---------------------
+  @Override
+  public boolean isResolved()
+  {
+    return resolved;
   }
 
   @Override
-  @SuppressWarnings({ "RefusedBequest" })
+  public void setResolved(boolean resolved)
+  {
+    this.resolved = resolved;
+  }
+
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  @Override
+  public void setBuildFile(Antfile buildFile)
+  {
+    this.buildFile = buildFile;
+  }
+
+  // -------------------------- OTHER METHODS --------------------------
   public String getDependencyExtraInfo()
   {
     // return "[style=dotted,label=\"Ant\"]";
@@ -20,16 +52,17 @@ public class Ant extends Dependency
     return "[color=red,style=dotted]";
   }
 
-  @Override
-  @SuppressWarnings({ "RefusedBequest" })
-  protected void setNodeType()
+  protected void setNodeType(NodeType antcall)
   {
-    nodeType = NodeType.ANT;
+    nodeType = antcall;
   }
 
+  // ------------------------ CANONICAL METHODS ------------------------
   @Override
   public String toString()
   {
     return super.toString() + " ::: Ant{" + "antFile='" + buildFile + "'" + "}";
   }
+
+  // --------------------- GETTER / SETTER METHODS ---------------------
 }
