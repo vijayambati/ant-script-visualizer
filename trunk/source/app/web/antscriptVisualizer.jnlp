@@ -19,6 +19,7 @@
         <j2se version="1.6+"  initial-heap-size="64m" max-heap-size="512m"/>
         <jar href="antscriptVisualizer.jar"/>
         <jar href="commons-lang.jar"/>
+        <jar href="commons-io.jar"/>
         <jar href="help.jar"/>
         <jar href="forms_rt.jar"/>
         <jar href="log4j.jar"/>

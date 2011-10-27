@@ -5,11 +5,8 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import com.nurflugel.util.antscriptvisualizer.UniqueList;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
-
 import org.jdom.Element;
-
 import org.jdom.filter.ElementFilter;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,25 +20,7 @@ public abstract class NodeWithDependancies extends Node
   {
     super(name, antfile);
   }
-
-  @Override
-  public String toString()
-  {
-    String result = super.toString() + " {";
-
-    for (Dependency node : depends)
-    {
-      result += (" " + node.getName());
-    }
-
-    return result + " }";
-  }
-
-  /** Get the list of dependencies for this node. */
-  public List<Dependency> getDepends()
-  {
-    return depends;
-  }
+  // -------------------------- OTHER METHODS --------------------------
 
   /** Parse target for all instances of "antcall". */
   public void parseAntCalls(Element subElement)
@@ -76,5 +55,26 @@ public abstract class NodeWithDependancies extends Node
 
       new Antfile(antcall, eventCollector, importsAlreadyProcessed, importsToProcess, this);
     }
+  }
+
+  // ------------------------ CANONICAL METHODS ------------------------
+  @Override
+  public String toString()
+  {
+    String result = super.toString() + " {";
+
+    for (Dependency node : depends)
+    {
+      result += (" " + node.getName());
+    }
+
+    return result + " }";
+  }
+  // --------------------- GETTER / SETTER METHODS ---------------------
+
+  /** Get the list of dependencies for this node. */
+  public List<Dependency> getDepends()
+  {
+    return depends;
   }
 }

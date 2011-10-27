@@ -10,21 +10,15 @@ import com.nurflugel.util.antscriptvisualizer.UniqueList;
 import com.nurflugel.util.antscriptvisualizer.Utility;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
-
 import org.apache.log4j.Logger;
-
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-
 import org.jdom.filter.ElementFilter;
-
 import org.jdom.input.SAXBuilder;
-
 import java.io.File;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -78,14 +72,12 @@ public class Antfile
     parseName();
   }
 
-  private void parseName()
+  /** Does this name include a property? */
+  private boolean isValueAProperty(String name)
   {
-    Attribute nameAttribute = rootElement.getAttribute("name");
+    int openIndex = name.indexOf("${");
 
-    if (nameAttribute != null)
-    {
-      projectName = nameAttribute.getValue();
-    }
+    return openIndex > -1;
   }
 
   private void parseBasedir()
@@ -101,6 +93,28 @@ public class Antfile
     Property property = new Property("basedir", basedir);
 
     properties.put(property.getName(), property);
+  }
+
+  /** Parse any properties in this Ant file. */
+  private void parseProperties()
+  {
+    List children = rootElement.getChildren("property");
+
+    for (Object aChildren : children)
+    {
+      Element  child    = (Element) aChildren;
+      Property property = new Property(child, properties, this);
+    }
+  }
+
+  private void parseName()
+  {
+    Attribute nameAttribute = rootElement.getAttribute("name");
+
+    if (nameAttribute != null)
+    {
+      projectName = nameAttribute.getValue();
+    }
   }
 
   public Antfile(Element antcall, EventCollector eventCollector, List<Antfile> importsAlreadyProcessed, List<Antfile> importsToProcess,
@@ -168,35 +182,6 @@ public class Antfile
     }
   }
 
-  /** Does this name include a property? */
-  private boolean isValueAProperty(String name)
-  {
-    int openIndex = name.indexOf("${");
-
-    return openIndex > -1;
-  }
-
-  /** Parse any properties in this Ant file. */
-  private void parseProperties()
-  {
-    List children = rootElement.getChildren("property");
-
-    for (Object aChildren : children)
-    {
-      Element  child    = (Element) aChildren;
-      Property property = new Property(child, properties, this);
-    }
-  }
-
-  /** Add a target to the list of targest in this ant buildFile. */
-  public void addAnt(Ant ant)
-  {
-    if (!ants.contains(ant))
-    {
-      ants.add(ant);
-    }
-  }
-
   /** Get the default target name if it exists. Else, return an empty string. */
   public String getDefaultTargetName()
   {
@@ -210,36 +195,15 @@ public class Antfile
     }
   }
 
-  @Override
-  public boolean equals(Object o)
+  /** Add a target to the list of targest in this ant buildFile. */
+  public void addAnt(Ant ant)
   {
-    if (this == o)
+    if (!ants.contains(ant))
     {
-      return true;
+      ants.add(ant);
     }
-
-    if (!(o instanceof Antfile))
-    {
-      return false;
-    }
-
-    final Antfile antfile = (Antfile) o;
-
-    return buildFile.getAbsolutePath().equals(antfile.buildFile.getAbsolutePath());
   }
-
-  @Override
-  public int hashCode()
-  {
-    return buildFile.getAbsolutePath().hashCode();
-  }
-
-  /**  */
-  @Override
-  public String toString()
-  {
-    return buildFile.getName();
-  }
+  // --------------------------- main() method ---------------------------
 
   /**  */
   public static void main(String[] args)
@@ -254,8 +218,9 @@ public class Antfile
     String result2 = Utility.expandPropertyName("${dibble}bruce", props);
     String result3 = Utility.expandPropertyName("doug${dibble}", props);
   }
-  // ------------------------ OTHER METHODS ------------------------
+  // -------------------------- OTHER METHODS --------------------------
 
+  // ------------------------ OTHER METHODS ------------------------
   /** Add an import to the list of targest in this ant buildFile. */
   public void addImport(Antfile importedAntfile)
   {
@@ -265,66 +230,12 @@ public class Antfile
     }
   }
 
-  /** Return the antcalls for this build file. */
-  public List<AntCall> getAntCalls()
-  {
-    return antCalls;
-  }
-
-  /** Return the ant calls for this build file. */
-  public List<Ant> getAnts()
-  {
-    return ants;
-  }
-
-  /** Return the actual File. */
-  public File getBuildFile()
-  {
-    return buildFile;
-  }
-
-  /** Any imports used in this build file. */
-  public List<Antfile> getImports()
-  {
-    return imports;
-  }
-
-  /** Any macrodefs used in this build file. */
-  public List<Macrodef> getLocalMacrodefs()
-  {
-    return localMacrodefs;
-  }
-
-  /** Any imports used in this build file. */
-  public List<Taskdef> getLocalTaskdefs()
-  {
-    return localTaskdefs;
-  }
-
   /** Get a nicely formatted file name for GraphViz. */
   public String getNiceName()
   {
     String name = getBuildFile().getName();
 
     return Utility.replaceBadChars(name);
-  }
-
-  /** Any properties in this build file. */
-  public Map<String, Property> getProperties()
-  {
-    return properties;
-  }
-
-  /**  */
-  private void setProperties(Map<String, Property> props)
-  {
-    properties = props;
-  }
-
-  /** Any targets used in this build file. */
-  public List<Target> getTargets()
-  {
-    return targets;
   }
 
   /**
@@ -615,6 +526,24 @@ public class Antfile
   }
 
   /** Return the Target maching the given target element. */
+  private Target getMatchingTarget(Element targetElement)
+  {
+    String targetName = targetElement.getAttribute("name").getValue();
+
+    for (Target target : targets)
+    {
+      String label = target.getName();
+
+      if (label.equals(targetName))
+      {
+        return target;
+      }
+    }
+
+    return null;
+  }
+
+  /** Return the Target maching the given target element. */
   private Macrodef getMatchingMacrodef(Element targetElement)
   {
     String targetName = targetElement.getAttribute("name").getValue();
@@ -692,24 +621,6 @@ public class Antfile
         }
       }
     }
-  }
-
-  /** Return the Target maching the given target element. */
-  private Target getMatchingTarget(Element targetElement)
-  {
-    String targetName = targetElement.getAttribute("name").getValue();
-
-    for (Target target : targets)
-    {
-      String label = target.getName();
-
-      if (label.equals(targetName))
-      {
-        return target;
-      }
-    }
-
-    return null;
   }
 
   /** Find any taskdef definitions. */
@@ -791,36 +702,6 @@ public class Antfile
     }  // end for
   }
 
-  /** Resolve any dependencies with internal targets. */
-  public void resolveInternalDependencies()
-  {
-    List<Dependency> dependencies = getUnresolvedDependencies();
-
-    for (Dependency dependency : dependencies)
-    {
-      List<Target> allTargets = getTargets();
-
-      for (Target target : allTargets)
-      {
-        String dependencyName = dependency.getName();
-        String targetName     = target.getName();
-
-        System.out.println("Antfile.resolveInternalDependencies dependencyName, targetName = " + dependencyName + " " + targetName);
-
-        if (dependencyName == null)
-        {
-          System.out.println("Antfile.resolveInternalDependencies dependency = " + dependency);
-        }
-        else if (dependencyName.equals(targetName))
-        {
-          dependency.setResolved(true);
-
-          break;
-        }
-      }
-    }
-  }
-
   /**  */
   private List<Dependency> getUnresolvedDependencies()
   {
@@ -856,8 +737,125 @@ public class Antfile
     return allTargets;
   }
 
+  /** Resolve any dependencies with internal targets. */
+  public void resolveInternalDependencies()
+  {
+    List<Dependency> dependencies = getUnresolvedDependencies();
+
+    for (Dependency dependency : dependencies)
+    {
+      List<Target> allTargets = getTargets();
+
+      for (Target target : allTargets)
+      {
+        String dependencyName = dependency.getName();
+        String targetName     = target.getName();
+
+        System.out.println("Antfile.resolveInternalDependencies dependencyName, targetName = " + dependencyName + " " + targetName);
+
+        if (dependencyName == null)
+        {
+          System.out.println("Antfile.resolveInternalDependencies dependency = " + dependency);
+        }
+        else if (dependencyName.equals(targetName))
+        {
+          dependency.setResolved(true);
+
+          break;
+        }
+      }
+    }
+  }
+
+  // ------------------------ CANONICAL METHODS ------------------------
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+
+    if (!(o instanceof Antfile))
+    {
+      return false;
+    }
+
+    final Antfile antfile = (Antfile) o;
+
+    return buildFile.getAbsolutePath().equals(antfile.buildFile.getAbsolutePath());
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return buildFile.getAbsolutePath().hashCode();
+  }
+
+  /**  */
+  @Override
+  public String toString()
+  {
+    return buildFile.getName();
+  }
+  // --------------------- GETTER / SETTER METHODS ---------------------
+
+  /** Return the antcalls for this build file. */
+  public List<AntCall> getAntCalls()
+  {
+    return antCalls;
+  }
+
+  /** Return the ant calls for this build file. */
+  public List<Ant> getAnts()
+  {
+    return ants;
+  }
+
+  /** Return the actual File. */
+  public File getBuildFile()
+  {
+    return buildFile;
+  }
+
+  /** Any imports used in this build file. */
+  public List<Antfile> getImports()
+  {
+    return imports;
+  }
+
+  /** Any macrodefs used in this build file. */
+  public List<Macrodef> getLocalMacrodefs()
+  {
+    return localMacrodefs;
+  }
+
+  /** Any imports used in this build file. */
+  public List<Taskdef> getLocalTaskdefs()
+  {
+    return localTaskdefs;
+  }
+
   public String getProjectName()
   {
     return projectName;
+  }
+
+  /** Any properties in this build file. */
+  public Map<String, Property> getProperties()
+  {
+    return properties;
+  }
+
+  /**  */
+  private void setProperties(Map<String, Property> props)
+  {
+    properties = props;
+  }
+
+  /** Any targets used in this build file. */
+  public List<Target> getTargets()
+  {
+    return targets;
   }
 }

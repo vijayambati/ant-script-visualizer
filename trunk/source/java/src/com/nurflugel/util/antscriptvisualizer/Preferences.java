@@ -2,6 +2,7 @@ package com.nurflugel.util.antscriptvisualizer;
 
 import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PDF;
 import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PNG;
+import static java.util.prefs.Preferences.userNodeForPackage;
 
 /**
  * Created by IntelliJ IDEA. User: douglasbullard Date: Nov 24, 2009 Time: 5:04:47 PM To change this template use File | Settings | File Templates.
@@ -42,7 +43,7 @@ public class Preferences
 
   public Preferences()
   {
-    preferencesStore           = java.util.prefs.Preferences.userNodeForPackage(AntParserUiImpl.class);
+    preferencesStore           = userNodeForPackage(AntParserUiImpl.class);
     dotExecutablePath          = preferencesStore.get(DOT_EXECUTABLE, "");
     shouldGroupByBuildfiles    = preferencesStore.getBoolean(GROUP_NODES_BY_BUILDFILE, true);
     shouldIncludeImportedFiles = preferencesStore.getBoolean(INCLUDE_IMPORTED_ANT_FILES, true);
@@ -62,8 +63,15 @@ public class Preferences
 
   public Preferences(boolean dummyFlag)
   {
-    preferencesStore  = java.util.prefs.Preferences.userNodeForPackage(AntParserUiImpl.class);
+    preferencesStore  = userNodeForPackage(AntParserUiImpl.class);
     dotExecutablePath = preferencesStore.get(DOT_EXECUTABLE, "");
+  }
+
+  // -------------------------- OTHER METHODS --------------------------
+  public void setLastDir(String lastDir)
+  {
+    this.lastDir = lastDir;
+    save();
   }
 
   public void save()
@@ -84,80 +92,14 @@ public class Preferences
     preferencesStore.putBoolean(SHOW_LEGEND, shouldShowLegend);
   }
 
-  public void setShouldGroupByBuildfiles(boolean shouldGroupByBuildfiles)
+  public boolean shouldConcentrate()
   {
-    this.shouldGroupByBuildfiles = shouldGroupByBuildfiles;
+    return shouldConcentrate;
   }
 
-  public void setShouldIncludeImportedFiles(boolean shouldIncludeImportedFiles)
+  public boolean shouldDeleteDotFilesOnExit()
   {
-    this.shouldIncludeImportedFiles = shouldIncludeImportedFiles;
-  }
-
-  public void setShouldConcentrate(boolean shouldConcentrate)
-  {
-    this.shouldConcentrate = shouldConcentrate;
-  }
-
-  public void setShouldShowMacrodefs(boolean shouldShowMacrodefs)
-  {
-    this.shouldShowMacrodefs = shouldShowMacrodefs;
-  }
-
-  public void setShouldShowAntCalls(boolean shouldShowAntCalls)
-  {
-    this.shouldShowAntCalls = shouldShowAntCalls;
-  }
-
-  public void setShouldShowTargets(boolean shouldShowTargets)
-  {
-    this.shouldShowTargets = shouldShowTargets;
-  }
-
-  public void setShouldDeleteDotFilesOnExit(boolean shouldDeleteDotFilesOnExit)
-  {
-    this.shouldDeleteDotFilesOnExit = shouldDeleteDotFilesOnExit;
-  }
-
-  public void setOutputFormat(OutputFormat outputFormat)
-  {
-    this.outputFormat = outputFormat;
-  }
-
-  public void setShouldUseAbsolutePaths(boolean shouldUseAbsolutePaths)
-  {
-    this.shouldUseAbsolutePaths = shouldUseAbsolutePaths;
-  }
-
-  public void setShouldShowTaskdefs(boolean shouldShowTaskdefs)
-  {
-    this.shouldShowTaskdefs = shouldShowTaskdefs;
-  }
-
-  public String getLastDir()
-  {
-    return lastDir;
-  }
-
-  public void setLastDir(String lastDir)
-  {
-    this.lastDir = lastDir;
-    save();
-  }
-
-  public String getDotExecutablePath()
-  {
-    return dotExecutablePath;
-  }
-
-  public void setPreferencesStore(java.util.prefs.Preferences preferencesStore)
-  {
-    this.preferencesStore = preferencesStore;
-  }
-
-  public void setDotExecutablePath(String dotExecutablePath)
-  {
-    this.dotExecutablePath = dotExecutablePath;
+    return shouldDeleteDotFilesOnExit;
   }
 
   public boolean shouldGroupByBuildfiles()
@@ -170,9 +112,19 @@ public class Preferences
     return shouldIncludeImportedFiles;
   }
 
-  public boolean shouldConcentrate()
+  public boolean shouldShowAntcalls()
   {
-    return shouldConcentrate;
+    return shouldShowAntCalls;
+  }
+
+  public boolean shouldShowAnts()
+  {
+    return shouldShowAnts;
+  }
+
+  public boolean shouldShowLegend()
+  {
+    return shouldShowLegend;
   }
 
   public boolean shouldShowMacrodefs()
@@ -180,24 +132,14 @@ public class Preferences
     return shouldShowMacrodefs;
   }
 
-  public boolean shouldShowAntcalls()
-  {
-    return shouldShowAntCalls;
-  }
-
   public boolean shouldShowTargets()
   {
     return shouldShowTargets;
   }
 
-  public boolean shouldDeleteDotFilesOnExit()
+  public boolean shouldShowTaskdefs()
   {
-    return shouldDeleteDotFilesOnExit;
-  }
-
-  public OutputFormat getOutputFormat()
-  {
-    return outputFormat;
+    return shouldShowTaskdefs;
   }
 
   public boolean shouldUseAbsolutePaths()
@@ -205,9 +147,30 @@ public class Preferences
     return shouldUseAbsolutePaths;
   }
 
-  public boolean shouldShowTaskdefs()
+  // --------------------- GETTER / SETTER METHODS ---------------------
+  public String getDotExecutablePath()
   {
-    return shouldShowTaskdefs;
+    return dotExecutablePath;
+  }
+
+  public void setDotExecutablePath(String dotExecutablePath)
+  {
+    this.dotExecutablePath = dotExecutablePath;
+  }
+
+  public String getLastDir()
+  {
+    return lastDir;
+  }
+
+  public OutputFormat getOutputFormat()
+  {
+    return outputFormat;
+  }
+
+  public void setOutputFormat(OutputFormat outputFormat)
+  {
+    this.outputFormat = outputFormat;
   }
 
   public String getPreviousVersion()
@@ -220,9 +183,34 @@ public class Preferences
     this.previousVersion = previousVersion;
   }
 
-  public boolean shouldShowAnts()
+  public void setPreferencesStore(java.util.prefs.Preferences preferencesStore)
   {
-    return shouldShowAnts;
+    this.preferencesStore = preferencesStore;
+  }
+
+  public void setShouldConcentrate(boolean shouldConcentrate)
+  {
+    this.shouldConcentrate = shouldConcentrate;
+  }
+
+  public void setShouldDeleteDotFilesOnExit(boolean shouldDeleteDotFilesOnExit)
+  {
+    this.shouldDeleteDotFilesOnExit = shouldDeleteDotFilesOnExit;
+  }
+
+  public void setShouldGroupByBuildfiles(boolean shouldGroupByBuildfiles)
+  {
+    this.shouldGroupByBuildfiles = shouldGroupByBuildfiles;
+  }
+
+  public void setShouldIncludeImportedFiles(boolean shouldIncludeImportedFiles)
+  {
+    this.shouldIncludeImportedFiles = shouldIncludeImportedFiles;
+  }
+
+  public void setShouldShowAntCalls(boolean shouldShowAntCalls)
+  {
+    this.shouldShowAntCalls = shouldShowAntCalls;
   }
 
   public void setShouldShowAnts(boolean shouldShowAnts)
@@ -230,13 +218,28 @@ public class Preferences
     this.shouldShowAnts = shouldShowAnts;
   }
 
-  public boolean shouldShowLegend()
-  {
-    return shouldShowLegend;
-  }
-
   public void setShouldShowLegend(boolean shouldShowLegend)
   {
     this.shouldShowLegend = shouldShowLegend;
+  }
+
+  public void setShouldShowMacrodefs(boolean shouldShowMacrodefs)
+  {
+    this.shouldShowMacrodefs = shouldShowMacrodefs;
+  }
+
+  public void setShouldShowTargets(boolean shouldShowTargets)
+  {
+    this.shouldShowTargets = shouldShowTargets;
+  }
+
+  public void setShouldShowTaskdefs(boolean shouldShowTaskdefs)
+  {
+    this.shouldShowTaskdefs = shouldShowTaskdefs;
+  }
+
+  public void setShouldUseAbsolutePaths(boolean shouldUseAbsolutePaths)
+  {
+    this.shouldUseAbsolutePaths = shouldUseAbsolutePaths;
   }
 }

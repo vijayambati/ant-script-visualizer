@@ -15,19 +15,14 @@ import com.nurflugel.util.antscriptvisualizer.nodes.Target;
 import com.nurflugel.util.antscriptvisualizer.nodes.Taskdef;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Classpath;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Path;
-
 import org.apache.log4j.Logger;
-
 import org.jdom.JDOMException;
-
 import java.io.File;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -48,6 +43,7 @@ public class AntFileParser
   private Preferences           preferences;
   private AntParserUiImpl       ui;
   private EventCollector        eventCollector          = new EventCollector();
+  private static int            parseCount              = 0;
 
   /** Creates a new AntFileParser object. */
   public AntFileParser(Os os, Preferences preferences, AntParserUiImpl ui, File... filesToParse)
@@ -143,8 +139,9 @@ public class AntFileParser
 
     if (preferences.shouldIncludeImportedFiles())
     {
-      while (!importsToProcess.isEmpty())
+      while (!importsToProcess.isEmpty() && (parseCount++ < 100))
       {
+        System.out.println("AntFileParser.parse 2 antfile = " + antfile + " parse count = " + parseCount);
         parseForImports(antfile);
       }
     }
