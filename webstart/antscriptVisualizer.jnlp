@@ -17,14 +17,14 @@
     </security>
     <resources>
         <j2se version="1.6+"  initial-heap-size="64m" max-heap-size="512m"/>
-        <jar href="antscriptVisualizer.jar"/>
-        <jar href="commons-lang.jar"/>
-        <jar href="commons-io.jar"/>
-        <jar href="help.jar"/>
-        <jar href="forms_rt.jar"/>
-        <jar href="log4j.jar"/>
-        <jar href="jdom.jar"/>
-        <jar href="jhall.jar"/>
+        <jar href="lib/AntscriptVisualizer.jar"/>
+        <jar href="lib/commons-lang.jar"/>
+        <jar href="lib/commons-io.jar"/>
+        <jar href="lib/help.jar"/>
+        <jar href="lib/forms_rt.jar"/>
+        <jar href="lib/log4j.jar"/>
+        <jar href="lib/jdom.jar"/>
+        <jar href="lib/jhall.jar"/>
     </resources>
     <application-desc main-class="com.nurflugel.util.antscriptvisualizer.AntParserUiImpl"/>
 </jnlp>
