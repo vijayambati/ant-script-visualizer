@@ -1,7 +1,6 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 import static com.nurflugel.util.antscriptvisualizer.Os.OS_X;
-import static com.nurflugel.util.antscriptvisualizer.Os.WINDOWS;
 import com.nurflugel.util.antscriptvisualizer.nodes.Antfile;
 import com.nurflugel.util.antscriptvisualizer.nodes.Dependency;
 import com.nurflugel.util.antscriptvisualizer.nodes.Macrodef;
@@ -9,20 +8,14 @@ import com.nurflugel.util.antscriptvisualizer.nodes.Node;
 import com.nurflugel.util.antscriptvisualizer.nodes.NodeWithDependancies;
 import com.nurflugel.util.antscriptvisualizer.nodes.Target;
 import com.nurflugel.util.antscriptvisualizer.nodes.Taskdef;
-
+import static org.apache.commons.io.FileUtils.writeLines;
 import org.apache.commons.lang.StringUtils;
-
+import static org.apache.commons.lang.StringUtils.replace;
 import org.apache.log4j.Logger;
-
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-
-import java.lang.reflect.Method;
-
 import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -37,10 +30,16 @@ import java.util.Set;
 @SuppressWarnings({ "CallToRuntimeExec", "AssignmentToCollectionOrArrayFieldFromParameter" })
 public class OutputHandler
 {
-  public static final Logger    logger                = LogFactory.getLogger(OutputHandler.class);
-  public static final String    NEW_LINE              = "\n";
-  protected static final String CLOSING_LINE_DOTGRAPH = "}";
-  protected static final String OPENING_LINE_DOTGRAPH = "digraph G {\nnode [shape=box,fontname=\"Arial\",fontsize=\"10\"];\nedge [fontname=\"Arial\",fontsize=\"8\"];\nrankdir=RL;\n\n";
+  public static final Logger      logger                = LogFactory.getLogger(OutputHandler.class);
+  protected static final String   CLOSING_LINE_DOTGRAPH = "}";
+  protected static final String[] OPENING_LINE_DOTGRAPH =
+  {
+    "digraph G {",                                           //
+    "node [shape=box,fontname=\"Arial\",fontsize=\"10\"];",  //
+    "edge [fontname=\"Arial\",fontsize=\"8\"];",             //
+    "rankdir=RL;",                                           //
+    ""
+  };
   protected static final String OPENING_LINE_SUBGRAPH = "subgraph ";
   private AntFileParser         parser;
   private Os                    os;
@@ -61,6 +60,7 @@ public class OutputHandler
     this.os                    = os;
     this.generateGraphicOutput = generateGraphicOutput;
   }
+  // -------------------------- OTHER METHODS --------------------------
 
   /** Write all the output for the given ant files. */
   void writeOutputFiles(List<Antfile> antfile)
@@ -85,125 +85,6 @@ public class OutputHandler
     {
       logger.error("Unexpected exception", e);
     }
-  }
-
-  /** Convert the .dot file into png, pdf, svg, whatever. */
-  @SuppressWarnings({ "OverlyLongMethod" })
-  private void processDotFile(File dotFile)
-  {
-    try
-    {
-      String outputFileName = getOutputFileName(dotFile, preferences.getOutputFormat().getExtension());
-      File   outputFile     = new File(dotFile.getParent(), outputFileName);
-      File   parentFile     = outputFile.getParentFile();
-      String dotFilePath    = dotFile.getAbsolutePath();
-      String outputFilePath = outputFile.getAbsolutePath();
-
-      if (outputFile.exists())
-      {
-        if (logger.isDebugEnabled())
-        {
-          logger.debug("Deleting existing version of " + outputFilePath);
-        }
-
-        outputFile.delete();  // delete the file before generating it if it exists
-      }
-
-      String   outputFormat = preferences.getOutputFormat().getType();
-      String[] command      = { preferences.getDotExecutablePath(), "-T" + outputFormat, dotFilePath, "-o" + outputFilePath };
-
-      if (logger.isDebugEnabled())
-      {
-        logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
-      }
-
-      Runtime runtime = Runtime.getRuntime();
-      long    start   = new Date().getTime();
-
-      runtime.exec(command).waitFor();
-
-      long end = new Date().getTime();
-
-      if (logger.isDebugEnabled())
-      {
-        logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
-      }
-
-      List<String> commandList = new ArrayList<String>();
-
-      if (os == OS_X)
-      {
-        // This method doesn't work
-        // calling FileManager to open the URL works, if we replace spaces with %20
-        outputFilePath = outputFilePath.replace(" ", "%20");
-
-        String fileUrl = "file://" + outputFilePath;
-
-        if (logger.isDebugEnabled())
-        {
-          logger.debug("Trying to open URL: " + fileUrl);
-        }
-
-        try
-        {
-          Class<?> aClass = Class.forName("com.apple.eio.FileManager");
-          Method   method = aClass.getMethod("openURL", String.class);
-
-          method.invoke(null, fileUrl);
-        }
-        catch (Exception e)
-        {
-          e.printStackTrace();
-        }
-      }
-      else
-      {
-        if (os == WINDOWS)
-        {
-          commandList.add("cmd.exe");
-          commandList.add("/c");
-        }
-
-        commandList.add(outputFilePath);
-        command = commandList.toArray(new String[commandList.size()]);
-
-        if (logger.isDebugEnabled())
-        {
-          logger.debug("Command to run: " + concatenate(command));
-        }
-
-        runtime.exec(command);
-      }
-    }
-    catch (Exception e)  // todo handle error
-    {
-      logger.error(e);
-    }
-  }
-
-  /** Join the array together as one string, with spaces between the elements. */
-  private String concatenate(String[] commands)
-  {
-    StringBuilder stringBuffer = new StringBuilder();
-
-    for (String command : commands)
-    {
-      stringBuffer.append(" ");
-      stringBuffer.append(command);
-    }
-
-    return stringBuffer.toString().trim();
-  }
-
-  /** Takes someting like build.dot and returns build.png. */
-  private String getOutputFileName(File dotFile, String outputExtension)
-  {
-    String results = dotFile.getName();
-    int    index   = results.indexOf(".dot");
-
-    results = results.substring(0, index) + outputExtension;
-
-    return results;
   }
 
   /**
@@ -234,54 +115,36 @@ public class OutputHandler
       logger.debug("Writing output to file " + dotFile.getAbsolutePath());
     }
 
-    OutputStream     outputStream = new FileOutputStream(dotFile);
-    DataOutputStream out          = new DataOutputStream(outputStream);
+    List<String> lines = new ArrayList<String>();
 
-    // open a new .dot file
-    out.writeBytes(OPENING_LINE_DOTGRAPH);
+    lines.addAll(asList(OPENING_LINE_DOTGRAPH));
 
     if (!preferences.shouldGroupByBuildfiles())
     {
-      out.writeBytes("clusterrank=none;\n");
+      lines.add("clusterrank=none;");
     }
 
     if (preferences.shouldConcentrate())
     {
-      out.writeBytes("concentrate=true;\n");
+      lines.add("concentrate=true;");
     }
 
     // todo only print primary build file if supposed to
-    writeDotFileTargetDeclarations(out);
+    writeDotFileTargetDeclarations(lines);
 
     if (preferences.shouldShowLegend())
     {
-      writeLegend(out);
+      writeLegend(lines);
     }
 
     Map<Node, List<Dependency>> dependencies = parser.getDependencies();
 
-    writeDotDependencies(dependencies, out);
-    out.writeBytes(CLOSING_LINE_DOTGRAPH);
-    outputStream.close();
+    writeDotDependencies(dependencies, lines);
+    lines.add(CLOSING_LINE_DOTGRAPH);
+    lines = handleSpecialCharacters(lines);
+    writeLines(dotFile, lines);
 
     return dotFile;
-  }
-
-  /** Generates a legend. */
-  private void writeLegend(DataOutputStream out) throws IOException
-  {
-    out.writeBytes("\t" + OPENING_LINE_SUBGRAPH + "cluster_legend {" + NEW_LINE);
-    out.writeBytes("\t\tlabel=\"legend\"" + NEW_LINE);
-    out.writeBytes("\t\ttarget [label=\"target\" shape=box color=black ];" + NEW_LINE);
-    out.writeBytes("\t\ttarget2 [label=\"target\" shape=box color=black ];" + NEW_LINE);
-    out.writeBytes("\t\ttarget3 [label=\"target\" shape=box color=black ];" + NEW_LINE);
-    out.writeBytes("\t\ttaskdef [label=\"taskdef\" shape=hexagon color=green ];" + NEW_LINE);
-    out.writeBytes("\t\tmacrodef [label=\"macrodef\" shape=ellipse color=red ]; " + NEW_LINE);
-    out.writeBytes("\t}" + NEW_LINE);
-    out.writeBytes("\ttarget -> taskdef;" + NEW_LINE);
-    out.writeBytes("\ttarget -> macrodef;" + NEW_LINE);
-    out.writeBytes("\ttarget -> target2[label=<ant> color=red,style=dotted];" + NEW_LINE);
-    out.writeBytes("\ttarget -> target3[label=<antcall> color=green,style=dotted];" + NEW_LINE);
   }
 
   /** Get the dot file name from the ant file name. */
@@ -289,14 +152,83 @@ public class OutputHandler
   {
     File   file         = antFile.getBuildFile();
     String absolutePath = file.getAbsolutePath();
-    String newPath      = StringUtils.replace(absolutePath, ".xml", ".dot");
+    String newPath      = replace(absolutePath, ".xml", ".dot");
 
     return newPath;
   }
 
+  /** Write out all the dot declarations. */
+  private void writeDotFileTargetDeclarations(List<String> lines) throws IOException
+  {
+    int clusterIndex = 0;
+
+    for (Antfile antfile : antfiles)
+    {
+      lines.add("\t" + OPENING_LINE_SUBGRAPH + "cluster_" + clusterIndex + " {");
+
+      String fileName;
+
+      if (preferences.shouldUseAbsolutePaths())
+      {
+        fileName = antfile.getBuildFile().getAbsolutePath();
+      }
+      else
+      {
+        fileName = antfile.getBuildFile().getName();
+      }
+
+      lines.add("\t\tlabel=\"" + fileName + "\"");
+
+      List<Target>   targets        = antfile.getTargets();
+      List<Taskdef>  localTaskdefs  = antfile.getLocalTaskdefs();
+      List<Macrodef> localMacrodefs = antfile.getLocalMacrodefs();
+
+      for (Target target : targets)
+      {
+        writeOutputForNode(target, lines);
+      }
+
+      for (Macrodef localMacrodef : localMacrodefs)
+      {
+        writeOutputForNode(localMacrodef, lines);
+      }
+
+      for (Taskdef localTaskdef : localTaskdefs)
+      {
+        writeOutputForNode(localTaskdef, lines);
+      }
+
+      lines.add("\t}");
+      clusterIndex++;
+    }  // end for
+  }
+
+  /**  */
+  private void writeOutputForNode(Node node, List<String> lines) throws IOException
+  {
+    node.writeOutput(lines, preferences);
+  }
+
+  /** Generates a legend. */
+  private void writeLegend(List<String> lines) throws IOException
+  {
+    lines.add("\t" + OPENING_LINE_SUBGRAPH + "cluster_legend {");
+    lines.add("\t\tlabel=\"legend\"");
+    lines.add("\t\ttarget [label=\"target\" shape=box color=black ];");
+    lines.add("\t\ttarget2 [label=\"target\" shape=box color=black ];");
+    lines.add("\t\ttarget3 [label=\"target\" shape=box color=black ];");
+    lines.add("\t\ttaskdef [label=\"taskdef\" shape=hexagon color=green ];");
+    lines.add("\t\tmacrodef [label=\"macrodef\" shape=ellipse color=red ]; ");
+    lines.add("\t}");
+    lines.add("\ttarget -> taskdef;");
+    lines.add("\ttarget -> macrodef;");
+    lines.add("\ttarget -> target2[label=<ant> color=red,style=dotted];");
+    lines.add("\ttarget -> target3[label=<antcall> color=green,style=dotted];");
+  }
+
   /** Write out the dependencies. */
   @SuppressWarnings({ "OverlyNestedMethod" })
-  private void writeDotDependencies(Map<Node, List<Dependency>> dependencies, DataOutputStream out) throws IOException
+  private void writeDotDependencies(Map<Node, List<Dependency>> dependencies, List<String> lines) throws IOException
   {
     Set<Node>   set       = dependencies.keySet();
     Set<String> resultSet = new HashSet<String>();
@@ -336,59 +268,105 @@ public class OutputHandler
     {
       String line = (String) aResultSet;
 
-      out.writeBytes(line + NEW_LINE);
+      lines.add(line);
     }
   }
 
-  /** Write out all the dot declarations. */
-  private void writeDotFileTargetDeclarations(DataOutputStream out) throws IOException
+  /** Replace characters that DOT doesn't like, such as : (file names on Windows may have c:\ in them... */
+  private List<String> handleSpecialCharacters(List<String> lines)
   {
-    int clusterIndex = 0;
+    List<String> newLines = new ArrayList<String>(lines.size());
 
-    for (Antfile antfile : antfiles)
+    for (String line : lines)
     {
-      out.writeBytes("\t" + OPENING_LINE_SUBGRAPH + "cluster_" + clusterIndex + " {" + NEW_LINE);
+      line = StringUtils.replace(line, ":", "_");
+      newLines.add(line);
+    }
 
-      String fileName;
-
-      if (preferences.shouldUseAbsolutePaths())
-      {
-        fileName = antfile.getBuildFile().getAbsolutePath();
-      }
-      else
-      {
-        fileName = antfile.getBuildFile().getName();
-      }
-
-      out.writeBytes("\t\tlabel=\"" + fileName + "\"" + NEW_LINE);
-
-      List<Target>   targets        = antfile.getTargets();
-      List<Taskdef>  localTaskdefs  = antfile.getLocalTaskdefs();
-      List<Macrodef> localMacrodefs = antfile.getLocalMacrodefs();
-
-      for (Target target : targets)
-      {
-        writeOutputForNode(target, out);
-      }
-
-      for (Macrodef localMacrodef : localMacrodefs)
-      {
-        writeOutputForNode(localMacrodef, out);
-      }
-
-      for (Taskdef localTaskdef : localTaskdefs)
-      {
-        writeOutputForNode(localTaskdef, out);
-      }
-
-      out.writeBytes("\t}" + NEW_LINE);
-      clusterIndex++;
-    }  // end for
+    return newLines;
   }
 
-  /**  */
-  private void writeOutputForNode(Node node, DataOutputStream out) throws IOException
+  /** Convert the .dot file into png, pdf, svg, whatever. */
+  @SuppressWarnings({ "OverlyLongMethod" })
+  private void processDotFile(File dotFile)
   {
-    node.writeOutput(out, preferences);
+    try
+    {
+      String outputFileName = getOutputFileName(dotFile, preferences.getOutputFormat().getExtension());
+      File   outputFile     = new File(dotFile.getParent(), outputFileName);
+      File   parentFile     = outputFile.getParentFile();
+      String dotFilePath    = dotFile.getAbsolutePath();
+      String outputFilePath = outputFile.getAbsolutePath();
+
+      if (outputFile.exists())
+      {
+        if (logger.isDebugEnabled())
+        {
+          logger.debug("Deleting existing version of " + outputFilePath);
+        }
+
+        outputFile.delete();  // delete the file before generating it if it exists
+      }
+
+      String outputFormatName  = preferences.getOutputFormat().getType();
+      String dotExecutablePath = preferences.getDotExecutablePath();
+
+      // this is to deal with different versions of Graphviz on OS X - if dot is in applications (old version), preface with an e for epdf.  If it's
+      // in /usr/local/bin, leave as pdf
+      if ((os == OS_X) && dotExecutablePath.startsWith("/Applications") && !outputFormatName.startsWith("e"))
+      {
+        outputFormatName = "e" + outputFormatName;
+      }
+
+      String[] command = { dotExecutablePath, "-T" + outputFormatName, "-o" + outputFilePath, dotFilePath };
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
+      }
+
+      Runtime runtime = Runtime.getRuntime();
+      long    start   = new Date().getTime();
+
+      runtime.exec(command).waitFor();
+
+      long end = new Date().getTime();
+
+      if (logger.isDebugEnabled())
+      {
+        logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
+      }
+
+      os.openFile(outputFilePath);
+    }
+    catch (Exception e)  // todo handle error
+    {
+      logger.error(e);
+    }
+  }
+
+  /** Takes someting like build.dot and returns build.png. */
+  private String getOutputFileName(File dotFile, String outputExtension)
+  {
+    String results = dotFile.getName();
+    int    index   = results.indexOf(".dot");
+
+    results = results.substring(0, index) + outputExtension;
+
+    return results;
+  }
+
+  /** Join the array together as one string, with spaces between the elements. */
+  private String concatenate(String[] commands)
+  {
+    StringBuilder stringBuffer = new StringBuilder();
+
+    for (String command : commands)
+    {
+      stringBuffer.append(" ");
+      stringBuffer.append(command);
+    }
+
+    return stringBuffer.toString().trim();
   }
 }

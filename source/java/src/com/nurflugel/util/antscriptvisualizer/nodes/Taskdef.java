@@ -5,7 +5,6 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-
 import java.util.List;
 
 /**
@@ -98,6 +97,12 @@ public class Taskdef extends Node
     }
   }
 
+  /** Handles parsing case 4: <taskdef resource="emma_ant.properties" classpathref="emma.path"/> */
+  private void getTaskdefFromClasspathref(Element element)
+  {
+    // Todo
+  }
+
   /**  */
   private void getTaskdefFromClasspath(Attribute resourceAttribute, Element taskdefElement, Element classpathElement)
   {
@@ -117,13 +122,6 @@ public class Taskdef extends Node
     }
   }
 
-  /** Case 2: <taskdef file="blash.properties"/> */
-  private void getTaskdefFromClasspathAttribute(Attribute resourceAttribute, Element taskdefElement, Element classpathElement,
-                                                Attribute classpathAttribute)
-  {
-    // Todo
-  }
-
   /**
    * handles case 3: <code><taskdef resource="cactus.tasks"> <classpath> <pathelement location="${lib.testing}/cactus-1.5.jar"/> <pathelement
    * location="${lib.testing}/cactus-ant-1.5.jar"/> <pathelement location="${lib.commons}/commons-httpclient.jar"/> <pathelement
@@ -134,12 +132,14 @@ public class Taskdef extends Node
     String name1 = resourceAttribute.getName();
   }
 
-  /** Handles parsing case 4: <taskdef resource="emma_ant.properties" classpathref="emma.path"/> */
-  private void getTaskdefFromClasspathref(Element element)
+  /** Case 2: <taskdef file="blash.properties"/> */
+  private void getTaskdefFromClasspathAttribute(Attribute resourceAttribute, Element taskdefElement, Element classpathElement,
+                                                Attribute classpathAttribute)
   {
     // Todo
   }
 
+  // -------------------------- OTHER METHODS --------------------------
   @Override
   protected void setNodeType()
   {

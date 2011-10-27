@@ -4,12 +4,9 @@
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import com.nurflugel.util.antscriptvisualizer.LogFactory;
-
 import org.apache.log4j.Logger;
-
 import org.jdom.Attribute;
 import org.jdom.Element;
-
 import java.util.List;
 
 /** Representation of a target in a build script. */
@@ -37,17 +34,12 @@ public class Target extends NodeWithDependancies
     setElement(targetElement);
   }
 
+  // -------------------------- OTHER METHODS --------------------------
   @Override
   @SuppressWarnings({ "RefusedBequest" })
   public String getLabel()
   {
     return description;
-  }
-
-  @Override
-  protected void setNodeType()
-  {
-    nodeType = NodeType.TARGET;
   }
 
   /** Find all the "depends" for this target. */
@@ -79,5 +71,11 @@ public class Target extends NodeWithDependancies
         }
       }
     }
+  }
+
+  @Override
+  protected void setNodeType()
+  {
+    nodeType = NodeType.TARGET;
   }
 }

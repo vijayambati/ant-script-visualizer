@@ -16,13 +16,15 @@ import static com.nurflugel.util.antscriptvisualizer.Os.findOs;
 import static com.nurflugel.util.antscriptvisualizer.OutputFormat.*;
 import static com.nurflugel.util.antscriptvisualizer.Util.*;
 import static java.awt.Cursor.*;
+import static javax.swing.JFileChooser.APPROVE_OPTION;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /** The main UI class and entry point for the app. */
 @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion", "CallToSystemExit" })
 public class AntParserUiImpl implements AntParserUi
 {
   public static final String  HELP_HS                       = "help.hs";
-  public static final String  VERSION                       = "2.1.1";
+  public static final String  VERSION                       = "2.1.5";
   private static final Logger LOGGER                        = Logger.getLogger(AntParserUiImpl.class);
   private Cursor              normalCursor                  = getPredefinedCursor(DEFAULT_CURSOR);
   private Cursor              busyCursor                    = getPredefinedCursor(WAIT_CURSOR);
@@ -62,14 +64,14 @@ public class AntParserUiImpl implements AntParserUi
     LOGGER.error("Bad programmer, no donut!");
     os                = findOs();
     preferences       = new Preferences();
-    dotExecutablePath = preferences.getDotExecutablePath();//todo this is ugly, fix it somehow
+    dotExecutablePath = preferences.getDotExecutablePath();  // todo this is ugly, fix it somehow
 
     if ((dotExecutablePath == null) || (dotExecutablePath.length() == 0))
     {
       dotExecutablePath = os.getDefaultDotPath();
     }
-      preferences.setDotExecutablePath(dotExecutablePath);
 
+    preferences.setDotExecutablePath(dotExecutablePath);
     frame = new JFrame();
     frame.setContentPane(mainPanel);
     initializeUi();
@@ -86,7 +88,6 @@ public class AntParserUiImpl implements AntParserUi
     AntParserUi ui = new AntParserUiImpl();
   }
   // ------------------------ OTHER METHODS ------------------------
-
   @Override
   public JFrame getFrame()
   {
@@ -121,7 +122,6 @@ public class AntParserUiImpl implements AntParserUi
       });
 
     // todo ad listeners to deal with selections ->> preferences
-    // lkjlkjlk
     selectAntFileButton.addActionListener(new ActionListener()
       {
         public void actionPerformed(ActionEvent event)
@@ -143,7 +143,6 @@ public class AntParserUiImpl implements AntParserUi
           doQuitAction();
         }
       });
-
     addHelpListener(HELP_HS, helpButton, frame);
   }
 
@@ -184,15 +183,15 @@ public class AntParserUiImpl implements AntParserUi
     if (!showMacrodefsCheckbox.isSelected() && !showTaskdefsCheckBox.isSelected() && !showTargetsCheckbox.isSelected()
           && !showAntcallsCheckbox.isSelected())
     {
-      JOptionPane.showMessageDialog(frame,
-                                    "Sorry, you must have one of \"Show targets\", \"Show macrodefs\", \n\""
-                                    + "Show taskdefs\", or \"Show Antcalls\" checked to do this");
+      showMessageDialog(frame,
+                        "Sorry, you must have one of \"Show targets\", \"Show macrodefs\", \n\""
+                          + "Show taskdefs\", or \"Show Antcalls\" checked to do this");
     }
     else
     {
       getOutputPreferencesFromUi();
       frame.setCursor(busyCursor);
-      statusLabel.setText("Parsing Ant files... ");
+      updateStatusLabel(null);
 
       JFileChooser      fileChooser = new JFileChooser();
       ExampleFileFilter filter      = new ExampleFileFilter();
@@ -213,7 +212,7 @@ public class AntParserUiImpl implements AntParserUi
 
       int returnVal = fileChooser.showOpenDialog(frame);
 
-      if (returnVal == JFileChooser.APPROVE_OPTION)
+      if (returnVal == APPROVE_OPTION)
       {
         File[] selectedFiles = fileChooser.getSelectedFiles();
 
@@ -237,22 +236,15 @@ public class AntParserUiImpl implements AntParserUi
     }                           // end if-else
   }
 
+  public void updateStatusLabel(Integer count)
+  {
+    statusLabel.setText("Parsing Ant files... " + count);
+  }
+
   private void doSelectDirAction()
   {
     // todo
   }
-
-  // private void doSelectShowImportsAction()
-  // {
-  // parseFileOptionsPanel.setVisible(false);
-  // selectDirButton.setVisible(true);
-  // }
-  //
-  // private void doSelectShowMacrodefDependenciesAction()
-  // {
-  // parseFileOptionsPanel.setVisible(false);
-  // selectDirButton.setVisible(true);
-  // }
 
   private void findDotExecutablePath()
   {
@@ -273,8 +265,7 @@ public class AntParserUiImpl implements AntParserUi
     }
     else
     {
-      JOptionPane.showMessageDialog(frame,
-                                    "Sorry, this program can't run without the GraphViz installation.\n" + "  Please install that and try again");
+      showMessageDialog(frame, "Sorry, this program can't run without the GraphViz installation.\n" + "  Please install that and try again");
       doQuitAction();
     }
   }
@@ -282,7 +273,6 @@ public class AntParserUiImpl implements AntParserUi
   private void initializeUi()
   {
     // $$$setupUI$$$();
-
     addActionListeners();
     doParseAntFileRadiobuttonAction();
     groupNodesByBuildfileCheckbox.setSelected(preferences.shouldGroupByBuildfiles());
@@ -312,7 +302,6 @@ public class AntParserUiImpl implements AntParserUi
     }
 
     // preferences.put(OUTPUT_FORMAT, getOutputFormat().toString());
-
     if (os == OS_X)
     {
       pdfRadioButton.setSelected(true);
