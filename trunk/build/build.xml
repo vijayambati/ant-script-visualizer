@@ -29,7 +29,7 @@
                 <!--<pathelement path="${unversioned.dir}/classes"/>-->
             </path>
             <taskdef name="validatePropertiesTask" classname="com.nurflugel.buildtasks.ValidatePropertiesTask" classpathref="classpath.buildtasks"/>
-             <validatePropertiesTask  exceptions="@{exceptions}"/>
+             <!--<validatePropertiesTask  exceptions="@{exceptions}"/>-->
             <echo> ::::::::::::::ant.file = ${ant.file} </echo>
             <!--<echo> ::::::::::::::missing property = @{dibble.dabble} </echo>-->
             <!--<echoproperties />-->
