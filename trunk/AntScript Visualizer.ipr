@@ -1321,6 +1321,7 @@
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
+        <inspection_tool class="Fix shebang" enabled="true" level="WARNING" enabled_by_default="true">/bin/sh#/bin/bash</inspection_tool>
         <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="TOP_LEVEL_CLASS_OPTIONS">
             <value>
@@ -1351,6 +1352,10 @@
           <option name="IGNORE_DUPLICATED_THROWS" value="false" />
           <option name="IGNORE_POINT_TO_ITSELF" value="false" />
           <option name="myAdditionalJavadocTags" value="" />
+        </inspection_tool>
+        <inspection_tool class="UnnecessaryLocalVariable" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="m_ignoreImmediatelyReturnedVariables" value="true" />
+          <option name="m_ignoreAnnotatedVariables" value="false" />
         </inspection_tool>
         <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="groups">

@@ -8,13 +8,13 @@
   <repository name="asv-repository" url="http://www.nurflugel.com/Home/repository" ivys="true" artifacts="true" />
 </info>
 <configurations defaultconfmapping="build,dist,presigned,test,test-formatTestNg->default">
-        <conf name="build"   visibility="public"  description="Dependencies only used during the build process." />
-        <conf name="dist"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
-        <conf name="presigned"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
-        <conf name="javadoc" visibility="public"  description="Some libraries provide separate javadoc packages." />
-        <conf name="test"    visibility="private" description="Dependencies only used during unit testing." />
+        <conf name="build"             visibility="public"  description="Dependencies only used during the build process." />
+        <conf name="dist"              visibility="public"  description="Dependencies that will be deployed via WebStart." />
+        <conf name="presigned"         visibility="public"  description="Dependencies that will be deployed via WebStart." />
+        <conf name="javadoc"           visibility="public"  description="Some libraries provide separate javadoc packages." />
+        <conf name="test"              visibility="private" description="Dependencies only used during unit testing." />
         <conf name="test-formatTestNg" visibility="public"  description="Test jars" />
-        <conf name="source"  visibility="public"  description="Dependencies' source code packages." />
+        <conf name="source"            visibility="public"  description="Dependencies' source code packages." />
 </configurations>
 
 <publications>
@@ -25,7 +25,7 @@
 <dependencies>
         <dependency org="net.sf.ant-contrib" name="ant-contrib"  rev="1.0b2"        conf="build" />
         <dependency org="org.jdom"           name="jdom"         rev="1.0"          conf="build,dist,test" />
-        <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,dist,test,source" />
+        <dependency org="javax.help"         name="jhall"        rev="2.0.6"        conf="build,presigned,test,source" />
         <dependency org="org.apache"         name="log4j"        rev="1.2.15"       conf="build,dist,test,source" />
         <dependency org="org.testng"         name="testng"       rev="5.8-jdk1.5"   conf="build,test,source" />
         <dependency org="org.testng"         name="testng-xslt"  rev="1.1"          conf="test-formatTestNg" />
