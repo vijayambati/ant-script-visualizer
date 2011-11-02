@@ -24,7 +24,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class AntParserUiImpl implements AntParserUi
 {
   public static final String  HELP_HS                       = "help.hs";
-  public static final String  VERSION                       = "2.1.5";
+  public static final String  VERSION                       = "2.1.7";
   private static final Logger LOGGER                        = Logger.getLogger(AntParserUiImpl.class);
   private Cursor              normalCursor                  = getPredefinedCursor(DEFAULT_CURSOR);
   private Cursor              busyCursor                    = getPredefinedCursor(WAIT_CURSOR);
@@ -87,6 +87,7 @@ public class AntParserUiImpl implements AntParserUi
   {
     AntParserUi ui = new AntParserUiImpl();
   }
+
   // ------------------------ OTHER METHODS ------------------------
   @Override
   public JFrame getFrame()

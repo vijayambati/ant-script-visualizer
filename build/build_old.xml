@@ -106,6 +106,8 @@
         <echo>Done</echo>
 	</target>
 
+  <target name="bad spaces c:\" depends="init"/>
+
 	<target name="compile" depends="init, minor" description="compile module Ant script Visualizer production classes">
 		<mkdir dir="${classes_output}"/>
 		<!--<javac-->
