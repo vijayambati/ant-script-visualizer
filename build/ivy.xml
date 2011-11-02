@@ -7,9 +7,10 @@
   <ivyauthor name="Douglas Bullard" />
   <repository name="asv-repository" url="http://www.nurflugel.com/Home/repository" ivys="true" artifacts="true" />
 </info>
-<configurations defaultconfmapping="build,dist,test,test-formatTestNg->default">
+<configurations defaultconfmapping="build,dist,presigned,test,test-formatTestNg->default">
         <conf name="build"   visibility="public"  description="Dependencies only used during the build process." />
         <conf name="dist"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
+        <conf name="presigned"    visibility="public"  description="Dependencies that will be deployed via WebStart." />
         <conf name="javadoc" visibility="public"  description="Some libraries provide separate javadoc packages." />
         <conf name="test"    visibility="private" description="Dependencies only used during unit testing." />
         <conf name="test-formatTestNg" visibility="public"  description="Test jars" />
