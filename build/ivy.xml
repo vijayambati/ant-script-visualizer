@@ -34,5 +34,7 @@
         <dependency org="org.apache"         name="commons-lang" rev="2.4"          conf="build,dist,test,source,javadoc" />
         <dependency org="org.apache"         name="commons-io"   rev="1.4"          conf="build,dist,test,source,javadoc"/>
         <dependency org="org.apache"         name="commons-logging"   rev="1.0.4"   conf="build"/>
+        <dependency org="com.intellij"  name="javac2"  rev="9.0.0"  conf="build"/>
+  <dependency org="org.objectweb.asm"  name="asm"  rev="3.1"  conf="build"/>
 </dependencies>
 </ivy-module>

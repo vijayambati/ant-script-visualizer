@@ -17,6 +17,12 @@
     <target name="formatTest" depends="-init">
            <formatTestNgOutput testNgOutputDir="/Users/douglasbullard/Documents/JavaStuff/Nike_Subversion_Projects/ProductSearch/productSearch/unversioned/test-output"/>
     </target>
+  
+     <target name="compile" depends="-generate" unless="nocompile"
+         description="Compiles all the Java code in the project. If you override this target, be sure to include the dependency on '-generate' and the call to super.compile. Calling Ant with -Dnocompile=t will skip compiling for speedier deployments.">
+        <echo level="verbose">Target::master.compile</echo>
+        <super.compile useJavac2="true" />
+    </target>
 
 
     <!--Validate the existance of a property.  Fail the build if it's not set.  We don't care what it is, as long as it exists-->
