@@ -11,6 +11,9 @@
         <description>Ant ScriptDependency Visualizer</description>
         <icon href="wing.jpg"/>
         <offline-allowed/>
+        <shortcut online="true">
+           <desktop/>
+         </shortcut>
     </information>
     <security>
         <all-permissions/>
