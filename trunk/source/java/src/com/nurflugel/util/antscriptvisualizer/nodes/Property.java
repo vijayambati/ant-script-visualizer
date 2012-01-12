@@ -2,23 +2,20 @@ package com.nurflugel.util.antscriptvisualizer.nodes;
 
 import com.nurflugel.util.antscriptvisualizer.LogFactory;
 import com.nurflugel.util.antscriptvisualizer.Utility;
-
 import org.apache.log4j.Logger;
-
 import org.jdom.Attribute;
 import org.jdom.Element;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import static com.nurflugel.util.antscriptvisualizer.Utility.expandPropertyName;
 
 /** Representation a a Property in Ant. */
 public class Property
@@ -35,10 +32,7 @@ public class Property
 
   public Property(Element element, Map<String, Property> properties, Antfile antfile)
   {
-    // check to see if
-    // they're reading in properties from a file,
-    // or if they're declared,
-    // or it's environment variables
+    // check to see if they're reading in properties from a file, or if they're declared, or it's environment variables
     try
     {
       parseNameForProperty(element, properties);
@@ -94,7 +88,7 @@ public class Property
 
       try
       {
-        String fileName = Utility.expandPropertyName(fileAttribute.getValue(), properties);
+        String fileName = expandPropertyName(fileAttribute.getValue(), properties);
         File   file1    = new File(antfile.getBuildFile().getParent(), fileName);
         File   file2    = new File(fileName);
         File   file     = file1.exists() ? file1
@@ -138,7 +132,7 @@ public class Property
           {
             String avalue = unresolvedProperty.getValue();
 
-            avalue = Utility.expandPropertyName(avalue, properties);
+            avalue = expandPropertyName(avalue, properties);
             unresolvedProperty.setValue(avalue);
           }
 
@@ -174,7 +168,7 @@ public class Property
                                                : "";  // default to empty if no value defined.
       String originalValue = keyValue;
 
-      keyValue = Utility.expandPropertyName(keyValue, properties);
+      keyValue = expandPropertyName(keyValue, properties);
 
       Property property = new Property(key, keyValue);
 
