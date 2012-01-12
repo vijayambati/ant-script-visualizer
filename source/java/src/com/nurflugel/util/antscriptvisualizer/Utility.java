@@ -1,12 +1,10 @@
 package com.nurflugel.util.antscriptvisualizer;
 
 import com.nurflugel.util.antscriptvisualizer.nodes.Property;
-
 import org.apache.commons.lang.StringUtils;
-
 import org.apache.log4j.Logger;
-
 import java.util.Map;
+import static org.apache.commons.lang.StringUtils.replace;
 
 /** Evil utility class. */
 public class Utility
@@ -54,13 +52,15 @@ public class Utility
   /**  */
   public static String replaceBadChars(String oldValue)
   {
-    String newValue = StringUtils.replace(oldValue, "-", "_");
+    String newValue = replace(oldValue, "-", "_");
 
-    newValue = StringUtils.replace(newValue, ".xml", "");
-    newValue = StringUtils.replace(newValue, " ", "_");
-    newValue = StringUtils.replace(newValue, ".", "_");
-    newValue = StringUtils.replace(newValue, "/", "_");
-    newValue = StringUtils.replace(newValue, "\\", "_");
+    newValue = replace(newValue, ".xml", "");
+    newValue = replace(newValue, " ", "_");
+    newValue = replace(newValue, "'", "_");
+    newValue = replace(newValue, ":", "_");
+    newValue = replace(newValue, ".", "_");
+    newValue = replace(newValue, "/", "_");
+    newValue = replace(newValue, "\\", "_");
 
     return newValue;
   }
