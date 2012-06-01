@@ -1,6 +1,5 @@
 package com.nurflugel.util.antscriptvisualizer.nodes.paths;
 
-import com.dibble.BadClass;
 
 import static com.nurflugel.util.antscriptvisualizer.Constants.EXCLUDE;
 import static com.nurflugel.util.antscriptvisualizer.Constants.EXCLUDES;
@@ -20,7 +19,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 /** PatternSet Tester. */
-public class PatternsetTest extends BadClass
+public class PatternsetTest //extends BadClass
 {
   // <patternset id="non.test.sources">
   ///// <include name="**/*.java"/>
