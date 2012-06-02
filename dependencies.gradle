@@ -20,7 +20,8 @@ dependencies {
     'javax.help:jhall:2.0.6'
 
 
-    testCompile  'org.testng:testng:6.4','com.google.inject:guice:3.0'
+//    testCompile  'org.testng:testng:6.4','com.google.inject:guice:3.0'
+    testCompile  'com.google.inject:guice:3.0'
     testCompile  ('velocity:velocity:1.4'){transtive=true}
     testCompile  ('org.uncommons:reportng:1.1.2'){transitive=false}
 
