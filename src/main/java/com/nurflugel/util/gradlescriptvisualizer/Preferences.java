@@ -1,6 +1,7 @@
-package com.nurflugel.util.antscriptvisualizer;
+package com.nurflugel.util.gradlescriptvisualizer;
 
 import com.nurflugel.util.OutputFormat;
+import com.nurflugel.util.gradlescriptvisualizer.ui.GradleScriptMainFrame;
 import static com.nurflugel.util.OutputFormat.PDF;
 import static com.nurflugel.util.OutputFormat.PNG;
 import static java.util.prefs.Preferences.userNodeForPackage;
@@ -17,11 +18,6 @@ public class Preferences
   private static final String         INCLUDE_IMPORTED_ANT_FILES = "includeImportedAntFiles";
   private static final String         OUTPUT_FORMAT              = "outputFormat";
   private static final String         SHOW_ABSOLUTE_FILE_PATHS   = "show_absolute_file_paths";
-  private static final String         SHOW_ANTCALLS              = "showAntcalls";
-  private static final String         SHOW_ANTS                  = "showAnts";
-  private static final String         SHOW_MACRODEFS             = "showMacrodefs";
-  private static final String         SHOW_TARGETS               = "showTargets";
-  private static final String         SHOW_TASKDEFS              = "showTaskdefs";
   private static final String         LAST_DIR                   = "LAST_DIR";
   private static final String         PREVIOUS_VERSION           = "version";
   private static final String         SHOW_LEGEND                = "showLegend";
@@ -29,31 +25,21 @@ public class Preferences
   private boolean                     shouldGroupByBuildfiles    = true;
   private boolean                     shouldIncludeImportedFiles = true;
   private boolean                     shouldConcentrate          = true;
-  private boolean                     shouldShowMacrodefs        = true;
-  private boolean                     shouldShowAntCalls         = true;
-  private boolean                     shouldShowTargets          = true;
   private boolean                     shouldDeleteDotFilesOnExit = true;
   private OutputFormat                outputFormat               = PDF;
   private boolean                     shouldUseAbsolutePaths     = false;
-  private boolean                     shouldShowTaskdefs         = true;
   private String                      lastDir;
   private String                      dotExecutablePath;
   private String                      previousVersion;
-  private boolean                     shouldShowAnts             = true;
   private boolean                     shouldShowLegend           = true;
 
   public Preferences()
   {
-    preferencesStore           = userNodeForPackage(AntParserUiImpl.class);
+    preferencesStore           = userNodeForPackage(GradleScriptMainFrame.class);
     dotExecutablePath          = preferencesStore.get(DOT_EXECUTABLE, "");
     shouldGroupByBuildfiles    = preferencesStore.getBoolean(GROUP_NODES_BY_BUILDFILE, true);
     shouldIncludeImportedFiles = preferencesStore.getBoolean(INCLUDE_IMPORTED_ANT_FILES, true);
     shouldConcentrate          = preferencesStore.getBoolean(CONCENTRATE_LINES, true);
-    shouldShowMacrodefs        = preferencesStore.getBoolean(SHOW_MACRODEFS, true);
-    shouldShowTaskdefs         = preferencesStore.getBoolean(SHOW_TASKDEFS, true);
-    shouldShowAntCalls         = preferencesStore.getBoolean(SHOW_ANTCALLS, true);
-    shouldShowAnts             = preferencesStore.getBoolean(SHOW_ANTS, true);
-    shouldShowTargets          = preferencesStore.getBoolean(SHOW_TARGETS, true);
     shouldDeleteDotFilesOnExit = preferencesStore.getBoolean(DELETE_DOT_FILES_ON_EXIT, true);
     shouldDeleteDotFilesOnExit = preferencesStore.getBoolean(SHOW_LEGEND, true);
     shouldUseAbsolutePaths     = preferencesStore.getBoolean(SHOW_ABSOLUTE_FILE_PATHS, false);
@@ -64,7 +50,7 @@ public class Preferences
 
   public Preferences(boolean dummyFlag)
   {
-    preferencesStore  = userNodeForPackage(AntParserUiImpl.class);
+    preferencesStore  = userNodeForPackage(GradleScriptMainFrame.class);
     dotExecutablePath = preferencesStore.get(DOT_EXECUTABLE, "");
   }
 
@@ -86,11 +72,6 @@ public class Preferences
     preferencesStore.putBoolean(GROUP_NODES_BY_BUILDFILE, shouldGroupByBuildfiles);
     preferencesStore.putBoolean(INCLUDE_IMPORTED_ANT_FILES, shouldIncludeImportedFiles);
     preferencesStore.putBoolean(CONCENTRATE_LINES, shouldConcentrate);
-    preferencesStore.putBoolean(SHOW_MACRODEFS, shouldShowMacrodefs);
-    preferencesStore.putBoolean(SHOW_TASKDEFS, shouldShowTaskdefs);
-    preferencesStore.putBoolean(SHOW_ANTCALLS, shouldShowAntCalls);
-    preferencesStore.putBoolean(SHOW_ANTS, shouldShowAnts);
-    preferencesStore.putBoolean(SHOW_TARGETS, shouldShowTargets);
     preferencesStore.putBoolean(DELETE_DOT_FILES_ON_EXIT, shouldDeleteDotFilesOnExit);
     preferencesStore.put(OUTPUT_FORMAT, outputFormat.getDisplayLabel());
     preferencesStore.putBoolean(SHOW_ABSOLUTE_FILE_PATHS, shouldUseAbsolutePaths);
@@ -142,42 +123,6 @@ public class Preferences
     save();
   }
 
-  public void setShouldShowAntCalls(boolean shouldShowAntCalls)
-  {
-    this.shouldShowAntCalls = shouldShowAntCalls;
-    save();
-  }
-
-  public void setShouldShowAnts(boolean shouldShowAnts)
-  {
-    this.shouldShowAnts = shouldShowAnts;
-    save();
-  }
-
-  public void setShouldShowLegend(boolean shouldShowLegend)
-  {
-    this.shouldShowLegend = shouldShowLegend;
-    save();
-  }
-
-  public void setShouldShowMacrodefs(boolean shouldShowMacrodefs)
-  {
-    this.shouldShowMacrodefs = shouldShowMacrodefs;
-    save();
-  }
-
-  public void setShouldShowTargets(boolean shouldShowTargets)
-  {
-    this.shouldShowTargets = shouldShowTargets;
-    save();
-  }
-
-  public void setShouldShowTaskdefs(boolean shouldShowTaskdefs)
-  {
-    this.shouldShowTaskdefs = shouldShowTaskdefs;
-    save();
-  }
-
   public void setShouldUseAbsolutePaths(boolean shouldUseAbsolutePaths)
   {
     this.shouldUseAbsolutePaths = shouldUseAbsolutePaths;
@@ -204,34 +149,9 @@ public class Preferences
     return shouldIncludeImportedFiles;
   }
 
-  public boolean shouldShowAntcalls()
-  {
-    return shouldShowAntCalls;
-  }
-
-  public boolean shouldShowAnts()
-  {
-    return shouldShowAnts;
-  }
-
   public boolean shouldShowLegend()
   {
     return shouldShowLegend;
-  }
-
-  public boolean shouldShowMacrodefs()
-  {
-    return shouldShowMacrodefs;
-  }
-
-  public boolean shouldShowTargets()
-  {
-    return shouldShowTargets;
-  }
-
-  public boolean shouldShowTaskdefs()
-  {
-    return shouldShowTaskdefs;
   }
 
   public boolean shouldUseAbsolutePaths()

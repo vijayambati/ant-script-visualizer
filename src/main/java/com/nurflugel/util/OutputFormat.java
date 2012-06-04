@@ -1,4 +1,4 @@
-package com.nurflugel.util.antscriptvisualizer;
+package com.nurflugel.util;
 
 /** Enum for the various types of output. */
 public enum OutputFormat

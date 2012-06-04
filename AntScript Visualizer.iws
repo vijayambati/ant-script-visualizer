@@ -50,26 +50,7 @@
     <option name="USER" value="" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="9c24eb49-ad9d-4ee6-8ac2-a13adae8e1a4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradle/wrapper" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ivyToolsKeystore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dependencies.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradlew.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/build.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/build_old.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/ivy.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/project-build.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/ivyToolsKeystore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntScript Visualizer.iws" afterPath="$PROJECT_DIR$/AntScript Visualizer.iws" />
-    </list>
+    <list default="true" readonly="true" id="9c24eb49-ad9d-4ee6-8ac2-a13adae8e1a4" name="Default" comment="" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1466,6 +1447,11 @@
       <created>1338585115730</created>
       <updated>1338585115730</updated>
     </task>
+    <task id="LOCAL-00001" summary="Moving to Gradle structure">
+      <created>1338588216127</created>
+      <updated>1338588216127</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">

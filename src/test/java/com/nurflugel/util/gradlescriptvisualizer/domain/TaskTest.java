@@ -1,16 +1,17 @@
 package com.nurflugel.util.gradlescriptvisualizer.domain;
 
 import org.testng.annotations.Test;
+import java.util.HashMap;
 import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 @Test(groups = "gradle")
-public class GradleTaskTest
+public class TaskTest
 {
   @Test
   public void testFindTaskType()
   {
-    Task task = new Task("task copyHelp(type: Copy) {");
+    Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp(type: Copy) {"));
 
     assertEquals(task.getTaskType(), "Copy");
   }
@@ -18,7 +19,7 @@ public class GradleTaskTest
   @Test
   public void testFindTaskTypeNoTypeDeclared()
   {
-    Task task = new Task("task copyHelp() {");
+    Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp() {"));
 
     assertEquals(task.getTaskType(), "noType");
   }
@@ -26,7 +27,7 @@ public class GradleTaskTest
   @Test
   public void testFindDependsOn()
   {
-    Task       task           = new Task("task signJars(dependsOn: 'installApp') << {");
+    Task       task           = new Task(new HashMap<String, Task>(), new Line("task signJars(dependsOn: 'installApp') << {"));
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
@@ -36,7 +37,7 @@ public class GradleTaskTest
   @Test
   public void testFindDependsOnDoubleQuotes()
   {
-    Task       task           = new Task("task signJars(dependsOn: \"installApp\") << {");
+    Task       task           = new Task(new HashMap<String, Task>(), new Line("task signJars(dependsOn: \"installApp\") << {"));
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
@@ -46,7 +47,7 @@ public class GradleTaskTest
   @Test
   public void testFindDependsOnNoQuotes()
   {
-    Task       task           = new Task("task signJars(dependsOn: installApp) << {");
+    Task       task           = new Task(new HashMap<String, Task>(), new Line("task signJars(dependsOn: installApp) << {"));
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
@@ -56,7 +57,7 @@ public class GradleTaskTest
   @Test
   public void testFindDependsOnWithComma()
   {
-    Task       task           = new Task("task jettyRunMock(dependsOn: war, description:");
+    Task       task           = new Task(new HashMap<String, Task>(), new Line("task jettyRunMock(dependsOn: war, description:"));
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
@@ -66,13 +67,32 @@ public class GradleTaskTest
   @Test
   public void testFindMultipleDependsOn()
   {
-    Task       task           = new Task("task signJars(dependsOn: [installApp,dibble, dabble]) << {");
+    Task       task           = new Task(new HashMap<String, Task>(), new Line("task signJars(dependsOn: [installApp,dibble, dabble]) << {"));
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 3);
     assertEquals(dependsOnTasks.get(0).getTaskName(), "installApp");
     assertEquals(dependsOnTasks.get(1).getTaskName(), "dibble");
     assertEquals(dependsOnTasks.get(2).getTaskName(), "dabble");
+  }
+
+  @Test
+  public void testDotDeclaration()
+  {
+    Task task = new Task("simpleTask");
+
+    assertEquals(task.getDotDeclaration(), "simpleTask [label=\"simpleTask\" shape=box color=black ];");
+  }
+
+  @Test
+  public void testDotDependencies()
+  {
+    Task         task  = new Task(new HashMap<String, Task>(), new Line("task signJars(dependsOn: [installApp,dibble, dabble]) << {"));
+    List<String> lines = task.getDotDependencies();
+
+    assertEquals(lines.get(0), "signJars -> installApp;");
+    assertEquals(lines.get(1), "signJars -> dibble;");
+    assertEquals(lines.get(2), "signJars -> dabble;");
   }
 
   // -test read in file

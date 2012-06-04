@@ -3,6 +3,7 @@
  */
 package com.nurflugel.util.antscriptvisualizer;
 
+import com.nurflugel.util.OutputFormat;
 import javax.swing.JFrame;
 
 public interface AntParserUi
