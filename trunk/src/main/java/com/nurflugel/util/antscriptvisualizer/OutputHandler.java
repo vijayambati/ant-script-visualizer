@@ -1,6 +1,7 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import static com.nurflugel.util.antscriptvisualizer.Os.OS_X;
+import static com.nurflugel.util.Os.OS_X;
+import com.nurflugel.util.Os;
 import com.nurflugel.util.antscriptvisualizer.nodes.Antfile;
 import com.nurflugel.util.antscriptvisualizer.nodes.Dependency;
 import com.nurflugel.util.antscriptvisualizer.nodes.Macrodef;

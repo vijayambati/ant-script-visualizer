@@ -1,22 +1,17 @@
-package com.nurflugel.util.antscriptvisualizer;
+package com.nurflugel.util;
 
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import java.io.File;
-
 import java.net.URL;
-
 import java.util.Date;
-
 import javax.help.CSH;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;

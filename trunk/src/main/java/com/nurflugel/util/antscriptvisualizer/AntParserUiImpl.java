@@ -3,6 +3,8 @@
  */
 package com.nurflugel.util.antscriptvisualizer;
 
+import com.nurflugel.util.Os;
+import com.nurflugel.util.OutputFormat;
 import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import static com.nurflugel.util.antscriptvisualizer.Os.OS_X;
-import static com.nurflugel.util.antscriptvisualizer.Os.findOs;
-import static com.nurflugel.util.antscriptvisualizer.OutputFormat.*;
-import static com.nurflugel.util.antscriptvisualizer.Util.*;
+import static com.nurflugel.util.Os.OS_X;
+import static com.nurflugel.util.Os.findOs;
+import static com.nurflugel.util.OutputFormat.*;
+import static com.nurflugel.util.Util.*;
 import static java.awt.Cursor.*;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 import static javax.swing.JOptionPane.showMessageDialog;

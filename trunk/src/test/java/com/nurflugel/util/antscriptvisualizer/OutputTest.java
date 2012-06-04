@@ -1,18 +1,13 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import static com.nurflugel.util.antscriptvisualizer.Os.findOs;
+import static com.nurflugel.util.Os.findOs;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
-
 import static org.apache.commons.io.FileUtils.contentEquals;
-
 import static org.testng.Assert.assertTrue;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.io.File;
 import java.io.IOException;
-
 import java.util.List;
 
 /** Test class to exercise the app and compare it to known good results. */

@@ -1,8 +1,8 @@
-package com.nurflugel.util.antscriptvisualizer;
+package com.nurflugel.util;
 
 import org.apache.commons.lang.SystemUtils;
-import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PDF;
-import static com.nurflugel.util.antscriptvisualizer.OutputFormat.PNG;
+import static com.nurflugel.util.OutputFormat.PDF;
+import static com.nurflugel.util.OutputFormat.PNG;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;

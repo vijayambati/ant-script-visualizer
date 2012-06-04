@@ -3,6 +3,7 @@
  */
 package com.nurflugel.util.antscriptvisualizer;
 
+import com.nurflugel.util.Os;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
 import com.nurflugel.util.antscriptvisualizer.events.GenericException;
