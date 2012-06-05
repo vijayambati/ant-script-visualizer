@@ -3,6 +3,7 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateTaskByLine;
 import static org.apache.commons.io.FileUtils.readLines;
+import static org.apache.commons.io.FilenameUtils.getFullPath;
 import static org.apache.commons.lang.StringUtils.remove;
 import static org.apache.commons.lang.StringUtils.substringAfter;
 import static org.apache.commons.lang.StringUtils.trim;
@@ -43,13 +45,18 @@ public class GradleFileParser
     {
       List<Line> lines = readLinesInFile(file);
 
-      findTasksInLines(lines);
-      findImports(lines, file);
+      processLines(file, lines);
     }
     else
     {
       throw new FileNotFoundException("Expected file not found: " + file.getAbsolutePath());
     }
+  }
+
+  private void processLines(File file, List<Line> lines) throws IOException
+  {
+    findTasksInLines(lines);
+    findImports(lines, file);
   }
 
   public void parseFile(String fileName) throws IOException
@@ -59,7 +66,7 @@ public class GradleFileParser
     parseFile(file);
   }
 
-  private void findImports(List<Line> lines, File file) throws IOException
+  void findImports(List<Line> lines, File file) throws IOException
   {
     for (Line line : lines)
     {
@@ -82,7 +89,7 @@ public class GradleFileParser
           // non-absolute path must be resolved relative to the current file
           if (!fileName.startsWith("/"))
           {
-            String parent = FilenameUtils.getFullPath(file.getAbsolutePath());
+            String parent = getFullPath(file.getAbsolutePath());
 
             fileName = parent + fileName;
           }
@@ -93,9 +100,19 @@ public class GradleFileParser
     }
   }
 
-  private void findUrlImport(String fileName) throws IOException
+  private void findUrlImport(String location) throws IOException
   {
-    parseFile(fileName);
+    URL        url       = new URL(location);
+    String     bigString = IOUtils.toString(url);
+    String[]   tokens    = bigString.split("\n");
+    List<Line> lines     = new ArrayList<Line>();
+
+    for (String token : tokens)
+    {
+      lines.add(new Line(token));
+    }
+
+    processLines(null, lines);  // todo deal with null file location as it's a URL somehow...
   }
 
   /**
@@ -115,7 +132,7 @@ public class GradleFileParser
     return lines;
   }
 
-  private List<Task> findTasksInLines(List<Line> lines)
+  List<Task> findTasksInLines(List<Line> lines)
   {
     List<Task> tasks = new ArrayList<Task>();
 
@@ -126,6 +143,13 @@ public class GradleFileParser
       if (trimmedLine.startsWith("task "))
       {
         Task task = findOrCreateTaskByLine(taskMap, line);
+
+        taskMap.put(task.getTaskName(), task);
+      }
+
+      if (trimmedLine.contains(".dependsOn"))
+      {
+        Task task = Task.findOrCreateImplicitTaskByLine(taskMap, trimmedLine);
 
         taskMap.put(task.getTaskName(), task);
       }

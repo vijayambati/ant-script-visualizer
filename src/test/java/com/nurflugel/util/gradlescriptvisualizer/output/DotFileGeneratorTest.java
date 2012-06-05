@@ -34,6 +34,6 @@ public class DotFileGeneratorTest
       System.out.println(line);
     }
 
-    Assert.fail("just failed");
+    // Assert.fail("just failed");
   }
 }

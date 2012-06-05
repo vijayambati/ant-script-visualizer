@@ -7,6 +7,8 @@ import org.apache.commons.lang.BooleanUtils;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -151,9 +153,15 @@ public class GradleFileParserTest
   }
 
   @Test
-  public void testFindUrlImports()
+  public void testFindUrlImports() throws IOException
   {
-    assertTrue(false);
+    GradleFileParser parser = new GradleFileParser();
+
+    parser.parseFile(getFilePath("importTasksFromUrl.gradle"));
+
+    Map<String, Task> tasks = parser.getTasksMap();
+
+    assertTrue(tasks.containsKey("publishWebstart"));
   }
 
   private void validateTaskDependencies(Map<String, Task> tasks, String taskName, String dependsOnTaskName, int expectedSize)
@@ -187,6 +195,65 @@ public class GradleFileParserTest
     {
       task.printTask(0);
     }
+  }
+
+  // test case like check.dependsOn integrationTest
+  @Test
+  public void testImplicitDeclarationTask() throws IOException
+  {
+    GradleFileParser parser = new GradleFileParser();
+    String[]         lines  = { "task dibble", "check.dependsOn integrationTest" };
+    List<Line>       list   = getLinesFromArray(lines);
+
+    parser.findTasksInLines(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("dibble"));  // no brainer, should already work
+    assertTrue(tasksMap.containsKey("check"));
+  }
+
+  // test case like check.dependsOn integrationTest
+  @Test
+  public void testImplicitDeclarationTask2() throws IOException
+  {
+    GradleFileParser parser = new GradleFileParser();
+    String[]         lines  = { "task dibble", "check.dependsOn integrationTest" };
+    List<Line>       list   = getLinesFromArray(lines);
+
+    parser.findTasksInLines(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("integrationTest"));
+  }
+
+  // test case like check.dependsOn integrationTest
+  @Test
+  public void testImplicitDeclarationDependsOnTask() throws IOException
+  {
+    GradleFileParser parser = new GradleFileParser();
+    String[]         lines  = { "task dibble", "check.dependsOn integrationTest" };
+    List<Line>       list   = getLinesFromArray(lines);
+
+    parser.findTasksInLines(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+    Task              check    = tasksMap.get("check");
+
+    assertTrue(check.getDependsOn().get(0).getTaskName().equals("integrationTest"));
+  }
+
+  private List<Line> getLinesFromArray(String[] lines)
+  {
+    List<Line> results = new ArrayList<Line>();
+
+    for (String line : lines)
+    {
+      results.add(new Line(line));
+    }
+
+    return results;
   }
 
   // test imported scripts recursively
