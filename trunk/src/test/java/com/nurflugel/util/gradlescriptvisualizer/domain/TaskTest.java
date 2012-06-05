@@ -3,7 +3,11 @@ package com.nurflugel.util.gradlescriptvisualizer.domain;
 import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTaskByLine;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 @Test(groups = "gradle")
 public class TaskTest
@@ -93,6 +97,48 @@ public class TaskTest
     assertEquals(lines.get(0), "signJars -> installApp;");
     assertEquals(lines.get(1), "signJars -> dibble;");
     assertEquals(lines.get(2), "signJars -> dabble;");
+  }
+
+  @Test
+  public void testImplicitTask1()
+  {
+    // check.dependsOn integrationTest
+    Task task = findOrCreateImplicitTaskByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
+
+    assertTrue(task.getTaskName().equals("check"));
+  }
+
+  @Test
+  public void testImplicitTaskDepends()
+  {
+    // check.dependsOn integrationTest
+    Task       task      = findOrCreateImplicitTaskByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
+    List<Task> dependsOn = task.getDependsOn();
+
+    assertFalse(dependsOn.isEmpty());
+    assertTrue(dependsOn.get(0).getTaskName().equals("integrationTest"));
+  }
+
+  @Test
+  public void testImplicitTaskDepends2()
+  {
+    // check.dependsOn integrationTest
+    Task       task      = findOrCreateImplicitTaskByLine(new HashMap<String, Task>(), "check.dependsOn [integrationTest,'dibble']");
+    List<Task> dependsOn = task.getDependsOn();
+
+    assertFalse(dependsOn.isEmpty());
+    assertTrue(dependsOn.get(0).getTaskName().equals("integrationTest"));
+    assertTrue(dependsOn.get(1).getTaskName().equals("dibble"));
+  }
+
+  @Test
+  public void testImplicitTask2()
+  {
+    // check.dependsOn integrationTest
+    Map<String, Task> taskMap = new HashMap<String, Task>();
+
+    findOrCreateImplicitTaskByLine(taskMap, "check.dependsOn integrationTest");
+    assertTrue(taskMap.containsKey("integrationTest"));
   }
 
   // -test read in file

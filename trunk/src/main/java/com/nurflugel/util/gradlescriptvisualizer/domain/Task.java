@@ -1,6 +1,5 @@
 package com.nurflugel.util.gradlescriptvisualizer.domain;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.*;
@@ -50,7 +49,13 @@ public class Task
   // find the depends on from something like task signJars(dependsOn: 'installApp') << {
   private void findTaskDependsOn(Map<String, Task> taskMap, Line line)
   {
-    String text = substringAfter(line.getText(), "dependsOn:");
+    findTaskDependsOn(taskMap, line, "dependsOn:");
+  }
+
+  // todo do I still need Line in this???
+  private void findTaskDependsOn(Map<String, Task> taskMap, Line line, String dependsText)
+  {
+    String text = substringAfter(line.getText(), dependsText);
 
     text = substringBefore(text, ")");
 
@@ -211,5 +216,17 @@ public class Task
   public String getTaskType()
   {
     return taskType;
+  }
+
+  // check.dependsOn integrationTest
+  public static Task findOrCreateImplicitTaskByLine(Map<String, Task> taskMap, String trimmedLine)
+  {
+    String dependsText = ".dependsOn";
+    String name        = substringBefore(trimmedLine, dependsText);
+    Task   task        = findOrCreateTaskByName(taskMap, name);
+
+    task.findTaskDependsOn(taskMap, new Line(trimmedLine), dependsText);
+
+    return task;
   }
 }
