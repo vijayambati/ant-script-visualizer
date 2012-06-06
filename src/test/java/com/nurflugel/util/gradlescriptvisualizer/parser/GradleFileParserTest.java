@@ -297,6 +297,9 @@ public class GradleFileParserTest
     assertEquals(task.getDependsOn().get(0).getTaskName(), ("daemonModeTomcat"));
   }
 
+  // find things like tomcatRun.execute()
+  @Test
+  public void testFindExecutes() {}
   // test imported scripts recursively
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification
