@@ -4,6 +4,7 @@ import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 @Test(groups = "gradle")
 public class GradleFileParserTest
@@ -44,13 +46,14 @@ public class GradleFileParserTest
   @Test(groups = "failed")
   public void testFailHere()
   {
-    File here  = new File(".");
     File there = new File(getFilePath(PARSE_FILE_NAME));
 
     ///Users/douglas_bullard/Documents/JavaStuff/Google_Code/AntScriptVisualizer_Google/gradleTrunk/build/.
     ///Users/douglas_bullard/Documents/JavaStuff/Google_Code/AntScriptVisualizer_Google/gradleTrunk/build/build/resources/test/gradle/parsetest.gradle
     if (false)
     {
+      File here = new File(".");
+
       assertEquals(here.getAbsolutePath(), "dibble",
                    "Should have been some sort of path here.... \ndot path is: " + here.getAbsolutePath() + " parse file path is :"
                      + there.getAbsolutePath());
@@ -79,9 +82,7 @@ public class GradleFileParserTest
   public void testReadLinesFromFile() throws IOException
   {
     GradleFileParser parser = new GradleFileParser();
-
-    // parser.parseFile(getFilePath(PARSE_FILE_NAME));
-    List<Line> lines = parser.readLinesInFile(new File(getFilePath(PARSE_FILE_NAME)));
+    List<Line>       lines  = parser.readLinesInFile(new File(getFilePath(PARSE_FILE_NAME)));
 
     assertFalse(lines.isEmpty());
   }
@@ -239,9 +240,9 @@ public class GradleFileParserTest
     parser.findTasksInLines(list);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
-    Task              check    = tasksMap.get("check");
+    Task              task     = tasksMap.get("check");
 
-    assertTrue(check.getDependsOn().get(0).getTaskName().equals("integrationTest"));
+    assertEquals(task.getDependsOn().get(0).getTaskName(), ("integrationTest"));
   }
 
   private List<Line> getLinesFromArray(String[] lines)
@@ -254,6 +255,46 @@ public class GradleFileParserTest
     }
 
     return results;
+  }
+
+  // test cases like [funcTest, bddTest]*.dependsOn daemonModeTomcat
+  @Test
+  public void testListOfImplicitTaskDeclaration() throws IOException
+  {
+    GradleFileParser parser = new GradleFileParser();
+    String[]         lines  = { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" };
+    List<Line>       list   = getLinesFromArray(lines);
+
+    parser.findTasksInLines(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("funcTest"));
+    assertTrue(tasksMap.containsKey("bddTest"));
+    assertTrue(tasksMap.containsKey("daemonModeTomcat"));
+  }
+
+  // test cases like [funcTest, bddTest]*.dependsOn daemonModeTomcat
+  @Test
+  public void testListOfImplicitTaskDeclarationDepends() throws IOException
+  {
+    GradleFileParser parser = new GradleFileParser();
+    String[]         lines  = { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" };
+    List<Line>       list   = getLinesFromArray(lines);
+
+    parser.findTasksInLines(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("funcTest"));
+    assertTrue(tasksMap.containsKey("bddTest"));
+    assertTrue(tasksMap.containsKey("daemonModeTomcat"));
+
+    Task task = tasksMap.get("funcTest");
+
+    assertEquals(task.getDependsOn().get(0).getTaskName(), ("daemonModeTomcat"));
+    task = tasksMap.get("bddTest");
+    assertEquals(task.getDependsOn().get(0).getTaskName(), ("daemonModeTomcat"));
   }
 
   // test imported scripts recursively

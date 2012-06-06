@@ -2,7 +2,6 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateTaskByLine;
 import static org.apache.commons.io.FileUtils.readLines;
 import static org.apache.commons.io.FilenameUtils.getFullPath;
@@ -132,10 +132,8 @@ public class GradleFileParser
     return lines;
   }
 
-  List<Task> findTasksInLines(List<Line> lines)
+  void findTasksInLines(List<Line> lines)
   {
-    List<Task> tasks = new ArrayList<Task>();
-
     for (Line line : lines)
     {
       String trimmedLine = line.getText().trim();
@@ -149,12 +147,8 @@ public class GradleFileParser
 
       if (trimmedLine.contains(".dependsOn"))
       {
-        Task task = Task.findOrCreateImplicitTaskByLine(taskMap, trimmedLine);
-
-        taskMap.put(task.getTaskName(), task);
+        findOrCreateImplicitTasksByLine(taskMap, trimmedLine);
       }
     }
-
-    return tasks;
   }
 }
