@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTaskByLine;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -103,17 +103,17 @@ public class TaskTest
   public void testImplicitTask1()
   {
     // check.dependsOn integrationTest
-    Task task = findOrCreateImplicitTaskByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
+    List<Task> task = findOrCreateImplicitTasksByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
 
-    assertTrue(task.getTaskName().equals("check"));
+    assertTrue(task.get(0).getTaskName().equals("check"));
   }
 
   @Test
   public void testImplicitTaskDepends()
   {
     // check.dependsOn integrationTest
-    Task       task      = findOrCreateImplicitTaskByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
-    List<Task> dependsOn = task.getDependsOn();
+    List<Task> task      = findOrCreateImplicitTasksByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
+    List<Task> dependsOn = task.get(0).getDependsOn();
 
     assertFalse(dependsOn.isEmpty());
     assertTrue(dependsOn.get(0).getTaskName().equals("integrationTest"));
@@ -123,8 +123,8 @@ public class TaskTest
   public void testImplicitTaskDepends2()
   {
     // check.dependsOn integrationTest
-    Task       task      = findOrCreateImplicitTaskByLine(new HashMap<String, Task>(), "check.dependsOn [integrationTest,'dibble']");
-    List<Task> dependsOn = task.getDependsOn();
+    List<Task> task      = findOrCreateImplicitTasksByLine(new HashMap<String, Task>(), "check.dependsOn [integrationTest,'dibble']");
+    List<Task> dependsOn = task.get(0).getDependsOn();
 
     assertFalse(dependsOn.isEmpty());
     assertTrue(dependsOn.get(0).getTaskName().equals("integrationTest"));
@@ -137,7 +137,7 @@ public class TaskTest
     // check.dependsOn integrationTest
     Map<String, Task> taskMap = new HashMap<String, Task>();
 
-    findOrCreateImplicitTaskByLine(taskMap, "check.dependsOn integrationTest");
+    findOrCreateImplicitTasksByLine(taskMap, "check.dependsOn integrationTest");
     assertTrue(taskMap.containsKey("integrationTest"));
   }
 

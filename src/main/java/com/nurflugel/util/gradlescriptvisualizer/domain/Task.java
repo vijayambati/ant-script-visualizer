@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.*;
 import static org.apache.commons.lang.StringUtils.*;
+import static org.apache.commons.lang.StringUtils.split;
 
 public class Task
 {
@@ -219,11 +220,41 @@ public class Task
   }
 
   // check.dependsOn integrationTest
-  public static Task findOrCreateImplicitTaskByLine(Map<String, Task> taskMap, String trimmedLine)
+  public static List<Task> findOrCreateImplicitTasksByLine(Map<String, Task> taskMap, String trimmedLine)
   {
-    String dependsText = ".dependsOn";
-    String name        = substringBefore(trimmedLine, dependsText);
-    Task   task        = findOrCreateTaskByName(taskMap, name);
+    List<Task> tasks       = new ArrayList<Task>();
+    String     dependsText = ".dependsOn";
+    String     text        = substringBefore(trimmedLine, dependsText);
+
+    if (text.contains("["))  // it's a list
+    {
+      text = substringAfter(text, "[");
+      text = substringBefore(text, "]");
+
+      String[] tokens = split(text, ",");
+
+      for (String token : tokens)
+      {
+        Task task = extractTaskByName(taskMap, trimmedLine, dependsText, token);
+
+        tasks.add(task);
+      }
+    }
+    else
+    {
+      Task task = extractTaskByName(taskMap, trimmedLine, dependsText, text);
+
+      tasks.add(task);
+    }
+
+    return tasks;
+  }
+
+  private static Task extractTaskByName(Map<String, Task> taskMap, String trimmedLine, String dependsText, String name)
+  {
+    name = name.trim();
+
+    Task task = findOrCreateTaskByName(taskMap, name);
 
     task.findTaskDependsOn(taskMap, new Line(trimmedLine), dependsText);
 
