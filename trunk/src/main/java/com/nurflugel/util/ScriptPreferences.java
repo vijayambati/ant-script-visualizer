@@ -41,7 +41,14 @@ public class ScriptPreferences
     shouldConcentrate          = preferencesStore.getBoolean(CONCENTRATE_LINES, true);
     lastDir                    = preferencesStore.get(LAST_DIR, "");
     previousVersion            = preferencesStore.get(PREVIOUS_VERSION, "");
-    outputFormat               = OutputFormat.valueOf(preferencesStore.get(OUTPUT_FORMAT, PNG.getDisplayLabel()));
+
+    String defaultOutputFormat = (Os.findOs() == Os.OS_X) ? PDF.getDisplayLabel()
+                                                          : PNG.getDisplayLabel();
+
+    outputFormat = OutputFormat.valueOf(preferencesStore.get(OUTPUT_FORMAT, defaultOutputFormat));
+
+    // outputFormat=OutputFormat.PDF;
+    // outputFormat=OutputFormat.PNG;
     shouldUseAbsolutePaths     = preferencesStore.getBoolean(SHOW_ABSOLUTE_FILE_PATHS, false);
     shouldDeleteDotFilesOnExit = preferencesStore.getBoolean(DELETE_DOT_FILES_ON_EXIT, true);
     shouldShowLegend           = preferencesStore.getBoolean(SHOW_LEGEND, true);
