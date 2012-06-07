@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByExecute;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateTaskByLine;
 import static org.apache.commons.io.FileUtils.readLines;
@@ -148,6 +149,11 @@ public class GradleFileParser
       if (trimmedLine.contains(".dependsOn"))
       {
         findOrCreateImplicitTasksByLine(taskMap, trimmedLine);
+      }
+
+      if (trimmedLine.contains(".execute"))
+      {
+        findOrCreateImplicitTasksByExecute(taskMap, trimmedLine);
       }
     }
   }

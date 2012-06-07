@@ -297,9 +297,19 @@ public class GradleFileParserTest
     assertEquals(task.getDependsOn().get(0).getTaskName(), ("daemonModeTomcat"));
   }
 
-  // find things like tomcatRun.execute()
   @Test
-  public void testFindExecutes() {}
+  public void testExecuteDoFirst()
+  {
+    String[] lines =
+    {
+      "task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {",  //
+      "    doFirst {",                                                                                     //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatRun.execute()",                                                                       //
+      "    }",                                                                                             //
+      "}"                                                                                                  //
+    };
+  }
   // test imported scripts recursively
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification
