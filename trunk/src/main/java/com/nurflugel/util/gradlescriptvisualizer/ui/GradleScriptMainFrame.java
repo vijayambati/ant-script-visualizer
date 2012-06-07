@@ -7,7 +7,9 @@ import com.nurflugel.util.GraphicFileCreator;
 import com.nurflugel.util.Os;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
 import com.nurflugel.util.gradlescriptvisualizer.output.DotFileGenerator;
+import com.nurflugel.util.gradlescriptvisualizer.output.FileWatcher;
 import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser;
+import org.apache.commons.io.FileUtils;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -15,7 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import static com.nurflugel.util.Os.findOs;
 import static com.nurflugel.util.Util.center;
 import static com.nurflugel.util.Util.setLookAndFeel;
@@ -36,6 +41,7 @@ public class GradleScriptMainFrame
   private GradleScriptPreferences preferences;
   private String                  dotExecutablePath;
   private Os                      os;
+  private final Map<File, Long>   fileChecksums = new HashMap<File, Long>();
 
   public GradleScriptMainFrame()
   {
@@ -142,44 +148,51 @@ public class GradleScriptMainFrame
     chooser.setFileFilter(new FileNameExtensionFilter("Gradle scripts", "gradle", "groovy"));
     chooser.setMultiSelectionEnabled(true);
 
-    int returnVal = chooser.showOpenDialog(frame);
+    int              returnVal = chooser.showOpenDialog(frame);
+    GradleFileParser parser    = new GradleFileParser();
 
     if (returnVal == APPROVE_OPTION)
     {
       File[] selectedFiles = chooser.getSelectedFiles();
+
+      chooser.hide();
 
       if (selectedFiles.length > 0)
       {
         preferences.setLastDir(selectedFiles[0].getParent());
       }
 
-      GradleFileParser parser = new GradleFileParser();
-
       for (File selectedFile : selectedFiles)
       {
-        parser.parseFile(selectedFile);
-        System.out.println("selectedFile = " + selectedFile);
+        // put the file checksum into a map so we can check it later if need be...
+        long checksum = FileUtils.checksumCRC32(selectedFile);
 
-        List<Task>         tasks            = parser.getTasks();
-        DotFileGenerator   dotFileGenerator = new DotFileGenerator();
-        List<String>       lines            = dotFileGenerator.createOutput(tasks);
-        File               dotFile          = dotFileGenerator.writeOutput(lines, selectedFile.getAbsolutePath());
-        GraphicFileCreator fileCreator      = new GraphicFileCreator();
-
-        fileCreator.processDotFile(dotFile, preferences, os);
-      }
-
-      // preferences.setLastDir(selectedFiles[0].getParent());
-      // AntFileParser fileParser = new AntFileParser(os, preferences, this, selectedFiles);
-      try
-      {
-        // fileParser.processBuildFile(true);
-      }
-      catch (Exception e)
-      {
-        e.printStackTrace();  // todo message dialog here
+        fileChecksums.put(selectedFile, checksum);
+        handleFileGeneration(parser, selectedFile);
       }
     }
+
+    if (watchFileForChangesCheckBox.isSelected())
+    {
+      // set a thread timer, pass it the maps, and have it call handleFileGeneration if any file in the map changes
+      FileWatcher fileWatcher = new FileWatcher(fileChecksums, this, parser);
+
+      fileWatcher.execute();
+    }
+  }
+
+  public void handleFileGeneration(GradleFileParser parser, File selectedFile) throws IOException
+  {
+    parser.parseFile(selectedFile);
+    System.out.println("selectedFile = " + selectedFile);
+
+    List<Task>         tasks            = parser.getTasks();
+    DotFileGenerator   dotFileGenerator = new DotFileGenerator();
+    List<String>       lines            = dotFileGenerator.createOutput(tasks);
+    File               dotFile          = dotFileGenerator.writeOutput(lines, selectedFile.getAbsolutePath());
+    GraphicFileCreator fileCreator      = new GraphicFileCreator();
+
+    fileCreator.processDotFile(dotFile, preferences, os);
   }
 
   private void doQuitAction()
@@ -222,8 +235,8 @@ public class GradleScriptMainFrame
                                       GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Graphic Options"));
     watchFileForChangesCheckBox = new JCheckBox();
-    watchFileForChangesCheckBox.setEnabled(false);
-    watchFileForChangesCheckBox.setText("Watch file for changes");
+    watchFileForChangesCheckBox.setEnabled(true);
+    watchFileForChangesCheckBox.setText("Watch files for changes");
     panel1.add(watchFileForChangesCheckBox,
                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
                                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,

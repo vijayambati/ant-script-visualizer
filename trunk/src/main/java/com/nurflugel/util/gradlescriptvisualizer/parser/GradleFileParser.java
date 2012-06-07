@@ -168,4 +168,9 @@ public class GradleFileParser
 
     parseFile(file);
   }
+
+  public void purgeAll()
+  {
+    taskMap.clear();
+  }
 }

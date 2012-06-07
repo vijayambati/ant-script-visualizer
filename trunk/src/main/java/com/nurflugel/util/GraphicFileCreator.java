@@ -9,7 +9,7 @@ import static com.nurflugel.util.Os.OS_X;
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 6/6/12 Time: 18:17 To change this template use File | Settings | File Templates. */
 public class GraphicFileCreator
 {
-  public static final Logger logger = LogFactory.getLogger(GraphicFileCreator.class);
+  // public static final Logger logger = LogFactory.getLogger(GraphicFileCreator.class);
 
   /** Convert the .dot file into png, pdf, svg, whatever. */
   @SuppressWarnings({ "OverlyLongMethod" })
@@ -34,11 +34,10 @@ public class GraphicFileCreator
 
       if (outputFile.exists())
       {
-        if (logger.isDebugEnabled())
-        {
-          logger.debug("Deleting existing version of " + outputFilePath);
-        }
-
+        // if (logger.isDebugEnabled())
+        // {
+        // logger.debug("Deleting existing version of " + outputFilePath);
+        // }
         outputFile.delete();  // delete the file before generating it if it exists
       }
 
@@ -54,11 +53,10 @@ public class GraphicFileCreator
 
       String[] command = { dotExecutablePath, "-T" + outputFormatName, "-o" + outputFilePath, dotFilePath };
 
-      if (logger.isDebugEnabled())
-      {
-        logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
-      }
-
+      // if (logger.isDebugEnabled())
+      // {
+      // logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
+      // }
       Runtime runtime = Runtime.getRuntime();
       long    start   = new Date().getTime();
 
@@ -66,16 +64,15 @@ public class GraphicFileCreator
 
       long end = new Date().getTime();
 
-      if (logger.isDebugEnabled())
-      {
-        logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
-      }
-
+      // if (logger.isDebugEnabled())
+      // {
+      // logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
+      // }
       os.openFile(outputFilePath);
     }
     catch (Exception e)  // todo handle error
     {
-      logger.error(e);
+      // logger.error(e);
     }
   }
 
