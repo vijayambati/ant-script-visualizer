@@ -3,12 +3,11 @@ package com.nurflugel.util.gradlescriptvisualizer.ui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import com.nurflugel.util.GraphicFileCreator;
 import com.nurflugel.util.Os;
-import com.nurflugel.util.gradlescriptvisualizer.Preferences;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
 import com.nurflugel.util.gradlescriptvisualizer.output.DotFileGenerator;
 import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser;
-import org.apache.commons.lang.StringUtils;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -16,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import static com.nurflugel.util.Os.findOs;
 import static com.nurflugel.util.Util.center;
@@ -27,23 +25,70 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 6/3/12 Time: 14:32 To change this template use File | Settings | File Templates. */
 public class GradleScriptMainFrame
 {
-  private JButton      selectGradleScriptButton;
-  private JCheckBox    watchFileForChangesCheckBox;
-  private JRadioButton generateJustDOTFilesRadioButton;
-  private JRadioButton generatePNGPDFFilesRadioButton;
-  private JPanel       mainPanel;
-  private JButton      quitButton;
-  private JFrame       frame;
-  private Preferences  preferences;
-  private String       dotExecutablePath;
-  private Os           os;
+  private JButton                 selectGradleScriptButton;
+  private JCheckBox               watchFileForChangesCheckBox;
+  private JRadioButton            generateJustDOTFilesRadioButton;
+  private JRadioButton            generatePNGPDFFilesRadioButton;
+  private JPanel                  mainPanel;
+  private JButton                 quitButton;
+  private JCheckBox               deleteDOTFilesOnCheckBox;
+  private JFrame                  frame;
+  private GradleScriptPreferences preferences;
+  private String                  dotExecutablePath;
+  private Os                      os;
 
   public GradleScriptMainFrame()
   {
-    os    = findOs();
-    frame = new JFrame();
+    preferences = new GradleScriptPreferences();
+    os          = findOs();
+    frame       = new JFrame();
     frame.setContentPane(mainPanel);
     initializeUi();
+    addActionListeners();
+    dotExecutablePath = preferences.getDotExecutablePath();  // todo this is ugly, fix it somehow
+
+    if (isBlank(dotExecutablePath))
+    {
+      dotExecutablePath = os.getDefaultDotPath();
+    }
+
+    preferences.setDotExecutablePath(dotExecutablePath);
+  }
+
+  private void addActionListeners()
+  {
+    deleteDOTFilesOnCheckBox.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+          preferences.setShouldDeleteDotFilesOnExit(deleteDOTFilesOnCheckBox.isSelected());
+        }
+      });
+    generateJustDOTFilesRadioButton.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+          preferences.setGenerateJustDotFiles(generateJustDOTFilesRadioButton.isSelected());
+        }
+      });
+    generatePNGPDFFilesRadioButton.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+          preferences.setGenerateJustDotFiles(generateJustDOTFilesRadioButton.isSelected());
+        }
+      });
+    watchFileForChangesCheckBox.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+          preferences.setWatchFilesForChanges(watchFileForChangesCheckBox.isSelected());
+        }
+      });
     selectGradleScriptButton.addActionListener(new ActionListener()
       {
         @Override
@@ -67,15 +112,6 @@ public class GradleScriptMainFrame
           doQuitAction();
         }
       });
-    preferences       = new Preferences();
-    dotExecutablePath = preferences.getDotExecutablePath();  // todo this is ugly, fix it somehow
-
-    if (isBlank(dotExecutablePath))
-    {
-      dotExecutablePath = os.getDefaultDotPath();
-    }
-
-    preferences.setDotExecutablePath(dotExecutablePath);
   }
 
   private void initializeUi()
@@ -83,6 +119,9 @@ public class GradleScriptMainFrame
     setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel", frame);
     frame.pack();
     center(frame);
+    deleteDOTFilesOnCheckBox.setSelected(preferences.shouldDeleteDotFilesOnExit());
+    generateJustDOTFilesRadioButton.setSelected(preferences.generateJustDotFiles());
+    watchFileForChangesCheckBox.setSelected(preferences.watchFilesForChanges());
 
     // frame.setTitle("Gradle Script Visualizer v" + VERSION);
     frame.setTitle("Gradle Script Visualizer ");
@@ -120,31 +159,13 @@ public class GradleScriptMainFrame
         parser.parseFile(selectedFile);
         System.out.println("selectedFile = " + selectedFile);
 
-        List<Task>       tasks            = parser.getTasks();
-        DotFileGenerator dotFileGenerator = new DotFileGenerator();
-        List<String>     lines            = dotFileGenerator.createOutput(tasks);
-        File             dotFile          = dotFileGenerator.writeOutput(lines, selectedFile.getAbsolutePath());
+        List<Task>         tasks            = parser.getTasks();
+        DotFileGenerator   dotFileGenerator = new DotFileGenerator();
+        List<String>       lines            = dotFileGenerator.createOutput(tasks);
+        File               dotFile          = dotFileGenerator.writeOutput(lines, selectedFile.getAbsolutePath());
+        GraphicFileCreator fileCreator      = new GraphicFileCreator();
 
-        try
-        {
-          os.openFile(dotFile.getAbsolutePath());
-        }
-        catch (InvocationTargetException e)
-        {
-          e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-          e.printStackTrace();
-        }
-        catch (NoSuchMethodException e)
-        {
-          e.printStackTrace();
-        }
-        catch (ClassNotFoundException e)
-        {
-          e.printStackTrace();
-        }
+        fileCreator.processDotFile(dotFile, preferences, os);
       }
 
       // preferences.setLastDir(selectedFiles[0].getParent());
@@ -223,14 +244,15 @@ public class GradleScriptMainFrame
                                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Type of output"));
     generateJustDOTFilesRadioButton = new JRadioButton();
-    generateJustDOTFilesRadioButton.setEnabled(false);
+    generateJustDOTFilesRadioButton.setEnabled(true);
     generateJustDOTFilesRadioButton.setText("Generate just DOT files");
     panel2.add(generateJustDOTFilesRadioButton,
                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
                                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
                                    null, null, null, 0, false));
     generatePNGPDFFilesRadioButton = new JRadioButton();
-    generatePNGPDFFilesRadioButton.setEnabled(false);
+    generatePNGPDFFilesRadioButton.setEnabled(true);
+    generatePNGPDFFilesRadioButton.setSelected(true);
     generatePNGPDFFilesRadioButton.setText("Generate PNG/PDF files");
     panel2.add(generatePNGPDFFilesRadioButton,
                new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
@@ -286,6 +308,12 @@ public class GradleScriptMainFrame
                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
                                    GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
                                    null, null, null, 0, false));
+
+    ButtonGroup buttonGroup;
+
+    buttonGroup = new ButtonGroup();
+    buttonGroup.add(generateJustDOTFilesRadioButton);
+    buttonGroup.add(generatePNGPDFFilesRadioButton);
   }
 
   /** @noinspection  ALL */

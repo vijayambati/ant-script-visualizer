@@ -56,6 +56,48 @@ public class Task
     findTaskDependsOn(taskMap, line, "dependsOn:");
   }
 
+  // check.dependsOn integrationTest
+  public static List<Task> findOrCreateImplicitTasksByLine(Map<String, Task> taskMap, String trimmedLine)
+  {
+    List<Task> tasks       = new ArrayList<Task>();
+    String     dependsText = ".dependsOn";
+    String     text        = substringBefore(trimmedLine, dependsText);
+
+    if (text.contains("["))  // it's a list
+    {
+      text = substringAfter(text, "[");
+      text = substringBefore(text, "]");
+
+      String[] tokens = split(text, ",");
+
+      for (String token : tokens)
+      {
+        Task task = extractTaskByName(taskMap, trimmedLine, dependsText, token);
+
+        tasks.add(task);
+      }
+    }
+    else
+    {
+      Task task = extractTaskByName(taskMap, trimmedLine, dependsText, text);
+
+      tasks.add(task);
+    }
+
+    return tasks;
+  }
+
+  private static Task extractTaskByName(Map<String, Task> taskMap, String trimmedLine, String dependsText, String name)
+  {
+    name = name.trim();
+
+    Task task = findOrCreateTaskByName(taskMap, name);
+
+    task.findTaskDependsOn(taskMap, new Line(trimmedLine), dependsText);
+
+    return task;
+  }
+
   // todo do I still need Line in this???
   private void findTaskDependsOn(Map<String, Task> taskMap, Line line, String dependsText)
   {
@@ -117,6 +159,23 @@ public class Task
     }
 
     return result;
+  }
+
+  public static Task findOrCreateImplicitTasksByExecute(Map<String, Task> taskmap, String line)
+  {
+    String trim = line.trim();
+
+    if (trim.contains(".execute"))
+    {
+      String taskName = substringBefore(trim, ".execute");
+      Task   task     = findOrCreateTaskByName(taskmap, taskName);
+
+      task.setTaskUsage(EXECUTE);
+
+      return task;
+    }
+
+    return null;
   }
 
   public Task(String name)
@@ -220,65 +279,6 @@ public class Task
   public String getTaskType()
   {
     return taskType;
-  }
-
-  // check.dependsOn integrationTest
-  public static List<Task> findOrCreateImplicitTasksByLine(Map<String, Task> taskMap, String trimmedLine)
-  {
-    List<Task> tasks       = new ArrayList<Task>();
-    String     dependsText = ".dependsOn";
-    String     text        = substringBefore(trimmedLine, dependsText);
-
-    if (text.contains("["))  // it's a list
-    {
-      text = substringAfter(text, "[");
-      text = substringBefore(text, "]");
-
-      String[] tokens = split(text, ",");
-
-      for (String token : tokens)
-      {
-        Task task = extractTaskByName(taskMap, trimmedLine, dependsText, token);
-
-        tasks.add(task);
-      }
-    }
-    else
-    {
-      Task task = extractTaskByName(taskMap, trimmedLine, dependsText, text);
-
-      tasks.add(task);
-    }
-
-    return tasks;
-  }
-
-  private static Task extractTaskByName(Map<String, Task> taskMap, String trimmedLine, String dependsText, String name)
-  {
-    name = name.trim();
-
-    Task task = findOrCreateTaskByName(taskMap, name);
-
-    task.findTaskDependsOn(taskMap, new Line(trimmedLine), dependsText);
-
-    return task;
-  }
-
-  public static Task findOrCreateImplicitTasksByExecute(Map<String, Task> taskmap, String line)
-  {
-    String trim = line.trim();
-
-    if (trim.contains(".execute"))
-    {
-      String taskName = substringBefore(trim, ".execute");
-      Task   task     = findOrCreateTaskByName(taskmap, taskName);
-
-      task.setTaskUsage(EXECUTE);
-
-      return task;
-    }
-
-    return null;
   }
 
   public TaskUsage getTaskUsage()

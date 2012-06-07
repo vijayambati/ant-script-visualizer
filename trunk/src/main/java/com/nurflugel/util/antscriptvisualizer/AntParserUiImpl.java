@@ -25,47 +25,47 @@ import static javax.swing.JOptionPane.showMessageDialog;
 @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion", "CallToSystemExit" })
 public class AntParserUiImpl implements AntParserUi
 {
-  public static final String  HELP_HS                       = "help.hs";
-  public static final String  VERSION                       = "3.0.6";
-  private static final Logger LOGGER                        = Logger.getLogger(AntParserUiImpl.class);
-  private Cursor              normalCursor                  = getPredefinedCursor(DEFAULT_CURSOR);
-  private Cursor              busyCursor                    = getPredefinedCursor(WAIT_CURSOR);
-  private JButton             findDotButton;
-  private JButton             helpButton;
-  private JButton             quitButton;
-  private JButton             selectAntFileButton;
-  private JButton             selectDirButton;
-  private JCheckBox           concentrateCheckbox;
-  private JCheckBox           deleteDotFilesCheckbox;
-  private JCheckBox           filterFromNodeCheckbox;
-  private JCheckBox           filterThroughNodeCheckbox;
-  private JCheckBox           groupNodesByBuildfileCheckbox;
-  private JCheckBox           includeImportedFilesCheckbox;
-  private JCheckBox           showAntcallsCheckbox;
-  private JCheckBox           showFilePathsCheckBox;
-  private JCheckBox           showLegendCheckBox;
-  private JCheckBox           showMacrodefsCheckbox;
-  private JCheckBox           showTargetsCheckbox;
-  private JCheckBox           showTaskdefsCheckBox;
-  private JFrame              frame;
-  private JLabel              statusLabel;
-  private JPanel              mainPanel;
-  private JPanel              parseFileOptionsPanel;
-  private JRadioButton        leftToRightRadioButton;
-  private JRadioButton        pdfRadioButton;
-  private JRadioButton        pngRadioButton;
-  private JRadioButton        rightToLeftRadioButton;
-  private JRadioButton        svgRadioButton;
-  private Os                  os;
-  private String              dotExecutablePath;
-  private Preferences         preferences;
+  public static final String   HELP_HS                       = "help.hs";
+  public static final String   VERSION                       = "3.0.6";
+  private static final Logger  LOGGER                        = Logger.getLogger(AntParserUiImpl.class);
+  private Cursor               normalCursor                  = getPredefinedCursor(DEFAULT_CURSOR);
+  private Cursor               busyCursor                    = getPredefinedCursor(WAIT_CURSOR);
+  private JButton              findDotButton;
+  private JButton              helpButton;
+  private JButton              quitButton;
+  private JButton              selectAntFileButton;
+  private JButton              selectDirButton;
+  private JCheckBox            concentrateCheckbox;
+  private JCheckBox            deleteDotFilesCheckbox;
+  private JCheckBox            filterFromNodeCheckbox;
+  private JCheckBox            filterThroughNodeCheckbox;
+  private JCheckBox            groupNodesByBuildfileCheckbox;
+  private JCheckBox            includeImportedFilesCheckbox;
+  private JCheckBox            showAntcallsCheckbox;
+  private JCheckBox            showFilePathsCheckBox;
+  private JCheckBox            showLegendCheckBox;
+  private JCheckBox            showMacrodefsCheckbox;
+  private JCheckBox            showTargetsCheckbox;
+  private JCheckBox            showTaskdefsCheckBox;
+  private JFrame               frame;
+  private JLabel               statusLabel;
+  private JPanel               mainPanel;
+  private JPanel               parseFileOptionsPanel;
+  private JRadioButton         leftToRightRadioButton;
+  private JRadioButton         pdfRadioButton;
+  private JRadioButton         pngRadioButton;
+  private JRadioButton         rightToLeftRadioButton;
+  private JRadioButton         svgRadioButton;
+  private Os                   os;
+  private String               dotExecutablePath;
+  private AntScriptPreferences preferences;
 
   /** Creates a new AntParserUi object. */
   public AntParserUiImpl()
   {
     LOGGER.error("Bad programmer, no donut!");
     os                = findOs();
-    preferences       = new Preferences();
+    preferences       = new AntScriptPreferences();
     dotExecutablePath = preferences.getDotExecutablePath();  // todo this is ugly, fix it somehow
 
     if ((dotExecutablePath == null) || (dotExecutablePath.length() == 0))
@@ -169,7 +169,7 @@ public class AntParserUiImpl implements AntParserUi
 
   private void getOutputPreferencesFromUi()
   {
-    preferences.setShouldGroupByBuildfiles(groupNodesByBuildfileCheckbox.isSelected());
+    preferences.setShouldGroupByBuildFiles(groupNodesByBuildfileCheckbox.isSelected());
     preferences.setShouldIncludeImportedFiles(includeImportedFilesCheckbox.isSelected());
     preferences.setShouldConcentrate(concentrateCheckbox.isSelected());
     preferences.setShouldShowMacrodefs(showMacrodefsCheckbox.isSelected());

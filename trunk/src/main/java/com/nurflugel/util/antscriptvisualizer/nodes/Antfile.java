@@ -3,11 +3,7 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
-import com.nurflugel.util.antscriptvisualizer.AntFileParser;
-import com.nurflugel.util.antscriptvisualizer.LogFactory;
-import com.nurflugel.util.antscriptvisualizer.Preferences;
-import com.nurflugel.util.antscriptvisualizer.UniqueList;
-import com.nurflugel.util.antscriptvisualizer.Utility;
+import com.nurflugel.util.antscriptvisualizer.*;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
 import com.nurflugel.util.antscriptvisualizer.events.EventCollector;
 import org.apache.log4j.Logger;
@@ -247,7 +243,7 @@ public class Antfile
    * @param  preferences
    */
   public void parse(AntFileParser parser, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed, EventCollector eventCollector,
-                    Preferences preferences) throws IOException, JDOMException
+                    AntScriptPreferences preferences) throws IOException, JDOMException
   {
     if (logger.isDebugEnabled())
     {
@@ -301,7 +297,7 @@ public class Antfile
 
   /** Parse the targets in this build file. */
   private void parseTargets(EventCollector eventCollector, List<Antfile> importsToProcess, List<Antfile> importsAlreadyProcessed,
-                            Preferences preferences)
+                            AntScriptPreferences preferences)
   {
     Iterator descendants = rootElement.getDescendants(new ElementFilter("target"));
 

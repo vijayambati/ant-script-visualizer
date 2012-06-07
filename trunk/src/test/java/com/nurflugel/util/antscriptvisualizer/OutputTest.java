@@ -13,13 +13,13 @@ import java.util.List;
 /** Test class to exercise the app and compare it to known good results. */
 public class OutputTest
 {
-  private Preferences preferences;
+  private AntScriptPreferences preferences;
 
   /** Here we set up preferences, overriding the defaults as needed. */
   @BeforeMethod(groups = { "dot", "master", "cRoy" })
   public void doSetup()
   {
-    preferences = new Preferences(true);
+    preferences = new AntScriptPreferences(true);
     preferences.setShouldShowLegend(false);
     preferences.setShouldDeleteDotFilesOnExit(false);
   }
@@ -144,7 +144,7 @@ public class OutputTest
   @Test(groups = "dot")
   public void testNoGrouping() throws IOException
   {
-    preferences.setShouldGroupByBuildfiles(false);
+    preferences.setShouldGroupByBuildFiles(false);
     testDotFile("unversioned/config/Import Test/noGroup");
   }
 

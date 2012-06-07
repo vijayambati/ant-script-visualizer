@@ -3,7 +3,7 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
-import com.nurflugel.util.antscriptvisualizer.Preferences;
+import com.nurflugel.util.antscriptvisualizer.AntScriptPreferences;
 
 /**
  * This is a dependency - it extends Target, but has a "resolved" attribute. This is because although all dependencies might be detected during
@@ -22,5 +22,5 @@ public interface Dependency
   String getColor();
   String getNiceName();
   String getDependencyExtraInfo();
-  boolean shouldPrint(Preferences preferences);
+  boolean shouldPrint(AntScriptPreferences preferences);
 }
