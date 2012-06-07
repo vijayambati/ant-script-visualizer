@@ -3,6 +3,8 @@ package com.nurflugel.util.gradlescriptvisualizer.domain;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.*;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.EXECUTE;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.GRADLE;
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.StringUtils.split;
 
@@ -11,6 +13,7 @@ public class Task
   private String     taskName;
   private String     taskType;
   private List<Task> dependsOnTasks = new ArrayList<Task>();
+  private TaskUsage  taskUsage      = GRADLE;
 
   public static Task findOrCreateTaskByLine(Map<String, Task> taskMap, Line line)
   {
@@ -153,7 +156,7 @@ public class Task
 
   public String getDotDeclaration()
   {
-    return taskName + " [label=\"" + taskName + "\" shape=box color=black ];";  // todo add task type, color, shape later
+    return taskName + " [label=\"" + taskName + "\" shape=" + taskUsage.getShape() + " color=" + taskUsage.getColor() + " ];";     // todo add task type, color, shape later
   }
 
   public List<String> getDotDependencies()
@@ -259,5 +262,32 @@ public class Task
     task.findTaskDependsOn(taskMap, new Line(trimmedLine), dependsText);
 
     return task;
+  }
+
+  public static Task findOrCreateImplicitTasksByExecute(Map<String, Task> taskmap, String line)
+  {
+    String trim = line.trim();
+
+    if (trim.contains(".execute"))
+    {
+      String taskName = substringBefore(trim, ".execute");
+      Task   task     = findOrCreateTaskByName(taskmap, taskName);
+
+      task.setTaskUsage(EXECUTE);
+
+      return task;
+    }
+
+    return null;
+  }
+
+  public TaskUsage getTaskUsage()
+  {
+    return taskUsage;
+  }
+
+  public void setTaskUsage(TaskUsage taskUsage)
+  {
+    this.taskUsage = taskUsage;
   }
 }

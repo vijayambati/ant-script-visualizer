@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.EXECUTE;
+import static org.testng.Assert.*;
 
 @Test(groups = "gradle")
 public class TaskTest
@@ -141,6 +140,43 @@ public class TaskTest
     assertTrue(taskMap.containsKey("integrationTest"));
   }
 
+  // find things like tomcatRun.execute()
+  @Test
+  public void testFindExecutes()
+  {
+    HashMap<String, Task> map = new HashMap<String, Task>();
+
+    Task.findOrCreateImplicitTasksByExecute(map, "tomcatRun.execute()");
+
+    String tomcatRun = "tomcatRun";
+
+    assertTrue(map.containsKey(tomcatRun));
+
+    Task task = map.get(tomcatRun);
+
+    assertEquals(task.getTaskName(), tomcatRun);
+    assertEquals(task.getTaskUsage(), EXECUTE);
+  }
+
+  @Test
+  public void testFindExecutesDisplaysRight()
+  {
+    HashMap<String, Task> map         = new HashMap<String, Task>();
+    Task                  task        = Task.findOrCreateImplicitTasksByExecute(map, "tomcatRun.execute()");
+    String                declaration = task.getDotDeclaration();
+
+    assertEquals(declaration, "tomcatRun [label=\"tomcatRun\" shape=ellipse color=red ];");
+  }
+
+  // show the task that depends on an execute displays right
+  @Test
+  public void testTaskDependsOnExecute() {}
+
+  @Test
+  public void testDoFirst() {}
+
+  @Test
+  public void testDoLast() {}
   // -test read in file
   // -test find tasks
   // -test find task type if it exists
