@@ -41,13 +41,13 @@ public class AntFileParser
   private List<Antfile>         importsToProcess        = new UniqueList<Antfile>();
   private Map<String, Property> properties              = new HashMap<String, Property>();
   private Os                    os;
-  private Preferences           preferences;
+  private AntScriptPreferences  preferences;
   private AntParserUiImpl       ui;
   private EventCollector        eventCollector          = new EventCollector();
   private static int            parseCount              = 0;
 
   /** Creates a new AntFileParser object. */
-  public AntFileParser(Os os, Preferences preferences, AntParserUiImpl ui, File... filesToParse)
+  public AntFileParser(Os os, AntScriptPreferences preferences, AntParserUiImpl ui, File... filesToParse)
   {
     this.os          = os;
     this.preferences = preferences;

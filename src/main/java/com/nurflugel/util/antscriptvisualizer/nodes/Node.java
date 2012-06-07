@@ -3,7 +3,7 @@
  */
 package com.nurflugel.util.antscriptvisualizer.nodes;
 
-import com.nurflugel.util.antscriptvisualizer.Preferences;
+import com.nurflugel.util.antscriptvisualizer.AntScriptPreferences;
 import com.nurflugel.util.antscriptvisualizer.Utility;
 import org.jdom.Element;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public abstract class Node implements Dependency
   }
 
   /** Write the DOT file output for this node. */
-  public void writeOutput(List<String> lines, Preferences preferences) throws IOException
+  public void writeOutput(List<String> lines, AntScriptPreferences preferences) throws IOException
   {
     if (name != null)
     {
@@ -125,7 +125,7 @@ public abstract class Node implements Dependency
 
   /** Should this node print out in the final image? */
   @SuppressWarnings({ "OverlyComplexBooleanExpression" })
-  public boolean shouldPrint(Preferences preferences)
+  public boolean shouldPrint(AntScriptPreferences preferences)
   {
     boolean isTaskdef  = (preferences.shouldShowTaskdefs() && (nodeType == TASKDEF));
     boolean istarget   = (preferences.shouldShowTargets() && (nodeType == TARGET));

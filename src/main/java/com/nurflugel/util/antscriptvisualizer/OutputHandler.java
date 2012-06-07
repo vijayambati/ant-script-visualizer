@@ -1,6 +1,6 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import static com.nurflugel.util.Os.OS_X;
+import com.nurflugel.util.GraphicFileCreator;
 import com.nurflugel.util.Os;
 import com.nurflugel.util.antscriptvisualizer.nodes.Antfile;
 import com.nurflugel.util.antscriptvisualizer.nodes.Dependency;
@@ -15,13 +15,8 @@ import static org.apache.commons.lang.StringUtils.replace;
 import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import static java.util.Arrays.asList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This class is involved in parsing the Ant file and generating the DOT output.
@@ -45,7 +40,7 @@ public class OutputHandler
   private AntFileParser         parser;
   private Os                    os;
   private boolean               generateGraphicOutput;
-  private Preferences           preferences;
+  private AntScriptPreferences  preferences;
   private List<Antfile>         antfiles;
 
   /**
@@ -53,7 +48,7 @@ public class OutputHandler
    * @param  antfiles               List of Ant files to parse
    * @param  generateGraphicOutput  if true, the graphic output (PDF, PNG, etc) will be generated, if false, not.
    */
-  public OutputHandler(Preferences preferences, List<Antfile> antfiles, AntFileParser antFileParser, Os os, boolean generateGraphicOutput)
+  public OutputHandler(AntScriptPreferences preferences, List<Antfile> antfiles, AntFileParser antFileParser, Os os, boolean generateGraphicOutput)
   {
     this.preferences           = preferences;
     this.antfiles              = antfiles;
@@ -74,7 +69,9 @@ public class OutputHandler
 
       if (generateGraphicOutput)
       {
-        processDotFile(dotFile);
+        GraphicFileCreator fileCreator = new GraphicFileCreator();
+
+        fileCreator.processDotFile(dotFile, preferences, os);
       }
 
       if (preferences.shouldDeleteDotFilesOnExit())
@@ -149,7 +146,7 @@ public class OutputHandler
   }
 
   /** Get the dot file name from the ant file name. */
-  private String getDotFilename(Antfile antFile)
+  private static String getDotFilename(Antfile antFile)
   {
     File   file         = antFile.getBuildFile();
     String absolutePath = file.getAbsolutePath();
@@ -165,7 +162,7 @@ public class OutputHandler
 
     for (Antfile antfile : antfiles)
     {
-      lines.add("\t" + OPENING_LINE_SUBGRAPH + "cluster_" + clusterIndex + " {");
+      lines.add('\t' + OPENING_LINE_SUBGRAPH + "cluster_" + clusterIndex + " {");
 
       String fileName;
 
@@ -178,7 +175,7 @@ public class OutputHandler
         fileName = antfile.getBuildFile().getName();
       }
 
-      lines.add("\t\tlabel=\"" + fileName + "\"");
+      lines.add("\t\tlabel=\"" + fileName + '"');
 
       List<Target>   targets        = antfile.getTargets();
       List<Taskdef>  localTaskdefs  = antfile.getLocalTaskdefs();
@@ -211,9 +208,9 @@ public class OutputHandler
   }
 
   /** Generates a legend. */
-  private void writeLegend(List<String> lines) throws IOException
+  private static void writeLegend(List<String> lines) throws IOException
   {
-    lines.add("\t" + OPENING_LINE_SUBGRAPH + "cluster_legend {");
+    lines.add('\t' + OPENING_LINE_SUBGRAPH + "cluster_legend {");
     lines.add("\t\tlabel=\"legend\"");
     lines.add("\t\ttarget [label=\"target\" shape=box color=black ];");
     lines.add("\t\ttarget2 [label=\"target\" shape=box color=black ];");
@@ -229,14 +226,14 @@ public class OutputHandler
 
   /** Write out the dependencies. */
   @SuppressWarnings({ "OverlyNestedMethod" })
-  private void writeDotDependencies(Map<Node, List<Dependency>> dependencies, List<String> lines) throws IOException
+  private void writeDotDependencies(Map<Node, List<Dependency>> dependencies, Collection<String> lines) throws IOException
   {
-    Set<Node>   set       = dependencies.keySet();
-    Set<String> resultSet = new HashSet<String>();
+    Set<Node>          set       = dependencies.keySet();
+    Collection<String> resultSet = new HashSet<String>();
 
     for (Object aSet : set)
     {
-      Node theNode = (Node) aSet;
+      Dependency theNode = (Dependency) aSet;
 
       if (theNode instanceof NodeWithDependancies)
       {
@@ -255,7 +252,7 @@ public class OutputHandler
 
               if (dependantNode.shouldPrint(preferences))
               {
-                String line = "\t\t" + niceName + " -> " + dependantNodeNiceName + dependencyExtraInfo + ";";
+                String line = "\t\t" + niceName + " -> " + dependantNodeNiceName + dependencyExtraInfo + ';';
 
                 resultSet.add(line);
               }
@@ -274,100 +271,16 @@ public class OutputHandler
   }
 
   /** Replace characters that DOT doesn't like, such as : (file names on Windows may have c:\ in them... */
-  private List<String> handleSpecialCharacters(List<String> lines)
+  private static List<String> handleSpecialCharacters(Collection<String> lines)
   {
     List<String> newLines = new ArrayList<String>(lines.size());
 
     for (String line : lines)
     {
-      line = StringUtils.replace(line, ":", "_");
+      line = replace(line, ":", "_");
       newLines.add(line);
     }
 
     return newLines;
-  }
-
-  /** Convert the .dot file into png, pdf, svg, whatever. */
-  @SuppressWarnings({ "OverlyLongMethod" })
-  private void processDotFile(File dotFile)
-  {
-    try
-    {
-      String outputFileName = getOutputFileName(dotFile, preferences.getOutputFormat().getExtension());
-      File   outputFile     = new File(dotFile.getParent(), outputFileName);
-      File   parentFile     = outputFile.getParentFile();
-      String dotFilePath    = dotFile.getAbsolutePath();
-      String outputFilePath = outputFile.getAbsolutePath();
-
-      if (outputFile.exists())
-      {
-        if (logger.isDebugEnabled())
-        {
-          logger.debug("Deleting existing version of " + outputFilePath);
-        }
-
-        outputFile.delete();  // delete the file before generating it if it exists
-      }
-
-      String outputFormatName  = preferences.getOutputFormat().getType();
-      String dotExecutablePath = preferences.getDotExecutablePath();
-
-      // this is to deal with different versions of Graphviz on OS X - if dot is in applications (old version), preface with an e for epdf.  If it's
-      // in /usr/local/bin, leave as pdf
-      if ((os == OS_X) && dotExecutablePath.startsWith("/Applications") && !outputFormatName.startsWith("e"))
-      {
-        outputFormatName = "e" + outputFormatName;
-      }
-
-      String[] command = { dotExecutablePath, "-T" + outputFormatName, "-o" + outputFilePath, dotFilePath };
-
-      if (logger.isDebugEnabled())
-      {
-        logger.debug("Command to run: " + concatenate(command) + " parent file is " + parentFile.getPath());
-      }
-
-      Runtime runtime = Runtime.getRuntime();
-      long    start   = new Date().getTime();
-
-      runtime.exec(command).waitFor();
-
-      long end = new Date().getTime();
-
-      if (logger.isDebugEnabled())
-      {
-        logger.debug("Took " + (end - start) + " milliseconds to generate graphic");
-      }
-
-      os.openFile(outputFilePath);
-    }
-    catch (Exception e)  // todo handle error
-    {
-      logger.error(e);
-    }
-  }
-
-  /** Takes someting like build.dot and returns build.png. */
-  private String getOutputFileName(File dotFile, String outputExtension)
-  {
-    String results = dotFile.getName();
-    int    index   = results.indexOf(".dot");
-
-    results = results.substring(0, index) + outputExtension;
-
-    return results;
-  }
-
-  /** Join the array together as one string, with spaces between the elements. */
-  private String concatenate(String[] commands)
-  {
-    StringBuilder stringBuffer = new StringBuilder();
-
-    for (String command : commands)
-    {
-      stringBuffer.append(" ");
-      stringBuffer.append(command);
-    }
-
-    return stringBuffer.toString().trim();
   }
 }
