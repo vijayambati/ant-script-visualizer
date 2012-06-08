@@ -2,6 +2,7 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.util.Map;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByExecute;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateTaskByLine;
+import static org.apache.commons.io.FileUtils.checksumCRC32;
 import static org.apache.commons.io.FileUtils.readLines;
 import static org.apache.commons.io.FilenameUtils.getFullPath;
 import static org.apache.commons.lang.StringUtils.*;
@@ -21,9 +23,13 @@ import static org.apache.commons.lang.StringUtils.*;
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 5/30/12 Time: 22:07 To change this template use File | Settings | File Templates. */
 public class GradleFileParser
 {
-  private Map<String, Task> taskMap = new HashMap<String, Task>();
+  private Map<String, Task> taskMap       = new HashMap<String, Task>();
+  private Map<File, Long>   fileChecksums;
 
-  public GradleFileParser() {}
+  public GradleFileParser(Map<File, Long> fileChecksums)
+  {
+    this.fileChecksums = fileChecksums;
+  }
 
   // -------------------------- OTHER METHODS --------------------------
   public List<Task> getTasks() throws IOException
@@ -166,6 +172,7 @@ public class GradleFileParser
   {
     File file = new File(fileName);
 
+    fileChecksums.put(file, checksumCRC32(file));  // todo figure out what the main files are and only rerender them
     parseFile(file);
   }
 

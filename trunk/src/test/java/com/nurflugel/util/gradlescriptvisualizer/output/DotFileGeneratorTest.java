@@ -5,7 +5,9 @@ import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser;
 import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParserTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import static org.apache.commons.io.FilenameUtils.getBaseName;
 import static org.apache.commons.io.FilenameUtils.getFullPath;
@@ -19,7 +21,7 @@ public class DotFileGeneratorTest
     // GradleFileParser parser = new
     // GradleFileParser("/Users/douglas_bullard/Documents/JavaStuff/Google_Code/AntScriptVisualizer_Google/gradleTrunk/master-gradle/master-build.gradle");
     String           gradleFileName = GradleFileParserTest.getFilePath("dasbuild.gradle");
-    GradleFileParser parser         = new GradleFileParser();
+    GradleFileParser parser         = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(gradleFileName);
 

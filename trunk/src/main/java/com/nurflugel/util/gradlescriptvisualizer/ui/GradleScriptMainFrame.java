@@ -18,9 +18,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import static com.nurflugel.util.Os.findOs;
 import static com.nurflugel.util.Util.center;
 import static com.nurflugel.util.Util.setLookAndFeel;
@@ -42,6 +41,7 @@ public class GradleScriptMainFrame
   private String                  dotExecutablePath;
   private Os                      os;
   private final Map<File, Long>   fileChecksums = new HashMap<File, Long>();
+  private final Set<File>         filesToRender = new HashSet<File>();
 
   public GradleScriptMainFrame()
   {
@@ -149,14 +149,15 @@ public class GradleScriptMainFrame
     chooser.setMultiSelectionEnabled(true);
 
     int              returnVal = chooser.showOpenDialog(frame);
-    GradleFileParser parser    = new GradleFileParser();
+    GradleFileParser parser    = new GradleFileParser(fileChecksums);
 
     if (returnVal == APPROVE_OPTION)
     {
       File[] selectedFiles = chooser.getSelectedFiles();
 
-      chooser.hide();
+      filesToRender.addAll(Arrays.asList(selectedFiles));
 
+      // chooser.hide();
       if (selectedFiles.length > 0)
       {
         preferences.setLastDir(selectedFiles[0].getParent());
@@ -168,8 +169,9 @@ public class GradleScriptMainFrame
         long checksum = FileUtils.checksumCRC32(selectedFile);
 
         fileChecksums.put(selectedFile, checksum);
-        handleFileGeneration(parser, selectedFile);
       }
+
+      handleFileGeneration(parser);
     }
 
     if (watchFileForChangesCheckBox.isSelected())
@@ -181,18 +183,21 @@ public class GradleScriptMainFrame
     }
   }
 
-  public void handleFileGeneration(GradleFileParser parser, File selectedFile) throws IOException
+  public void handleFileGeneration(GradleFileParser parser) throws IOException
   {
-    parser.parseFile(selectedFile);
-    System.out.println("selectedFile = " + selectedFile);
+    for (File file : filesToRender)
+    {
+      parser.parseFile(file);
+      System.out.println("selectedFile = " + file);
 
-    List<Task>         tasks            = parser.getTasks();
-    DotFileGenerator   dotFileGenerator = new DotFileGenerator();
-    List<String>       lines            = dotFileGenerator.createOutput(tasks);
-    File               dotFile          = dotFileGenerator.writeOutput(lines, selectedFile.getAbsolutePath());
-    GraphicFileCreator fileCreator      = new GraphicFileCreator();
+      List<Task>         tasks            = parser.getTasks();
+      DotFileGenerator   dotFileGenerator = new DotFileGenerator();
+      List<String>       lines            = dotFileGenerator.createOutput(tasks);
+      File               dotFile          = dotFileGenerator.writeOutput(lines, file.getAbsolutePath());
+      GraphicFileCreator fileCreator      = new GraphicFileCreator();
 
-    fileCreator.processDotFile(dotFile, preferences, os);
+      fileCreator.processDotFile(dotFile, preferences, os);
+    }
   }
 
   private void doQuitAction()
