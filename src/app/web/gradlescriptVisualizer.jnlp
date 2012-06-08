@@ -8,8 +8,10 @@
         <title>Gradle Script Visualizer</title>
         <vendor>From Nurflugel.com...</vendor>
         <homepage href="index_gradle.html"/>
-        <description>Gradle ScriptDependency Visualizer</description>
-        <icon href="gradleLogo.jpg"/>
+        <description>Gradle Script Dependency Visualizer</description>
+        <icon href="images/gradleLogo.jpg"/>
+        <icon kind="splash"
+              href="images/gradleLogo.jpg"/>
         <offline-allowed/>
         <shortcut online="true">
            <desktop/>
