@@ -1,14 +1,16 @@
 package com.nurflugel.util.antscriptvisualizer;
 
-import static com.nurflugel.util.Os.findOs;
+import com.nurflugel.util.Os;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
-import static org.apache.commons.io.FileUtils.contentEquals;
-import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import static com.nurflugel.util.Os.findOs;
+import static com.nurflugel.util.test.TestResources.getFilePath;
+import static org.apache.commons.io.FileUtils.contentEquals;
+import static org.testng.Assert.assertTrue;
 
 /** Test class to exercise the app and compare it to known good results. */
 public class OutputTest
@@ -24,15 +26,17 @@ public class OutputTest
     preferences.setShouldDeleteDotFilesOnExit(false);
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testSimpleOne() throws IOException
   {
-    testDotFile("unversioned/config/SimpleBuild/onebuild");
+    testDotFile(getFilePath("SimpleBuild/onebuild"));
   }
 
   private void testDotFile(String baseName) throws IOException
   {
-    AntFileParser fileParser = new AntFileParser(findOs(), preferences, null, new File(baseName + ".xml"));
+    File          file       = new File(baseName + ".xml");
+    Os            os         = findOs();
+    AntFileParser fileParser = new AntFileParser(os, preferences, null, file);
 
     fileParser.processBuildFile(false);
 
@@ -51,137 +55,137 @@ public class OutputTest
     assertTrue(areEqual, "File contents should be identical");
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testSimpleTwoTaskdefsMacrodefs() throws IOException
   {
-    testDotFile("unversioned/config/SimpleBuild/twobuild_with_taskdef_and_macrodef");
+    testDotFile(getFilePath("SimpleBuild/twobuild_with_taskdef_and_macrodef"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testSimpleTwo() throws IOException
   {
-    testDotFile("unversioned/config/SimpleBuild/twobuild_with_taskdefs");
+    testDotFile(getFilePath("SimpleBuild/twobuild_with_taskdefs"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testSimpleThree() throws IOException
   {
-    testDotFile("unversioned/config/SimpleBuild/threebuild");
+    testDotFile(getFilePath("SimpleBuild/threebuild"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testSimpleFour() throws IOException
   {
-    testDotFile("unversioned/config/SimpleBuild/fourbuild");
+    testDotFile(getFilePath("SimpleBuild/fourbuild"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testLegend() throws IOException
   {
     preferences.setShouldShowLegend(true);
-    testDotFile("unversioned/config/SimpleBuild/legend");
+    testDotFile(getFilePath("SimpleBuild/legend"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoMacrodefs() throws IOException
   {
     preferences.setShouldShowMacrodefs(false);
-    testDotFile("unversioned/config/SimpleBuild/noMacrodefs");
+    testDotFile(getFilePath("SimpleBuild/noMacrodefs"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoTaskdefs() throws IOException
   {
     preferences.setShouldShowTaskdefs(false);
-    testDotFile("unversioned/config/SimpleBuild/noTaskdefs");
+    testDotFile(getFilePath("SimpleBuild/noTaskdefs"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoAntCalls() throws IOException
   {
     preferences.setShouldShowAntCalls(false);
-    testDotFile("unversioned/config/SimpleBuild/noAntCalls");
+    testDotFile(getFilePath("SimpleBuild/noAntCalls"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoAnts() throws IOException
   {
     preferences.setShouldShowAnts(false);
-    testDotFile("unversioned/config/SimpleBuild/noAnts");
+    testDotFile(getFilePath("SimpleBuild/noAnts"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoTargets() throws IOException
   {
     preferences.setShouldShowTargets(false);
-    testDotFile("unversioned/config/SimpleBuild/noTargets");
+    testDotFile(getFilePath("SimpleBuild/noTargets"));
   }
 
-  @Test(groups = "cRoy")  // todo
+  @Test(groups = { "cRoy", "failed" })
   public void testCRoy() throws IOException
   {
-    testDotFile("unversioned/config/C_Roy/build");
+    testDotFile(getFilePath("C_Roy/build"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testDependency() throws IOException
   {
-    testDotFile("unversioned/config/Dependency Test/build-batch");
+    testDotFile(getFilePath("Dependency Test/build-batch"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testEntity() throws IOException
   {
-    testDotFile("unversioned/config/ENTITY property Test/threebuild");
+    testDotFile(getFilePath("ENTITY property Test/threebuild"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testImport() throws IOException
   {
-    testDotFile("unversioned/config/Import Test/threebuild");
+    testDotFile(getFilePath("Import Test/threebuild"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoGrouping() throws IOException
   {
     preferences.setShouldGroupByBuildFiles(false);
-    testDotFile("unversioned/config/Import Test/noGroup");
+    testDotFile(getFilePath("Import Test/noGroup"));
   }
 
-  @Test(groups = "dot")
+  @Test(groups = { "dot", "failed" })
   public void testNoImports() throws IOException
   {
     preferences.setShouldIncludeImportedFiles(false);
-    testDotFile("unversioned/config/Import Test/noImports");
+    testDotFile(getFilePath("Import Test/noImports"));
   }
 
-  @Test(groups = "master")  // todo
+  @Test(groups = { "master", "failed" })
   public void testMasterBuild() throws IOException
   {
-    testDotFile("unversioned/config/MasterBuildExamples/build");
+    testDotFile(getFilePath("MasterBuildExamples/build"));
   }
 
-  @Test(groups = "master")  // todo
+  @Test(groups = { "master", "failed" })
   public void testMasterBuildOverride() throws IOException
   {
-    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile");
+    testDotFile(getFilePath("MasterBuildExamples/build_overrideCompile"));
   }
 
-  @Test(groups = "master")
+  @Test(groups = { "master", "failed" })
   public void testMasterBuildOverrideNoShowOverridden() throws IOException
   {
-    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoShowOverriden");
+    testDotFile(getFilePath("MasterBuildExamples/build_overrideCompile_NoShowOverriden"));
   }
 
-  @Test(groups = "master")
+  @Test(groups = { "master", "failed" })
   public void testMasterBuildOverrideNoUnusedDefs() throws IOException
   {
-    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_NoUnusedDefs");
+    testDotFile(getFilePath("MasterBuildExamples/build_overrideCompile_NoUnusedDefs"));
   }
 
   @Test(groups = { "master", "failed" })
   public void testMasterBuildOverrideJustJavadoc() throws IOException
   {
-    testDotFile("unversioned/config/MasterBuildExamples/build_overrideCompile_JustJavadoc");
+    testDotFile(getFilePath("MasterBuildExamples/build_overrideCompile_JustJavadoc"));
   }
 }
