@@ -8,11 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import static org.testng.Assert.*;
 import static org.testng.Assert.assertEquals;
 
@@ -73,7 +69,7 @@ public class GradleFileParserTest
   @Test(expectedExceptions = IOException.class)
   public void testReadBadFile() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile("dibble.gradle");
   }
@@ -81,7 +77,7 @@ public class GradleFileParserTest
   @Test
   public void testReadLinesFromFile() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       lines  = parser.readLinesInFile(new File(getFilePath(PARSE_FILE_NAME)));
 
     assertFalse(lines.isEmpty());
@@ -90,7 +86,7 @@ public class GradleFileParserTest
   @Test
   public void testFindTaskLines() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath(PARSE_FILE_NAME));
 
@@ -102,7 +98,7 @@ public class GradleFileParserTest
   @Test
   public void testFindTaskNames() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath(PARSE_FILE_NAME));
 
@@ -117,7 +113,7 @@ public class GradleFileParserTest
   @Test
   public void testFindTaskNamesInMap() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath(PARSE_FILE_NAME));
 
@@ -132,7 +128,7 @@ public class GradleFileParserTest
   @Test
   public void testFindTasksWithDependencies() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath(PARSE_FILE_NAME));
 
@@ -144,7 +140,7 @@ public class GradleFileParserTest
   @Test
   public void testFindFileImports() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath("importTasks.gradle"));
 
@@ -156,7 +152,7 @@ public class GradleFileParserTest
   @Test
   public void testFindUrlImports() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath("importTasksFromUrl.gradle"));
 
@@ -186,7 +182,7 @@ public class GradleFileParserTest
   @Test
   public void testBigFile() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.parseFile(getFilePath("master-build.gradle"));
 
@@ -202,7 +198,7 @@ public class GradleFileParserTest
   @Test
   public void testImplicitDeclarationTask() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
@@ -217,7 +213,7 @@ public class GradleFileParserTest
   @Test
   public void testImplicitDeclarationTask2() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
@@ -231,7 +227,7 @@ public class GradleFileParserTest
   @Test
   public void testImplicitDeclarationDependsOnTask() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
@@ -258,7 +254,7 @@ public class GradleFileParserTest
   @Test
   public void testListOfImplicitTaskDeclaration() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
     parser.findTasksInLines(list);
@@ -274,7 +270,7 @@ public class GradleFileParserTest
   @Test
   public void testListOfImplicitTaskDeclarationDepends() throws IOException
   {
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
     parser.findTasksInLines(list);
@@ -304,7 +300,7 @@ public class GradleFileParserTest
       "}"                                                                                                  //
     };
     List<Line> list         = getLinesFromArray(lines);
-    GradleFileParser parser = new GradleFileParser();
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.findTasksInLines(list);
 

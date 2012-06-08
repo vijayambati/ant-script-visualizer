@@ -15,6 +15,7 @@ configurations
   javac2
 }
 
+
 dependencies
 {
   javac2 'com.intellij:javac2:9.0.0'

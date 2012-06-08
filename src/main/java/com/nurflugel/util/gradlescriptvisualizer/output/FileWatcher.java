@@ -24,9 +24,10 @@ public class FileWatcher extends SwingWorker<Object, Object>
   @Override
   protected Object doInBackground() throws Exception
   {
+    //
     while (true)
     {
-      System.out.println("Waking from sleep to check files");
+      // System.out.println("Waking from sleep to check files");
       Thread.sleep(1000);
 
       for (Map.Entry<File, Long> fileLongEntry : fileChecksums.entrySet())
@@ -37,7 +38,7 @@ public class FileWatcher extends SwingWorker<Object, Object>
 
         if (oldChecksum == currentChecksum)
         {
-          System.out.println("File " + file + " didn't change");
+          // System.out.println("File " + file + " didn't change");
         }
         else
         {
@@ -46,7 +47,7 @@ public class FileWatcher extends SwingWorker<Object, Object>
           // update the checksum
           fileChecksums.put(file, currentChecksum);
           parser.purgeAll();
-          gradleScriptMainFrame.handleFileGeneration(parser, file);
+          gradleScriptMainFrame.handleFileGeneration(parser);
         }
       }
     }
