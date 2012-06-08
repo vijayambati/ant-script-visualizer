@@ -9,6 +9,8 @@ sourceCompatibility = 1.6
 //mainClassName = "com.nurflugel.ivybrowser.ui.IvyBrowserMainFrame"
 mainClassName = "com.nurflugel.ivyformatter.ui.IvyFormatterMainFrame"
 
+//task biteMe (dependsOn: test)<<{ }
+//task biteMe (dependsOn: test)<<{ }
 
 configurations
 {
