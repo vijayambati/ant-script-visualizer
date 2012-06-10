@@ -29,6 +29,7 @@ dependencies {
      'ca.odell.glazedlists:jdk_1.5:1.8.0',
     'org.codehaus.xstream:xstream:1.2',
     'org.tmatesoft.svnkit:svnkit:1.7.4-v1',
+    'com.nurflugel:buildtasks:1.0-SNAPSHOT',
     'w3c:jtidy:04aug2000r7-dev',
     'org.apache:commons-lang:2.4',
     'org.apache:commons-logging:1.0.4',

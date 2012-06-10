@@ -94,7 +94,7 @@ public class GradleFileParserTest
 
     for (Task task : tasks)
     {
-      assertTrue(ArrayUtils.contains(TASK_NAMES, task.getTaskName()), "Couldn't find task " + task);
+      assertTrue(ArrayUtils.contains(TASK_NAMES, task.getName()), "Couldn't find task " + task);
     }
   }
 
@@ -162,8 +162,8 @@ public class GradleFileParserTest
 
     Task foundTask = taskList.get(expectedSize - 1);
 
-    assertEquals(foundTask.getTaskName(), dependsOnTask.getTaskName());  // validate that the tasks are the same task name
-    assertEquals(foundTask, dependsOnTask);                              // validate that the tasks are the same task object
+    assertEquals(foundTask.getName(), dependsOnTask.getName());  // validate that the tasks are the same task name
+    assertEquals(foundTask, dependsOnTask);                      // validate that the tasks are the same task object
   }
 
   // just doing this to get a printout of the tasks...
@@ -187,7 +187,7 @@ public class GradleFileParserTest
   public void testImplicitDeclarationTask() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
+    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
 
@@ -202,7 +202,7 @@ public class GradleFileParserTest
   public void testImplicitDeclarationTask2() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
+    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
 
@@ -216,26 +216,14 @@ public class GradleFileParserTest
   public void testImplicitDeclarationDependsOnTask() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
+    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
     Task              task     = tasksMap.get("check");
 
-    assertEquals(task.getDependsOn().get(0).getTaskName(), "integrationTest");
-  }
-
-  private List<Line> getLinesFromArray(String[] lines)
-  {
-    List<Line> results = new ArrayList<Line>();
-
-    for (String line : lines)
-    {
-      results.add(new Line(line));
-    }
-
-    return results;
+    assertEquals(task.getDependsOn().get(0).getName(), "integrationTest");
   }
 
   // test cases like [funcTest, bddTest]*.dependsOn daemonModeTomcat
@@ -243,7 +231,7 @@ public class GradleFileParserTest
   public void testListOfImplicitTaskDeclaration() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
+    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
     parser.findTasksInLines(list);
 
@@ -259,7 +247,7 @@ public class GradleFileParserTest
   public void testListOfImplicitTaskDeclarationDepends() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
+    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
     parser.findTasksInLines(list);
 
@@ -271,10 +259,13 @@ public class GradleFileParserTest
     String daemonModeTomcat = "daemonModeTomcat";
 
     assertTrue(tasksMap.containsKey(daemonModeTomcat));
-    assertEquals(tasksMap.get("funcTest").getDependsOn().get(0).getTaskName(), daemonModeTomcat);
-    assertEquals(tasksMap.get("bddTest").getDependsOn().get(0).getTaskName(), daemonModeTomcat);
+    assertEquals(tasksMap.get("funcTest").getDependsOn().get(0).getName(), daemonModeTomcat);
+    assertEquals(tasksMap.get("bddTest").getDependsOn().get(0).getName(), daemonModeTomcat);
   }
 
+  // idea for doing this - after task declaration, keep parsing lines keeping track of { and } - anything within
+  // the matching {} pair can be claimed as a dependency.  So, take all those lines and put them into the task for
+  // future reference as well.
   @Test(groups = "failed")
   public void testExecuteInDoFirst()
   {
@@ -283,11 +274,16 @@ public class GradleFileParserTest
       "task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {",  //
       "    doFirst {",                                                                                     //
       "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
-      "        tomcatRunner.execute()",                                                                    //
+      "        tomcatRun.execute()",                                                                       //
       "    }",                                                                                             //
-      "}"                                                                                                  //
+      "    doLast {",                                                                                      //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatStop.execute()",                                                                      //
+      "    }",                                                                                             // "}"
+                                                                                                           //
+                                                                                                           // //
     };
-    List<Line> list         = getLinesFromArray(lines);
+    List<Line> list         = TestResources.getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.findTasksInLines(list);
@@ -295,11 +291,45 @@ public class GradleFileParserTest
     Map<String, Task> tasksMap = parser.getTasksMap();
 
     assertTrue(tasksMap.containsKey("tomcatRunMock"));
-    assertTrue(tasksMap.containsKey("tomcatRunner"));
+    assertTrue(tasksMap.containsKey("tomcatRun"));
 
     Task task = tasksMap.get("tomcatRunMock");
 
     assertEquals(task.getDependsOn().size(), 2);
+  }
+
+  // after task declaration, keep parsing lines keeping track of { and } - anything within
+  // the matching {} pair can be claimed as a dependency.  So, take all those lines and put them into the task for
+  // future reference as well.
+  @Test(groups = "failed")
+  public void testFindAllTaskLines()
+  {
+    String[] lines =
+    {
+      "task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {",  //
+      "    doFirst {",                                                                                     //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatRun.execute()",                                                                       //
+      "    }",                                                                                             //
+      "    doLast {",                                                                                      //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatStop.execute()",                                                                      //
+      "    }",                                                                                             //
+      "}"                                                                                                  //
+    };
+    List<Line> list         = TestResources.getLinesFromArray(lines);
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
+
+    parser.findTasksInLines(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("tomcatRunMock"));
+    // assertTrue(tasksMap.containsKey("tomcatRunner"));
+    Task     task      = tasksMap.get("tomcatRunMock");
+    String[] taskLines = task.getScopeLines();
+
+    assertEquals(taskLines, lines, "Should have all the lines for the task in the task");
   }
   // test imported scripts recursively
   // ==>test find task dependsOn if task exists elsewhere in build script

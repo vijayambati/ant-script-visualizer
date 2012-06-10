@@ -21,4 +21,33 @@ public class Line
     return "Line{"
              + "text='" + text + '\'' + '}';
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+
+    if ((o == null) || (getClass() != o.getClass()))
+    {
+      return false;
+    }
+
+    Line line = (Line) o;
+
+    if (!text.equals(line.text))
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return text.hashCode();
+  }
 }
