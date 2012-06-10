@@ -11,14 +11,15 @@ import static org.apache.commons.lang.StringUtils.split;
 
 public class Task
 {
-  private static final String DEPENDS_ON     = "dependsOn:";
-  private static final String EXECUTE        = ".execute";
+  private static final String DEPENDS_ON                 = "dependsOn:";
+  private static final String EXECUTE                    = ".execute";
   private String              name;
   private String              type;
-  private List<Task>          dependsOnTasks = new ArrayList<Task>();
-  private TaskUsage           usage          = GRADLE;
+  private List<Task>          dependsOnTasks             = new ArrayList<Task>();
+  private TaskUsage           usage                      = GRADLE;
   private String[]            scopeLines;
-  private boolean             showType       = true;
+  private boolean             showType                   = true;
+  private static boolean      showFullyQualifiedTaskType = false;
 
   public static Task findOrCreateTaskByLine(Map<String, Task> taskMap, Line line, List<Line> lines)
   {
@@ -280,6 +281,12 @@ public class Task
       taskType = getTextBeforeIfExists(taskType, ")");
       taskType = getTextBeforeIfExists(taskType, ",");
       taskType = getTextBeforeIfExists(taskType, " ");
+
+      if (!showFullyQualifiedTaskType)
+      {
+        taskType = StringUtils.substringAfterLast(taskType, ".");
+      }
+
       taskType = trim(taskType);
 
       return taskType;
