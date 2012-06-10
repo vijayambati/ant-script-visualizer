@@ -2,7 +2,6 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,9 +88,9 @@ public class GradleFileParser
 
       if (trimmedLine.startsWith("task "))
       {
-        Task task = findOrCreateTaskByLine(taskMap, line);
+        Task task = findOrCreateTaskByLine(taskMap, line, lines);
 
-        taskMap.put(task.getTaskName(), task);
+        taskMap.put(task.getName(), task);
       }
 
       if (trimmedLine.contains(".dependsOn"))

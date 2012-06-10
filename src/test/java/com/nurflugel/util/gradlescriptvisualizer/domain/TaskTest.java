@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateTaskByLine;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.EXECUTE;
+import static com.nurflugel.util.test.TestResources.getLinesFromArray;
 import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 @Test(groups = "gradle")
 public class TaskTest
@@ -16,7 +19,15 @@ public class TaskTest
   {
     Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp(type: Copy) {"));
 
-    assertEquals(task.getTaskType(), "Copy");
+    assertEquals(task.getType(), "Copy");
+  }
+
+  @Test
+  public void testFindTaskTypeWithDepends()
+  {
+    Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp(type: Copy, dependsOn: dibble) {"));
+
+    assertEquals(task.getType(), "Copy");
   }
 
   @Test
@@ -24,7 +35,7 @@ public class TaskTest
   {
     Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp() {"));
 
-    assertEquals(task.getTaskType(), "noType");
+    assertEquals(task.getType(), "noType");
   }
 
   @Test
@@ -34,7 +45,7 @@ public class TaskTest
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
-    assertEquals(dependsOnTasks.get(0).getTaskName(), "installApp");
+    assertEquals(dependsOnTasks.get(0).getName(), "installApp");
   }
 
   @Test
@@ -44,7 +55,7 @@ public class TaskTest
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
-    assertEquals(dependsOnTasks.get(0).getTaskName(), "installApp");
+    assertEquals(dependsOnTasks.get(0).getName(), "installApp");
   }
 
   @Test
@@ -54,7 +65,7 @@ public class TaskTest
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
-    assertEquals(dependsOnTasks.get(0).getTaskName(), "installApp");
+    assertEquals(dependsOnTasks.get(0).getName(), "installApp");
   }
 
   @Test
@@ -64,7 +75,7 @@ public class TaskTest
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 1);
-    assertEquals(dependsOnTasks.get(0).getTaskName(), "war");
+    assertEquals(dependsOnTasks.get(0).getName(), "war");
   }
 
   @Test
@@ -74,9 +85,9 @@ public class TaskTest
     List<Task> dependsOnTasks = task.getDependsOn();
 
     assertEquals(dependsOnTasks.size(), 3);
-    assertEquals(dependsOnTasks.get(0).getTaskName(), "installApp");
-    assertEquals(dependsOnTasks.get(1).getTaskName(), "dibble");
-    assertEquals(dependsOnTasks.get(2).getTaskName(), "dabble");
+    assertEquals(dependsOnTasks.get(0).getName(), "installApp");
+    assertEquals(dependsOnTasks.get(1).getName(), "dibble");
+    assertEquals(dependsOnTasks.get(2).getName(), "dabble");
   }
 
   @Test
@@ -104,7 +115,7 @@ public class TaskTest
     // check.dependsOn integrationTest
     List<Task> task = findOrCreateImplicitTasksByLine(new HashMap<String, Task>(), "check.dependsOn integrationTest");
 
-    assertTrue(task.get(0).getTaskName().equals("check"));
+    assertTrue(task.get(0).getName().equals("check"));
   }
 
   @Test
@@ -115,7 +126,7 @@ public class TaskTest
     List<Task> dependsOn = task.get(0).getDependsOn();
 
     assertFalse(dependsOn.isEmpty());
-    assertTrue(dependsOn.get(0).getTaskName().equals("integrationTest"));
+    assertTrue(dependsOn.get(0).getName().equals("integrationTest"));
   }
 
   @Test
@@ -126,8 +137,8 @@ public class TaskTest
     List<Task> dependsOn = task.get(0).getDependsOn();
 
     assertFalse(dependsOn.isEmpty());
-    assertTrue(dependsOn.get(0).getTaskName().equals("integrationTest"));
-    assertTrue(dependsOn.get(1).getTaskName().equals("dibble"));
+    assertTrue(dependsOn.get(0).getName().equals("integrationTest"));
+    assertTrue(dependsOn.get(1).getName().equals("dibble"));
   }
 
   @Test
@@ -154,34 +165,117 @@ public class TaskTest
 
     Task task = map.get(tomcatRun);
 
-    assertEquals(task.getTaskName(), tomcatRun);
-    assertEquals(task.getTaskUsage(), EXECUTE);
+    assertEquals(task.getName(), tomcatRun);
+    assertEquals(task.getUsage(), EXECUTE);
   }
 
   @Test
   public void testFindExecutesDisplaysRight()
   {
-    HashMap<String, Task> map         = new HashMap<String, Task>();
-    Task                  task        = Task.findOrCreateImplicitTasksByExecute(map, "tomcatRun.execute()");
-    String                declaration = task.getDotDeclaration();
+    Map<String, Task> map         = new HashMap<String, Task>();
+    Task              task        = Task.findOrCreateImplicitTasksByExecute(map, "tomcatRun.execute()");
+    String            declaration = task.getDotDeclaration();
 
     assertEquals(declaration, "tomcatRun [label=\"tomcatRun\" shape=ellipse color=red ];");
   }
 
   // show the task that depends on an execute displays right
   @Test
-  public void testTaskDependsOnExecute() {}
+  public void testTaskDependsOnExecute()
+  {
+    String[] taskLines =
+    {
+      "task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {",  //
+      "    doFirst {",                                                                                     //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatRun.execute()",                                                                       //
+      "    }",                                                                                             //
+      "    doLast {",                                                                                      //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatStop.execute()",                                                                      //
+      "    }",                                                                                             //
+      "}",                                                                                                 //
+    };
+
+    // build up a list of what we want surrounded by junk - we should get just what we want back
+    List<Line> list            = getLinesFromArray(taskLines);
+    Line       declarationLine = new Line("task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {");
+    Map<String, Task> taskMap  = new HashMap<String, Task>();
+    Task       task            = findOrCreateTaskByLine(taskMap, declarationLine, list);
+
+    assertTrue(taskMap.containsKey("tomcatRun"));
+    assertTrue(taskMap.containsKey("tomcatStop"));
+
+    List<Task> dependsOn = task.getDependsOn();
+
+    assertTrue(dependsOn.contains(new Task("war")));
+    assertTrue(dependsOn.contains(new Task("tomcatRun")));
+    assertTrue(dependsOn.contains(new Task("tomcatStop")));
+  }
+
+  // after task declaration, keep parsing lines keeping track of { and } - anything within
+  // the matching {} pair can be claimed as a dependency.  So, take all those lines and put them into the task for
+  // future reference as well.
+  @Test
+  public void testFindAllTaskLines()
+  {
+    String[] lines = {
+                       "dibble",                                                                           //
+                       "dibble",                                                                           //
+                       "dibble",                                                                           //
+                       "dibble",                                                                           //
+                       "dibble",                                                                           //
+                       "dibble",                                                                           //
+                     };
+    String[] taskLines =
+    {
+      "task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {",  //
+      "    doFirst {",                                                                                     //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatRun.execute()",                                                                       //
+      "    }",                                                                                             //
+      "    doLast {",                                                                                      //
+      "        System.setProperty(\"spring.profiles.active\", \"InMemoryAuth,MockDB\")",                   //
+      "        tomcatStop.execute()",                                                                      //
+      "    }",                                                                                             //
+      "}",                                                                                                 //
+    };
+
+    // build up a list of what we want surrounded by junk - we should get just what we want back
+    List<Line> list            = getLinesFromArray(lines, taskLines, lines);
+    Line       declarationLine = new Line("task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {");
+    Task       task            = findOrCreateTaskByLine(new HashMap<String, Task>(), declarationLine, list);
+    String[]   scopeLines      = task.getScopeLines();
+
+    assertEquals(scopeLines, taskLines, "Should have all the lines for the task in the task");
+  }
 
   @Test
-  public void testDoFirst() {}
+  public void testFindExecutesTask()
+  {
+    String text = "        tomcatRun.execute()";
+    String name = Task.findExecuteDependency(text);
+
+    assertEquals(name, "tomcatRun");
+  }
 
   @Test
-  public void testDoLast() {}
-  // -test read in file
-  // -test find tasks
-  // -test find task type if it exists
-  // -test find dependsOn in task declaration
-  // -test find dependsOn in task declaration with multiple dependsOn
+  public void testFindExecutesTaskWithOtherWords()
+  {
+    String text = "  dibble      tomcatRun.execute()";
+    String name = Task.findExecuteDependency(text);
+
+    assertEquals(name, "tomcatRun");
+  }
+
+  @Test
+  public void testFindExecutesTaskNoExecutes()
+  {
+    String text = "  dibble      tomcatRun.dibble()";
+    String name = Task.findExecuteDependency(text);
+
+    assertNull(name);
+  }
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification
   // test find dependsOn in iterative task modification
