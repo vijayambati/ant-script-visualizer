@@ -31,6 +31,14 @@ public class TaskTest
   }
 
   @Test
+  public void testFindTaskTypeWithQualifiedName()
+  {
+    Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp(type: org.dibble.Copy, dependsOn: dibble) {"));
+
+    assertEquals(task.getType(), "Copy");
+  }
+
+  @Test
   public void testFindTaskTypeNoTypeDeclared()
   {
     Task task = new Task(new HashMap<String, Task>(), new Line("task copyHelp() {"));
