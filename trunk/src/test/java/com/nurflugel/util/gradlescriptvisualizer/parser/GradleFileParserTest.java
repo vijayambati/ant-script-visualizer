@@ -358,7 +358,6 @@ public class GradleFileParserTest
 
     assertTrue(tasksMap.containsKey("tRun1"));
 
-    // assertTrue(tasksMap.containsKey("tomcatRunner"));
     Task       task      = tasksMap.get("tRun1");
     List<Task> dependsOn = task.getDependsOn();
 
@@ -369,6 +368,103 @@ public class GradleFileParserTest
     assertEquals(task1.getName(), "dibble");
   }
 
+  @Test
+  public void testFindForEachTasks2()
+  {
+    String[] lines =
+    {
+      "task unitTest {",                                                                        //
+      "  }"                                                                                     //
+        + "check tRun2 {",                                                                      //
+      "  }",                                                                                    //
+      "[unitTest, check].each{",                                                                //
+      "    it.doLast {",                                                                        //
+      "        tomcatStop.execute()",                                                           //
+      "    }",                                                                                  //
+      "    it.doLast {",                                                                        //
+      "        if (new File(srcCopy).exists()) {",                                              //
+      "            // replace instrumented classes with backup copy again",                     //
+      "            ant {",                                                                      //
+      "                delete(file: srcOriginal)",                                              //
+      "                move(file: srcCopy, tofile: srcOriginal)",                               //
+      "            }",                                                                          //
+      "            // end cobertura cleanup",                                                   //
+      "",                                                                                       //
+      "            // create cobertura reports",                                                //
+      "            ant.'cobertura-report'(destdir:\"${project.buildDir}/reports/cobertura\",",  //
+      "                    format:'html', srcdir:\"src/main/java\", datafile:cobSerFile)",      //
+      "            ant.'cobertura-report'(destdir:\"${project.buildDir}/reports/cobertura\",",  //
+      "                    format:'xml', srcdir:\"src/main/java\", datafile:cobSerFile)",       //
+      "        }",                                                                              //
+      "    }",                                                                                  //
+      "}"                                                                                       //
+    };
+    List<Line> list         = getLinesFromArray(lines);
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
+
+    parser.findTasksInLines(list);
+    parser.findPostDeclarationTaskModifications(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("unitTest"));
+
+    Task       task      = tasksMap.get("check");
+    List<Task> dependsOn = task.getDependsOn();
+
+    assertEquals(dependsOn.size(), 1);
+
+    Task task1 = dependsOn.get(0);
+
+    assertEquals(task1.getName(), "tomcatStop");
+  }
+
+  @Test
+  public void testFindForEachTasksUndeclaredTasks()
+  {
+    String[] lines =
+    {
+      "[unitTest, check].each{",                                                                //
+      "    it.doLast {",                                                                        //
+      "        tomcatStop.execute()",                                                           //
+      "    }",                                                                                  //
+      "    it.doLast {",                                                                        //
+      "        if (new File(srcCopy).exists()) {",                                              //
+      "            // replace instrumented classes with backup copy again",                     //
+      "            ant {",                                                                      //
+      "                delete(file: srcOriginal)",                                              //
+      "                move(file: srcCopy, tofile: srcOriginal)",                               //
+      "            }",                                                                          //
+      "            // end cobertura cleanup",                                                   //
+      "",                                                                                       //
+      "            // create cobertura reports",                                                //
+      "            ant.'cobertura-report'(destdir:\"${project.buildDir}/reports/cobertura\",",  //
+      "                    format:'html', srcdir:\"src/main/java\", datafile:cobSerFile)",      //
+      "            ant.'cobertura-report'(destdir:\"${project.buildDir}/reports/cobertura\",",  //
+      "                    format:'xml', srcdir:\"src/main/java\", datafile:cobSerFile)",       //
+      "        }",                                                                              //
+      "    }",                                                                                  //
+      "}"                                                                                       //
+    };
+    List<Line> list         = getLinesFromArray(lines);
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
+
+    parser.findTasksInLines(list);
+    parser.findPostDeclarationTaskModifications(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("unitTest"));
+
+    Task       task      = tasksMap.get("check");
+    List<Task> dependsOn = task.getDependsOn();
+
+    assertEquals(dependsOn.size(), 1);
+
+    Task task1 = dependsOn.get(0);
+
+    assertEquals(task1.getName(), "tomcatStop");
+  }
   // test imported scripts recursively
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification

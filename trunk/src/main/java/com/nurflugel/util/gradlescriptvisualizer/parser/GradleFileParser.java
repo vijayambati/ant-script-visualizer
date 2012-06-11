@@ -4,6 +4,7 @@ import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
 import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,6 +25,22 @@ public class GradleFileParser
 {
   private Map<String, Task> taskMap       = new HashMap<String, Task>();
   private Map<File, Long>   fileChecksums;
+
+  public static void addToTaskMap(Map<String, Task> taskMap, Task task)
+  {
+    if (!isEmpty(task.getName()))
+    {
+      taskMap.put(task.getName(), task);
+    }
+  }
+
+  public static void addToTaskMap(Map<String, Task> taskMap, String name, Task task)
+  {
+    if (!isEmpty(name))
+    {
+      taskMap.put(name, task);
+    }
+  }
 
   public GradleFileParser(Map<File, Long> fileChecksums)
   {
@@ -78,6 +95,7 @@ public class GradleFileParser
   {
     findTasksInLines(lines);
     findImports(lines, file);
+    findPostDeclarationTaskModifications(lines);
   }
 
   void findTasksInLines(List<Line> lines)
@@ -101,21 +119,8 @@ public class GradleFileParser
       if (trimmedLine.contains(".execute"))
       {
         findOrCreateImplicitTasksByExecute(taskMap, trimmedLine);
-
-        // todo  now find the task which this is referred inside of - doAfter, doBefore, etc -
-        Task containingTask = findContainingTask(lines, line);
       }
     }
-  }
-
-  /**
-   * Given the line in the collection of lines, scan backwards until you find something which matches...
-   *
-   * <p>todo Better yet, when a task is explicitly declared, do this sort of thing there...</p>
-   */
-  private Task findContainingTask(List<Line> lines, Line line)
-  {
-    return null;
   }
 
   void findImports(List<Line> lines, File file) throws IOException
@@ -175,11 +180,6 @@ public class GradleFileParser
     parseFile(file);
   }
 
-  public void purgeAll()
-  {
-    taskMap.clear();
-  }
-
   public void findPostDeclarationTaskModifications(List<Line> list)
   {
     for (Line line : list)
@@ -203,10 +203,24 @@ public class GradleFileParser
                 task.findTaskDependsOn(taskMap, lineInScope, "dependsOn");
               }
             }
+
+            if (lineInScope.contains("execute("))
+            {
+              for (Task task : tasks)
+              {
+                task.analyzeScopeLinesForExecuteDependencies(taskMap, linesInScope);
+              }
+            }
           }
           // todo work with iteration variable other than it
         }
       }
     }
+  }
+
+  /** Keep results from one file corrupting another's output. */
+  public void purgeAll()
+  {
+    taskMap.clear();
   }
 }

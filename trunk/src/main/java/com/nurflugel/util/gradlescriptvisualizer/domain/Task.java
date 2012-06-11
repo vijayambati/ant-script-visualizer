@@ -1,25 +1,28 @@
 package com.nurflugel.util.gradlescriptvisualizer.domain;
 
+import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser;
 import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.GRADLE;
+import static com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser.addToTaskMap;
 import static org.apache.commons.lang.StringUtils.*;
-import static org.apache.commons.lang.StringUtils.split;
 
 public class Task
 {
   private static final String DEPENDS_ON                 = "dependsOn:";
   private static final String EXECUTE                    = ".execute";
+  private static boolean      showFullyQualifiedTaskType = false;
   private String              name;
   private String              type;
   private List<Task>          dependsOnTasks             = new ArrayList<Task>();
   private TaskUsage           usage                      = GRADLE;
   private String[]            scopeLines;
   private boolean             showType                   = true;
-  private static boolean      showFullyQualifiedTaskType = false;
 
   public static Task findOrCreateTaskByLine(Map<String, Task> taskMap, Line line, List<Line> lines)
   {
@@ -34,6 +37,7 @@ public class Task
     {
       result = new Task(taskMap, line);
       taskMap.put(name, result);
+      addToTaskMap(taskMap, name, result);
     }
 
     // find any dependencies in the task
@@ -55,6 +59,16 @@ public class Task
     return taskName;
   }
 
+  private static String getTextBeforeIfExists(String taskType, String matchingText)
+  {
+    if (taskType.contains(matchingText))
+    {
+      taskType = substringBefore(taskType, matchingText);
+    }
+
+    return taskType;
+  }
+
   // find the depends on from something like task signJars(dependsOn: 'installApp') << {
   private void findTaskDependsOn(Map<String, Task> taskMap, Line line)
   {
@@ -64,53 +78,7 @@ public class Task
   /** Go through the scope lines, look for any .executes - grab that and mark that task as a dependency. */
   private void analyzeScopeLinesForExecuteDependencies(Map<String, Task> taskMap)
   {
-    String[] scopeLines1 = scopeLines;
-
-    for (String line : scopeLines1)
-    {
-      String executeDependency = findExecuteDependency(line);
-
-      if (executeDependency != null)
-      {
-        Task newTask = findOrCreateTaskByName(taskMap, executeDependency);
-
-        newTask.setUsage(TaskUsage.EXECUTE);
-        dependsOnTasks.add(newTask);
-      }
-    }
-  }
-
-  public static String findExecuteDependency(String text)
-  {
-    if (contains(text, EXECUTE))
-    {
-      String beforeText         = substringBefore(text, EXECUTE);
-      String afterLastSpaceText = substringAfterLast(beforeText, " ");
-      String trimmedText        = afterLastSpaceText.trim();
-
-      return trimmedText;
-    }
-    else
-    {
-      return null;
-    }
-  }
-
-  public static Task findOrCreateTaskByName(Map<String, Task> taskMap, String name)
-  {
-    Task result;
-
-    if (taskMap.containsKey(name))
-    {
-      result = taskMap.get(name);
-    }
-    else
-    {
-      result = new Task(name);
-      taskMap.put(name, result);
-    }
-
-    return result;
+    analyzeScopeLinesForExecuteDependencies(taskMap, scopeLines);
   }
 
   // check.dependsOn integrationTest
@@ -218,6 +186,30 @@ public class Task
     return null;
   }
 
+  public static List<Task> findOrCreateTaskInForEach(Line line, Map<String, Task> taskMap)
+  {
+    List<Task> foundTasks = new ArrayList<Task>();
+    String     text       = line.getText();
+
+    text = substringBefore(text, ".each");
+    text = substringBefore(text, "]");
+    text = substringAfter(text, "[");
+
+    if (text != null)
+    {
+      String[] tokens = text.split(",");
+
+      for (String token : tokens)
+      {
+        Task task = findOrCreateTaskByName(taskMap, token.trim());
+
+        foundTasks.add(task);
+      }
+    }
+
+    return foundTasks;
+  }
+
   public Task(String name)
   {
     this.name = name;
@@ -257,17 +249,56 @@ public class Task
     }
   }
 
-  private static String getTextBeforeIfExists(String taskType, String matchingText)
+  // -------------------------- OTHER METHODS --------------------------
+  public void analyzeScopeLinesForExecuteDependencies(Map<String, Task> taskMap, String... linesInScope)
   {
-    if (taskType.contains(matchingText))
+    for (String line : linesInScope)
     {
-      taskType = substringBefore(taskType, matchingText);
-    }
+      String executeDependency = findExecuteDependency(line);
 
-    return taskType;
+      if (executeDependency != null)
+      {
+        Task newTask = findOrCreateTaskByName(taskMap, executeDependency);
+
+        newTask.setUsage(TaskUsage.EXECUTE);
+        dependsOnTasks.add(newTask);
+      }
+    }
   }
 
-  // -------------------------- OTHER METHODS --------------------------
+  public static String findExecuteDependency(String text)
+  {
+    if (contains(text, EXECUTE))
+    {
+      String beforeText         = substringBefore(text, EXECUTE);
+      String afterLastSpaceText = substringAfterLast(beforeText, " ");
+      String trimmedText        = afterLastSpaceText.trim();
+
+      return trimmedText;
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public static Task findOrCreateTaskByName(Map<String, Task> taskMap, String taskName)
+  {
+    Task result;
+
+    if (taskMap.containsKey(taskName))
+    {
+      result = taskMap.get(taskName);
+    }
+    else
+    {
+      result = new Task(taskName);
+      addToTaskMap(taskMap, taskName, result);
+    }
+
+    return result;
+  }
+
   public List<Task> getDependsOn()
   {
     return dependsOnTasks;
@@ -371,29 +402,5 @@ public class Task
   public void setUsage(TaskUsage usage)
   {
     this.usage = usage;
-  }
-
-  public static List<Task> findOrCreateTaskInForEach(Line line, Map<String, Task> taskMap)
-  {
-    List<Task> foundTasks = new ArrayList<Task>();
-    String     text       = line.getText();
-
-    text = substringBefore(text, ".each");
-    text = substringBefore(text, "]");
-    text = substringAfter(text, "[");
-
-    if (text != null)
-    {
-      String[] tokens = text.split(",");
-
-      for (String token : tokens)
-      {
-        Task task = findOrCreateTaskByName(taskMap, token.trim());
-
-        foundTasks.add(task);
-      }
-    }
-
-    return foundTasks;
   }
 }
