@@ -186,7 +186,7 @@ public class GradleFileParser
     {
       String text = line.getText();
 
-      if (text.contains(".forEach"))
+      if (text.contains(".each"))
       {
         List<Task> tasks = findOrCreateTaskInForEach(line, taskMap);
 

@@ -288,7 +288,7 @@ public class TaskTest
   @Test
   public void testFindForEachTasks()
   {
-    Line       line  = new Line("[tRun1, tRun2].forEach {");
+    Line       line  = new Line("[tRun1, tRun2].each {");
     List<Task> tasks = Task.findOrCreateTaskInForEach(line, new HashMap<String, Task>());
 
     assertEquals(tasks.size(), 2);
