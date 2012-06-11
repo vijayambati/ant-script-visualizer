@@ -266,7 +266,7 @@ public class GradleFileParserTest
   // idea for doing this - after task declaration, keep parsing lines keeping track of { and } - anything within
   // the matching {} pair can be claimed as a dependency.  So, take all those lines and put them into the task for
   // future reference as well.
-  @Test(groups = "failed")
+  @Test
   public void testExecuteInDoFirst()
   {
     String[] lines =
@@ -295,13 +295,13 @@ public class GradleFileParserTest
 
     Task task = tasksMap.get("tomcatRunMock");
 
-    assertEquals(task.getDependsOn().size(), 2);
+    assertEquals(task.getDependsOn().size(), 3);
   }
 
   // after task declaration, keep parsing lines keeping track of { and } - anything within
   // the matching {} pair can be claimed as a dependency.  So, take all those lines and put them into the task for
   // future reference as well.
-  @Test(groups = "failed")
+  @Test
   public void testFindAllTaskLines()
   {
     String[] lines =
@@ -325,6 +325,7 @@ public class GradleFileParserTest
     Map<String, Task> tasksMap = parser.getTasksMap();
 
     assertTrue(tasksMap.containsKey("tomcatRunMock"));
+
     // assertTrue(tasksMap.containsKey("tomcatRunner"));
     Task     task      = tasksMap.get("tomcatRunMock");
     String[] taskLines = task.getScopeLines();

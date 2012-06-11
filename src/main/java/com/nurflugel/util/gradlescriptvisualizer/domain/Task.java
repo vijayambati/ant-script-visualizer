@@ -90,7 +90,7 @@ public class Task
       levelOfNesting -= countMatches(text, "}");  // I'm assuming braces will be nicely formatted and not all on one line, bad assumption as that's
                                                   // legal
 
-      while ((levelOfNesting > 0) && (index++ < lines.size()))
+      while ((levelOfNesting > 0) && (++index < lines.size()))
       {
         text = lines.get(index).getText();
         scopeLines.add(text);
@@ -282,9 +282,9 @@ public class Task
       taskType = getTextBeforeIfExists(taskType, ",");
       taskType = getTextBeforeIfExists(taskType, " ");
 
-      if (!showFullyQualifiedTaskType)
+      if (!showFullyQualifiedTaskType && taskType.contains("."))
       {
-        taskType = StringUtils.substringAfterLast(taskType, ".");
+        taskType = substringAfterLast(taskType, ".");
       }
 
       taskType = trim(taskType);
