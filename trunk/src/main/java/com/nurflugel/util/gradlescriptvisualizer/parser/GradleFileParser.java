@@ -2,6 +2,7 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
+import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
 import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,9 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByExecute;
-import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateImplicitTasksByLine;
-import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.findOrCreateTaskByLine;
+import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.*;
+import static com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil.findLinesInScope;
 import static org.apache.commons.io.FileUtils.checksumCRC32;
 import static org.apache.commons.io.FileUtils.readLines;
 import static org.apache.commons.io.FilenameUtils.getFullPath;
@@ -178,5 +178,35 @@ public class GradleFileParser
   public void purgeAll()
   {
     taskMap.clear();
+  }
+
+  public void findPostDeclarationTaskModifications(List<Line> list)
+  {
+    for (Line line : list)
+    {
+      String text = line.getText();
+
+      if (text.contains(".forEach"))
+      {
+        List<Task> tasks = findOrCreateTaskInForEach(line, taskMap);
+
+        if (!tasks.isEmpty())
+        {
+          String[] linesInScope = findLinesInScope(line, list);
+
+          for (String lineInScope : linesInScope)
+          {
+            if (lineInScope.contains("dependsOn"))
+            {
+              for (Task task : tasks)
+              {
+                task.findTaskDependsOn(taskMap, lineInScope, "dependsOn");
+              }
+            }
+          }
+          // todo work with iteration variable other than it
+        }
+      }
+    }
   }
 }

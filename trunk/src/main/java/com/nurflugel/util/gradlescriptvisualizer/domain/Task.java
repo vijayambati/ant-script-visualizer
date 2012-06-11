@@ -1,10 +1,10 @@
 package com.nurflugel.util.gradlescriptvisualizer.domain;
 
+import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.*;
-import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.EXECUTE;
 import static com.nurflugel.util.gradlescriptvisualizer.domain.TaskUsage.GRADLE;
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.StringUtils.split;
@@ -38,7 +38,7 @@ public class Task
 
     // find any dependencies in the task
     result.findTaskDependsOn(taskMap, line);
-    result.setScopeLines(findTaskLinesInScope(line, lines));
+    result.setScopeLines(ParseUtil.findLinesInScope(line, lines));
     result.analyzeScopeLinesForExecuteDependencies(taskMap);
 
     return result;
@@ -58,48 +58,7 @@ public class Task
   // find the depends on from something like task signJars(dependsOn: 'installApp') << {
   private void findTaskDependsOn(Map<String, Task> taskMap, Line line)
   {
-    findTaskDependsOn(taskMap, line, DEPENDS_ON);
-  }
-
-  /**
-   * Go through the lines from the given line where the task is declared and get all the lines within the task scope for analysis.
-   *
-   * @param  line   the line where the task is declared
-   * @param  lines  the lines of the script
-   */
-  private static String[] findTaskLinesInScope(Line line, List<Line> lines)
-  {
-    List<String> scopeLines = new ArrayList<String>();
-    int          index      = lines.indexOf(line);
-
-    // in case the opening { is on the next (or later) lines, scan ahead until we find it
-    while (!line.getText().contains("{") && (index < lines.size()))
-    {
-      index++;
-    }
-
-    String text = line.getText();
-
-    if (text.contains("{"))
-    {
-      scopeLines.add(text);
-
-      int levelOfNesting = 0;
-
-      levelOfNesting += countMatches(text, "{");
-      levelOfNesting -= countMatches(text, "}");  // I'm assuming braces will be nicely formatted and not all on one line, bad assumption as that's
-                                                  // legal
-
-      while ((levelOfNesting > 0) && (++index < lines.size()))
-      {
-        text = lines.get(index).getText();
-        scopeLines.add(text);
-        levelOfNesting += countMatches(text, "{");
-        levelOfNesting -= countMatches(text, "}");
-      }
-    }
-
-    return scopeLines.toArray(new String[scopeLines.size()]);
+    findTaskDependsOn(taskMap, line.getText(), DEPENDS_ON);
   }
 
   /** Go through the scope lines, look for any .executes - grab that and mark that task as a dependency. */
@@ -190,17 +149,18 @@ public class Task
     String name = taskName.trim();
     Task   task = findOrCreateTaskByName(taskMap, name);
 
-    task.findTaskDependsOn(taskMap, new Line(trimmedLine), dependsText);
+    task.findTaskDependsOn(taskMap, trimmedLine, dependsText);
 
     return task;
   }
 
   // todo do I still need Line in this???
-  private void findTaskDependsOn(Map<String, Task> taskMap, Line line, String dependsText)
+  public void findTaskDependsOn(Map<String, Task> taskMap, String line, String dependsText)
   {
-    String text = substringAfter(line.getText(), dependsText);
+    String text = substringAfter(line, dependsText);
 
     text = substringBefore(text, ")");
+    text = replace(text, "(", "");
 
     // test for multiple dependsOn
     if (text.contains("["))
@@ -411,5 +371,29 @@ public class Task
   public void setUsage(TaskUsage usage)
   {
     this.usage = usage;
+  }
+
+  public static List<Task> findOrCreateTaskInForEach(Line line, Map<String, Task> taskMap)
+  {
+    List<Task> foundTasks = new ArrayList<Task>();
+    String     text       = line.getText();
+
+    text = substringBefore(text, ".forEach");
+    text = substringBefore(text, "]");
+    text = substringAfter(text, "[");
+
+    if (text != null)
+    {
+      String[] tokens = text.split(",");
+
+      for (String token : tokens)
+      {
+        Task task = findOrCreateTaskByName(taskMap, token.trim());
+
+        foundTasks.add(task);
+      }
+    }
+
+    return foundTasks;
   }
 }

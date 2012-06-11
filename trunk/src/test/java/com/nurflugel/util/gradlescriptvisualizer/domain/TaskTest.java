@@ -284,6 +284,17 @@ public class TaskTest
 
     assertNull(name);
   }
+
+  @Test
+  public void testFindForEachTasks()
+  {
+    Line       line  = new Line("[tRun1, tRun2].forEach {");
+    List<Task> tasks = Task.findOrCreateTaskInForEach(line, new HashMap<String, Task>());
+
+    assertEquals(tasks.size(), 2);
+    assertTrue(tasks.contains(new Task("tRun1")));  // since .equals only checks name, this works
+    assertTrue(tasks.contains(new Task("tRun2")));
+  }
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification
   // test find dependsOn in iterative task modification
