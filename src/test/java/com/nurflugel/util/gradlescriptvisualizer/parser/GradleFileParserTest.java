@@ -344,7 +344,7 @@ public class GradleFileParserTest
         + "task tRun2 {",           //
       "  }",                        //
       "",                           //
-      "[tRun1, tRun2].forEach {",   //
+      "[tRun1, tRun2].each {",      //
       "   it.dependsOn('dibble')",  //
       "}"                           //
     };

@@ -378,7 +378,7 @@ public class Task
     List<Task> foundTasks = new ArrayList<Task>();
     String     text       = line.getText();
 
-    text = substringBefore(text, ".forEach");
+    text = substringBefore(text, ".each");
     text = substringBefore(text, "]");
     text = substringAfter(text, "[");
 
