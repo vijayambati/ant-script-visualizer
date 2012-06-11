@@ -187,6 +187,7 @@ public class GradleScriptMainFrame
   {
     for (File file : filesToRender)
     {
+      parser.purgeAll();
       parser.parseFile(file);
       System.out.println("selectedFile = " + file);
 
