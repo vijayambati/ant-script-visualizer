@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import static com.nurflugel.util.test.TestResources.getFilePath;
+import static com.nurflugel.util.test.TestResources.getLinesFromArray;
 import static org.testng.Assert.*;
 import static org.testng.Assert.assertEquals;
 
@@ -187,7 +188,7 @@ public class GradleFileParserTest
   public void testImplicitDeclarationTask() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
+    List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
 
@@ -202,7 +203,7 @@ public class GradleFileParserTest
   public void testImplicitDeclarationTask2() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
+    List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
 
@@ -216,7 +217,7 @@ public class GradleFileParserTest
   public void testImplicitDeclarationDependsOnTask() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
+    List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
     parser.findTasksInLines(list);
 
@@ -231,7 +232,7 @@ public class GradleFileParserTest
   public void testListOfImplicitTaskDeclaration() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
+    List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
     parser.findTasksInLines(list);
 
@@ -247,7 +248,7 @@ public class GradleFileParserTest
   public void testListOfImplicitTaskDeclarationDepends() throws IOException
   {
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
-    List<Line>       list   = TestResources.getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
+    List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
     parser.findTasksInLines(list);
 
@@ -283,7 +284,7 @@ public class GradleFileParserTest
                                                                                                            //
                                                                                                            // //
     };
-    List<Line> list         = TestResources.getLinesFromArray(lines);
+    List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.findTasksInLines(list);
@@ -317,7 +318,7 @@ public class GradleFileParserTest
       "    }",                                                                                             //
       "}"                                                                                                  //
     };
-    List<Line> list         = TestResources.getLinesFromArray(lines);
+    List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
     parser.findTasksInLines(list);
@@ -332,6 +333,42 @@ public class GradleFileParserTest
 
     assertEquals(taskLines, lines, "Should have all the lines for the task in the task");
   }
+
+  @Test
+  public void testPostDeclarationExecutes()
+  {
+    String[] lines =
+    {
+      "task tRun1 {",               //
+      "  }"                         //
+        + "task tRun2 {",           //
+      "  }",                        //
+      "",                           //
+      "[tRun1, tRun2].forEach {",   //
+      "   it.dependsOn('dibble')",  //
+      "}"                           //
+    };
+    List<Line> list         = getLinesFromArray(lines);
+    GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
+
+    parser.findTasksInLines(list);
+    parser.findPostDeclarationTaskModifications(list);
+
+    Map<String, Task> tasksMap = parser.getTasksMap();
+
+    assertTrue(tasksMap.containsKey("tRun1"));
+
+    // assertTrue(tasksMap.containsKey("tomcatRunner"));
+    Task       task      = tasksMap.get("tRun1");
+    List<Task> dependsOn = task.getDependsOn();
+
+    assertEquals(dependsOn.size(), 1);
+
+    Task task1 = dependsOn.get(0);
+
+    assertEquals(task1.getName(), "dibble");
+  }
+
   // test imported scripts recursively
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification
