@@ -6,7 +6,7 @@ import static com.nurflugel.util.OutputFormat.PNG;
 import static java.util.prefs.Preferences.userNodeForPackage;
 
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 6/6/12 Time: 18:23 To change this template use File | Settings | File Templates. */
-public class ScriptPreferences
+public abstract class ScriptPreferences
 {
   private static final String   CONCENTRATE_LINES          = "concentrateLines";
   private static final String   DELETE_DOT_FILES_ON_EXIT   = "deleteDotFilesOnExit";
@@ -32,7 +32,7 @@ public class ScriptPreferences
   private boolean               shouldShowLegend           = true;
   protected boolean             generateJustDotFiles;
 
-  public ScriptPreferences(Class theClass)
+  protected ScriptPreferences(Class theClass)
   {
     preferencesStore           = userNodeForPackage(theClass);
     dotExecutablePath          = preferencesStore.get(DOT_EXECUTABLE, "");

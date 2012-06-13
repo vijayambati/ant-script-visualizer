@@ -36,12 +36,14 @@ public class GradleScriptMainFrame
   private JPanel                  mainPanel;
   private JButton                 quitButton;
   private JCheckBox               deleteDOTFilesOnCheckBox;
+  private JCheckBox               groupByBuildFileCheckBox;
   private JFrame                  frame;
   private GradleScriptPreferences preferences;
   private String                  dotExecutablePath;
   private Os                      os;
   private final Map<File, Long>   fileChecksums = new HashMap<File, Long>();
   private final Set<File>         filesToRender = new HashSet<File>();
+  private final GradleFileParser parser;
 
   public GradleScriptMainFrame()
   {
@@ -60,10 +62,27 @@ public class GradleScriptMainFrame
     }
 
     preferences.setDotExecutablePath(dotExecutablePath);
+    parser = new GradleFileParser(fileChecksums);
   }
 
   private void addActionListeners()
   {
+    groupByBuildFileCheckBox.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+          preferences.setShouldGroupByBuildFiles(groupByBuildFileCheckBox.isSelected());
+          try
+          {
+            handleFileGeneration(parser);
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();//todo do something...
+          }
+        }
+      });
     deleteDOTFilesOnCheckBox.addActionListener(new ActionListener()
       {
         @Override
@@ -129,6 +148,7 @@ public class GradleScriptMainFrame
     deleteDOTFilesOnCheckBox.setSelected(preferences.shouldDeleteDotFilesOnExit());
     generateJustDOTFilesRadioButton.setSelected(preferences.generateJustDotFiles());
     watchFileForChangesCheckBox.setSelected(preferences.watchFilesForChanges());
+    groupByBuildFileCheckBox.setSelected(preferences.shouldGroupByBuildfiles());
 
     // frame.setTitle("Gradle Script Visualizer v" + VERSION);
     frame.setTitle("Gradle Script Visualizer ");
@@ -149,7 +169,7 @@ public class GradleScriptMainFrame
     chooser.setMultiSelectionEnabled(true);
 
     int              returnVal = chooser.showOpenDialog(frame);
-    GradleFileParser parser    = new GradleFileParser(fileChecksums);
+    parser.purgeAll();
 
     if (returnVal == APPROVE_OPTION)
     {
@@ -193,7 +213,7 @@ public class GradleScriptMainFrame
 
       List<Task>         tasks            = parser.getTasks();
       DotFileGenerator   dotFileGenerator = new DotFileGenerator();
-      List<String>       lines            = dotFileGenerator.createOutput(tasks);
+      List<String>       lines            = dotFileGenerator.createOutput(tasks,preferences);
       File               dotFile          = dotFileGenerator.writeOutput(lines, file.getAbsolutePath());
       GraphicFileCreator fileCreator      = new GraphicFileCreator();
 

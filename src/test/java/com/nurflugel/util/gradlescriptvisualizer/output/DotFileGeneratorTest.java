@@ -1,7 +1,9 @@
 package com.nurflugel.util.gradlescriptvisualizer.output;
 
+import com.nurflugel.util.ScriptPreferences;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
 import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser;
+import com.nurflugel.util.gradlescriptvisualizer.ui.GradleScriptPreferences;
 import com.nurflugel.util.test.TestResources;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -24,7 +26,7 @@ public class DotFileGeneratorTest
 
     List<Task>       tasks            = parser.getTasks();
     DotFileGenerator dotFileGenerator = new DotFileGenerator();
-    List<String>     lines            = dotFileGenerator.createOutput(tasks);
+    List<String>     lines            = dotFileGenerator.createOutput(tasks, new GradleScriptPreferences());
 
     dotFileGenerator.writeOutput(lines, gradleFileName);
 
