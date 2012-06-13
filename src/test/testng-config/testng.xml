@@ -57,6 +57,7 @@
     </groups>
       <packages>
             <package name="com.nurflugel.util.gradlescriptvisualizer.*" />
+            <package name="dibble.*" />
       </packages>
   </test>
 

@@ -2,9 +2,8 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
-import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -91,14 +90,25 @@ public class GradleFileParser
     return lines;
   }
 
-  private void processLines(File file, List<Line> lines) throws IOException
+  private void processLines(File sourceFile, List<Line> lines) throws IOException
   {
-    findTasksInLines(lines);
-    findImports(lines, file);
+    String baseName = FilenameUtils.getBaseName(sourceFile.getAbsolutePath());
+
+    findTasksInLines(lines, baseName);
+    findImportsInFile(lines, sourceFile);
     findPostDeclarationTaskModifications(lines);
   }
 
-  void findTasksInLines(List<Line> lines)
+  private void processLines(URL sourceFile, List<Line> lines) throws IOException
+  {
+    String fileName = sourceFile.getFile();
+
+    findTasksInLines(lines, fileName);
+    findImportsFromUrl(lines);
+    findPostDeclarationTaskModifications(lines);
+  }
+
+  void findTasksInLines(List<Line> lines, String sourceFile)
   {
     for (Line line : lines)
     {
@@ -106,7 +116,7 @@ public class GradleFileParser
 
       if (trimmedLine.startsWith("task "))
       {
-        Task task = findOrCreateTaskByLine(taskMap, line, lines);
+        Task task = findOrCreateTaskByLine(taskMap, line, lines, sourceFile);
 
         taskMap.put(task.getName(), task);
       }
@@ -116,14 +126,14 @@ public class GradleFileParser
         findOrCreateImplicitTasksByLine(taskMap, trimmedLine);
       }
 
-      if (trimmedLine.contains(".execute"))
+      if (trimmedLine.contains(".execute()"))
       {
         findOrCreateImplicitTasksByExecute(taskMap, trimmedLine);
       }
     }
   }
 
-  void findImports(List<Line> lines, File file) throws IOException
+  void findImportsInFile(List<Line> lines, File file) throws IOException
   {
     for (Line line : lines)
     {
@@ -137,7 +147,15 @@ public class GradleFileParser
 
         if (text.startsWith("http:"))
         {
-          findUrlImport(text);
+
+          try
+          {
+            findUrlImport(text);
+          }
+          catch (IOException e)
+          {
+//            e.printStackTrace();//todo something where we tell the user we can't go through the firewall
+          }
         }
         else
         {
@@ -157,6 +175,30 @@ public class GradleFileParser
     }
   }
 
+  void findImportsFromUrl(List<Line> lines) throws IOException
+  {
+    for (Line line : lines)
+    {
+      String text = line.getText().trim();
+
+      if (text.startsWith("apply from: "))
+      {
+        text = substringAfter(text, "apply from: ");
+        text = remove(text, '\'');
+        text = remove(text, '\"');
+
+        if (text.startsWith("http:"))
+        {
+          findUrlImport(text);
+        }
+        else
+        {
+          // todo we can't parse a file import in a remote URL - thow some sort of exception
+        }
+      }
+    }
+  }
+
   private void findUrlImport(String location) throws IOException
   {
     URL        url       = new URL(location);
@@ -169,14 +211,14 @@ public class GradleFileParser
       lines.add(new Line(token));
     }
 
-    processLines(null, lines);  // todo deal with null file location as it's a URL somehow...
+    processLines(url, lines);  
   }
 
   public void parseFile(String fileName) throws IOException
   {
     File file = new File(fileName);
 
-    fileChecksums.put(file, checksumCRC32(file));  // todo figure out what the main files are and only rerender them
+    fileChecksums.put(file, checksumCRC32(file));
     parseFile(file);
   }
 

@@ -1,5 +1,5 @@
-apply from: 'http://ant-master-build-scripts.googlecode.com/svn/trunk/build/master-gradle/master-build.gradle'
-//apply from: 'master-gradle/master-build.gradle'
+//apply from: 'http://ant-master-build-scripts.googlecode.com/svn/trunk/build/master-gradle/master-build.gradle'
+apply from: 'master-gradle/master-build.gradle'
 apply from: 'dependencies.gradle'
 
 //version = "0.1-SNAPSHOT"  //used to set Ivy version if we're going to publish

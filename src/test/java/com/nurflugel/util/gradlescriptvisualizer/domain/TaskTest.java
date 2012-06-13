@@ -209,7 +209,7 @@ public class TaskTest
     List<Line> list            = getLinesFromArray(taskLines);
     Line       declarationLine = new Line("task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {");
     Map<String, Task> taskMap  = new HashMap<String, Task>();
-    Task       task            = findOrCreateTaskByLine(taskMap, declarationLine, list);
+    Task       task            = findOrCreateTaskByLine(taskMap, declarationLine, list, null);
 
     assertTrue(taskMap.containsKey("tomcatRun"));
     assertTrue(taskMap.containsKey("tomcatStop"));
@@ -252,7 +252,7 @@ public class TaskTest
     // build up a list of what we want surrounded by junk - we should get just what we want back
     List<Line> list            = getLinesFromArray(lines, taskLines, lines);
     Line       declarationLine = new Line("task tomcatRunMock(dependsOn: war, description: 'Runs Webapp using Mock resources (DB, LDAP)') {");
-    Task       task            = findOrCreateTaskByLine(new HashMap<String, Task>(), declarationLine, list);
+    Task       task            = findOrCreateTaskByLine(new HashMap<String, Task>(), declarationLine, list, null);
     String[]   scopeLines      = task.getScopeLines();
 
     assertEquals(scopeLines, taskLines, "Should have all the lines for the task in the task");
