@@ -296,6 +296,15 @@ public class TaskTest
     assertTrue(tasks.contains(new Task("tRun2")));
   }
 
+  @Test
+  public void testSimpleBuildFile()
+  {
+    Task task = new Task("taskName");
+
+    task.setBuildScript("dibble.gradle");
+    assertEquals(task.getBuildScript(), "dibble.gradle");
+  }
+
   // ==>test find task dependsOn if task exists elsewhere in build script
   // test find dependsOn in task modification
   // test find dependsOn in iterative task modification

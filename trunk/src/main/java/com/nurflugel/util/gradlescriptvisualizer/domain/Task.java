@@ -1,6 +1,5 @@
 package com.nurflugel.util.gradlescriptvisualizer.domain;
 
-import com.nurflugel.util.gradlescriptvisualizer.parser.GradleFileParser;
 import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -23,6 +22,7 @@ public class Task
   private TaskUsage           usage                      = GRADLE;
   private String[]            scopeLines;
   private boolean             showType                   = true;
+  private String              buildScript;
 
   public static Task findOrCreateTaskByLine(Map<String, Task> taskMap, Line line, List<Line> lines)
   {
@@ -402,5 +402,15 @@ public class Task
   public void setUsage(TaskUsage usage)
   {
     this.usage = usage;
+  }
+
+  public void setBuildScript(String buildScript)
+  {
+    this.buildScript = buildScript;
+  }
+
+  public String getBuildScript()
+  {
+    return buildScript;
   }
 }
