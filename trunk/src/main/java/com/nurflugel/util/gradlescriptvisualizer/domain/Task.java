@@ -1,9 +1,12 @@
 package com.nurflugel.util.gradlescriptvisualizer.domain;
 
 import com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +17,7 @@ import static org.apache.commons.lang.StringUtils.*;
 public class Task
 {
   private static final String DEPENDS_ON                 = "dependsOn:";
-  private static final String EXECUTE                    = ".execute";
+  private static final String EXECUTE                    = ".execute()";
   private static boolean      showFullyQualifiedTaskType = false;
   private String              name;
   private String              type;
@@ -24,7 +27,7 @@ public class Task
   private boolean             showType                   = true;
   private String              buildScript;
 
-  public static Task findOrCreateTaskByLine(Map<String, Task> taskMap, Line line, List<Line> lines)
+  public static Task findOrCreateTaskByLine(Map<String, Task> taskMap, Line line, List<Line> lines, String sourceFile)
   {
     String name   = findTaskName(line.getText());
     Task   result;
@@ -39,7 +42,8 @@ public class Task
       taskMap.put(name, result);
       addToTaskMap(taskMap, name, result);
     }
-
+result.setBuildScript(sourceFile);
+    
     // find any dependencies in the task
     result.findTaskDependsOn(taskMap, line);
     result.setScopeLines(ParseUtil.findLinesInScope(line, lines));
@@ -169,14 +173,14 @@ public class Task
     }
   }
 
-  public static Task findOrCreateImplicitTasksByExecute(Map<String, Task> taskmap, String line)
+  public static Task findOrCreateImplicitTasksByExecute(Map<String, Task> taskMap, String line)
   {
     String trim = line.trim();
 
     if (trim.contains(EXECUTE))
     {
       String taskName = substringBefore(trim, EXECUTE);
-      Task   task     = findOrCreateTaskByName(taskmap, taskName);
+      Task   task     = findOrCreateTaskByName(taskMap, taskName);
 
       task.setUsage(TaskUsage.EXECUTE);
 

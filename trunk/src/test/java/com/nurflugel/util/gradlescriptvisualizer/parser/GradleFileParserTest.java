@@ -2,7 +2,6 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
-import com.nurflugel.util.test.TestResources;
 import org.apache.commons.lang.ArrayUtils;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -190,7 +189,7 @@ public class GradleFileParserTest
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
 
@@ -205,7 +204,7 @@ public class GradleFileParserTest
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
 
@@ -219,7 +218,7 @@ public class GradleFileParserTest
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "task dibble", "check.dependsOn integrationTest" });
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
     Task              task     = tasksMap.get("check");
@@ -234,7 +233,7 @@ public class GradleFileParserTest
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
 
@@ -250,7 +249,7 @@ public class GradleFileParserTest
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
     List<Line>       list   = getLinesFromArray(new String[] { "[funcTest, bddTest]*.dependsOn daemonModeTomcat" });
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
 
@@ -287,7 +286,7 @@ public class GradleFileParserTest
     List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
 
@@ -321,7 +320,7 @@ public class GradleFileParserTest
     List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
 
@@ -351,7 +350,7 @@ public class GradleFileParserTest
     List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
     parser.findPostDeclarationTaskModifications(list);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
@@ -402,7 +401,7 @@ public class GradleFileParserTest
     List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
     parser.findPostDeclarationTaskModifications(list);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
@@ -449,7 +448,7 @@ public class GradleFileParserTest
     List<Line> list         = getLinesFromArray(lines);
     GradleFileParser parser = new GradleFileParser(new HashMap<File, Long>());
 
-    parser.findTasksInLines(list);
+    parser.findTasksInLines(list, null);
     parser.findPostDeclarationTaskModifications(list);
 
     Map<String, Task> tasksMap = parser.getTasksMap();
