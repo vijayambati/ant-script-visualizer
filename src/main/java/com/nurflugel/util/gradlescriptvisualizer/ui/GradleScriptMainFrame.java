@@ -1,8 +1,5 @@
 package com.nurflugel.util.gradlescriptvisualizer.ui;
 
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import com.nurflugel.util.GraphicFileCreator;
 import com.nurflugel.util.Os;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
@@ -15,9 +12,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.List;
 import static com.nurflugel.util.Os.findOs;
@@ -37,23 +35,31 @@ public class GradleScriptMainFrame
   private JButton                 quitButton;
   private JCheckBox               deleteDOTFilesOnCheckBox;
   private JCheckBox               groupByBuildFileCheckBox;
+  private JCheckBox               useHttpProxyCheckBox;
+  private JPanel                  proxySettingsPanel;
+  private JFormattedTextField     serverNameField;
+  private JCheckBox               useAuthenticationCheckBox;
+  private JPanel                  authenticationPanel;
+  private JTextField              portNumberField;
+  private JTextField              userNameField;
+  private JPasswordField          passwordField;
   private JFrame                  frame;
   private GradleScriptPreferences preferences;
   private String                  dotExecutablePath;
   private Os                      os;
   private final Map<File, Long>   fileChecksums = new HashMap<File, Long>();
   private final Set<File>         filesToRender = new HashSet<File>();
-  private final GradleFileParser parser;
+  private final GradleFileParser  parser;
 
   public GradleScriptMainFrame()
   {
-    // $$$setupUI$$$();
     preferences = new GradleScriptPreferences();
     os          = findOs();
     frame       = new JFrame();
     frame.setContentPane(mainPanel);
     initializeUi();
     addActionListeners();
+    initializeUiWithActions();
     dotExecutablePath = preferences.getDotExecutablePath();  // todo this is ugly, fix it somehow
 
     if (isBlank(dotExecutablePath))
@@ -62,24 +68,90 @@ public class GradleScriptMainFrame
     }
 
     preferences.setDotExecutablePath(dotExecutablePath);
-    parser = new GradleFileParser(fileChecksums);
+    parser = new GradleFileParser(fileChecksums, preferences);
+  }
+
+  /** Initialize parts of the UI which need actions to properly work. */
+  private void initializeUiWithActions()
+  {
+    useHttpProxyCheckBox.setSelected(preferences.shouldUseHttpProxy());
+    useHttpProxyCheckBox.doClick();
+    useAuthenticationCheckBox.setSelected(preferences.shouldUseProxyAuthentication());
+    useAuthenticationCheckBox.doClick();
   }
 
   private void addActionListeners()
   {
+    serverNameField.addFocusListener(new FocusAdapter()
+      {
+        @Override
+        public void focusLost(FocusEvent e)
+        {
+          preferences.setProxyServerName(serverNameField.getText());
+        }
+      });
+    userNameField.addFocusListener(new FocusAdapter()
+      {
+        @Override
+        public void focusLost(FocusEvent e)
+        {
+          preferences.setProxyUserName(userNameField.getText());
+        }
+      });
+    passwordField.addFocusListener(new FocusAdapter()
+      {
+        @Override
+        public void focusLost(FocusEvent e)
+        {
+          preferences.setProxyPassword(new String(passwordField.getPassword()));
+        }
+      });
+    portNumberField.addFocusListener(new FocusAdapter()
+      {
+        @Override
+        public void focusLost(FocusEvent e)
+        {
+          preferences.setProxyServerPort(Integer.parseInt(portNumberField.getText()));
+        }
+      });
+    useAuthenticationCheckBox.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          boolean selected = useAuthenticationCheckBox.isSelected();
+
+          authenticationPanel.setVisible(selected);
+          frame.pack();
+          preferences.setUseProxyAuthentication(selected);
+        }
+      });
+    useHttpProxyCheckBox.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          boolean selected = useHttpProxyCheckBox.isSelected();
+
+          proxySettingsPanel.setVisible(selected);
+          frame.pack();
+          preferences.setUseHttpProxy(selected);
+        }
+      });
     groupByBuildFileCheckBox.addActionListener(new ActionListener()
       {
         @Override
         public void actionPerformed(ActionEvent actionEvent)
         {
           preferences.setShouldGroupByBuildFiles(groupByBuildFileCheckBox.isSelected());
+
           try
           {
             handleFileGeneration(parser);
           }
           catch (IOException e)
           {
-            e.printStackTrace();//todo do something...
+            e.printStackTrace();  // todo do something...
           }
         }
       });
@@ -150,6 +222,17 @@ public class GradleScriptMainFrame
     watchFileForChangesCheckBox.setSelected(preferences.watchFilesForChanges());
     groupByBuildFileCheckBox.setSelected(preferences.shouldGroupByBuildfiles());
 
+    if (preferences.shouldUseHttpProxy())
+    {
+      serverNameField.setText(preferences.getProxyServerName());
+      portNumberField.setText(preferences.getProxyServerPort() + "");
+
+      if (preferences.shouldUseProxyAuthentication())
+      {
+        userNameField.setText(preferences.getProxyUserName());
+      }
+    }
+
     // frame.setTitle("Gradle Script Visualizer v" + VERSION);
     frame.setTitle("Gradle Script Visualizer ");
     frame.setVisible(true);
@@ -168,7 +251,8 @@ public class GradleScriptMainFrame
     chooser.setFileFilter(new FileNameExtensionFilter("Gradle scripts", "gradle", "groovy"));
     chooser.setMultiSelectionEnabled(true);
 
-    int              returnVal = chooser.showOpenDialog(frame);
+    int returnVal = chooser.showOpenDialog(frame);
+
     parser.purgeAll();
 
     if (returnVal == APPROVE_OPTION)
@@ -213,7 +297,7 @@ public class GradleScriptMainFrame
 
       List<Task>         tasks            = parser.getTasks();
       DotFileGenerator   dotFileGenerator = new DotFileGenerator();
-      List<String>       lines            = dotFileGenerator.createOutput(tasks,preferences);
+      List<String>       lines            = dotFileGenerator.createOutput(tasks, preferences);
       File               dotFile          = dotFileGenerator.writeOutput(lines, file.getAbsolutePath());
       GraphicFileCreator fileCreator      = new GraphicFileCreator();
 
