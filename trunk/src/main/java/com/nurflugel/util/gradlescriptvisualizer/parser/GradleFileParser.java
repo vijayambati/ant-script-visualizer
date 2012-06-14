@@ -2,6 +2,7 @@ package com.nurflugel.util.gradlescriptvisualizer.parser;
 
 import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import com.nurflugel.util.gradlescriptvisualizer.domain.Task;
+import com.nurflugel.util.gradlescriptvisualizer.ui.GradleScriptPreferences;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import java.io.File;
@@ -16,22 +17,16 @@ import static com.nurflugel.util.gradlescriptvisualizer.domain.Task.*;
 import static com.nurflugel.util.gradlescriptvisualizer.util.ParseUtil.findLinesInScope;
 import static org.apache.commons.io.FileUtils.checksumCRC32;
 import static org.apache.commons.io.FileUtils.readLines;
+import static org.apache.commons.io.FilenameUtils.getBaseName;
 import static org.apache.commons.io.FilenameUtils.getFullPath;
 import static org.apache.commons.lang.StringUtils.*;
 
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 5/30/12 Time: 22:07 To change this template use File | Settings | File Templates. */
 public class GradleFileParser
 {
-  private Map<String, Task> taskMap       = new HashMap<String, Task>();
-  private Map<File, Long>   fileChecksums;
-
-  public static void addToTaskMap(Map<String, Task> taskMap, Task task)
-  {
-    if (!isEmpty(task.getName()))
-    {
-      taskMap.put(task.getName(), task);
-    }
-  }
+  private Map<String, Task>       taskMap       = new HashMap<String, Task>();
+  private Map<File, Long>         fileChecksums;
+  private GradleScriptPreferences preferences;
 
   public static void addToTaskMap(Map<String, Task> taskMap, String name, Task task)
   {
@@ -41,9 +36,10 @@ public class GradleFileParser
     }
   }
 
-  public GradleFileParser(Map<File, Long> fileChecksums)
+  public GradleFileParser(Map<File, Long> fileChecksums, GradleScriptPreferences preferences)
   {
     this.fileChecksums = fileChecksums;
+    this.preferences   = preferences;
   }
 
   // -------------------------- OTHER METHODS --------------------------
@@ -77,7 +73,7 @@ public class GradleFileParser
    * We wrap the text lines into object lines so we can determine parsing strings or lines better. Later on, we may modify the line class to be more
    * broad than a single line of text.
    */
-  List<Line> readLinesInFile(File file) throws IOException
+  static List<Line> readLinesInFile(File file) throws IOException
   {
     List<Line>   lines     = new ArrayList<Line>();
     List<String> textLines = readLines(file);
@@ -92,7 +88,7 @@ public class GradleFileParser
 
   private void processLines(File sourceFile, List<Line> lines) throws IOException
   {
-    String baseName = FilenameUtils.getBaseName(sourceFile.getAbsolutePath());
+    String baseName = getBaseName(sourceFile.getAbsolutePath());
 
     findTasksInLines(lines, baseName);
     findImportsInFile(lines, sourceFile);
@@ -147,14 +143,13 @@ public class GradleFileParser
 
         if (text.startsWith("http:"))
         {
-
           try
           {
             findUrlImport(text);
           }
           catch (IOException e)
           {
-//            e.printStackTrace();//todo something where we tell the user we can't go through the firewall
+            // e.printStackTrace();//todo something where we tell the user we can't go through the firewall
           }
         }
         else
@@ -201,6 +196,18 @@ public class GradleFileParser
 
   private void findUrlImport(String location) throws IOException
   {
+    if (preferences.shouldUseHttpProxy())
+    {
+      System.getProperties().put("http.proxyHost", preferences.getProxyServerName());
+      System.getProperties().put("http.proxyPort", preferences.getProxyServerPort());
+
+      if (preferences.shouldUseProxyAuthentication())
+      {
+        System.getProperties().put("http.proxyUser", preferences.getProxyUserName());
+        System.getProperties().put("http.proxyPassword", preferences.getProxyPassword());
+      }
+    }
+
     URL        url       = new URL(location);
     String     bigString = IOUtils.toString(url);
     String[]   tokens    = bigString.split("\n");
@@ -211,7 +218,7 @@ public class GradleFileParser
       lines.add(new Line(token));
     }
 
-    processLines(url, lines);  
+    processLines(url, lines);
   }
 
   public void parseFile(String fileName) throws IOException
