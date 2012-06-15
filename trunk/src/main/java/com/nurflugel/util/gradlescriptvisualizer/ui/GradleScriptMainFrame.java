@@ -59,7 +59,6 @@ public class GradleScriptMainFrame
     frame.setContentPane(mainPanel);
     initializeUi();
     addActionListeners();
-    initializeUiWithActions();
     dotExecutablePath = preferences.getDotExecutablePath();  // todo this is ugly, fix it somehow
 
     if (isBlank(dotExecutablePath))
@@ -69,15 +68,6 @@ public class GradleScriptMainFrame
 
     preferences.setDotExecutablePath(dotExecutablePath);
     parser = new GradleFileParser(fileChecksums, preferences);
-  }
-
-  /** Initialize parts of the UI which need actions to properly work. */
-  private void initializeUiWithActions()
-  {
-    useHttpProxyCheckBox.setSelected(preferences.shouldUseHttpProxy());
-    useHttpProxyCheckBox.doClick();
-    useAuthenticationCheckBox.setSelected(preferences.shouldUseProxyAuthentication());
-    useAuthenticationCheckBox.doClick();
   }
 
   private void addActionListeners()
@@ -121,8 +111,7 @@ public class GradleScriptMainFrame
         {
           boolean selected = useAuthenticationCheckBox.isSelected();
 
-          authenticationPanel.setVisible(selected);
-          frame.pack();
+          setVisibility();
           preferences.setUseProxyAuthentication(selected);
         }
       });
@@ -133,8 +122,7 @@ public class GradleScriptMainFrame
         {
           boolean selected = useHttpProxyCheckBox.isSelected();
 
-          proxySettingsPanel.setVisible(selected);
-          frame.pack();
+          setVisibility();
           preferences.setUseHttpProxy(selected);
         }
       });
@@ -233,9 +221,20 @@ public class GradleScriptMainFrame
       }
     }
 
+    useHttpProxyCheckBox.setSelected(preferences.shouldUseHttpProxy());
+    useAuthenticationCheckBox.setSelected(preferences.shouldUseProxyAuthentication());
+    setVisibility();
+
     // frame.setTitle("Gradle Script Visualizer v" + VERSION);
     frame.setTitle("Gradle Script Visualizer ");
     frame.setVisible(true);
+  }
+
+  private void setVisibility()
+  {
+    proxySettingsPanel.setVisible(useHttpProxyCheckBox.isSelected());
+    authenticationPanel.setVisible(useAuthenticationCheckBox.isSelected());
+    frame.pack();
   }
 
   private void selectGradleScript() throws IOException
