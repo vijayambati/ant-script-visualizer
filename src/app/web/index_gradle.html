@@ -54,18 +54,23 @@
                     <tr>
                       <td> <script>var url = "http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/gradlescriptVisualizer.jnlp"; deployJava.createWebStartLaunchButton(url); </script></td>
                       <td><a href="http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/gradlescriptVisualizer.jnlp"><b>Launch the Gradle Script Visualizer program </b></a></td>
+                      <ul>
+                        <li>Accept all dialogs.</li>
+                        <li> If it asks to load a newer version of Java or WebStart, say "yes".</li>
+                        <li>Ignore the warnings about installing software on your system or accessing your file system. I'm using the Java WebStart architecture, and the cost of that is annoying dialogs
+                          like this for the users.  But it is nice enough to ask before touching your file system, so you know what's going on.</li>
+                        <li>Launch it twice from this web page and it'll install icons on to your desktop and start menu. You won't have to visit this site again to run the application after that.</li>
+                        <li>You'll always have the most up-to-date version - it updates to new versions automatically!  This is especially nice when bugs are fixed or features are added.</li>
+                        <li>You don't need to be connected to the Internet (or this server) to use the application, but if you are connected, it will update itself if necessary.</li>
+                      </ul>
                     </tr>
+                <tr>Associate .dot files with GraphViz
+                  <li>This lets the app display the graphics by simply telling the file system to open them, rather than calling GraphViz directly.</li><br>
+                </tr>
                   </table>
-                  <ul>
-                    <li>Accept all dialogs.</li>
-                    <li> If it asks to load a newer version of Java or WebStart, say "yes".</li>
-                    <li>Ignore the warnings about installing software on your system or accessing your file system. I'm using the Java WebStart architecture, and the cost of that is annoying dialogs
-                      like this for the users.  But it is nice enough to ask before touching your file system, so you know what's going on.</li>
-                    <li>Launch it twice from this web page and it'll install icons on to your desktop and start menu. You won't have to visit this site again to run the application after that.</li>
-                    <li>You'll always have the most up-to-date version - it updates to new versions automatically!  This is especially nice when bugs are fixed or features are added.</li>
-                    <li>You don't need to be connected to the Internet (or this server) to use the application, but if you are connected, it will update itself if necessary.</li>
-                  </ul>
-                  <p style="list-style-type: none;"><b>Why do I use Java WebStart?</b></p>
+                <p>
+                <p>
+                  <br><p style="list-style-type: none;"><b>Why do I use Java WebStart?</b></p>
                 </li>
                 <li>It works with any platform - OS X, Windows, Linux.</li>
                 <li>You always have the latest version if you're on the net, but if not, it'll run what you've got</li>
