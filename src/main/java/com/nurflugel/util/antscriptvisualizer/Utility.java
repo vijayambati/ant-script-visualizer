@@ -24,7 +24,7 @@ public class Utility
     {
       while (openIndex > -1)
       {
-        int    endIndex     = modifiedName.indexOf("}");
+        int    endIndex     = modifiedName.indexOf('}');
         String beginning    = modifiedName.substring(0, openIndex);
         String propertyName = modifiedName.substring(openIndex + 2, endIndex);
         String end          = (endIndex <= modifiedName.length()) ? modifiedName.substring(endIndex + 1)

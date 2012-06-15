@@ -14,6 +14,7 @@ import static org.apache.commons.io.FileUtils.isFileNewer;
 import static org.apache.commons.io.FileUtils.writeLines;
 import static org.apache.commons.io.FilenameUtils.getBaseName;
 import static org.apache.commons.io.FilenameUtils.getFullPath;
+import static org.apache.commons.lang.StringUtils.replace;
 
 public class DotFileGenerator
 {
@@ -76,7 +77,7 @@ public class DotFileGenerator
           builder.append(task.getDotDeclaration()).append("; ");
         }
 
-        output.add("subgraph cluster_" + scriptName + " { label=\"" + scriptName + "\"; " + builder + "}");
+        output.add("subgraph cluster_" + replaceBadChars(scriptName) + " { label=\"" + scriptName + "\"; " + builder + "}");
       }
     }
 
@@ -96,5 +97,20 @@ public class DotFileGenerator
     writeLines(file, lines);
 
     return file;
+  }
+
+  /**  */
+  public static String replaceBadChars(String oldValue)
+  {
+    String newValue = replace(oldValue, "-", "_");
+
+    newValue = replace(newValue, " ", "_");
+    newValue = replace(newValue, "'", "_");
+    newValue = replace(newValue, ":", "_");
+    newValue = replace(newValue, ".", "_");
+    newValue = replace(newValue, "/", "_");
+    newValue = replace(newValue, "\\", "_");
+
+    return newValue;
   }
 }
