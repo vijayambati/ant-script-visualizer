@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import static org.testng.Assert.assertEquals;
 
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 6/2/12 Time: 19:18 To change this template use File | Settings | File Templates. */
 public class DotFileGeneratorTest
@@ -36,5 +37,14 @@ public class DotFileGeneratorTest
     }
 
     // Assert.fail("just failed");
+  }
+
+  @Test
+  public void testBadCharacterReplacement()
+  {
+    String badPath  = "/svn/trunk/build/master:gradle/master-build.gradle";
+    String goodPath = DotFileGenerator.replaceBadChars(badPath);
+
+    assertEquals(goodPath, "_svn_trunk_build_master_gradle_master_build_gradle");
   }
 }
