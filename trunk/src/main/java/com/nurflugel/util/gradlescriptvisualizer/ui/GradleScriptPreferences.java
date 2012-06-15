@@ -43,8 +43,6 @@ public class GradleScriptPreferences extends ScriptPreferences
     preferencesStore.putInt(PROXY_SERVER_PORT, proxyServerPort);
     preferencesStore.putBoolean(USE_PROXY_AUTHENTICATION, useProxyAuthentication);
     preferencesStore.put(PROXY_USER_NAME, proxyUserName);
-    System.out.println("\nSAVE - useHttpProxy = " + useHttpProxy);
-    System.out.println("       useProxyAuthentication = " + useProxyAuthentication);
 
     // preferencesStore.put(PROXY_USER_NAME,proxyUserName);
   }
@@ -107,7 +105,6 @@ public class GradleScriptPreferences extends ScriptPreferences
   public void setUseProxyAuthentication(boolean useProxyAuthentication)
   {
     this.useProxyAuthentication = useProxyAuthentication;
-    System.out.println("useProxyAuthentication = " + useProxyAuthentication);
     save();
   }
 
@@ -119,7 +116,6 @@ public class GradleScriptPreferences extends ScriptPreferences
   public void setUseHttpProxy(boolean useHttpProxy)
   {
     this.useHttpProxy = useHttpProxy;
-    System.out.println("useHttpProxy = " + useHttpProxy);
     save();
   }
 

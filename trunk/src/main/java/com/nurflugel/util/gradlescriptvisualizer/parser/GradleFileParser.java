@@ -95,9 +95,9 @@ public class GradleFileParser
     findPostDeclarationTaskModifications(lines);
   }
 
-  private void processLines(URL sourceFile, List<Line> lines) throws IOException
+  private void processLines(URL sourceUrl, List<Line> lines) throws IOException
   {
-    String fileName = sourceFile.getFile();
+    String fileName = sourceUrl.toString();
 
     findTasksInLines(lines, fileName);
     findImportsFromUrl(lines);
@@ -198,13 +198,13 @@ public class GradleFileParser
   {
     if (preferences.shouldUseHttpProxy())
     {
-      System.getProperties().put("http.proxyHost", preferences.getProxyServerName());
-      System.getProperties().put("http.proxyPort", preferences.getProxyServerPort());
+      System.getProperties().setProperty("http.proxyHost", preferences.getProxyServerName());
+      System.getProperties().setProperty("http.proxyPort", preferences.getProxyServerPort() + "");
 
       if (preferences.shouldUseProxyAuthentication())
       {
-        System.getProperties().put("http.proxyUser", preferences.getProxyUserName());
-        System.getProperties().put("http.proxyPassword", preferences.getProxyPassword());
+        System.getProperties().setProperty("http.proxyUser", preferences.getProxyUserName());
+        System.getProperties().setProperty("http.proxyPassword", preferences.getProxyPassword());
       }
     }
 
