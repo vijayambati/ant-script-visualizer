@@ -3,15 +3,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="Author" content="Douglas Bullard">
-    <meta name="Generator" content="NetObjects Fusion 7 for Windows">
-    <meta name="Keywords" content="Nurflugel, Ant, GraphViz">
+    <meta name="Keywords" content="Nurflugel, Gradle, GradleScriptVisualizer, GraphViz">
     <title>index</title>
     <!-- doctype html public "-//w3c//dtd html 4.0 transitional//en" -->
     <link rel="STYLESHEET" type="text/css" href="./style.css">
     <link rel="STYLESHEET" type="text/css" href="./site.css">
     <style>
 </style> </head>
-  <body nof="(MB=(ZeroMargins, 0, 0, 0, 0), L=(indexLayout, 758, 1114))" style="background-color: rgb(255,255,255); background-image: url('help/html/assets/images/wing1.jpg');"
+  <body style="background-color: rgb(255,255,255); background-image: url('help/html/assets/images/wing1.jpg');"
     topmargin="0"
     leftmargin="0"
     marginheight="0"
@@ -23,19 +22,19 @@
           <td class="TextObject" style="background-image: url('help/html/assets/images/wing1.jpg');"
             valign="TOP">
             <span style="font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, Helvetica, Sans-serif, sans-serif; font-size: medium;">
-              <p style="text-align: center;"><b><span style="font-size: x-large;">Nurflugel
-                    Gradle Script Visualizer</span></b></p>
-              <p style="text-align: left;"><b><span style="font-size: medium;">Welcome
-                    to the Nurflugel Gradle Script Visualizer!<img id="Picture1" src="help/html/assets/images/build_small.png"
+              <p style="text-align: center;"><b><span style="font-size: x-large;">Nurflugel Gradle Script Visualizer</span></b></p>
+              <p style="text-align: left;"><b><span style="font-size: medium;">Welcome to the Nurflugel Gradle Script Visualizer!<img id="Picture1" src="help/html/assets/images/build_gradle_small.png"
                       alt=""
                       align="RIGHT"
                       border="0"
-                      height="294"
-                      hspace="0"
-                      vspace="0"
-                      width="433"></span></b></p>
-              <!--<p style="text-align: left;"><a href="./help/html/html/what_exactly_is_gradle_script_vis.html">What-->
-                  <!--exactly is the Gradle Script Visualizer?</a></p>-->
+                      >
+                      <!--height="294"-->
+                      <!--hspace="0"-->
+                      <!--vspace="0"-->
+                      <!--width="433"-->
+              </span></b></p>
+              <p style="text-align: left;"><a href="./help/html/html/what_exactly_is_gradle_script_vis.html">What
+                  exactly is the Gradle Script Visualizer?</a></p>
               <!--<p style="text-align: left;"><a href="./help/html/html/using_ant_script_visualizer.html">Using-->
                   <!--the Gradle Script Visualizer</a></p>-->
               <!--<p style="text-align: left;"><a href="./help/html/html/whats_left_todo.html">What's-->
@@ -49,54 +48,29 @@
                 &nbsp;</p>
               <span style="font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, Helvetica, Sans-serif, sans-serif;">
                 <p></p>
-                <hr id="HRRule1" align="CENTER" size="2" width="100%"><b>How to
-                  install this application</b>:
-                <li><a href="http://www.graphviz.org/"><b>Download &amp; Install
-                      GraphViz.</b></a> This is what actually generates the
-                  graphics files (my program just generates the data files in a
-                  format that GraphViz understands).</li>
-                <li><a href="http://www.java.com/en/download/index.jsp"><b>Download
-                      Java</b></a> (Windows users only - Macs have this already
-                  installed in OSX (you may have to turn Java on). If you
-                  already have a 1.6 or later JRE installed on your system, you
-                  won't need this (WebStart is included in the JRE). </li>
-                <ul>
-                  <li>Accept all dialogs, ignore the dire warning that you may
-                    have to reboot your system - you don't.</li>
-                </ul>
-                <li> <script>var url = "http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/gradlescriptVisualizer.jnlp";
-                                        deployJava.createWebStartLaunchButton(url);
-                                    </script><a href="http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/gradlescriptVisualizer.jnlp"><b>Launch
-                      the Gradle Script Visualizer program </b></a>
-
+                <hr id="HRRule1" align="CENTER" size="2" width="100%"><b>How to install and run this application</b>:
+                <p><a href="http://www.graphviz.org/"><b>Download &amp; Install GraphViz.</b></a> This is what actually generates the graphics  (my program just generates the data files in a format that GraphViz understands).
+                <p><table>
+                    <tr>
+                      <td> <script>var url = "http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/gradlescriptVisualizer.jnlp"; deployJava.createWebStartLaunchButton(url); </script></td>
+                      <td><a href="http://ant-script-visualizer.googlecode.com/svn/trunk/webstart/gradlescriptVisualizer.jnlp"><b>Launch the Gradle Script Visualizer program </b></a></td>
+                    </tr>
+                  </table>
                   <ul>
                     <li>Accept all dialogs.</li>
-                    <li> If it asks to load a newer version of Java or WebStart,
-                      say "yes".</li>
-                    <li>Ignore the warnings about installing software on your
-                      system. I'm using the free version of Sun's WebStart
-                      architecture, and the cost of that is annoying dialogs
-                      like this for the users.</li>
-                    <li>Launch it twice from this web page and it'll install
-                      icons on to your desktop and start menu. You won't have to
-                      visit this site again to run the appliation after that.</li>
-                    <li>You'll always have the most up-to-date version - it
-                      updates to new versions automatically!</li>
-                    <li>You'll never have to reinstall or upgrade!</li>
-                    <li>You don't need to be connected to the Internet (or this
-                      server) to use the application, but if you are connected,
-                      it will update itself if necessary.</li>
+                    <li> If it asks to load a newer version of Java or WebStart, say "yes".</li>
+                    <li>Ignore the warnings about installing software on your system or accessing your file system. I'm using the Java WebStart architecture, and the cost of that is annoying dialogs
+                      like this for the users.  But it is nice enough to ask before touching your file system, so you know what's going on.</li>
+                    <li>Launch it twice from this web page and it'll install icons on to your desktop and start menu. You won't have to visit this site again to run the application after that.</li>
+                    <li>You'll always have the most up-to-date version - it updates to new versions automatically!  This is especially nice when bugs are fixed or features are added.</li>
+                    <li>You don't need to be connected to the Internet (or this server) to use the application, but if you are connected, it will update itself if necessary.</li>
                   </ul>
-                  <p style="list-style-type: none;"><b>Why do I use Java
-                      WebStart?</b></p>
+                  <p style="list-style-type: none;"><b>Why do I use Java WebStart?</b></p>
                 </li>
                 <li>It works with any platform - OS X, Windows, Linux.</li>
-                <li>You always have the latest version if you're on the net, but
-                  if not, it'll run what you've got</li>
+                <li>You always have the latest version if you're on the net, but if not, it'll run what you've got</li>
                 <li>It works by just committing the right jars into Google Code</li>
                 <li>Easy storage of user preferences.</li>
-                <li>If you've got PDF capability, it'll use it - server version
-                  wouldn't be able to do it (PDF is only on Mac)</li>
               </span></span></td>
         </tr>
       </tbody>
