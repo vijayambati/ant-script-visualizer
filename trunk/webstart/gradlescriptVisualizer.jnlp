@@ -31,8 +31,6 @@
         <jar href="lib/asm-3.1.jar"/>
         <jar href="lib/commons-lang-2.4.jar"/>
         <jar href="lib/log4j-1.2.15.jar"/>
-
-
     </resources>
     <application-desc main-class="com.nurflugel.util.gradlescriptvisualizer.ui.GradleScriptMainFrame"/>
 </jnlp>

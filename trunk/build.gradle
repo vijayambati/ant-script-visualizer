@@ -1,6 +1,30 @@
-apply from: 'http://ant-master-build-scripts.googlecode.com/svn/trunk/build/master-gradle/master-build.gradle'
-//apply from: 'master-gradle/master-build.gradle'
+//apply from: 'http://ant-master-build-scripts.googlecode.com/svn/trunk/build/master-gradle/master-build.gradle'
+
+// declaration so that variable can be used across all scripts.  I hate putting this here, it should be in dependencies.gradle, but then
+// the master-build script can't see it.... chicken or the egg....
+ext.libraryVersions = [
+    jdom:                '1.0',
+    glazedLists:         '1.8.0',
+    xstream:             '1.2',
+    svnkit:              '1.7.4-v1',
+    jtidy:               '04aug2000r7-dev',
+    version_tool:        '1.1.4_fixed',
+    buildtasks:          '1.0-SNAPSHOT',
+    commons_logging:     '1.0.4',
+    commons_lang:        '2.4',
+    commons_collections: '3.2.1',
+    commons_io:          '2.2',
+    forms_rt:            '11.0.3',
+    log4j:               '1.2.15',
+    testng:              '6.4',
+    asm:                 '3.1',
+    jhall:               '2.0.6',
+    ant:                 '1.8.4'
+]
+
+apply from: 'master-gradle/master-build.gradle'
 apply from: 'dependencies.gradle'
+
 
 //version = "0.1-SNAPSHOT"  //used to set Ivy version if we're going to publish
 sourceCompatibility = 1.6
