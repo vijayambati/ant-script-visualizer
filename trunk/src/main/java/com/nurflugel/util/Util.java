@@ -23,6 +23,7 @@ public class Util
 {
   public static final Cursor busyCursor   = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
   public static final Cursor normalCursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
+  public static final String VERSION      = "2.0.2";
   // -------------------------- STATIC METHODS --------------------------
 
   /** Firgures out how much time is remaining in the task. */
