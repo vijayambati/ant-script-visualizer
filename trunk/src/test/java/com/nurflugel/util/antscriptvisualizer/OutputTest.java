@@ -2,6 +2,7 @@ package com.nurflugel.util.antscriptvisualizer;
 
 import com.nurflugel.util.Os;
 import com.nurflugel.util.antscriptvisualizer.events.Event;
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -10,6 +11,8 @@ import java.util.List;
 import static com.nurflugel.util.Os.findOs;
 import static com.nurflugel.util.test.TestResources.getFilePath;
 import static org.apache.commons.io.FileUtils.contentEquals;
+import static org.apache.commons.io.FileUtils.readLines;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 /** Test class to exercise the app and compare it to known good results. */
@@ -52,7 +55,10 @@ public class OutputTest
 
     boolean areEqual = contentEquals(testFile, standardFile);
 
-    assertTrue(areEqual, "File contents should be identical");
+    assertEquals(readLines(testFile), readLines(standardFile));
+    // FileUtils.contentEquals(testFile,standardFile);
+
+    // assertTrue(areEqual, "File contents should be identical");
   }
 
   @Test(groups = { "dot", "failed" })

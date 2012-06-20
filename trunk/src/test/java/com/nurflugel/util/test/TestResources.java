@@ -1,9 +1,6 @@
 package com.nurflugel.util.test;
 
-import com.nurflugel.util.gradlescriptvisualizer.domain.Line;
 import org.apache.commons.lang.BooleanUtils;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Created with IntelliJ IDEA. User: douglas_bullard Date: 6/7/12 Time: 18:12 To change this template use File | Settings | File Templates. */
 public class TestResources
@@ -21,20 +18,5 @@ public class TestResources
 
     return isGradleEnvironment ? (SOURCE_PATH_GRADLE + fileName)
                                : (SOURCE_PATH_IDEA + fileName);
-  }
-
-  public static List<Line> getLinesFromArray(String[]... lineArrays)
-  {
-    List<Line> results = new ArrayList<Line>();
-
-    for (String[] lineArray : lineArrays)
-    {
-      for (String line : lineArray)
-      {
-        results.add(new Line(line));
-      }
-    }
-
-    return results;
   }
 }
