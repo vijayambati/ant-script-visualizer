@@ -1,13 +1,30 @@
 apply plugin: 'application'
 
-apply from: 'dependencies.gradle'
+apply from: 'gradle/dependencies.gradle'
 //apply from: 'http://ant-master-build-scripts.googlecode.com/svn/trunk/master-gradle/master-webstart-build.gradle'
-apply from:  'master-gradle/master-webstart-build.gradle'
+apply from:  'gradle/master-gradle/master-webstart-build.gradle'
+apply from:  'gradle/master-gradle/master-appbundler-build.gradle'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
-mainClassName = "com.nurflugel.ivybrowser.ui.IvyBrowserMainFrame"
+mainClassName = "com.nurflugel.util.antscriptvisualizer.AntParserUiImpl"
 //mainClassName = "com.nurflugel.ivyformatter.ui.IvyFormatterMainFrame"
 versionClassName = 'com.nurflugel.util.Util'
+
+
+dependencies {
+    ext.libraryVersions = [
+            dibble   : '1.1'
+    ]
+
+}
+
+
+project.ext {
+	projectname = 'antscriptvisualizer'
+	artifactId = 'com-nurflugel'
+	groupId = group
+  osx_app_name = 'Ant Script Visualizer'
+}
 

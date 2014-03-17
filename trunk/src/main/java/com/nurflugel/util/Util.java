@@ -5,13 +5,11 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
 import java.io.File;
-import java.net.URL;
+
 import java.util.Date;
-import javax.help.CSH;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.help.HelpSetException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
@@ -23,7 +21,7 @@ public class Util
 {
   public static final Cursor busyCursor   = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
   public static final Cursor normalCursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-  public static final String VERSION      = "2.0.2";
+  public static final String VERSION      = "2.2.0";
   // -------------------------- STATIC METHODS --------------------------
 
   /** Firgures out how much time is remaining in the task. */

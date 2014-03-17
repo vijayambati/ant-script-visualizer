@@ -18,5 +18,7 @@ public class TestResources
 
     return isGradleEnvironment ? (SOURCE_PATH_GRADLE + fileName)
                                : (SOURCE_PATH_IDEA + fileName);
+
+    // : (SOURCE_PATH_GRADLE + fileName);
   }
 }
