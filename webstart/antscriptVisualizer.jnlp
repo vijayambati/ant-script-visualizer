@@ -8,7 +8,7 @@
         <title>Ant Script Visualizer</title>
         <vendor>From Nurflugel.com...</vendor>
         <homepage href="index.html"/>
-        <description>Ant ScriptDependency Visualizer</description>
+        <description>Ant Script Dependency Visualizer</description>
         <icon href="wing.jpg"/>
         <offline-allowed/>
         <shortcut online="true">
@@ -19,15 +19,17 @@
         <all-permissions/>
     </security>
     <resources>
-        <j2se version="1.6+"  initial-heap-size="64m" max-heap-size="512m"/>
-        <jar href="lib/AntScriptVisualizer.jar"/>
-        <jar href="lib/commons-lang.jar"/>
-        <jar href="lib/commons-io.jar"/>
-        <jar href="lib/help.jar"/>
-        <jar href="lib/forms_rt.jar"/>
-        <jar href="lib/log4j.jar"/>
-        <jar href="lib/jdom.jar"/>
-        <jar href="lib/jhall.jar"/>
+      <j2se version="1.6+"  initial-heap-size="64m" max-heap-size="512m"/>
+      <jar href="lib/GradleScriptVisualizer.jar"/>
+      <jar href="lib/help.jar"/>
+      <jar href="lib/commons-lang-2.4.jar"/>
+      <jar href="lib/commons-io-2.2.jar"/>
+      <jar href="lib/forms_rt-11.0.3.jar"/>
+      <jar href="lib/asm-3.1.jar"/>
+      <jar href="lib/log4j-1.2.15.jar"/>
+      <jar href="lib/jdom-1.0.jar"/>
+      <jar href="lib/jhall-2.0.6.jar"/>
+      <jar href="lib/commons-lang-2.4.jar"/>
     </resources>
     <application-desc main-class="com.nurflugel.util.antscriptvisualizer.AntParserUiImpl"/>
 </jnlp>

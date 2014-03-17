@@ -16,14 +16,19 @@ import com.nurflugel.util.antscriptvisualizer.nodes.Target;
 import com.nurflugel.util.antscriptvisualizer.nodes.Taskdef;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Classpath;
 import com.nurflugel.util.antscriptvisualizer.nodes.paths.Path;
+
 import org.apache.log4j.Logger;
+
 import org.jdom.JDOMException;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -95,6 +100,7 @@ public class AntFileParser
     catch (Exception e)
     {
       logger.error("There has been a severe error, stopping all activity.", e);
+      e.printStackTrace();
       // todo something
       // System.exit(1);
     }
